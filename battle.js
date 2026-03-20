@@ -228,12 +228,12 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 let bindPlayer = function(scene, player, x, y){
     const nameView = T.text(player.name(), {x: x, y: y+90, font: "27px Sans-Serif"});
 
-    const HPMeterView = createMeterView(player.HPMeter, x, y, 750);
+    const HPMeterView = createMeterView("HP", player.HPMeter, x, y, 750);
     const HPView = T.ftext("HP: ${}", player.HPMeter, "value",
                           {x: x, y: y-70, font: "27px Sans-Serif"});
     const MPView = T.ftext("MP: ${}", player.MPMeter, "value",
                           {x: x, y: y-30, font: "27px Sans-Serif"});
-    const SGMeterView = createMeterView(player.SGMeter, x, y+35, 750);
+    const SGMeterView = createMeterView("SG", player.SGMeter, x, y+35, 750);
 
     player.bind(scene);
     scene.add(nameView);
@@ -256,7 +256,7 @@ let bindEnemy = function(scene, enemy, x, y){
 
     const HPView = T.ftext("HP: ${}", enemy.HPMeter, "value", {x: x+600, y: y+70, font: "27px Sans-Serif"});
     const MPView = T.ftext("MP: ${}", enemy.MPMeter, "value", {x: x+600, y: y+110, font: "27px Sans-Serif"});
-    const HPMeterView = createMeterView(enemy.HPMeter, x, y, 750, true);
+    const HPMeterView = createMeterView("HP", enemy.HPMeter, x, y, 750, true);
     scene.add(nameView);
     scene.add(HPMeterView);
     scene.add(HPView);
@@ -308,7 +308,7 @@ let createPhysicalButton = function(x, y, key, label) {
     };
 }
 
-let createMeterView = function(target, x, y, len, reversed = false){
+let createMeterView = function(caption, target, x, y, len, reversed = false){
     return {
         x: x, y: y, active: true,
         draw(GE, ctx){
@@ -325,6 +325,13 @@ let createMeterView = function(target, x, y, len, reversed = false){
             g.addColorStop(1, "rgba(0,191,255,1)");
             ctx.fillStyle = g;
             ctx.fillRect(x, this.y, width, 20);
+
+            const cx = (reversed ? this.x + len - 4 : this.x + 4);
+            const cy = this.y + 16;
+            ctx.textAlign = (reversed ? "right" : "left");
+            ctx.font = "18px Sans-Serif";
+            ctx.fillStyle = "white";
+            ctx.fillText(caption, cx, cy);
             ctx.restore();
         }
     };
