@@ -346,7 +346,7 @@ actions:  [
         scene.addTask(sw, true);
     },
     function(GE, scene, book){
-        const opt = {set1: scene.deckSet, set2: scene.sideboardSet};
+        const opt = {set1: scene.setting.deckSet, set2: scene.setting.sideboardSet};
         GE.se.play("optionSelected");
         GE.changeScene("edit", opt);
     },
