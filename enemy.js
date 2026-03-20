@@ -133,10 +133,6 @@ const EnemyAction = {
 
 /*--- 2. 敵のカタログ ---*/
 
-/*
- * 現時点ではまだ使用しないが、affinityも設定しておく
- */
-
 const EnemyData = {
     "キュゥべえ": {
         name: "キュゥべえ",

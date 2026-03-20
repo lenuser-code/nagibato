@@ -393,14 +393,17 @@ class Polysuit{
  */
 class DuosuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
+        ctx.save();
         const [m1, m2] = marks;
         ctx.fillStyle = this.gradation(ctx, Polysuit.ccolors[m1], Polysuit.ccolors[m2]);
         ctx.fillRect(0, 0, this.width, this.height);
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[m1], Polysuit.wcolors[m2], 50, 250);
         ctx.fillRect(3, 3, this.width-6, this.height-6);
+        ctx.restore();
     }
 
     paintMark(ctx, pics){
+        ctx.save();
         const [img1, img2] = pics;
         const w = this.width * 0.7;
         const h = this.height * 0.7;
@@ -408,9 +411,11 @@ class DuosuitGenerator extends Polysuit{
                       0, this.height*0.04, w, h);
         ctx.drawImage(img2, 0, 0, this.width, this.height,
                       this.width-w, this.height-h, w, h);
+        ctx.restore();
     }
 
     paintCost(ctx, x, y, marks, n){
+        ctx.save();
         const [m1, m2] = marks;
         ctx.strokeStyle = Polysuit.ccolors[m2];
         ctx.lineWidth = 4;
@@ -419,6 +424,7 @@ class DuosuitGenerator extends Polysuit{
         ctx.textAlign = "center";
         ctx.strokeText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
         ctx.fillText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
+        ctx.restore();
     }
 }
 
@@ -427,14 +433,17 @@ class DuosuitGenerator extends Polysuit{
  */
 class TriosuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
+        ctx.save();
         const [m1, m2, m3] = marks;
         ctx.fillStyle = this.gradation(ctx, Polysuit.ccolors[m2], Polysuit.ccolors[m1], 0, 0);
         ctx.fillRect(0, 0, this.width, this.height);
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[m1], Polysuit.wcolors[m3], 50, 250);
         ctx.fillRect(3, 3, this.width-6, this.height-6);
+        ctx.restore();
     }
 
     paintMark(ctx, pics){
+        ctx.save();
         const [img1, img2, img3] = pics;
         const w = this.width * 0.65;
         const h = this.height * 0.65;
@@ -444,9 +453,11 @@ class TriosuitGenerator extends Polysuit{
                       0, this.height*0.15, w, h);
         ctx.drawImage(img3, 0, 0, this.width, this.height,
                       this.width*0.32, this.height*0.37, w, h);
+        ctx.restore();
     }
 
     paintCost(ctx, x, y, marks, n){
+        ctx.save();
         const [m1, m2, m3] = marks;
         ctx.strokeStyle = this.gradation(ctx, Polysuit.wcolors[m3], Polysuit.wcolors[m2], 0, 0);
         ctx.lineWidth = 4;
@@ -455,6 +466,7 @@ class TriosuitGenerator extends Polysuit{
         ctx.textAlign = "center";
         ctx.strokeText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
         ctx.fillText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
+        ctx.restore();
     }
 }
 
@@ -463,14 +475,17 @@ class TriosuitGenerator extends Polysuit{
  */
 class QuartetsuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
+        ctx.save();
         const [m1, m2, m3, m4] = marks;
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[m2], Polysuit.wcolors[m4], 0, 0);
         ctx.fillRect(0, 0, this.width, this.height);
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[m1], Polysuit.wcolors[m3], 50, 250);
         ctx.fillRect(3, 3, this.width-6, this.height-6);
+        ctx.restore();
     }
 
     paintMark(ctx, pics){
+        ctx.save();
         const [img1, img2, img3, img4] = pics;
         const w = this.width * 0.52;
         const h = this.height * 0.52;
@@ -482,9 +497,11 @@ class QuartetsuitGenerator extends Polysuit{
                       this.width*0.25, this.height*0.5, w, h);
         ctx.drawImage(img4, 0, 0, this.width, this.height,
                       this.width*0.5, this.height*0.25, w, h);
+        ctx.restore();
     }
 
     paintCost(ctx, x, y, marks, n){
+        ctx.save();
         const [m1, m2, m3, m4] = marks;
         ctx.strokeStyle = Polysuit.ccolors[m2];
         ctx.lineWidth = 4;
@@ -493,6 +510,7 @@ class QuartetsuitGenerator extends Polysuit{
         ctx.textAlign = "center";
         ctx.strokeText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
         ctx.fillText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
+        ctx.restore();
     }
 }
 
@@ -502,13 +520,16 @@ class QuartetsuitGenerator extends Polysuit{
  */
 class QuintetsuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
+        ctx.save();
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[1], Polysuit.wcolors[2], 50, 250);
         ctx.fillRect(0, 0, this.width, this.height);
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[0], Polysuit.wcolors[3], 50, 250);
         ctx.fillRect(3, 3, this.width-6, this.height-6);
+        ctx.restore();
     }
 
     paintMark(ctx, pics){
+        ctx.save();
         const [img1, img2, img3, img4, img5] = pics;
         const w = this.width * 0.5;
         const h = this.height * 0.5;
@@ -522,9 +543,11 @@ class QuintetsuitGenerator extends Polysuit{
                       this.width*0.5, this.height*0.5, w, h);
         ctx.drawImage(img4, 0, 0, this.width, this.height,
                       this.width*0.25, this.height*0.25, w, h);
+        ctx.restore();
     }
 
     paintCost(ctx, x, y, marks, n){
+        ctx.save();
         ctx.strokeStyle = Polysuit.ccolors[5];
         ctx.lineWidth = 4;
         ctx.fillStyle = "white";
@@ -532,6 +555,7 @@ class QuintetsuitGenerator extends Polysuit{
         ctx.textAlign = "center";
         ctx.strokeText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
         ctx.fillText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
+        ctx.restore();
     }
 
     // 必ず [0, 1, 2, 3, 4] で固定する
@@ -556,13 +580,16 @@ class QuintetsuitGenerator extends Polysuit{
  */
 class SestetsuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
+        ctx.save();
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[1], Polysuit.wcolors[2], 50, 250);
         ctx.fillRect(0, 0, this.width, this.height);
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[0], Polysuit.wcolors[3], 50, 250);
         ctx.fillRect(3, 3, this.width-6, this.height-6);
+        ctx.restore();
     }
 
     paintMark(ctx, pics){
+        ctx.save();
         const [img1, img2, img3, img4, img5, img6] = pics;
         const w = this.width * 0.5;
         const h = this.height * 0.5;
@@ -578,9 +605,11 @@ class SestetsuitGenerator extends Polysuit{
                       this.width*0.25, this.height*0, w, h);
         ctx.drawImage(img4, 0, 0, this.width, this.height,
                       this.width*0.25, this.height*0.5, w, h);
+        ctx.restore();
     }
 
     paintCost(ctx, x, y, marks, n){
+        ctx.save();
         ctx.strokeStyle = Polysuit.ccolors[5];
         ctx.lineWidth = 4;
         ctx.fillStyle = "white";
@@ -588,6 +617,7 @@ class SestetsuitGenerator extends Polysuit{
         ctx.textAlign = "center";
         ctx.strokeText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
         ctx.fillText(`${n}`, x+this.width*0.8, y+10+this.height*0.8);
+        ctx.restore();
     }
 
     // 必ず [0, 1, 2, 3, 4, 5] で固定する
@@ -613,6 +643,10 @@ class SestetsuitGenerator extends Polysuit{
  * 具体的には Card.init(GE, width, height) を最初に実行する
  */
 class Card{
+    // スキル持ちカードのマーカーを表示するか？
+    // このフラグはPrismaticCardからも参照される
+    static MarkerFlag = true;
+
     static init(GE, width, height){
         this.IC = new ImageCutter(GE.images.get("CARDIMAGES"), width, height);
         this.width = width;
@@ -639,11 +673,12 @@ class Card{
 
     paint(GE, ctx, x, y){
         Card.IC.paint(ctx, x, y, this.value, this.mark);
-        if(this.skill){
+        if(this.skill && Card.MarkerFlag){
+            const indicator = this.version ? "*".repeat(this.version) : "*!";
             ctx.save();
             ctx.font = "bold 20px Sans-Serif";
             ctx.fillStyle = "white";
-            ctx.fillText("*", x+Card.width*0.1, y+Card.height*0.2);
+            ctx.fillText(indicator, x+Card.width*0.1, y+Card.height*0.2);
             ctx.restore();
         }
     }
@@ -690,10 +725,13 @@ class PrismaticCard{
         ctx.save();
         ctx.drawImage(this.image, x, y);
         this.generator.paintCost(ctx, x, y, this.components, this.value);
-        if(this.skill){
+        if(this.skill && Card.MarkerFlag){
+            ctx.save();
+            const indicator = this.version ? "*".repeat(this.version) : "*!";
             ctx.font = "bold 20px Sans-Serif";
             ctx.fillStyle = "white";
-            ctx.fillText("*", x+Card.width*0.1, y+Card.height*0.2);
+            ctx.fillText(indicator, x+Card.width*0.1, y+Card.height*0.2);
+            ctx.restore();
         }
         ctx.restore();
     }
@@ -937,6 +975,7 @@ const CardAtlas = {
                 card = new PrismaticCard(marks, item.cost, mp);
             }
             card.cardAtlasID = item.id;
+            card.version = parseInt(item.id[0]);
             this.setSkill(card, item.sub);
             _data[item.id] = card;
         }

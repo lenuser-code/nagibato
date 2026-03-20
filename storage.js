@@ -40,8 +40,8 @@ removeStorage(alreadyConfirmed){
     return false;
 },
 
-saveConfig: function(mainCardID, chainRuleVersion){
-    const data = [mainCardID, chainRuleVersion];
+saveConfig: function(mainCardID, chainRuleVersion, skillMarkerFlag){
+    const data = [mainCardID, chainRuleVersion, skillMarkerFlag];
     const json = JSON.stringify(data);
     localStorage.setItem("nagibato_config_data", json);
     this.config = data;

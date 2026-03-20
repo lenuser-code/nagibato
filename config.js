@@ -1,7 +1,7 @@
 ﻿/*
  * namespace config
  *
- * 今のところ config.configScene と config.SideboardDialog だけ公開
+ * 今のところ config.configScene, config.configScene2 と config.SideboardDialog だけ公開
  */
 
 var config = config || {};
@@ -361,7 +361,7 @@ Public.SideboardDialog = class extends DialogBase{
  */
 Public.configScene = new stdgam.Scene({
 saveConfig(){
-    LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule);
+    LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag);
 },
 
 displayObject: {
@@ -504,6 +504,95 @@ execute(GE){
     }
 }
 
+});
+
+/**
+ * 特殊設定のコンフィグ画面
+ */
+Public.configScene2 = new stdgam.Scene({
+saveConfig(){
+    LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag);
+},
+
+checkInput(GE){
+    if(this.busy > 0) this.busy--;
+    return GE.input.checkInput(
+        ["ArrowUp", "ArrowDown", "KeyA", "KeyS"],
+        ["ArrowUp", "ArrowDown"],
+        this.busy
+    );
+},
+
+onLoad(GE, setting){
+    this.setting = setting;
+    this.deck = setting.deckSet.cards;  // localStorageを使うとき、すぐに保存するため必要
+
+    this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+    this.add(T.text("スキル持ちカードのマーカー表示", {x: 90, y:90, font: "32px Sans-Serif"}));
+    let tmp = T.text("現在の設定：  ", {x: 160, y:133, font: "24px Sans-Serif"});
+    tmp.execute = (GE) => {
+        tmp.text = Card.MarkerFlag ? "現在の設定：　表示する" : "現在の設定：　表示しない";
+        return true;
+    };
+    this.add(tmp);
+
+    this.index = 0;
+    this.busy = 0;
+    this.itemY = [ 90 ];
+
+},
+
+operations: [
+    { createDialog: (owner) => {
+          const options = ["表示する", "表示しない"];
+          return new SimpleChoice(owner, "スキル持ちカードのマーカー表示をしますか？", options,
+                                     Card.MarkerFlag ? 0 : 1, 200, 140, 600, 420);
+      },
+      treatResult: (owner, result) => {
+          Card.MarkerFlag = (result == 0);
+          if(LocalStorageInfo.isUsed()){
+              owner.saveConfig();
+          }
+      }
+    }
+],
+
+draw(GE, ctx){
+    ctx.save();
+    ctx.font = "32px Sans-Serif";
+    ctx.fillStyle = "white";
+    ctx.fillText("→ ", 50, this.itemY[this.index]);
+    ctx.restore();
+},
+
+execute(GE){
+    if(this.dialog && this.dialog.active) return;
+    if(this.dialog){
+        const r = this.dialog.result;
+        this.operations[this.index].treatResult(this, r);
+        this.dialog = null;
+    }
+    else{
+        const [code, k] = this.checkInput(GE);
+        if(k == 0){
+            this.index = (this.index + this.itemY.length - 1) % this.itemY.length;
+            this.busy = 10;
+        }
+        if(k == 1){
+            this.index = (this.index + 1) % this.itemY.length;
+            this.busy = 10;
+        }
+        if(k == 2){
+            this.dialog = this.operations[this.index].createDialog(this);
+            this.addSprite(this.dialog);
+            this.addTask(this.dialog, true);
+            this.busy = 10;
+        }
+        else if(k == 3){
+            GE.changeScene("select");
+        }
+    }
+}
 });
 
 })(config);

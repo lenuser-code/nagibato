@@ -226,6 +226,8 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 /*--- 2. プライベート関数  ---*/
 
 let bindPlayer = function(scene, player, x, y){
+    const nameView = T.text(player.name(), {x: x, y: y+90, font: "27px Sans-Serif"});
+
     const HPMeterView = createMeterView(player.HPMeter, x, y, 750);
     const HPView = T.ftext("HP: ${}", player.HPMeter, "value",
                           {x: x, y: y-70, font: "27px Sans-Serif"});
@@ -234,6 +236,7 @@ let bindPlayer = function(scene, player, x, y){
     const SGMeterView = createMeterView(player.SGMeter, x, y+35, 750);
 
     player.bind(scene);
+    scene.add(nameView);
     scene.add(HPMeterView);
     scene.add(HPView);
     scene.add(MPView);
@@ -249,7 +252,7 @@ let bindPlayer = function(scene, player, x, y){
 
 let bindEnemy = function(scene, enemy, x, y){
     enemy.bind(scene);
-    const nameView = T.text(enemy.name(), {x: x, y: y-10, font: "27px Sans-Serif"});
+    const nameView = T.text(enemy.name(), {x: x+740, y: y-10, font: "27px Sans-Serif", textAlign: "right"});
 
     const HPView = T.ftext("HP: ${}", enemy.HPMeter, "value", {x: x+600, y: y+70, font: "27px Sans-Serif"});
     const MPView = T.ftext("MP: ${}", enemy.MPMeter, "value", {x: x+600, y: y+110, font: "27px Sans-Serif"});
@@ -643,7 +646,7 @@ onLoad(GE, args){
         const card = dialog.result;
         if(card){
             GE.se.play("heal");
-            this.sideboard.remove(card);
+            //this.sideboard.remove(card);  // 同じカードを複数回スキャンできる
             this.pool.extraScan(card);
             yield* this.SD.wait(60);
         }
