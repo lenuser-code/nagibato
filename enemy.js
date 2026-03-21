@@ -1,34 +1,34 @@
 ﻿/*
- * 敵に関連するオブジェクトの実装
+ * @file
+ * 敵の特殊攻撃に関連するオブジェクトと敵のカタログを実装する.
+ *
+ * @author lenuser
  */
 
 
-// Chapter 1. 敵の情報
-
-/*--- 1. 敵の特殊攻撃とその実行インターフェース ---*/
+// #1. 敵の特殊攻撃とその実行インターフェース
 
 /**
- * 敵の特殊攻撃の効果を実装するためオブジェクト。
- * これ自体はごく限定された機能しか持っておらず、
- * 各スキル効果の具体的な処理内容はサブクラスで実装する。
+ * 敵のスキルの実行インターフェース.
+ * スキルを表すオブジェクトAと, その実行者Bの間の仲介を行う.
+ * Aはこのクラスが提供する機能を利用してスキルを実行する.
+ * Bはこのクラスの *upkeep や *specialAction によりAの実行を依頼する.
+ *
+ * EnemyActionDealer自体は各スキル効果の具体的な処理方法を知らない.
+ * 具体的な処理内容はサブクラスで実装する.
+ * - turnCount()
+ * - playerHP()
+ * - *common(action)
+ * - *antiskill(callback)
+ * - *poison(percent)
+ * - *stun(n)
+ * - *damage(percent)
+ * - *nightmare(str, mark, percent)
+ * - *transform(enemyName)
+ *
+ * @class
  */
 class EnemyActionDealerBase{
-/*
-    // サブクラスが実装する処理 (基本情報)
-    turnCount(){ }
-    playerHP(){ }
-
-    // サブクラスが実装する処理 (ターン開始時に実行)
-    *common(action){ }
-    *antiskill(callback){ }
-    *poison(percent){ }
-    *stun(n){ }
-    *damage(percent){ }
-    *nightmare(str, mark, percent){ }
-    *transform(enemyName){ }
-
- */
-
     constructor(){
         this.actionList = [];
         this.poisonRate = 0;
@@ -59,7 +59,7 @@ class EnemyActionDealerBase{
 }
 
 /**
- * 敵の特殊攻撃を生成する関数をまとめたもの。
+ * 敵の特殊攻撃を生成する関数をまとめたもの.
  */
 const EnemyAction = {
     stun: function(n, cap = null, desc = null){
@@ -131,8 +131,12 @@ const EnemyAction = {
 };
 
 
-/*--- 2. 敵のカタログ ---*/
+// #2. 敵のカタログ
 
+/**
+ * このゲームに登場する敵のデータを登録する連想配列.
+ * @type {Object.<string, *>}
+ */
 const EnemyData = {
     "キュゥべえ": {
         name: "キュゥべえ",

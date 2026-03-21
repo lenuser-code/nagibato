@@ -1,10 +1,25 @@
-﻿/*
- * PlayerとEnemyは共通部分が多いので、ここでまとめて定義する
+﻿/**
+ * @file
+ * プレイヤーおよび敵を表すクラスを実装する.
+ * ここで定義するのはデータの集合としてのPlayer/Enemyであり,
+ * スキルなどは別のファイルで定義する.
+ *
+ * @author lenuser
  */
 
-/*/
- * ステータスの等速変化を実現するオブジェクトを作る。
- * これ自体は表示を伴わず、これの値をGUIから読み取って表示する
+
+// #1. 補助
+
+/**
+ * ステータスの等速変化を実現するMeterオブジェクトを作る.
+ * あるパラメータがAからBへ変化するとき, モデル内部では一瞬で値がBになるが,
+ * GUIではAからBまで一定の時間を掛けて変化する様子を描画したい.
+ * この時間変化を表現するために使う.
+ *
+ * @param {number} v - 初期値
+ * @param {number} max - 最大値
+ * @param {number} frames - 変化に要するフレーム数の既定値
+ * @returns 生成されたMeterオブジェクト
  */
 createMeter = function(v, max, frames){
     let sv = v, tv = v, duration = 0, elapsed = 0;
@@ -32,15 +47,23 @@ createMeter = function(v, max, frames){
     };
 }
 
-//*** #1. Player, Enemy[
+// #2. Player, Enemy
 
 /**
- * HP, MP, nameを持つオブジェクトを作る。
- * 多くの変数はカプセル化を行なっているので、提供されているメソッドで
- * アクセスする。
+ * HP, MP, nameを持つオブジェクトのためのクラス.
+ * ただし, 実際はカプセル化しているのでメソッドでアクセスする.
+ * - HP()
+ * - MP()
+ * - addHP(v)
+ * - addMP(v)
+ * - percentHP(p)
+ * - percentMP(p)
+ * - retentionRateHP()
+ * - retentionRateMP()
  *
- * ただし、値の等速変化を実現するHPMeter, MPMeterはSceneのタスクとして
- * 扱うのでカプセル化していない。
+ * また, HPに対してHPMeter, MPに対してMPMeterも同時に用意する.
+ * この2つは公開されている.
+ * @class
  */
 class BasicStatus{
     init(maxHP, defaultMP, name){
@@ -80,6 +103,19 @@ class BasicStatus{
     }
 }
 
+/**
+ * プレイヤーのステータスを保持するクラス.
+ * HP, MP, nameに加えて, 以下のステータスを持つ.
+ * - mainSkill
+ * - mainSkillCount
+ * - mark
+ * - SG
+ * - shield
+ * - stun
+ * - suitString
+ *
+ * @class
+ */
 class Player extends BasicStatus{
     parseMainSkill(opt){
         if(!opt.main) return null;
@@ -151,6 +187,13 @@ class Player extends BasicStatus{
     }
 }
 
+/**
+ * 敵のステータスを保持するクラス.
+ * HP, MP, nameに加えて, 以下のステータスを持つ.
+ * - antiskill
+ *
+ * @class
+ */
 class Enemy extends BasicStatus{
     init(opt, playerSS = null){
         let HP = opt.HP;

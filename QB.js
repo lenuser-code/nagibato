@@ -1,5 +1,18 @@
-﻿
+﻿/**
+ * @file
+ * システムメッセージを表示するオブジェクトの実装を行う.
+ * また, これらのオブジェクトを生成するヘルパー関数も用意する.
+ *
+ * @author lenuser
+ */
 
+
+// #1. システムメッセージを表示するオブジェクト
+
+/**
+ * 時間経過で消える会話ダイアログのクラス.
+ * @class
+ */
 class QBTalk{
     constructor(msg, frames = 120){
         this.a = 10;
@@ -43,7 +56,10 @@ class QBTalk{
     }
 }
 
-
+/**
+ * 画面中央に一定時間表示されるメッセージのクラス.
+ * @class
+ */
 class QBTelop{
     constructor(msg, frames = 20){
         this.a = (1 / 15);
@@ -86,7 +102,9 @@ class QBTelop{
     }
 }
 
-
+/**
+ * ユーザーに入力を要求する会話ダイアログのクラス.
+ */
 class QBYesNo{
     constructor(msg, minWait = 20, seName = null){
         this.a = 10;
@@ -151,7 +169,10 @@ class QBYesNo{
     }
 }
 
-
+/**
+ * 複数のメッセージを順番に表示する会話ダイアログのクラス.
+ * @class
+ */
 class QBLecture{
     constructor(msgs, minWait=20){
         this.a = 10;
@@ -226,9 +247,19 @@ class QBLecture{
 }
 
 
-// QBのセリフをなるべく分散させないために
-// (短い＆分岐が無いものはそのまま埋め込まれているけど)
+// #2. ヘルパー関数, チュートリアルデータ
 
+// (a) ヘルパー関数
+
+/*
+ * テキスト量の多いメッセージはこのファイルでまとめて管理する.
+ * (短い＆分岐が無いものは別のファイルにそのまま埋め込まれているけど)
+ */
+
+/**
+ * バトルの最初にQBが喋る内容を生成する.
+ * @param {Objcet.<string,*>} battleOpt - バトルの設定データ
+ */
 const createOpeningQB = function(battleOpt){
     // チュートリアルの場合
     if(battleOpt.tutorial){
@@ -260,6 +291,10 @@ const createOpeningQB = function(battleOpt){
     }
 }
 
+/**
+ * バトルが選択されたときに喋る内容を生成する.
+ * @param {Objcet.<string,*>} setting - selectSceneの設定データ
+ */
 const createConfirmatingQB_BeforeBattle = function(setting){
     const usedCards = setting.deckSet.cards;
     const sideboardCards = setting.sideboardSet.cards;
@@ -276,17 +311,25 @@ const createConfirmatingQB_BeforeBattle = function(setting){
     return new QBYesNo(msg, 20, "optionSelected");
 }
 
-
-/*
- * チュートリアルのデータ。
- * デッキや敵データも同じ場所にあるほうがわかりやすいので、
- * ここにまとめておいておく
+/**
+ * チュートリアルが選択されたときに喋る内容を生成する.
  */
-
 const createTutorialQB = function(){
     return new QBYesNo("チュートリアルを開始するかい？\nA → YES    S → No", 20, "optionSelected");
 };
 
+
+// (b) チュートリアルのデータ
+
+/*
+ * デッキや敵データも同じ場所にあるほうがわかりやすいので、
+ * ここにまとめておいておく.
+ */
+
+/**
+ * チュートリアルの各項目の情報をまとめた配列.
+ * @type {Array.<Object.<string, *>>}
+ */
 const TutorialInfo = [
     {
         caption: "バトルの流れ", chainRule: 1,
