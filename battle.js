@@ -80,6 +80,7 @@ let SkillDealer = class extends SkillDealerBase{
     }
     *damage(percent){
         const v = this.owner.player.percentMP(percent);
+        GE.se.play("hit0");  // 試しにSEを入れてみる
         this.owner.enemy.addHP(-v);
         yield* this.wait(60);
     }
@@ -174,6 +175,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
     *poison(percent){
         this.owner.add(new QBTalk("敵スキルの効果でダメージを受けるよ。", 60));
         const v = this.owner.player.percentHP(percent);
+        GE.se.play("hit1");  // 試しにSEを入れてみる
         this.owner.player.addHP(-v);
         yield* this.wait(120);
         yield* this.owner.SD.playerChanged();
@@ -183,6 +185,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
     }
     *damage(percent){
         const v = this.owner.enemy.percentMP(percent);
+        GE.se.play("hit1");  // 試しにSEを入れてみる
         this.owner.player.addHP(-v);
         yield* this.wait(60);
         yield* this.owner.SD.playerChanged();
@@ -363,16 +366,17 @@ let createPoolView = function(target, x, y){
         font: "bold 24px Sans-Serif", color: "#ffff55",
         //lineWidth: 0.5, lineJoin: "round"
     };
+    const step = 15;
 
     return {
         target: target, x: x, y: y, active: true,
         meter: createMeter(0, 9999, 10),
         history: 0, frames: 10,
         addr(){
-            return {x: this.x + this.target.size() * 10, y: this.y};
+            return {x: this.x + this.target.size() * step, y: this.y};
         },
         createChainEffect(GE){
-            const x = this.x + this.target.size() * 10 - 15;
+            const x = this.x + this.target.size() * step - 15;
             const text = T.text("COMBO!", chainFont);
             const sp = T.slider(T.finite(text, 20), x, this.y-15);
             sp.slideTo(x, this.y-20, 15);
@@ -382,7 +386,7 @@ let createPoolView = function(target, x, y){
             let i;
             ctx.save();
             for(i = 0; i < this.target.size(); i++){
-                const x = this.x + i * 10;
+                const x = this.x + i * step;
                 this.target.watch(i).paint(GE, ctx, x, this.y);
             }
             if(!this.showOnlyCards){
@@ -507,8 +511,8 @@ initComponents(args){
     this.enemy = new Enemy(args.enemyData || EnemyData["キュゥべえ"], args.playerData.suit_string);
     this.EAD.init( args.enemyData ? args.enemyData.actions : []);
 
-    this.poolView = createPoolView(this.pool, this.x+50, this.y+150);
-    this.deckView = createDeckView(this.deck, this.x+420, this.y+350);
+    this.poolView = createPoolView(this.pool, this.x+70, this.y+150);
+    this.deckView = createDeckView(this.deck, this.x+440, this.y+350);
     this.init();
 },
 
@@ -546,7 +550,7 @@ onLoad(GE, args){
     const btnKeys = ["KeyA", "KeyS", "KeyD"];
     for (let i = 0; i < 3; i++) {
         // 手札のカードの中心（Card.width/2）に合わせる
-        const bx = this.x+80 + i * (5 + Card.width) + Card.width / 2;
+        const bx = this.x+100 + i * (5 + Card.width) + Card.width / 2;
         const by = this.y+500; // 手札（y=300）の下
         this.add(createPhysicalButton(bx, by, btnKeys[i], btnLabels[i]));
     }
@@ -594,7 +598,7 @@ onLoad(GE, args){
     this.addTask(this.openingQB, true);
 
     for(let i = 0; i < 3; i++){
-        this.hand.push(T.custom(new Card(), { x: this.x+80+i*(5+Card.width), y: this.y+350 }));
+        this.hand.push(T.custom(new Card(), { x: this.x+100+i*(5+Card.width), y: this.y+350 }));
         this.add(this.hand[i]);
 
         const obj = T.pause(60);
@@ -738,6 +742,7 @@ phase2_body(GE, i){
     obj.fadeTo(1, 2);
     this.add(obj);
 
+    GE.se.play("hit0");  // 試しにSEを入れてみる
     this.enemy.addHP(-pts);
     yield* this.SD.wait(110);
 },
@@ -767,6 +772,7 @@ phase2_body(GE, i){
         yield* this.SD.wait(50);
     }
     else{
+        GE.se.play("hit1");  // 試しにSEを入れてみる
         this.player.addHP(-this.enemy.MP());
     }
     yield* this.SD.wait(90);
