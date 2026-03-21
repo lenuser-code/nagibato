@@ -82,6 +82,7 @@ let SkillDealer = class extends SkillDealerBase{
         const v = this.owner.player.percentMP(percent);
         GE.se.play("hit0");  // 試しにSEを入れてみる
         this.owner.enemy.addHP(-v);
+        this.owner.shakeEnemy();  // shake_test
         yield* this.wait(60);
     }
     *extendTime(n){
@@ -176,6 +177,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
         this.owner.add(new QBTalk("敵スキルの効果でダメージを受けるよ。", 60));
         const v = this.owner.player.percentHP(percent);
         GE.se.play("hit1");  // 試しにSEを入れてみる
+        this.owner.shakePlayer();  // shaker_test
         this.owner.player.addHP(-v);
         yield* this.wait(120);
         yield* this.owner.SD.playerChanged();
@@ -186,6 +188,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
     *damage(percent){
         const v = this.owner.enemy.percentMP(percent);
         GE.se.play("hit1");  // 試しにSEを入れてみる
+        this.owner.shakePlayer();  // shaker_test
         this.owner.player.addHP(-v);
         yield* this.wait(60);
         yield* this.owner.SD.playerChanged();
@@ -228,6 +231,55 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 
 /*--- 2. プライベート関数  ---*/
 
+/**
+ * 登録されたオブジェクトを振動させるために使う（将来は別のファイルに移すかも）。
+ * ターゲットの x 属性を直接変化させるので注意
+ */
+let Shaker = class{
+    constructor(speed, acc, count){
+        this.speed = speed;
+        this.acc = acc;
+        this.count = count;
+        this.target = [];
+    }
+
+    add(...obj){
+        this.target.push(...obj);
+    }
+
+    activate(speed = null, acc = null, count = null){
+        this.backup = this.target.map((e) => e.x);
+        this.dir = 1;
+        this.v0 = this.v = speed || this.speed;
+        this.a = acc ? -acc : -this.acc;
+        this.n = count || this.count;
+        this.active = true;
+    }
+
+    execute(GE){
+        if(this.n <= 0){
+            this.active = false;
+            for(let i = 0; i < this.target.length; i++){
+                this.target[i].x = this.backup[i];
+            }
+            return true;
+        }
+
+        for(const obj of this.target){
+            obj.x += this.v;
+        }
+
+        this.v += this.a;
+        if(this.v0 + this.v * this.dir <= 0){
+            this.dir *= -1;
+            this.a *= -1;
+            this.n--;
+        }
+
+        return true;
+    }
+}
+
 let bindPlayer = function(scene, player, x, y){
     const nameView = T.text(player.name(), {x: x, y: y+90, font: "27px Sans-Serif"});
 
@@ -251,6 +303,10 @@ let bindPlayer = function(scene, player, x, y){
         return true;
     };
     scene.add(shieldView);
+
+    // shaker_test
+    scene.pShaker = new Shaker(4, 2, 3);
+    scene.pShaker.add(nameView, HPMeterView, HPView, MPView, shieldView, SGMeterView);
 }
 
 let bindEnemy = function(scene, enemy, x, y){
@@ -264,6 +320,10 @@ let bindEnemy = function(scene, enemy, x, y){
     scene.add(HPMeterView);
     scene.add(HPView);
     scene.add(MPView);
+
+    // shaker_test
+    scene.eShaker = new Shaker(4, 2, 3);
+    scene.eShaker.add(nameView, HPView, MPView, HPMeterView);
 }
 
 let delivery = function(card, addr1, addr2, callback){
@@ -486,6 +546,24 @@ let createSkillDialog = function(skill){
 Public.mainScene = new stdgam.Scene({
 x: 160,
 y: 0,
+
+// shaker_test
+shakePlayer(){
+    if(this.pShaker.active) return;
+    this.pShaker.activate();
+    this.addTask(this.pShaker);
+},
+
+shakeEnemy(){
+    if(this.eShaker.active) return;
+    if(this.enemy.retentionRateHP() > 0.5){
+        this.eShaker.activate(1, 0.5, 1);
+    }
+    else{
+        this.eShaker.activate(6, 2, 3);
+    }
+    this.addTask(this.eShaker);
+},
 
 textOpt: {
     time: { font: "27px Sans-Serif", textAlign: "center" },
@@ -744,6 +822,7 @@ phase2_body(GE, i){
 
     GE.se.play("hit0");  // 試しにSEを入れてみる
     this.enemy.addHP(-pts);
+    this.shakeEnemy();  // shake_test
     yield* this.SD.wait(110);
 },
 *attackPhase_choice(n){
@@ -773,6 +852,7 @@ phase2_body(GE, i){
     }
     else{
         GE.se.play("hit1");  // 試しにSEを入れてみる
+        this.shakePlayer();  // shaker_test
         this.player.addHP(-this.enemy.MP());
     }
     yield* this.SD.wait(90);
