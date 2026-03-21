@@ -26,21 +26,25 @@ let SkillDealer = class extends SkillDealerBase{
     // サブクラスが実装する処理 (攻撃時に実行)
     *addHP(percent){
         const v = this.owner.player.percentHP(percent);
+        GE.se.play("powerup");
         this.owner.player.addHP(v);
         yield* this.wait(60);
         yield* this.playerChanged();
     }
     *addMP(percent){
         const v = this.owner.player.percentMP(percent);
+        GE.se.play("powerup");
         this.owner.player.addMP(v);
         yield* this.wait(60);
     }
     *addSG(percent){
+        GE.se.play("powerup");
         this.owner.player.addSG(percent);
         yield* this.wait(60);
     }
     *addHPSG(percent){
         const v = this.owner.player.percentHP(percent);
+        GE.se.play("powerup");
         this.owner.player.addHP(v);
         this.owner.player.addSG(percent);
         yield* this.wait(60);
@@ -98,12 +102,14 @@ let SkillDealer = class extends SkillDealerBase{
     *heal(percent){
         this.owner.add(new QBTalk("体力が回復するよ。", 60));
         const v = this.owner.player.percentHP(percent);
+        GE.se.play("powerup");
         this.owner.player.addHP(v);
         yield* this.wait(120);
         yield* this.playerChanged();
     }
     *SGHeal(percent){
         this.owner.add(new QBTalk("ソウルジェムが浄化されるよ。", 60));
+        GE.se.play("powerup");
         this.owner.player.addSG(percent);
         yield* this.wait(120);
     }
@@ -830,6 +836,7 @@ phase2_body(GE, i){
         yield* this.SD.wait(30);
         this.poolView.frames = 45;
         this.pool.chargedMP = Math.floor(this.pool.chargedMP / 2);
+        GE.se.play("powerup");
         this.player.resetSG();
         yield* this.SD.wait(60);
     }
