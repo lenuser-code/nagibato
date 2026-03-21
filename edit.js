@@ -485,6 +485,9 @@ let Prism = class{
 
 const displayObject = {
     y: 400,
+    prevDesc: null,
+    lines: null,
+
     setPosition(i){
         this.x = 320;
         this.y = 400 + 100*i;
@@ -503,9 +506,12 @@ const displayObject = {
                      this.x + 20, this.y);
         if(card.skill){
             ctx.fillText(`サブスキル 『${card.skill.caption}』`, this.x + 20, this.y + 30);
-            const lines = card.skill.desc.split("\n");
-            for(let i = 0; i < lines.length; i++){
-                ctx.fillText(lines[i], this.x + 20, this.y + 30*(i+2));
+            if(!this.lines || this.prevDesc != card.skill.desc){
+                this.lines = card.skill.desc.split("\n");
+                this.prevDesc = card.skill.desc;
+            }
+            for(let i = 0; i < this.lines.length; i++){
+                ctx.fillText(this.lines[i], this.x + 20, this.y + 30*(i+2));
             }
         }
         ctx.restore();

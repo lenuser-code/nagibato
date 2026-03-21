@@ -274,6 +274,8 @@ Public.SideboardDialog = class extends DialogBase{
         this.category = { body: Public.SideboardDialog.labels, i: 0 };
         this.subset = null;
         this.busy = 0;
+        this.prevDesc = null;
+        this.lines = null;
     }
 
     // sideboardObjはDeckなので微妙に処理が違う
@@ -314,9 +316,12 @@ Public.SideboardDialog = class extends DialogBase{
             ctx.fillText(`《 ${getCharacterName(Suits[card.mark])} ${card.value} /  MP ${card.MP} 》`, this.x + 140, this.y+110);
             if(card.skill){
                 ctx.fillText(`サブスキル 『${card.skill.caption}』`, this.x + 50, this.y + 150);
-                const lines = card.skill.desc.split("\n");
-                for(let i = 0; i < lines.length; i++){
-                    ctx.fillText(lines[i], this.x + 50, this.y + 190 + 40*i);
+                if(!this.lines || this.prevDesc != card.skill.desc){
+                    this.lines = card.skill.desc.split("\n");
+                    this.prevDesc = card.skill.desc;
+                }
+                for(let i = 0; i < this.lines.length; i++){
+                    ctx.fillText(this.lines[i], this.x + 50, this.y + 190 + 40*i);
                 }
             }
         }
