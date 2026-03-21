@@ -14,7 +14,7 @@
  * Aはこのクラスが提供する機能を利用してスキルを実行する.
  * Bはこのクラスの *upkeep や *specialAction によりAの実行を依頼する.
  *
- * EnemyActionDealer自体は各スキル効果の具体的な処理方法を知らない.
+ * EnemyActionDealerBase自体は各スキル効果の具体的な処理方法を知らない.
  * 具体的な処理内容はサブクラスで実装する.
  * - turnCount()
  * - playerHP()
@@ -60,6 +60,7 @@ class EnemyActionDealerBase{
 
 /**
  * 敵の特殊攻撃を生成する関数をまとめたもの.
+ * @type {Object.<string, function>}
  */
 const EnemyAction = {
     stun: function(n, cap = null, desc = null){

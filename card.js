@@ -1,40 +1,81 @@
-﻿/*
- * カードに関連するオブジェクトの実装
+﻿/**
+ * @file
+ * カードに関連するオブジェクトを実装する.
+ *
+ * @author lenuser
  */
 
 
-// Chapter 1. 属性の定義・実装
+// #1. 属性の定義・実装
 
 /*
- * カードは「属性」と「数字」を持つ。
- * このうち、属性はさらに「基本属性」と「複合属性」に分かれる。
+ * カードは「属性」と「数字」を持つ.
+ * このうち, 属性はさらに「基本属性」と「複合属性」に分かれる.
  *
- * 基本属性は PrimitiveSuits で定義される。
- * また、 Suits にも初期値としてこれらの値が格納される。
- * 複合属性はそれが必要になったとき自動的に Suits に追加される。
+ * 基本属性は PrimitiveSuits で定義される.
+ * また, Suits にも初期値としてこれらの値が格納される. 複合属性はそれが
+ * 必要になったとき自動的に Suits に追加される.
+ * 以下, 「属性の値」とはこれらの文字列のこととする.
  *
- * 現実には、属性の値そのものを直接扱うことは少なく、
- * 多くは「 Suits 内におけるその属性のインデックス」を利用するが、
- * ファイル名の生成や ImagePool などで使う文字列キーの生成では
- * 属性の値自体を直接使う。
+ * 現実には, 属性の値そのものを直接扱うことは少なく, 多くは「 Suits 内における
+ * その属性のインデックス」を利用する. ただし, ファイル名の生成や
+ * ImagePool などで使う文字列キーの生成では属性の値自体を直接使う.
  *
- * また、コンボの判定に使うデータを ChainMask に格納する。
- * 複合属性が Suits に追加されるとき ChainMask にも適切な値が追加される。
- * これらの値を使ってコンボの判定を行う関数が ChainFunc に設定される。
+ * また, コンボの判定に使うデータを ChainMask に格納する.
+ * 複合属性が Suits に追加されるとき ChainMask にも適切な値が追加される.
+ * これらの値を使ってコンボの判定を行う関数が ChainFunc に設定される.
  */
 
+// (a) 属性
+
+/**
+ * 基本属性を定義するリスト.
+ * @type string[]
+ */
 const PrimitiveSuits = [ "Md", "Hm", "Sy", "Mm", "Ky", "Ng" ];
-const ChainMask = [ 1, 2, 4, 8, 16, 32 ];
+
+/**
+ * プログラムで使われている属性を登録するリスト.
+ * @type string[]
+ */
 const Suits = [...PrimitiveSuits];
 
+/**
+ * 複合属性の属性名を生成する
+ * @param {number[]} marks - 各構成要素のPrimitiveSuitsにおけるインデックス
+ * @returns {string} 生成された属性名
+ */
+const getPolysuitName = function(marks){
+    const names = marks.map((m) => PrimitiveSuits[m]);
+    return names.join("");
+}
+
+
+// (b) キャラクター名 (or カード名) への変換
+
+/**
+ * 基本属性をキャラクターのフルネームに変換する連想配列.
+ * @type Object.<string, string>
+ */
 const CharacterNames = {
     Md: "鹿目まどか",  Hm: "暁美ほむら",  Sy: "美樹さやか",  Mm: "巴マミ",
     Ky: "佐倉杏子",  Ng: "百江なぎさ"
 };
+
+/**
+ * 基本属性をキャラクターの下の名前に変換する連想配列.
+ * @type Object.<string, string>
+ */
 const ShortCharacterNames ={
     Md: "まどか",  Hm: "ほむら",  Sy: "さやか",  Mm: "マミ",
     Ky: "杏子",  Ng: "なぎさ"
 };
+
+/**
+ * 指定された属性に対応するカード名を生成する.
+ * @param {string} suitString - 属性の値
+ * @returns {string} 生成されたカード名
+ */
 const getCharacterName = function(suitString){
     if(suitString.length >= 10) return "魔法少女";
     if(suitString.length == 2) return CharacterNames[suitString];
@@ -43,38 +84,18 @@ const getCharacterName = function(suitString){
 }
 
 
-/**
- * 3枚のカードがコンボの条件を満たしているか判定する
- * （ただし、3枚目のカードがスキルを持つかどうかはチェックしない）。
- * コンボの成立条件はバージョンによって異なるため、
- * 採用するルールに応じてこれらの関数を使うこと。
- */
-const ChainFunc = function(a, b, c){
-    return ((a.mask & c.mask) == a.mask) && ((b.mask & c.mask) == b.mask);
-}
-
-const ChainFuncVer2 = function(a, b, c){
-    if(c.mark < PrimitiveSuits.length){
-        return ((a.mark == b.mark) && (b.mark == c.mark));
-    }
-    else{
-        return (a.mark >= PrimitiveSuits.length)
-               && (b.mark >= PrimitiveSuits.length);
-    }
-}
+// (c) コンボ判定用の値 (マスク)
 
 /**
- * 複合クラスの属性名を生成する
- * (構成要素は「PrimitiveSuitsにおけるインデックス」で指定する)
+ * 各属性に対して割り当てられたコンボ判定用のマスク.
+ * @type number[]
  */
-const getPolysuitName = function(marks){
-    const names = marks.map((m) => PrimitiveSuits[m]);
-    return names.join("");
-}
+const ChainMask = [ 1, 2, 4, 8, 16, 32 ];
 
 /**
  * 複合クラスのためのマスクを計算する
- * (構成要素は「PrimitiveSuitsにおけるインデックス」で指定する)
+ * @param {number[]} marks - 各構成要素のPrimitiveSuitsにおけるインデックス
+ * @returns {number} 生成されたマスクの値
  */
 const getPolysuitMask = function(indices){
     let m = 0;
@@ -83,10 +104,11 @@ const getPolysuitMask = function(indices){
 }
 
 /**
- * 一部のスキル（敵スキルを含む）では「特定の属性だけMPが増加」のように
- * 属性ごとに影響の違う効果を引き起こすことがある。
- * これを管理するため、各属性の強化倍率を扱うオブジェクトを用意する。
- * （複合属性は全部ひとまとめにして扱う）
+ * 各属性の強化倍率を扱うオブジェクト.
+ * 一部のスキル (敵スキルを含む) では「特定の属性だけMPが増加」のように
+ * 属性ごとに影響の違う効果を引き起こすことがある.
+ * これを管理するために用意する (複合属性は全部ひとまとめにして扱う).
+ * @type {Object}
  */
 const MPBoostBySuit = {
     primitive: PrimitiveSuits.map((e) => 100),
@@ -98,9 +120,9 @@ const MPBoostBySuit = {
         this.prismatic = 100;
     },
 
-    // Suit[m]に対する強化倍率を計算する。
-    // 複合属性は基本的に白属性（prismatic）として扱われるが、
-    // "Ng" を含むものは例外的に "Ng" として扱う（理由は不明・・・）
+    // Suit[m]に対する強化倍率を計算する.
+    // 複合属性は基本的に白属性 (prismatic) として扱われるが,
+    // "Ng" を含むものは例外的に "Ng" として扱う (理由は不明・・・)
     get(m){
         if(ChainMask[m] & ChainMask[5]) m = 5;
         return (this.primitive[m] ?? this.prismatic) / 100;
@@ -108,41 +130,77 @@ const MPBoostBySuit = {
 };
 
 
-// Chapter 2. カード、およびカードに関連する機能
+// (d) コンボ判定関数
 
-/*--- 1. スキルとその実行インターフェース ---*/
+/*
+ * コンボの成立条件はバージョンによって異なるため, 採用するルールに応じて
+ * これらの関数を使い分けること.
+ */
 
 /**
- * プレイヤー側のスキルの効果を実装するためオブジェクト。
- * これ自体はごく限定された機能しか持っておらず、
- * 各スキル効果の具体的な処理内容はサブクラスで実装する。
+ * MAGICARD BATTLE第1弾のルールに従い, 3枚のカードがコンボの条件を
+ * 満たしているか判定する
+ * (3枚目のカードがスキルを持つかどうかはチェックしない).
+ * @param {(Card|PrismaticCard)} a
+ * @param {(Card|PrismaticCard)} b
+ * @param {(Card|PrismaticCard)} c
+ * @returns {boolean} コンボが成立していればtrue, 不成立ならfalse
+ */
+const ChainFunc = function(a, b, c){
+    return ((a.mask & c.mask) == a.mask) && ((b.mask & c.mask) == b.mask);
+}
+
+/**
+ * MAGICARD BATTLE第2弾のルールに従い, 3枚のカードがコンボの条件を
+ * 満たしているか判定する
+ * (3枚目のカードがスキルを持つかどうかはチェックしない).
+ * @param {(Card|PrismaticCard)} a
+ * @param {(Card|PrismaticCard)} b
+ * @param {(Card|PrismaticCard)} c
+ * @returns {boolean} コンボが成立していればtrue, 不成立ならfalse
+ */
+const ChainFuncVer2 = function(a, b, c){
+    if(c.mark < PrimitiveSuits.length){
+        return ((a.mark == b.mark) && (b.mark == c.mark));
+    }
+    else{
+        return (a.mark >= PrimitiveSuits.length)
+               && (b.mark >= PrimitiveSuits.length);
+    }
+}
+
+
+// #2. カード、およびカードに関連する機能
+
+// (a) スキルとその実行インターフェース
+
+/**
+ * プレイヤー側のスキルの実行インターフェース.
+ * スキルを表すオブジェクトAと, その実行者Bの間の仲介を行う.
+ * Aはこのクラスが提供する機能を利用してスキルを実行する.
+ * Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.
+ *
+ * SkillDealerBase自体は各スキル効果の具体的な処理方法を知らない.
+ * 具体的な処理内容はサブクラスで実装する.
+ * - enemyHP()
+ * - *addHP(percent)
+ * - *addMP(percent)
+ * - *addSG(percent)
+ * - *addHPSG(percent)
+ * - *addShield(n)
+ * - *chargeUp(percent)
+ * - *reduceEnemyMP(percent)
+ * - *suitSpecificBoost(str, mark, percent)
+ * - *damage(percent)
+ * - *extendTime(n)
+ * - *timeWarp()
+ * - *heal(percent)
+ * - *SGHeal(percent)
+ * - *crisisBoostTask(percent)
+ *
+ * @class
  */
 class SkillDealerBase{
-/*
-    // サブクラスが実装する処理 (基本情報)
-    enemyHP(){ }
-
-    // サブクラスが実装する処理 (攻撃時に実行)
-    *addHP(percent){ }
-    *addMP(percent){ }
-    *addSG(percent){ }
-    *addHPSG(percent){ }
-    *addShield(n){ }
-    *chargeUp(percent){ }
-    *reduceEnemyMP(percent){ }
-    *suitSpecificBoost(str, mark, percent){ }
-    *damage(percent){ }
-    *extendTime(n){ }
-    *timeWarp(){ }
-
-    // サブクラスが実装する処理 (ターン開始時に実行)
-    *heal(percent){ }
-    *SGHeal(percent){ }
-
-    // サブクラスが実装する処理 (HPの変化に伴い呼び出される)
-    *crisisBoostTask(percent){ }
-*/
-
     constructor(){
         this.healRate = 0;
         this.SGHealRate = 0;
@@ -173,7 +231,8 @@ class SkillDealerBase{
 }
 
 /**
- * プレイヤー側のスキルを生成する関数をまとめたもの。
+ * プレイヤー側のスキルを生成する関数をまとめたもの.
+ * @type {Object.<string, function>}
  */
 const PlayerSkill = {
     addHP: function(percent, cap = null, desc = null){
@@ -335,16 +394,23 @@ const PlayerSkill = {
 };
 
 
-/*--- 2. カードを表すオブジェクトの生成 ---*/
+// (b) 複合属性のカードの画像
 
-class Polysuit{
 /*
-    // サブクラスが実装する処理
-    paintBackground(ctx, marks){ }
-    paintMark(ctx, pics){ }
-    paintCost(ctx, x, y, marks, n){ }
-*/
+ * 基本属性のカードの画像は cardimages.png から読み込む.
+ * 一方, 複合属性のカードの画像は, 各マークの画像を組み合わせて
+ * プログラム内で生成する.
+ */
 
+/**
+ * 複合属性のカードを描画するクラスの土台を提供する.
+ * サブクラスは次のメソッドを実装する.
+ * - paintBackground(ctx, marks)
+ * - paintMark(ctx, pics)
+ * - paintCost(ctx, x, y, marks, n)
+ * @class
+ */
+class Polysuit{
     static ccolors = [
         "rgb(204,96,96)", "rgb(17,17,119)", "rgb(96,96,204)",
         "rgb(192,192,0)", "rgb(186,115,87)", "rgb(207,141,154)"
@@ -389,7 +455,8 @@ class Polysuit{
 }
 
 /**
- * 2つのマークを持つカードの画像を生成・管理するためのクラス
+ * 2つのマークを持つカードの画像を生成・管理するためのクラス.
+ * @class
  */
 class DuosuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
@@ -429,7 +496,8 @@ class DuosuitGenerator extends Polysuit{
 }
 
 /**
- * 3つのマークを持つカードの画像を生成・管理するためのクラス
+ * 3つのマークを持つカードの画像を生成・管理するためのクラス.
+ * @class
  */
 class TriosuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
@@ -471,7 +539,8 @@ class TriosuitGenerator extends Polysuit{
 }
 
 /**
- * 4つのマークを持つカードの画像を生成・管理するためのクラス
+ * 4つのマークを持つカードの画像を生成・管理するためのクラス.
+ * @class
  */
 class QuartetsuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
@@ -515,8 +584,9 @@ class QuartetsuitGenerator extends Polysuit{
 }
 
 /**
- * 「魔法少女」のカードの画像を生成・管理するためのクラス
- * （なぎさを含むものは別のクラスで対応する）
+ * 「魔法少女」のカードのうち, なぎさを含まないものについて
+ * 画像を生成・管理するためのクラス.
+ * @class
  */
 class QuintetsuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
@@ -576,7 +646,8 @@ class QuintetsuitGenerator extends Polysuit{
 }
 
 /**
- * なぎさを含む「魔法少女」のカードの画像を生成・管理するためのクラス
+ * なぎさを含む「魔法少女」のカードの画像を生成・管理するためのクラス.
+ * @class
  */
 class SestetsuitGenerator extends Polysuit{
     paintBackground(ctx, marks){
@@ -637,10 +708,14 @@ class SestetsuitGenerator extends Polysuit{
     }
 }
 
+
+// (c) カードを表すクラスの実装
+
 /**
- * 基本属性を持つカードを実装するクラス。
- * インスタンスの生成を行う前にCardクラスの初期化を実行しないといけない。
- * 具体的には Card.init(GE, width, height) を最初に実行する
+ * 基本属性を持つカードのクラス.
+ * インスタンスの生成を行う前にCardクラスの初期化を実行しないといけない。.
+ * 具体的には Card.init(GE, width, height) を最初に実行する.
+ * @class
  */
 class Card{
     // スキル持ちカードのマーカーを表示するか？
@@ -685,10 +760,9 @@ class Card{
 }
 
 /**
- * 複合属性を持つカードを実装するクラス
- * （現時点ではまだマークが２つのカードだけ対応）。
- * インスタンスの生成を行う前にPrismaticCardクラスの初期化を実行しないといけない。
- * 具体的には PrismaticCard.init(GE, width, height) を最初に実行する
+ * 複合属性を持つカードのクラス.
+ * インスタンスの生成を行う前にPrismaticCardクラスの初期化を実行しないといけない.
+ * 具体的には PrismaticCard.init(GE, width, height) を最初に実行する.
  */
 class PrismaticCard{
     static init(GE, width, height){
@@ -738,22 +812,23 @@ class PrismaticCard{
 }
 
 
-/*--- 3. カードに関連するクラス ---*/
+// #3. カードに関連するクラス
 
 /*
- * カードの集合にはいくつか種類がある。
+ * カードの集合にはいくつか種類がある.
  * (1) 単なる配列 (Array)
- *     主に cards などのように表す。
+ *     主に cards などのように表す.
  * (2) CardSet
- *     要素の重複がなく Card.compare でソートされたコレクション。
- *     主に cardset または deckSet のように表す。
+ *     要素の重複がなく Card.compare でソートされたコレクション.
+ *     主に cardset または deckSet のように表す.
  * (3) Deck
- *     shift() や shuffle() などバトルに必要な機能を持たせたコレクション。
- *     主に deck または deckObj のように表す。
+ *     shift() や shuffle() などバトルに必要な機能を持たせたコレクション.
+ *     主に deck または deckObj のように表す.
  */
 
 /**
- * 重複を持たずソートされたカードの集合を表すクラス
+ * 重複を持たずソートされたカードの集合を表すクラス.
+ * @class
  */
 class CardSet{
     static NullCard = new Card(0, 0);
@@ -789,8 +864,8 @@ class CardSet{
 }
 
 /**
- * バトルで使うデッキを実装するクラス
- * （現時点では「巻き戻し」に未対応）
+ * バトルで使うデッキを実装するクラス.
+ * @class
  */
 class Deck{
     // cardsに格納されているカード達をそのままの並び順で使う
@@ -844,7 +919,8 @@ class Deck{
 }
 
 /**
- * 場に出されたカードを管理するクラス
+ * 場に出されたカードを管理するクラス.
+ * class
  */
 class Pool{
     constructor(version = 1){
@@ -885,11 +961,11 @@ class Pool{
         this.applyBonus();
     }
 
-    // 場にカードを出す。具体的には、
+    // 場にカードを出す. 具体的には,
     // (1) baseMPを増加させる
     // (2) chargeMPをボーナス適用前の値に戻す
     // (3) cardをカードリストに追加する
-    // (4) コンボの判定を行い、成立時はcard.skillをスキルリストに追加する
+    // (4) コンボの判定を行い, 成立時はcard.skillをスキルリストに追加する
     //     （このときhypeの値も更新する）
     push(card){
         if(card.value == 0) return;
@@ -913,7 +989,7 @@ class Pool{
         return this.cards[i];
     }
 
-    // 追加スキャンのためのメソッド。
+    // 追加スキャンのためのメソッド.
     // この場合、１枚だけでもコンボ成立扱いになる
     extraScan(card){
         if(card.value == 0) return;
@@ -924,21 +1000,22 @@ class Pool{
 }
 
 
-// Chapter 3. カードデータベース
+// #4. カードデータベース
 
 /*
- * cardlist.jsをロードすると RAW_CARD_DATA にカード情報が格納される。
- * これを元にカードのデータベースを作成する
+ * cardlist.jsをロードすると RAW_CARD_DATA にカード情報が格納される.
+ * これを元にカードのデータベースを作成する.
  */
 
 /**
- * RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト。
- * 以下のメソッドを持つ。
+ * RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.
+ * 以下のメソッドを持つ.
  * get(id) : 指定されたカードIDのカードを返す
  * forEach(callback) : すべてのカード x に対して callback(x) を実行する
  *
  * CardAtlasにより生成されたCardオブジェクトはcardAtlasID属性に
  * カードのIDを代入される
+ * @type {Object}
  */
 const CardAtlas = {
     parseSuitString(ss){

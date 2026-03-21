@@ -1,5 +1,17 @@
-﻿
+﻿/**
+ * @file
+ * localStorageの読み書きを行うオブジェクトを実装する.
+ *
+ * @author lenuser
+ */
 
+
+/**
+ * localStorageの読み書きを行うオブジェクト.
+ * 読み書きした情報の保持も行う. そのため, プログラムがlocalStorageを
+ * 使用しているか否かは, このオブジェクトのisUsed()メソッドで判別できる.
+ * @type {Object}
+ */
 const LocalStorageInfo = {
 config: null,
 deckInfo: null,

@@ -19,7 +19,7 @@
  * @param {number} v - 初期値
  * @param {number} max - 最大値
  * @param {number} frames - 変化に要するフレーム数の既定値
- * @returns 生成されたMeterオブジェクト
+ * @returns {Object} 生成されたMeterオブジェクト
  */
 createMeter = function(v, max, frames){
     let sv = v, tv = v, duration = 0, elapsed = 0;

@@ -104,6 +104,7 @@ class QBTelop{
 
 /**
  * ユーザーに入力を要求する会話ダイアログのクラス.
+ * @class
  */
 class QBYesNo{
     constructor(msg, minWait = 20, seName = null){
@@ -259,6 +260,7 @@ class QBLecture{
 /**
  * バトルの最初にQBが喋る内容を生成する.
  * @param {Objcet.<string,*>} battleOpt - バトルの設定データ
+ * @returns {(QBTalk|QBLecture)} 生成されたオブジェクト
  */
 const createOpeningQB = function(battleOpt){
     // チュートリアルの場合
@@ -294,6 +296,7 @@ const createOpeningQB = function(battleOpt){
 /**
  * バトルが選択されたときに喋る内容を生成する.
  * @param {Objcet.<string,*>} setting - selectSceneの設定データ
+ * @returns {(QBYesNo)} 生成されたオブジェクト
  */
 const createConfirmatingQB_BeforeBattle = function(setting){
     const usedCards = setting.deckSet.cards;
@@ -313,6 +316,7 @@ const createConfirmatingQB_BeforeBattle = function(setting){
 
 /**
  * チュートリアルが選択されたときに喋る内容を生成する.
+ * @returns {QBYesNo} 生成されたオブジェクト
  */
 const createTutorialQB = function(){
     return new QBYesNo("チュートリアルを開始するかい？\nA → YES    S → No", 20, "optionSelected");
