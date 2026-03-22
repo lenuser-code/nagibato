@@ -94,7 +94,7 @@ const ChainMask = [ 1, 2, 4, 8, 16, 32 ];
 
 /**
  * 複合クラスのためのマスクを計算する
- * @param {number[]} marks - 各構成要素のPrimitiveSuitsにおけるインデックス
+ * @param {number[]} indices - 各構成要素のPrimitiveSuitsにおけるインデックス
  * @returns {number} 生成されたマスクの値
  */
 const getPolysuitMask = function(indices){
@@ -170,7 +170,7 @@ const ChainFuncVer2 = function(a, b, c){
 }
 
 
-// #2. カード、およびカードに関連する機能
+// #2. カード, およびカードに関連する機能
 
 // (a) スキルとその実行インターフェース
 
@@ -213,7 +213,7 @@ class SkillDealerBase{
     }
 
     *upkeep(GE){
-        // healが実行されない場合、crisisBoostのHPチェックを自分で実行
+        // healが実行されない場合, crisisBoostのHPチェックを自分で実行
         if(this.healRate > 0) yield* this.heal(this.healRate);
         else yield *this.crisisBoostTask(this.crisisBonus);
 
@@ -991,7 +991,7 @@ class Pool{
     }
 
     // 追加スキャンのためのメソッド.
-    // この場合、１枚だけでもコンボ成立扱いになる
+    // この場合, １枚だけでもコンボ成立扱いになる
     extraScan(card){
         if(card.value == 0) return;
         this.push(card);
