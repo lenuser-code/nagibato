@@ -11,6 +11,16 @@
 // #1. 補助
 
 /**
+ * @typedef {Object} Meter - ステータスの等速変化を実現するオブジェクト
+ * @property {number} value - 現在の値
+ * @property {number} max - 最大値
+ * @property {boolean} active - 指示された等速変化処理を完了した状態のときfalse, それ以外の状態ではtrue
+ * @property {function(number, number): void} init - 初期化する
+ * @property {function(number, number=, boolean=): void} changeTo - 目標値への変化を開始する
+ * @property {function(Object): boolean} execute - 1フレーム分のタスク処理を実行する
+ */
+
+/**
  * ステータスの等速変化を実現するMeterオブジェクトを作る.
  * あるパラメータがAからBへ変化するとき, モデル内部では一瞬で値がBになるが,
  * GUIではAからBまで一定の時間を掛けて変化する様子を描画したい.
@@ -19,7 +29,7 @@
  * @param {number} v - 初期値
  * @param {number} max - 最大値
  * @param {number} frames - 変化に要するフレーム数の既定値
- * @returns {Object} 生成されたMeterオブジェクト
+ * @returns {Meter} 生成されたMeterオブジェクト
  */
 createMeter = function(v, max, frames){
     let sv = v, tv = v, duration = 0, elapsed = 0;
