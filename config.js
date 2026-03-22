@@ -17,8 +17,11 @@
 var config = config || {};
 (function(Public){
 
+// #1. 各項目の設定ダイアログの実装
+
 /**
  * cardlist.jsの内容をキャラ別に分割するクラス.
+ * RAW_CARD_DATAの各要素をそのまま使うので注意.
  * @class
  */
 let Prism = class{
@@ -38,7 +41,8 @@ let Prism = class{
 }
 
 /**
- * コンフィグで使うダイアログのベース
+ * 各項目の設定変更ダイアログを実装するための土台を提供する.
+ * @class
  */
 let DialogBase = class{
     static font = "23px Sans-Serif";
@@ -76,7 +80,8 @@ let DialogBase = class{
 }
 
 /**
- * メインカード選択ダイアログ
+ * メインカード選択ダイアログを実装する.
+ * @class
  */
 let MainCardDialog = class extends DialogBase{
     constructor(owner, defaultValue, x, y, w, h){
@@ -153,7 +158,10 @@ let MainCardDialog = class extends DialogBase{
 }
 
 /**
- * 選択肢を縦に並べるダイアログ。ラベルは１行だけ
+ * 選択肢を縦に並べて表示し, その中から1つを選択させるダイアログを実装する.
+ * 選択肢群の前に１行だけラベルを表示できる. また, ダイアログの下部に
+ * footnoteを表示できる.
+ * @class
  */
 let SimpleChoice = class extends DialogBase{
     static step = 50;
@@ -213,7 +221,9 @@ let SimpleChoice = class extends DialogBase{
 }
 
 /**
- * localStorageのダイアログ。確認事項があるので別途用意する
+ * localStorage設定のダイアログを実装する.
+ * SimpleChoiceに似ているが, 独自の確認事項があるので別途用意する.
+ * @class
  */
 let LocalStorageDialog = class extends DialogBase{
     constructor(owner, defaultValue, x, y, w, h){
@@ -272,9 +282,20 @@ let LocalStorageDialog = class extends DialogBase{
     }
 }
 
+
+// #2. 追加スキャン用のダイアログの実装
+
 /*
- * 追加スキャンを実装するときにサイドボードのカードを選択する必要があるので、
- * このnamespaceで作っておく
+ * 追加スキャンを実装するときにサイドボードのカードを選択する必要があるので,
+ * このnamespaceで作っておく.
+ */
+
+/**
+ * mainSceneで追加スキャンのために使うダイアログの実装.
+ * 使用するのは別のシーンだが, 「カードライブラリから１枚を選ぶ」という操作が
+ * メインカードの選択と酷似しているので, 実装の効率化や見た目の統一ために
+ * ここで定義して外部に提供する.
+ * @class
  */
 Public.SideboardDialog = class extends DialogBase{
     static labels = PrimitiveSuits.map((e) => CharacterNames[e]).concat(["多人数"]);
@@ -371,6 +392,9 @@ Public.SideboardDialog = class extends DialogBase{
         }
     }
 }
+
+
+// #3. configScene, configScene2の実装
 
 /**
  * コンフィグ画面を実装するSceneオブジェクト.
