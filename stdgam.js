@@ -1,123 +1,35 @@
-﻿/*
- * 便宜上、stdgamの定義に加えて
- * ZzFX (https://github.com/KilledByAPixel/ZzFX?tab=readme-ov-file) の
- * インポートもこのファイル内で済ませることにする。
+﻿/**
+ * @file
+ * namespace stdgamの定義と, ZzFXのZzFX Micro Codeのインポートを行う.
+ *
+ * ZzFX - Zuper Zmall Zound Zynth
+ * https://github.com/KilledByAPixel/ZzFX?tab=readme-ov-file
+ *
+ * stdgamの実装が主要な作業内容だが, 他に適切な方法がなかったので
+ * ZzFX Micro Codeもこのファイルに記述する.
  */
 
+//--- 最初にnamespace stdgamを定義する
 
-// Chapter 1. stdgam
-
-/*
- * namespace stdgam
- *
- * GameEngine
- * - Scene
- * - InputManager
- * - TimeKeeper
- *
- * CachePool
- * ImagePool
- * SoundPool
- * SEPool
- * Templates
+/**
+ * ゲームエンジンの実装を行うnamespace. 以下の要素が外部に公開される.
+ * - stdgam.GameEngine
+ * - stdgam.Scene
+ * - stdgam.CachePool
+ * - stdgam.ImagePool
+ * - stdgam.SoundPool
+ * - stdgam.SEPool
+ * - stdgam.Templates
  */
 var stdgam = stdgam || {};
 (function(Public){
 
-/*--- 1. 補助 ---*/
+// #1. Sceneの実装
 
 /**
- * キー入力を管理するクラス
- */
-let InputManager = class {
-    constructor(){
-        this.currentKeys = new Set();
-        this.previousKeys = new Set();
-        window.addEventListener('keydown', (e) => this.currentKeys.add(e.code));
-        window.addEventListener('keyup', (e) => this.currentKeys.delete(e.code));
-    }
-
-    // 現在の状態を「1フレーム前の状態」としてコピー
-    update() {
-        this.previousKeys = new Set(this.currentKeys);
-    }
-
-    // そのキーが今押されているか？
-    isDown(code) {
-        return this.currentKeys.has(code);
-    }
-
-    // 「今は押されている」かつ「1フレーム前は押されていなかった」ときtrueを返す
-    isJustPressed(code) {
-        return this.currentKeys.has(code) && !this.previousKeys.has(code);
-    }
-
-    // シーン切り替え時に「今押されているキー」を「前から押されていたこと」にする
-    // これにより、新しいシーンで isJustPressed が false になる
-    sync() {
-        this.previousKeys = new Set(this.currentKeys);
-    }
-
-    // キー入力のチェックを補佐する関数。
-    // キーを押し続けたときに毎フレーム反応するのでは困るが、
-    // 一定の間隔が空いていればキーを離していなくてもキー入力を受け付けたい、
-    // というケースに用いる。
-    //
-    // (1) もし codes1 の中に isJustPressed が真のものがあれば、
-    //     そのような一番最初のキー入力とそのインデックスの組を返す。
-    // (2) さらに、(1)に該当するものが無く、かつbusyFlagが偽のとき
-    //     codes2 の中で isDown が真である最初のキーを探す。
-    //     見つかればそのキーとインデックスの組を返す。
-    // (3) 上記のどちらにも該当しないとき、[null, -1]を返す。
-    checkInput(codes1, codes2 = null, busyFlag = true){
-        let i = codes1.findIndex((e) => this.isJustPressed(e));
-        if(i >= 0) return [ codes1[i], i ];
-
-        if(codes2 && !busyFlag){
-            i = codes2.findIndex((e) => this.isDown(e));
-            if(i >= 0) return [ codes2[i], i ];
-        }
-
-        return [ null, -1 ];
-    }
-};
-
-/**
- * タイマー処理を担当するクラス
- */
-let TimeKeeper = class {
-    constructor(owner){
-        this.owner = owner;
-        this.isRunning = false;
-        this.fps = 60; // ターゲットfps
-    }
-
-    // タイマー処理を開始する
-    run(){
-        if(this.isRunning) return;
-        this.isRunning = true;
-
-        const interval = 1000 / this.fps; // 1フレームあたりのミリ秒（約16.6ms）
-        let lastTime = performance.now();
-
-        const loop = (currentTime) => {
-           const elapsed = currentTime - lastTime;
-           // 指定した間隔（16.6ms）以上が経過したかチェック
-           if (elapsed >= interval) {
-               lastTime = currentTime - (elapsed % interval);
-               this.owner.update();
-           }
-           requestAnimationFrame(loop);
-        };
-        requestAnimationFrame(loop);
-    }
-};
-
-
-/*--- 2. Scene ---*/
-
-/**
- * ゲームにおける１つのモード、または１つのステージを表すクラス
+ * ゲームにおける１つのモード, または１つのステージを表すクラス.
+ * GameEndineからロードして使う.
+ * @class
  */
 Public.Scene = class {
     // optが渡された場合、共通の処理を済ませた後にその内容を自身に代入する
@@ -139,7 +51,7 @@ Public.Scene = class {
         this.tasks = [];
     }
 
-    // スプライトを追加する。
+    // スプライトを追加する.
     // もし第2引数にtrueを指定した場合は先頭に追加する
     addSprite(spr, first = false){
         if(first){
@@ -162,8 +74,8 @@ Public.Scene = class {
         else this.sprites.push(...objs); // 見つからなければ末尾へ
     }
 
-    // タスクを追加する
-    // もし第2引数にtrueを指定した場合は先頭に追加する
+    // タスクを追加する.
+    // もし第2引数にtrueを指定した場合は先頭に追加する.
     addTask(task, first = false){
         if(first){
             this.tasks.unshift(task);
@@ -192,9 +104,9 @@ Public.Scene = class {
         return obj;
     }
 
-    // 複数のオブジェクトを登録するためのショートカット。
-    // 先頭に追加する場合、リスト内の順序を維持したままリストの先頭に連結する。
-    // 末尾に追加する場合は単にaddを繰り返すのと同じである
+    // 複数のオブジェクトを登録するためのショートカット.
+    // 先頭に追加する場合, リスト内の順序を維持したままリストの先頭に連結する.
+    // 末尾に追加する場合は単にaddを繰り返すのと同じである.
     addSequence(list, first = false) {
         if (first) {
             const sprites = list.filter(e => e.draw);
@@ -207,26 +119,26 @@ Public.Scene = class {
         return list;
     }
 
-    // 登録されているスプライトのdraw(GE, ctx)を順番に実行する。
-    // ここでGEはこのゲームのGameEngine、ctxは描画に使うコンテクストである
+    // 登録されているスプライトのdraw(GE, ctx)を順番に実行する.
+    // ここでGEはこのゲームのGameEngine, ctxは描画に使うコンテクストである.
     // 最後に「activeが真」または「activeがundefined」のスプライトだけを
-    // リストに残して、他のスプライトはリストから削除する
+    // リストに残して, 他のスプライトはリストから削除する.
     superdraw(ctx){
         this.sprites.forEach(e => e.draw(this.GE, ctx));
         this.sprites = this.sprites.filter(e => (e.active || e.active === undefined));
         if(this.draw) this.draw(this.GE, ctx);
     }
 
-    // 登録されているタスクのexecute(GE)を順番に実行する。
-    // ここでGEはこのゲームのGameEngineである。
-    // ただし、あるタスクがfalseを返した場合、それより後のタスクは実行しない
+    // 登録されているタスクのexecute(GE)を順番に実行する.
+    // ここでGEはこのゲームのGameEngineである.
+    // ただし, あるタスクがfalseを返した場合, それより後のタスクは実行しない
     // 
-    // スプライトの場合と同様、最後に「activeが真」または「activeがundefined」の
-    // タスクだけをリストに残して、他のタスクはリストから削除する
+    // スプライトの場合と同様, 最後に「activeが真」または「activeがundefined」の
+    // タスクだけをリストに残して, 他のタスクはリストから削除する.
     // 
-    // 【注意】execute()の中でタスクの追加・削除を行うと、for文の実行中に
+    // 【注意】execute()の中でタスクの追加・削除を行うと, for文の実行中に
     // 配列を変更したのと同じ現象が発生します！　特に、自身よりも前に新しい要素を、
-    // 追加する場合は、falseを返して後続の処理を止めてください。
+    // 追加する場合は, falseを返して後続の処理を止めてください.
     superexecute(){
         let i, f;
         for(i = 0, f = true; i < this.tasks.length && f; i++){
@@ -242,7 +154,7 @@ Public.Scene = class {
         if(this.execute) this.execute(this.GE);
     }
 
-    // genにより作られるGeneratorを回す関数を作り、これをexecuteに代入する
+    // genにより作られるGeneratorを回す関数を作り, これをexecuteに代入する
     useCoroutine(GE, opt, gen){
         const iter = gen.call(this, GE);
         this.execute = (GE) => {
@@ -250,13 +162,105 @@ Public.Scene = class {
             if(result.done) this.execute = null;
         };
     }
-};
+}
 
 
-/*--- 3. GameEngine ---*/
+// #2. GameEngineの実装
 
 /**
- * ゲームの全体的な挙動を管理するクラス
+ * キー入力を管理するヘルパークラス.
+ * クラス定義自体は公開されないが, インスタンスはGameEngineのinput要素に格納され
+ * 外部からも利用される.
+ * @class
+ */
+let InputManager = class {
+    constructor(){
+        this.currentKeys = new Set();
+        this.previousKeys = new Set();
+        window.addEventListener('keydown', (e) => this.currentKeys.add(e.code));
+        window.addEventListener('keyup', (e) => this.currentKeys.delete(e.code));
+    }
+
+    // 現在の状態を「1フレーム前の状態」としてコピー
+    update() {
+        this.previousKeys = new Set(this.currentKeys);
+    }
+
+    // そのキーが今押されているか？
+    isDown(code) {
+        return this.currentKeys.has(code);
+    }
+
+    // 「今は押されている」かつ「1フレーム前は押されていなかった」ときtrueを返す
+    isJustPressed(code) {
+        return this.currentKeys.has(code) && !this.previousKeys.has(code);
+    }
+
+    // シーン切り替え時に「今押されているキー」を「前から押されていたこと」にする.
+    // これにより, 新しいシーンで isJustPressed が false になる
+    sync() {
+        this.previousKeys = new Set(this.currentKeys);
+    }
+
+    // キー入力のチェックを補佐する関数.
+    // キーを押し続けたときに毎フレーム反応するのでは困るが,
+    // 一定の間隔が空いていればキーを離していなくてもキー入力を受け付けたい、
+    // というケースに用いる.
+    //
+    // (1) もし codes1 の中に isJustPressed が真のものがあれば,
+    //     そのような一番最初のキー入力とそのインデックスの組を返す.
+    // (2) さらに、(1)に該当するものが無く, かつbusyFlagが偽のとき
+    //     codes2 の中で isDown が真である最初のキーを探す.
+    //     見つかればそのキーとインデックスの組を返す.
+    // (3) 上記のどちらにも該当しないとき, [null, -1]を返す.
+    checkInput(codes1, codes2 = null, busyFlag = true){
+        let i = codes1.findIndex((e) => this.isJustPressed(e));
+        if(i >= 0) return [ codes1[i], i ];
+
+        if(codes2 && !busyFlag){
+            i = codes2.findIndex((e) => this.isDown(e));
+            if(i >= 0) return [ codes2[i], i ];
+        }
+
+        return [ null, -1 ];
+    }
+}
+
+/**
+ * タイマー処理を担当するヘルパークラス.
+ * @class
+ */
+let TimeKeeper = class {
+    constructor(owner){
+        this.owner = owner;
+        this.isRunning = false;
+        this.fps = 60; // ターゲットfps
+    }
+
+    // タイマー処理を開始する
+    run(){
+        if(this.isRunning) return;
+        this.isRunning = true;
+
+        const interval = 1000 / this.fps; // 1フレームあたりのミリ秒（約16.6ms）
+        let lastTime = performance.now();
+
+        const loop = (currentTime) => {
+           const elapsed = currentTime - lastTime;
+           // 指定した間隔（16.6ms）以上が経過したかチェック
+           if (elapsed >= interval) {
+               lastTime = currentTime - (elapsed % interval);
+               this.owner.update();
+           }
+           requestAnimationFrame(loop);
+        };
+        requestAnimationFrame(loop);
+    }
+}
+
+/**
+ * ゲームの全体的な挙動を管理するクラス.
+ * @class
  */
 Public.GameEngine = class {
     constructor(canvasId) {
@@ -283,8 +287,8 @@ Public.GameEngine = class {
         this.scenes[name] = scene;
     }
 
-    // nameという名前で登録されているシーンをカレントシーンとする。
-    // 第２引数としてハッシュを指定した場合、これをカレントシーンに伝える
+    // nameという名前で登録されているシーンをカレントシーンとする.
+    // 第２引数としてハッシュを指定した場合, これをカレントシーンに伝える
     changeScene(name, data = {}) {
         this.input.sync();
         if(this.scenes[name]){
@@ -311,13 +315,14 @@ Public.GameEngine = class {
             this.sounds.ready().then(callback);
         });
     }
-};
+}
 
 
-/*--- 4. 画像/音声の管理をサポートする機能 ---*/
+// #3. 画像・音声の管理をサポートする機能
 
 /**
- * イメージを指定された幅・高さに基づいて分割するクラス
+ * イメージを指定された幅・高さに基づいて分割するクラス.
+ * @class
  */
 Public.ImageCutter = class {
     constructor(img, width, height){
@@ -326,8 +331,8 @@ Public.ImageCutter = class {
         this.h = height; // 1コマの縦幅
     }
 
-    // 分割した画像のうち上からa番目、左からb番目の部分を描画する。
-    // ただし、a, bは0から数え始めるものとする
+    // 分割した画像のうち上からa番目, 左からb番目の部分を描画する.
+    // ただし, a, bは0から数え始めるものとする
     paint(ctx, x, y, a, b){
         const sx = this.w * a;
         const sy = this.h * b;
@@ -336,18 +341,19 @@ Public.ImageCutter = class {
             x, y, this.w, this.h
         );
     }
-};
+}
 
 /**
- * オフスクリーン・キャンバスを管理するクラス
+ * オフスクリーン・キャンバスを管理するクラス.
+ * @class
  */
 Public.CachePool = class {
     constructor(){
         this.pool = {};
     }
 
-    // オフスクリーン・キャンバスを作ってプールに登録する。
-    // (drawFnが与えられた場合、それを実行する)
+    // オフスクリーン・キャンバスを作ってプールに登録する.
+    // (drawFnが与えられた場合, それを実行する)
     createCache(name, w, h, drawFn = (ctx) => {}){
         const c = document.createElement('canvas');
         c.width = w;
@@ -361,10 +367,11 @@ Public.CachePool = class {
     get(name){
         return this.pool[name];
     }
-};
+}
 
 /**
- * 画像ファイルから読み込んだイメージを管理するクラス
+ * 画像ファイルから読み込んだイメージを管理するクラス.
+ * @class
  */
 Public.ImagePool = class {
     constructor(){
@@ -395,12 +402,13 @@ Public.ImagePool = class {
     get(name){
         return this.pool[name];
     }
-};
+}
 
 /**
- * 音声ファイルを管理するクラス
+ * 音声ファイルを管理するクラス.
  * [注意] 現在のブラウザでは、ユーザがそのページ内で何か操作をするまで
  * 勝手に音声を鳴らすことができない！
+ * @class
  */
 Public.SoundPool = class {
     constructor() {
@@ -427,7 +435,7 @@ Public.SoundPool = class {
         return Promise.all(this.promises);
     }
 
-    // 登録されている音声を再生する（毎回音声の最初から流す）
+    // 登録されている音声を再生する (毎回音声の最初から流す)
     play(name) {
         const ad = this.pool[name];
         if (ad) {
@@ -444,10 +452,11 @@ Public.SoundPool = class {
             ad.currentTime = 0; // 巻き戻し
         }
     }
-};
+}
 
 /**
- * ZzFXを使用した効果音（SE）を管理するクラス
+ * ZzFXを使用した効果音（SE）を管理するクラス.
+ * @class
  */
 Public.SEPool = class {
     constructor() {
@@ -473,47 +482,50 @@ Public.SEPool = class {
             }
         }
     }
-};
+}
 
 
-/*--- 5. スプライト/タスクの作成をサポートする機能 ---*/
+// #4. スプライト・タスクの作成をサポートする機能
 
 /**
- * 基礎的なオブジェクトを生成する「ジェネレータ」と、
- * 生成済みのオブジェクトに機能を付与する「デコレータ」を用意する。
+ * 頻繁に必要になる定型のオブジェクトを作成するためのテンプレート群.
+ * 基礎的なオブジェクトを生成する「ジェネレータ」と,
+ * 生成済みのオブジェクトに機能を付与する「デコレータ」を提供する.
  *
  * 使用例:
  *     T = stdgam.Templates;
  *     obj = T.slider(
- *         T.finite( T.text("MESSAGE"), 120 ),
+ *         T.finite( T.text("MESSAGE", {font: "20px Serif"}), 120 ),
  *         x1, y1
  *     );
  *     obj.slideTo(x2, y2, 120);
  *
- * デコレータは対象のオブジェクトを直接変更し、特定の機能を付与する。
- * これはある種のコードスニペットであり、他の機能との独立性は
- * 保証されないが、stdgam.Templatesで提供する機能同士を組み合わせる分には
- * 内部実装を特に意識しないで済むように構成している。
+ * デコレータは対象のオブジェクトを直接変更し, 特定の機能を付与する.
+ * これはある種のコードスニペットであり, 他の機能との独立性は
+ * 保証されないが, stdgam.Templatesで提供する機能同士を組み合わせる分には
+ * 内部実装を特に意識しないで済むように構成している.
  *
  * 1. ジェネレータ
- * text -- 文字列を表示するオブジェクト
- * ftext -- フォーマット機能付きの文字列表示オブジェクト
- * image -- 画像を表示するオブジェクト
- * custom -- paintメソッドを持つオブジェクトをラップするオブジェクト
- * pause -- 一定時間が経過するまで後続のタスクを停止するオブジェクト
- * call -- 指定した関数を１回呼び出すだけのオブジェクト（実行後消える）
+ * - text: 文字列を表示するオブジェクト
+ * - ftext: フォーマット機能付きの文字列表示オブジェクト
+ * - image: 画像を表示するオブジェクト
+ * - custom: paintメソッドを持つオブジェクトをラップするオブジェクト
+ * - pause: 一定時間が経過するまで後続のタスクを停止するオブジェクト
+ * - call: 指定した関数を１回呼び出すだけのオブジェクト（実行後消える）
  *
  * 2. デコレータ
- * finite -- 指定した時間が経過すると自動的に消滅する
- * scheduler -- 指定した時間が経過した後に実行する処理を予約できる
- * slider -- slideToにより自動的に平行移動させることができる
- * fader -- fadeToによりアルファを自動的に変化させることができる
+ * - finite: 指定した時間が経過すると自動的に消滅する
+ * - scheduler: 指定した時間が経過した後に実行する処理を予約できる
+ * - slider: slideToにより自動的に平行移動させることができる
+ * - fader: fadeToによりアルファを自動的に変化させることができる
+ *
+ * @type {Object.<string, function>}
  */
 Public.Templates = {
     // --- 1. ジェネレータ ---
 
-    // テキストの描画を行うオブジェクト。
-    // optを使って x, y, color, font, alpha を指定できる。
+    // テキストの描画を行うオブジェクト.
+    // optを使って x, y, color, font, alpha を指定できる.
     // これらに加えて, ctxの持っている他の属性もoptで渡すことが可能
     text: (str, opt = {}) => {
         const obj = {
@@ -541,8 +553,8 @@ Public.Templates = {
     },
 
     // formatに含まれる "${}" という文字列を target[key] に置き換えて
-    // 得られるテキストを表示するオブジェクト。
-    // もしtargetが偽の場合は、このオブジェクト自身をターゲットとする。
+    // 得られるテキストを表示するオブジェクト.
+    // もしtargetが偽の場合は, このオブジェクト自身をターゲットとする.
     // 自動的にテキストが更新されること以外はtextと同じ挙動をする
     ftext: (format, target, key, opt = {}) => {
         const obj = stdgam.Templates.text("", opt);
@@ -560,8 +572,8 @@ Public.Templates = {
         return obj;
     },
 
-    // 画像の描画を行うオブジェクト。
-    // optを使って x, y, color, alppha を指定できる。
+    // 画像の描画を行うオブジェクト.
+    // optを使って x, y, color, alppha を指定できる.
     image: (img, opt = {}) => ({
         image: img, active: true,
         x: opt["x"] || 0, y: opt["y"] || 0,
@@ -574,9 +586,9 @@ Public.Templates = {
         }
     }),
 
-    // paint(GE, ctx, x, y)を持つオブジェクトを受け取り、
-    // それを描画するオブジェクトを生成する
-    // optを使って x, y, alppha を指定できる。
+    // paint(GE, ctx, x, y)を持つオブジェクトを受け取り,
+    // それを描画するオブジェクトを生成する.
+    // optを使って x, y, alppha を指定できる.
     custom: (contents, opt = {}) => ({
         contents: contents, active: true,
         x: opt["x"] || 0, y: opt["y"] || 0,
@@ -593,9 +605,9 @@ Public.Templates = {
         }
     }),
 
-    // 指定されたフレーム数の間、「return false;」を実行し続ける
-    // オブジェクトを生成する。ただし、もし引数として負の数が与えられた場合は
-    // 無限にこの処理を実行し続ける
+    // 指定されたフレーム数の間 「return false;」を実行し続けるオブジェクトを
+    // 生成する. ただし, もし引数として負の数が与えられた場合はこの処理を
+    // 無限に実行し続ける
     pause: (frames) => ({
         active: true,
         execute(GE) {
@@ -605,7 +617,7 @@ Public.Templates = {
         }
     }),
 
-    // 指定された関数を１回実行した後、自動的に消滅するオブジェクト
+    // 指定された関数を１回実行した後, 自動的に消滅するオブジェクト
     call: (callback) => ({
         active: true,
         execute(GE) {
@@ -616,7 +628,7 @@ Public.Templates = {
     }),
 
     // --- 2. デコレータ ---
-    // 内部ヘルパー: Traitsの受け皿と、タスクとして認識されるための execute を用意
+    // 内部ヘルパー: Traitsの受け皿と, タスクとして認識されるための execute を用意
     _initTraits: (obj) => {
         if (!obj._traits) obj._traits = [];
         // Scene.add(obj) でタスクとして登録されるよう、空のexecuteを生やしておく
@@ -635,7 +647,7 @@ Public.Templates = {
         return obj;
     },
 
-    // after(frames, callback) と loop(frames, callback) を実装する。
+    // after(frames, callback) と loop(frames, callback) を実装する.
     // after: 指定時間が経過したとき、callbackを実行する
     // loop: callbackの実行結果がtrueである限り、afterと同じ処理を繰り返す
     scheduler: function(obj) {
@@ -669,7 +681,7 @@ Public.Templates = {
         return obj;
     },
 
-    // moveTo(x, y) と slideTo(x, y, frames)を実装する。
+    // moveTo(x, y) と slideTo(x, y, frames)を実装する.
     // moveTo: this.x, this.yを指定した値に変更する
     // slideTo: 現在位置から(x,y)までthis.x, this.yの値を変化させる
     slider: function(obj, x, y) {
@@ -702,7 +714,7 @@ Public.Templates = {
         return obj;
     },
 
-    // fadeTo(alpha, frames)を実装する。
+    // fadeTo(alpha, frames)を実装する.
     // fadeTo: 現在位置からalphaまでthis.alphaの値を変化させる
     fader: function(obj, alpha) {
         this._initTraits(obj);
@@ -732,19 +744,21 @@ Public.Templates = {
         });
         return obj;
     }
-};
+}
 
 })(stdgam);
 
 
-// Chapter 2. ZzFX
+//--- 次に, ZzFX Micro Codeをインポートする
 
 /*
- * ZzFX (https://github.com/KilledByAPixel/ZzFX?tab=readme-ov-file)
+ * ZzFX - Zuper Zmall Zound Zynth
+ * https://github.com/KilledByAPixel/ZzFX?tab=readme-ov-file
  *
- * ZzFX Micro Codeを取り込み、zzfx()が使えるようにする。
- * 下記の一見すると何だかわからないコードが最終的に zzfx() を定義している。
+ * ZzFX Micro Codeを取り込み, zzfx()が使えるようにする.
+ * 下記の一見すると何だかわからないコードが最終的に zzfx() を定義している.
  */
+
 let // ZzFXMicro - Zuper Zmall Zound Zynth - v1.3.2 by Frank Force
 zzfxV=.3,               // volume
 zzfxX=new AudioContext, // audio context

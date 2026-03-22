@@ -279,7 +279,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 }
 
 
-// #2 プライベート関数
+// #2. プライベート関数
 
 // (a) コンポーネントを生成する関数
 
@@ -546,7 +546,7 @@ let createSkillDialog = function(skill){
  * Playerオブジェクトを指定されたシーンに登録する. 具体的には,
  * (1) Playerが持つ各種のMeterオブジェクトをSceneのタスクリストに登録する.
  * (2) Playerの状態を観察・表示するコンポーネントを生成し, Sceneに追加する.
- * @param {Scene} scene - この操作を実行されるSceneオブジェクト
+ * @param {stdgam.Scene} scene - この操作を実行されるSceneオブジェクト
  * @param {Player} player - 登録されるPlayerオブジェクト
  * @param {number} x - 配置作業の基点のx座標
  * @param {number} y - 配置作業の基点のy座標
@@ -586,7 +586,7 @@ let bindPlayer = function(scene, player, x, y){
  * Enemyオブジェクトを指定されたシーンに登録する. 具体的には,
  * (1) Enemyが持つ各種のMeterオブジェクトをSceneのタスクリストに登録する.
  * (2) Enemyの状態を観察・表示するコンポーネントを生成し, Sceneに追加する.
- * @param {Scene} scene - この操作を実行されるSceneオブジェクト
+ * @param {stdgam.Scene} scene - この操作を実行されるSceneオブジェクト
  * @param {Player} enemy - 登録されるEnemyオブジェクト
  * @param {number} x - 配置作業の基点のx座標
  * @param {number} y - 配置作業の基点のy座標
@@ -686,7 +686,7 @@ let delivery = function(card, addr1, addr2, callback){
 
 /**
  * バトルを実行するSceneオブジェクト.
- * @type {Scene}
+ * @type {stdgam.Scene}
  */
 Public.mainScene = new stdgam.Scene({
 x: 160,

@@ -23,17 +23,34 @@
 <script type="text/javascript" src="./storage.js"></script>
 <script>
 
-/*
- * これ以降、次の定数を使う
- */
+// #1. GameEngineの生成, stdgamに関連する定数の定義
 
+/**
+ * stdgamから必要な要素をインポートしてきたもの.
+ * - GameEngine: {Class} ゲームのメインエンジンを実装するクラス
+ * - Scene: {Class} シーンを表すクラス
+ * - ImageCutter: {Class} 画像を分割して扱うためのクラス
+ * - Templates: {Object.<string, function>} 定番のオブジェクトを作るためのテンプレート群
+ */
 const { GameEngine, Scene, ImageCutter, Templates } = stdgam;
+
+/**
+ * このプログラムで使うGameEngineオブジェクト.
+ * @type {stdgam.GameEngine}
+ */
 const GE = new GameEngine("gameCanvas");
+
+/**
+ * stdgam.Templatesの略称.
+ * @type {Object.<string, function>}
+ */
 const T = Templates;
 
+
+// #2. 画像や音声の準備
+
 /*
- * また、必要なデータのロードが完了してからでないと
- * 本題に取りかかれないので、最初にまとめて列挙しておく
+ * プログラムで使う画像や音声をまとめて登録しておく.
  */
 
 GE.images.load("CARDIMAGES", "./image/cardimages.png");
@@ -46,7 +63,6 @@ GE.se.register("optionSelected", [0.7,0,530,.01,.08,.15,1,.5,-9,-110,0,0,0,0,0,0
 GE.se.register("hit0", [1,0,426,.02,.16,.15,1,4,-5,6,0,0,0,1.4,0,.4,.01,.88,.1,0,0]);
 GE.se.register("hit1", [1,0,426,.02,.16,.15,1,4,-5,6,0,0,.01,1.4,0,.4,.01,.88,.1,0,0]);
 GE.se.register("powerup", [0.7,0,126,.01,.22,.3,1,.5,-4,0,0,0,0,0,0,0,.15,.6,.24,0,0]);
-
 
 GE.caches.createCache("BACKGROUND", 1000, 700, (ctx) => {
     ctx.save();
@@ -71,10 +87,15 @@ GE.caches.createCache("DIALOG", 1000, 700, (ctx) => {
 });
 
 
-//*** 1. タイトル画面
+// #3. タイトル画面の実装
 
-// 途中に挟むページ
+// (a) intermediateSceneの定義
 
+/**
+ * タイトル画面からバトルへ移行する際, 途中に挟む仲介役のシーン.
+ * 逆に, バトルから戻って来るときもこのシーンを経由する.
+ * @type {stdgam.Scene}
+ */
 const intermediateScene = new Scene({
     step: 0,
     constructor(){
@@ -110,8 +131,13 @@ const intermediateScene = new Scene({
     }
 });
 
-// UIの構成要素
 
+// (b) タイトル画面のUIの構成要素
+
+/**
+ * バトル・チュートリアルの選択に使うダイアログを実装するクラス.
+ * @class
+ */
 class SelectWindow{
     constructor(menu, action, rowCount, x, y, w, h){
         this.menu = menu;
@@ -201,6 +227,10 @@ class SelectWindow{
     }
 }
 
+/**
+ * Shelflikeに格納される個々のアイテムを実装するクラス.
+ * @class
+ */
 class Booklike{
     static boxColors = [ "rgb(239,228,176)", "rgb(195,195,195)"];
     static textColors = [ "rgb(255,100,0)", "gray" ];
@@ -234,6 +264,10 @@ class Booklike{
     }
 }
 
+/**
+ * タイトル画面のメインメニューを実装するクラス.
+ * @class
+ */
 class Shelflike{
     static boxColor = "rgb(30,30,30)";
     static borderColor = "rgb(10,10,10)";
@@ -291,8 +325,13 @@ class Shelflike{
     }
 }
 
-// シーンの作成
 
+// (c) selectSceneの実装
+
+/**
+ * タイトル画面を実装するSceneオブジェクト.
+ * @type {stdgam.Scene}
+ */
 const selectScene = new Scene({
 battleSelected(opt){
     this.yesno = createConfirmatingQB_BeforeBattle(this.setting);
@@ -444,6 +483,8 @@ onLoad(GE, args){
 }
 });
 
+
+// #4. ゲームの開始
 
 /*
  * 以上の準備のもとで次を実行する

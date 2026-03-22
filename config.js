@@ -398,7 +398,7 @@ Public.SideboardDialog = class extends DialogBase{
 
 /**
  * コンフィグ画面を実装するSceneオブジェクト.
- * @type {Scene}
+ * @type {stdgam.Scene}
  */
 Public.configScene = new stdgam.Scene({
 saveConfig(){
@@ -549,7 +549,7 @@ execute(GE){
 
 /**
  * 特殊設定のコンフィグ画面を実装するSceneオブジェクト.
- * @type {Scene}
+ * @type {stdgam.Scene}
  */
 Public.configScene2 = new stdgam.Scene({
 saveConfig(){

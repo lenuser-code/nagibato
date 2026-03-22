@@ -603,7 +603,7 @@ let createBaseMenu = function(owner, panels){
 
 /**
  * デッキ編集画面を実装するSceneオブジェクト.
- * @type {Scene}
+ * @type {stdgam.Scene}
  */
 Public.editScene = new stdgam.Scene({
 onLoad(GE, args){
