@@ -14,6 +14,8 @@
 var edit = edit || {};
 (function(Public){
 
+// #1. カードを展示するコンポーネント
+
 /**
  * CardPanelで利用するカーソルを実装するクラス.
  * @class
@@ -97,6 +99,13 @@ let CardCapture = class{
     }
 }
 
+/**
+ * 指定されたCardSetの内容を横一列に展示するコンポーネント.
+ * 表示に加えて, カードの選択機能も担当する.
+ * 対象のCardSetの内容を動的に監視するので, カードの追加・削除は
+ * 単にCardSet自体を編集すればよい.
+ * @class
+ */
 let CardPanel = class{
     constructor(owner, deckSet, colCount, x, y, showAlways = true){
         this.owner = owner;
@@ -299,6 +308,13 @@ let CardCapture2D = class{
     }
 }
 
+/**
+ * 指定されたCardSetの内容を縦・横に並べて展示するコンポーネント.
+ * 表示に加えて, カードの選択機能も担当する.
+ * 対象のCardSetの内容を動的に監視するので, カードの追加・削除は
+ * 単にCardSet自体を編集すればよい.
+ * @class
+ */
 let CardPanel2D = class{
     constructor(owner, deckSet, rowCount, colCount, x, y){
         this.owner = owner;
@@ -389,6 +405,90 @@ let CardPanel2D = class{
 }
 
 
+// #2. メニューの実装
+
+/**
+ * 指定されたCardSetの内容をキャラ別に分割するクラス
+ * (元のCardSetに変更は影響しない).
+ * @class
+ */
+let Prism = class{
+    static labels = [
+        "まどか", "ほむら", "さやか", "マミ", "杏子", "なぎさ", "多人数"
+    ];
+
+    constructor(source){
+        const tmp = [];
+        for(let i = 0; i < Prism.labels.length; i++){
+            tmp.push([]);
+        }
+        source.cards.forEach((e) => {
+            if(e.mark < tmp.length - 1) tmp[e.mark].push(e);
+            else tmp[tmp.length-1].push(e);
+        });
+        this.subsets = tmp.map((subset) => new CardSet(subset));
+    }
+
+    size(){
+        return this.subsets.length;
+    }
+
+    union(){
+        const a = [];
+        for(let i = 0; i < this.subsets.length; i++){
+            a.push(...this.subsets[i].cards);
+        }
+        return a;
+    }
+}
+
+/**
+ * カードの内容の描画を担当するオブジェクト. 
+ * これ自体はSceneに登録するオブジェクトではなく, 他のオブジェクトから
+ * 必要に応じてpaintメソッドを呼び出されることで描画を行う.
+ * @type {Object}
+ */
+const displayObject = {
+    y: 400,
+    prevDesc: null,
+    lines: null,
+
+    setPosition(i){
+        this.x = 320;
+        this.y = 400 + 100*i;
+    },
+    paint(ctx, card){
+        ctx.save();
+        ctx.strokeStyle = "rgb(255,255,255,0.5)";
+        ctx.lineWidth = 5;
+        ctx.strokeRect(this.x, this.y-40, 600, 30*4+20);
+        ctx.fillStyle = "rgb(0,0,0,0.5)";
+        ctx.fillRect(this.x, this.y-40, 600, 30*4+20);
+
+        ctx.fillStyle = "white";
+        ctx.font = "22px Sans-Serif";
+        ctx.fillText(`${getCharacterName(Suits[card.mark])} ${card.value} /  MP ${card.MP}`,
+                     this.x + 20, this.y);
+        if(card.skill){
+            ctx.fillText(`サブスキル 『${card.skill.caption}』`, this.x + 20, this.y + 30);
+            if(!this.lines || this.prevDesc != card.skill.desc){
+                this.lines = card.skill.desc.split("\n");
+                this.prevDesc = card.skill.desc;
+            }
+            for(let i = 0; i < this.lines.length; i++){
+                ctx.fillText(this.lines[i], this.x + 20, this.y + 30*(i+2));
+            }
+        }
+        ctx.restore();
+    }
+};
+
+/**
+ * BaseMenuのサブメニューを実装するクラス.
+ * 具体的には "カードを増やす" と "カードを減らす" からなるメニューを表示し,
+ * ユーザーの入力に応じてデッキ編集作業を実行する.
+ * @class
+ */
 let MenuDialog = class{
     // optで指定できるもの: padding, step, font
     constructor(menu, x, y, innerWidth, innerHeight, opt = {}){
@@ -465,71 +565,10 @@ let MenuDialog = class{
     cancel(GE, n){ }
 }
 
-let Prism = class{
-    static labels = [
-        "まどか", "ほむら", "さやか", "マミ", "杏子", "なぎさ", "多人数"
-    ];
-
-    constructor(source){
-        const tmp = [];
-        for(let i = 0; i < Prism.labels.length; i++){
-            tmp.push([]);
-        }
-        source.cards.forEach((e) => {
-            if(e.mark < tmp.length - 1) tmp[e.mark].push(e);
-            else tmp[tmp.length-1].push(e);
-        });
-        this.subsets = tmp.map((subset) => new CardSet(subset));
-    }
-
-    size(){
-        return this.subsets.length;
-    }
-
-    union(){
-        const a = [];
-        for(let i = 0; i < this.subsets.length; i++){
-            a.push(...this.subsets[i].cards);
-        }
-        return a;
-    }
-}
-
-const displayObject = {
-    y: 400,
-    prevDesc: null,
-    lines: null,
-
-    setPosition(i){
-        this.x = 320;
-        this.y = 400 + 100*i;
-    },
-    paint(ctx, card){
-        ctx.save();
-        ctx.strokeStyle = "rgb(255,255,255,0.5)";
-        ctx.lineWidth = 5;
-        ctx.strokeRect(this.x, this.y-40, 600, 30*4+20);
-        ctx.fillStyle = "rgb(0,0,0,0.5)";
-        ctx.fillRect(this.x, this.y-40, 600, 30*4+20);
-
-        ctx.fillStyle = "white";
-        ctx.font = "22px Sans-Serif";
-        ctx.fillText(`${getCharacterName(Suits[card.mark])} ${card.value} /  MP ${card.MP}`,
-                     this.x + 20, this.y);
-        if(card.skill){
-            ctx.fillText(`サブスキル 『${card.skill.caption}』`, this.x + 20, this.y + 30);
-            if(!this.lines || this.prevDesc != card.skill.desc){
-                this.lines = card.skill.desc.split("\n");
-                this.prevDesc = card.skill.desc;
-            }
-            for(let i = 0; i < this.lines.length; i++){
-                ctx.fillText(this.lines[i], this.x + 20, this.y + 30*(i+2));
-            }
-        }
-        ctx.restore();
-    }
-};
-
+/**
+ * デッキ編集画面のベースメニューを実装するクラス.
+ * @class
+ */
 let createBaseMenu = function(owner, panels){
     panels[0].changeDeck(owner.prisms[0].subsets[0]);
     panels[1].changeDeck(owner.prisms[1].subsets[0]);
@@ -558,6 +597,9 @@ let createBaseMenu = function(owner, panels){
     };
     return obj;
 }
+
+
+// #3. editSceneの実装
 
 /**
  * デッキ編集画面を実装するSceneオブジェクト.
