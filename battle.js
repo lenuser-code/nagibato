@@ -284,7 +284,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 // (a) コンポーネントを生成する関数
 
 /*
- * 以下, draw()とexeecute()を持ちSceneに登録して使うオブジェクトを
+ * 以下, draw() and/or exeecute()を持ちSceneに登録して使うオブジェクトを
  * この項目では単にコンポーネントと呼ぶ.
  */
 

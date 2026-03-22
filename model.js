@@ -292,7 +292,7 @@ class Player extends BasicStatus{
      * @returns {?Object} メインカードが使用可能ならメインカードオブジェクト,
      * 使用可能でない場合はnull
      */
-    #shiftMainSkill(){
+    shiftMainSkill(){
         if(this.#mainSkillCount == 0) return null;
         this.#mainSkillCount--;
         return this.#mainSkill;

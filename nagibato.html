@@ -21,6 +21,7 @@
 <script type="text/javascript" src="./config.js"></script>
 <script type="text/javascript" src="./battle.js"></script>
 <script type="text/javascript" src="./storage.js"></script>
+<script type="text/javascript" src="./stdtask.js"></script>
 <script>
 
 // #1. GameEngineの生成, stdgamに関連する定数の定義
@@ -138,13 +139,17 @@ const intermediateScene = new Scene({
  * バトル・チュートリアルの選択に使うダイアログを実装するクラス.
  * @class
  */
-class SelectWindow{
-    constructor(menu, action, rowCount, x, y, w, h){
+class SelectWindow extends stdtask.Scroll{
+    constructor(menu, callback, rowCount, x, y, w, h){
+        const select = new stdtask.Select(
+            menu.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
+        );
+        super(select, rowCount, true);
+
         this.menu = menu;
-        this.action = action;
+        this.callback = callback;
         this.rowCount = rowCount;
-        this.scroll = 0;
-        this.r = 0;
+        this.select = select;
 
         this.x = x;
         this.y = y;
@@ -152,11 +157,11 @@ class SelectWindow{
         this.padY = 40 + (h - this.step * rowCount) / 2;
         this.width = w;
         this.height = h;
-        this.busy = 0;
-    }
 
-    selectedIndex(){
-        return this.scroll + this.r;
+        select.action = (GE, n) => {
+            this.callback(select.index);
+        };
+        select.cancel = (GE,n) => { this.active = false; };
     }
 
     draw(GE, ctx){
@@ -168,7 +173,7 @@ class SelectWindow{
         ctx.fillStyle = "white";
         const m = ctx.measureText("→_");
         const ax = this.x + 30;
-        const ay = this.y + this.padY + this.r*this.step;
+        const ay = this.y + this.padY + this.offset*this.step;
         const aw = m.width;
         ctx.fillText("→", ax, ay);
 
@@ -190,40 +195,6 @@ class SelectWindow{
             ctx.fillText("▼", this.x + this.width/2, this.y+this.padY+this.step*(this.rowCount-1)+40);
         }
         ctx.restore();
-    }
-
-    checkInput(GE){
-        if(this.busy > 0) this.busy--;
-        return GE.input.checkInput(
-            ["ArrowUp", "ArrowDown", "KeyA", "KeyS"],
-            ["ArrowUp", "ArrowDown"],
-            this.busy
-        );
-    }
-
-    execute(GE){
-        const [code, k] = this.checkInput(GE);
-        if(k == 0){
-            if(this.r > 0) this.r--;
-            else if(this.scroll > 0) this.scroll--;
-            this.busy = 10;
-        }
-        if(k == 1){
-            if(this.selectedIndex() < this.menu.length - 1){
-                if(this.r < this.rowCount-1) this.r++;
-                else this.scroll++;
-            }
-            this.busy = 10;
-        }
-        if(k == 2){
-            this.action(this.selectedIndex());
-            this.busy = 10;
-        }
-        if(k == 3){
-            this.active = false;
-            this.busy = 10;
-        }
-        return false;
     }
 }
 
@@ -268,11 +239,12 @@ class Booklike{
  * タイトル画面のメインメニューを実装するクラス.
  * @class
  */
-class Shelflike{
+class Shelflike extends stdtask.CyclicSelect{
     static boxColor = "rgb(30,30,30)";
     static borderColor = "rgb(10,10,10)";
 
     constructor(owner, books, x, y, w, h){
+        super(books.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 12, false);
         this.owner = owner;
         this.x = x;
         this.y = y;
@@ -280,8 +252,6 @@ class Shelflike{
         this.height = h;
         this.books = books;
         books[0].selected = true;
-        this.index = 0;
-        this.busy = 0;
     }
 
     draw(GE, ctx){
@@ -293,35 +263,18 @@ class Shelflike{
         ctx.restore();
     }
 
-    checkInput(GE){
-        if(this.busy > 0) this.busy--;
-        return GE.input.checkInput(
-            ["ArrowUp", "ArrowDown", "KeyA"],
-            ["ArrowUp", "ArrowDown"],
-            this.busy
-        );
+    execute(GE){
+        const prev = this.index;
+        const f = super.execute(GE);
+        if(this.index != prev){
+            this.books[prev].selected = false;
+            this.books[this.index].selected = true;
+        }
+        return f;
     }
 
-    execute(GE){
-        const [code, i] = this.checkInput(GE);
-        if(i == 0){
-            this.books[this.index].selected = false;
-            this.index = (this.index + this.books.length - 1) % this.books.length;
-            this.books[this.index].selected = true;
-            this.busy = 12;
-        }
-        if(i == 1){
-            this.books[this.index].selected = false;
-            this.index = (this.index + 1) % this.books.length;
-            this.books[this.index].selected = true;
-            this.busy = 12;
-        }
-        if(i == 2){
-            this.books[this.index].open(GE, this.owner);
-            this.busy = 12;
-            return false;
-        }
-        return true;
+    action(GE, index){
+        this.books[this.index].open(GE, this.owner);
     }
 }
 
@@ -337,9 +290,6 @@ battleSelected(opt){
     this.yesno = createConfirmatingQB_BeforeBattle(this.setting);
     this.yesno.action = (GE, scene) => {
         const deckObj = new Deck(scene.setting.deckSet.cards);
-
-        // メインカード以外は何でも追加スキャンできるらしい
-        // const sideboardObj = new Deck(scene.setting.sideboardSet.cards);
         const sideboardObj = new Deck(RAW_CARD_DATA.map((e) => CardAtlas.get(e.id)));
         const mainCard = CardAtlas.get(scene.setting.mainCardData.id);
         deckObj.remove(mainCard);
@@ -481,6 +431,7 @@ onLoad(GE, args){
         this.add(book);
     }
 }
+
 });
 
 

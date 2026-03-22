@@ -179,6 +179,7 @@ let InputManager = class {
         this.previousKeys = new Set();
         window.addEventListener('keydown', (e) => this.currentKeys.add(e.code));
         window.addEventListener('keyup', (e) => this.currentKeys.delete(e.code));
+        window.addEventListener('blur', () => this.currentKeys.clear());
     }
 
     // 現在の状態を「1フレーム前の状態」としてコピー
