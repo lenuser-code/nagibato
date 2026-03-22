@@ -1,15 +1,23 @@
-﻿/*
- * editの定義
+﻿/**
+ * @file
+ * namsspace editを定義し, その中にeditSceneを実装する.
+ *
+ * @author lenuser
  */
 
-/*
- * namespace battle
+/**
+ * editSceneの構成要素をまとめたnamespace. 以下の要素が外部に公開される.
+ * - edit.editScene
  *
- * 公開されるの edit.editScene のみ（今のところ）
+ * @namespace
  */
 var edit = edit || {};
 (function(Public){
 
+/**
+ * CardPanelで利用するカーソルを実装するクラス.
+ * @class
+ */
 let CardCapture = class{
     constructor(owner, colCount, x, y, dp){
         this.owner = owner;
@@ -175,6 +183,10 @@ let CardPanel = class{
     }
 }
 
+/**
+ * CardPanel2Dで利用するカーソルを実装するクラス.
+ * @class
+ */
 let CardCapture2D = class{
     constructor(owner, rowCount, colCount, x, y, dp){
         this.owner = owner;
@@ -547,6 +559,10 @@ let createBaseMenu = function(owner, panels){
     return obj;
 }
 
+/**
+ * デッキ編集画面を実装するSceneオブジェクト.
+ * @type {Scene}
+ */
 Public.editScene = new stdgam.Scene({
 onLoad(GE, args){
     this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));

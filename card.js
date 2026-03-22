@@ -763,6 +763,7 @@ class Card{
  * 複合属性を持つカードのクラス.
  * インスタンスの生成を行う前にPrismaticCardクラスの初期化を実行しないといけない.
  * 具体的には PrismaticCard.init(GE, width, height) を最初に実行する.
+ * @class
  */
 class PrismaticCard{
     static init(GE, width, height){

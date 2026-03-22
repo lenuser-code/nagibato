@@ -1,17 +1,28 @@
-﻿/*
- * battleの定義
+﻿/**
+ * @file
+ * namespace battleを定義し, その中にmainSceneを実装する.
+ *
+ * @author lenuser
  */
 
-/*
- * namespace battle
+/**
+ * mainSceneの構成要素をまとめたnamespace. 以下の要素が外部に公開される.
+ * - battle.mainScene
  *
- * 公開されるのは battle.mainScene のみ
+ * @namespace
  */
 var battle = battle || {};
 (function(Public){
 
-/*--- 1. SkillDealerBase, EnemyDealerBaseの派生クラス ---*/
+// #1. SkillDealerBase, EnemyDealerBaseの派生クラス
 
+/**
+ * SkillDealerBaseのサブクラス. 上記クラスの内容を継承し, それに加えて,
+ * プレイヤー側のスキルの実行時にスキルオブジェクトから呼び出される
+ * 各種機能を具体的に実装する. 言い換えれば, スキル効果の実装作業において
+ * mainSceneの中身を知らないと書けない処理がここに集められている.
+ * @class
+ */
 let SkillDealer = class extends SkillDealerBase{
     constructor(owner){
         super();
@@ -19,11 +30,13 @@ let SkillDealer = class extends SkillDealerBase{
     }
 
     // サブクラスが実装する処理 (基本情報)
+
     enemyHP(){
         return this.owner.enemy.HP();
     }
 
     // サブクラスが実装する処理 (攻撃時に実行)
+
     *addHP(percent){
         const v = this.owner.player.percentHP(percent);
         GE.se.play("powerup");
@@ -31,17 +44,20 @@ let SkillDealer = class extends SkillDealerBase{
         yield* this.wait(60);
         yield* this.playerChanged();
     }
+
     *addMP(percent){
         const v = this.owner.player.percentMP(percent);
         GE.se.play("powerup");
         this.owner.player.addMP(v);
         yield* this.wait(60);
     }
+
     *addSG(percent){
         GE.se.play("powerup");
         this.owner.player.addSG(percent);
         yield* this.wait(60);
     }
+
     *addHPSG(percent){
         const v = this.owner.player.percentHP(percent);
         GE.se.play("powerup");
@@ -50,20 +66,24 @@ let SkillDealer = class extends SkillDealerBase{
         yield* this.wait(60);
         yield* this.playerChanged();
     }
+
     *addShield(n){
         this.owner.player.addShield(n);
     }
+
     *chargeUp(percent){
         this.owner.poolView.frames = 45;
         this.owner.pool.chargeBonus += percent;
         this.owner.pool.applyBonus();
         yield* this.wait(60);
     }
+
     *reduceEnemyMP(percent){
         const v = this.owner.enemy.percentMP(percent);
         this.owner.enemy.addMP(-v);
         yield* this.wait(60);
     }
+
     *suitSpecificBoost(str, mark, percent){
         if(mark < PrimitiveSuits.length){
             MPBoostBySuit.primitive[mark] += percent;
@@ -82,6 +102,7 @@ let SkillDealer = class extends SkillDealerBase{
         this.owner.pool.recalculate();
         yield* this.wait(60);
     }
+
     *damage(percent){
         const v = this.owner.player.percentMP(percent);
         GE.se.play("hit0");  // 試しにSEを入れてみる
@@ -89,9 +110,11 @@ let SkillDealer = class extends SkillDealerBase{
         this.owner.shakeEnemy();  // shake_test
         yield* this.wait(60);
     }
+
     *extendTime(n){
         this.owner.maxTimeCount += n;
     }
+
     *timeWarp(){
         this.owner.backupArgs.playerData.main = null;
         this.owner.init();  // !?
@@ -99,6 +122,7 @@ let SkillDealer = class extends SkillDealerBase{
     }
 
     // サブクラスが実装する処理 (ターン開始時に実行)
+
     *heal(percent){
         this.owner.add(new QBTalk("体力が回復するよ。", 60));
         const v = this.owner.player.percentHP(percent);
@@ -107,6 +131,7 @@ let SkillDealer = class extends SkillDealerBase{
         yield* this.wait(120);
         yield* this.playerChanged();
     }
+
     *SGHeal(percent){
         this.owner.add(new QBTalk("ソウルジェムが浄化されるよ。", 60));
         GE.se.play("powerup");
@@ -115,6 +140,7 @@ let SkillDealer = class extends SkillDealerBase{
     }
 
     // サブクラスが実装する処理 (HPの変化に伴い呼び出される)
+
     *crisisBoostTask(percent){
         if(this.owner.player.HP() <= 0) return; // 既に敗北しているときは省略
         const f = (this.owner.player.retentionRateHP() <= 0.5);
@@ -144,6 +170,13 @@ let SkillDealer = class extends SkillDealerBase{
     }
 }
 
+/**
+ * EnemyActionDealerのサブクラス. 上記クラスの内容を継承し, それに加えて,
+ * 敵の特殊行動の実行時にスキルオブジェクトから呼び出される各種機能を
+ * 具体的に実装する. 言い換えれば, 敵の特殊行動の実装作業において
+ * mainSceneの中身を知らないと書けない処理がここに集められている.
+ * @class
+ */
 let EnemyActionDealer = class extends EnemyActionDealerBase{
     constructor(owner){
         super();
@@ -151,19 +184,35 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
     }
 
     // サブクラスが実装する処理 (基本情報)
+
     turnCount(){
         return this.owner.turn;
     }
+
     playerHP(){
         return this.owner.player.HP();
     }
 
-    // サブクラスが実装する処理 (ターン開始時に実行)
+    // サブクラスが実装する処理 (*upkeep内で実行)
+
+    *poison(percent){
+        this.owner.add(new QBTalk("敵スキルの効果でダメージを受けるよ。", 60));
+        const v = this.owner.player.percentHP(percent);
+        GE.se.play("hit1");  // 試しにSEを入れてみる
+        this.owner.shakePlayer();  // shaker_test
+        this.owner.player.addHP(-v);
+        yield* this.wait(120);
+        yield* this.owner.SD.playerChanged();
+    }
+
+    // サブクラスが実装する処理 (*specialAction内で実行)
+
     *common(action){
         yield* this.wait(20);
         this.owner.add( createSkillDialog(action) );
         yield* this.wait(130);
     }
+
     *antiskill(callback){
         const id = this.owner.player.id();
         if(this.owner.player.mainSkillCount() > 0 && this.owner.enemy.antiskillContains(id)){
@@ -179,18 +228,11 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
             }
         }
     }
-    *poison(percent){
-        this.owner.add(new QBTalk("敵スキルの効果でダメージを受けるよ。", 60));
-        const v = this.owner.player.percentHP(percent);
-        GE.se.play("hit1");  // 試しにSEを入れてみる
-        this.owner.shakePlayer();  // shaker_test
-        this.owner.player.addHP(-v);
-        yield* this.wait(120);
-        yield* this.owner.SD.playerChanged();
-    }
+
     *stun(n){
         this.owner.player.addStun(n);
     }
+
     *damage(percent){
         const v = this.owner.enemy.percentMP(percent);
         GE.se.play("hit1");  // 試しにSEを入れてみる
@@ -199,6 +241,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
         yield* this.wait(60);
         yield* this.owner.SD.playerChanged();
     }
+
     *nightmare(str, mark, percent){
         // 基本属性に対して
         for(let m = 0; m < PrimitiveSuits.length; m++){
@@ -225,6 +268,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
         }
         yield* this.wait(60);
     }
+
     *transform(enemyName){
         const data = EnemyData[enemyName];
         this.owner.backupArgs.enemyData = data; // 敵設定を上書き
@@ -235,113 +279,23 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 }
 
 
-/*--- 2. プライベート関数  ---*/
+// #2 プライベート関数
+
+// (a) コンポーネントを生成する関数
+
+/*
+ * 以下, draw()とexeecute()を持ちSceneに登録して使うオブジェクトを
+ * この項目では単にコンポーネントと呼ぶ.
+ */
 
 /**
- * 登録されたオブジェクトを振動させるために使う（将来は別のファイルに移すかも）。
- * ターゲットの x 属性を直接変化させるので注意
+ * 筐体のボタンを表現するコンポーネントを生成する.
+ * @param {number} x - 配置する位置のx座標
+ * @param {number} y - 配置する位置のy座標
+ * @param {string} key - どのキー入力に反応するか指定する
+ * @param {string} label - ボタンに書かれる文字
+ * @return {Object} 生成されたコンポーネント
  */
-let Shaker = class{
-    constructor(speed, acc, count){
-        this.speed = speed;
-        this.acc = acc;
-        this.count = count;
-        this.target = [];
-    }
-
-    add(...obj){
-        this.target.push(...obj);
-    }
-
-    activate(speed = null, acc = null, count = null){
-        this.backup = this.target.map((e) => e.x);
-        this.dir = 1;
-        this.v0 = this.v = speed || this.speed;
-        this.a = acc ? -acc : -this.acc;
-        this.n = count || this.count;
-        this.active = true;
-    }
-
-    execute(GE){
-        if(this.n <= 0){
-            this.active = false;
-            for(let i = 0; i < this.target.length; i++){
-                this.target[i].x = this.backup[i];
-            }
-            return true;
-        }
-
-        for(const obj of this.target){
-            obj.x += this.v;
-        }
-
-        this.v += this.a;
-        if(this.v0 + this.v * this.dir <= 0){
-            this.dir *= -1;
-            this.a *= -1;
-            this.n--;
-        }
-
-        return true;
-    }
-}
-
-let bindPlayer = function(scene, player, x, y){
-    const nameView = T.text(player.name(), {x: x, y: y+90, font: "27px Sans-Serif"});
-
-    const HPMeterView = createMeterView("HP", player.HPMeter, x, y, 750);
-    const HPView = T.ftext("HP: ${}", player.HPMeter, "value",
-                          {x: x, y: y-70, font: "27px Sans-Serif"});
-    const MPView = T.ftext("MP: ${}", player.MPMeter, "value",
-                          {x: x, y: y-30, font: "27px Sans-Serif"});
-    const SGMeterView = createMeterView("SG", player.SGMeter, x, y+35, 750);
-
-    player.bind(scene);
-    scene.add(nameView);
-    scene.add(HPMeterView);
-    scene.add(HPView);
-    scene.add(MPView);
-    scene.add(SGMeterView);
-
-    const shieldView = T.text("", {x: x, y: y-110, font: "27px Sans-Serif"});
-    shieldView.execute = (GE) => {
-        shieldView.text = (player.shield() > 0) ? `シールド: ${player.shield()}` : "";
-        return true;
-    };
-    scene.add(shieldView);
-
-    // shaker_test
-    scene.pShaker = new Shaker(4, 2, 3);
-    scene.pShaker.add(nameView, HPMeterView, HPView, MPView, shieldView, SGMeterView);
-}
-
-let bindEnemy = function(scene, enemy, x, y){
-    enemy.bind(scene);
-    const nameView = T.text(enemy.name(), {x: x+740, y: y-10, font: "27px Sans-Serif", textAlign: "right"});
-
-    const HPView = T.ftext("HP: ${}", enemy.HPMeter, "value", {x: x+600, y: y+70, font: "27px Sans-Serif"});
-    const MPView = T.ftext("MP: ${}", enemy.MPMeter, "value", {x: x+600, y: y+110, font: "27px Sans-Serif"});
-    const HPMeterView = createMeterView("HP", enemy.HPMeter, x, y, 750, true);
-    scene.add(nameView);
-    scene.add(HPMeterView);
-    scene.add(HPView);
-    scene.add(MPView);
-
-    // shaker_test
-    scene.eShaker = new Shaker(4, 2, 3);
-    scene.eShaker.add(nameView, HPView, MPView, HPMeterView);
-}
-
-let delivery = function(card, addr1, addr2, callback){
-    const obj = T.scheduler( T.slider(T.custom(card), addr1.x, addr1.y) );
-    obj.slideTo(addr2.x, addr2.y, 18);
-    obj.after(18, (GE, obj) => {
-        callback(card);
-        obj.active = false;
-    });
-    return obj;
-}
-
 let createPhysicalButton = function(x, y, key, label) {
     return {
         x: x, y: y, key: key, label: label, isPressed: false, active: true,
@@ -377,6 +331,17 @@ let createPhysicalButton = function(x, y, key, label) {
     };
 }
 
+/**
+ * createMeter()で作られるMeterオブジェクトの値をバーで表示する
+ * コンポーネントを生成する.
+ * @param {string} caption - 表示する値の説明
+ * @param {Object} target - 観察対象のMeterオブジェクト
+ * @param {number} x - 配置する位置のx座標
+ * @param {number} y - 配置する位置のy座標
+ * @param {number} len - バーの長さ
+ * @param {flag} [reversed=false] - trueなら左端を基点に, falseなら右端を基点にする.
+ * @return {Object} 生成されたコンポーネント
+ */
 let createMeterView = function(caption, target, x, y, len, reversed = false){
     return {
         x: x, y: y, active: true,
@@ -406,6 +371,13 @@ let createMeterView = function(caption, target, x, y, len, reversed = false){
     };
 }
 
+/**
+ * Deckの状態を表示するコンポーネントを生成する.
+ * @param {Deck} target - 観察対象のDeckオブジェクト
+ * @param {number} x - 配置する位置のx座標
+ * @param {number} y - 配置する位置のy座標
+ * @return {Object} 生成されたコンポーネント
+ */
 let createDeckView = function(target, x, y){
     return {
         target: target, x: x, y: y, active: true,
@@ -427,6 +399,13 @@ let createDeckView = function(target, x, y){
     };
 }
 
+/**
+ * Poolの状態を表示するコンポーネントを生成する.
+ * @param {Pool} target - 観察対象のPoolオブジェクト
+ * @param {number} x - 配置する位置のx座標
+ * @param {number} y - 配置する位置のy座標
+ * @return {Object} 生成されたコンポーネント
+ */
 let createPoolView = function(target, x, y){
     const chainFont = {
         font: "bold 24px Sans-Serif", color: "#ffff55",
@@ -478,6 +457,13 @@ let createPoolView = function(target, x, y){
     };
 }
 
+/**
+ * 各ターンの制限時間を表示するコンポーネントを生成する.
+ * @param {number} maxTimeCount - 制限時間の初期値
+ * @param {number} x - 配置する位置のx座標
+ * @param {number} y - 配置する位置のy座標
+ * @return {Object} 生成されたコンポーネント
+ */
 let createTimeCount = function(maxTimeCount, x, y){
     const obj = T.scheduler(
         T.text(`${maxTimeCount}`, {x: x, y: y, font: "70px Sans-Serif", textAlign: "center"})
@@ -499,6 +485,11 @@ let createTimeCount = function(maxTimeCount, x, y){
     return obj;
 }
 
+/**
+ * プレイヤーの行動選択時に表示するダイアログを生成する.
+ * 入力受付はmainSceneで行う.
+ * @returns {Object} 生成されたコンポーネント
+ */
 let createAttackDialog = function(){
     const img = GE.caches.get("DIALOG");
     const obj = {
@@ -517,6 +508,11 @@ let createAttackDialog = function(){
     return obj;
 }
 
+/**
+ * スキルの内容を表示するダイアログを生成する.
+ * @param {Object} skill - 表示するスキル
+ * @returns {Object} 生成されたコンポーネント
+ */
 let createSkillDialog = function(skill){
     const img = GE.caches.get("DIALOG");
     const msgs = skill.desc.split("\n");
@@ -544,10 +540,153 @@ let createSkillDialog = function(skill){
 }
 
 
-/*--- 3. mainScene ---*/
+// (b) Player, Enemyを登録するための処理
 
 /**
- * バトルを実行するSceneオブジェクトを作って公開する。
+ * Playerオブジェクトを指定されたシーンに登録する. 具体的には,
+ * (1) Playerが持つ各種のMeterオブジェクトをSceneのタスクリストに登録する.
+ * (2) Playerの状態を観察・表示するコンポーネントを生成し, Sceneに追加する.
+ * @param {Scene} scene - この操作を実行されるSceneオブジェクト
+ * @param {Player} player - 登録されるPlayerオブジェクト
+ * @param {number} x - 配置作業の基点のx座標
+ * @param {number} y - 配置作業の基点のy座標
+ */
+let bindPlayer = function(scene, player, x, y){
+    const nameView = T.text(player.name(), {x: x, y: y+90, font: "27px Sans-Serif"});
+
+    const HPMeterView = createMeterView("HP", player.HPMeter, x, y, 750);
+    const HPView = T.ftext("HP: ${}", player.HPMeter, "value",
+                          {x: x, y: y-70, font: "27px Sans-Serif"});
+    const MPView = T.ftext("MP: ${}", player.MPMeter, "value",
+                          {x: x, y: y-30, font: "27px Sans-Serif"});
+    const SGMeterView = createMeterView("SG", player.SGMeter, x, y+35, 750);
+
+    scene.add(player.HPMeter);
+    scene.add(player.MPMeter);
+    scene.add(player.SGMeter);
+    scene.add(nameView);
+    scene.add(HPMeterView);
+    scene.add(HPView);
+    scene.add(MPView);
+    scene.add(SGMeterView);
+
+    const shieldView = T.text("", {x: x, y: y-110, font: "27px Sans-Serif"});
+    shieldView.execute = (GE) => {
+        shieldView.text = (player.shield() > 0) ? `シールド: ${player.shield()}` : "";
+        return true;
+    };
+    scene.add(shieldView);
+
+    // shaker_test
+    scene.pShaker = new Shaker(4, 2, 3);
+    scene.pShaker.add(nameView, HPMeterView, HPView, MPView, shieldView, SGMeterView);
+}
+
+/**
+ * Enemyオブジェクトを指定されたシーンに登録する. 具体的には,
+ * (1) Enemyが持つ各種のMeterオブジェクトをSceneのタスクリストに登録する.
+ * (2) Enemyの状態を観察・表示するコンポーネントを生成し, Sceneに追加する.
+ * @param {Scene} scene - この操作を実行されるSceneオブジェクト
+ * @param {Player} enemy - 登録されるEnemyオブジェクト
+ * @param {number} x - 配置作業の基点のx座標
+ * @param {number} y - 配置作業の基点のy座標
+ */
+let bindEnemy = function(scene, enemy, x, y){
+    scene.add(enemy.HPMeter);
+    scene.add(enemy.MPMeter);
+    const nameView = T.text(enemy.name(), {x: x+740, y: y-10, font: "27px Sans-Serif", textAlign: "right"});
+
+    const HPView = T.ftext("HP: ${}", enemy.HPMeter, "value", {x: x+600, y: y+70, font: "27px Sans-Serif"});
+    const MPView = T.ftext("MP: ${}", enemy.MPMeter, "value", {x: x+600, y: y+110, font: "27px Sans-Serif"});
+    const HPMeterView = createMeterView("HP", enemy.HPMeter, x, y, 750, true);
+    scene.add(nameView);
+    scene.add(HPMeterView);
+    scene.add(HPView);
+    scene.add(MPView);
+
+    // shaker_test
+    scene.eShaker = new Shaker(4, 2, 3);
+    scene.eShaker.add(nameView, HPView, MPView, HPMeterView);
+}
+
+
+// (c) mainScene内で使うヘルパー
+
+/**
+ * 登録されたオブジェクト達を一括で振動させるために使うクラス.
+ * ターゲットの x 属性を直接変化させるので注意.
+ * @class
+ */
+let Shaker = class{
+    constructor(speed, acc, count){
+        this.speed = speed;
+        this.acc = acc;
+        this.count = count;
+        this.target = [];
+    }
+
+    add(...obj){
+        this.target.push(...obj);
+    }
+
+    activate(speed = null, acc = null, count = null){
+        this.backup = this.target.map((e) => e.x);
+        this.dir = 1;
+        this.v0 = this.v = speed || this.speed;
+        this.a = acc ? -acc : -this.acc;
+        this.n = count || this.count;
+        this.active = true;
+    }
+
+    execute(GE){
+        if(this.n <= 0){
+            this.active = false;
+            for(let i = 0; i < this.target.length; i++){
+                this.target[i].x = this.backup[i];
+            }
+            return true;
+        }
+
+        for(const obj of this.target){
+            obj.x += this.v;
+        }
+
+        this.v += this.a;
+        if(this.v0 + this.v * this.dir <= 0){
+            this.dir *= -1;
+            this.a *= -1;
+            this.n--;
+        }
+
+        return true;
+    }
+}
+
+/**
+ * ある場所から他の場所までカードが移動する様子を描画した後, 指定された処理を
+ * 実行するオブジェクトを生成する.
+ * @param {Card} card - 対象となるカード
+ * @param {{x: number, y: number}} addr1 - 移動開始時の位置
+ * @param {{x: number, y: number}} addr2 - 移動終了時の位置
+ * @param {function} callback - 移動終了時に実行する関数. cardを引数として受け取る.
+ * @returns {Object} 生成されたオブジェクト
+ */
+let delivery = function(card, addr1, addr2, callback){
+    const obj = T.scheduler( T.slider(T.custom(card), addr1.x, addr1.y) );
+    obj.slideTo(addr2.x, addr2.y, 18);
+    obj.after(18, (GE, obj) => {
+        callback(card);
+        obj.active = false;
+    });
+    return obj;
+}
+
+
+// #3. mainSceneの実装
+
+/**
+ * バトルを実行するSceneオブジェクト.
+ * @type {Scene}
  */
 Public.mainScene = new stdgam.Scene({
 x: 160,

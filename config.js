@@ -1,14 +1,25 @@
-﻿/*
- * namespace config
+﻿/**
+ * @file
+ * namsspace configを定義し, その中にconfigScene, configScene2を実装する.
  *
- * 今のところ config.configScene, config.configScene2 と config.SideboardDialog だけ公開
+ * @author lenuser
  */
 
+/*
+ * configScene, configScene2の構成要素をまとめたnamespace.
+ * 以下の要素が外部に公開される.
+ * - config.configScene
+ * - config.configScene2
+ * - config.SideboardDialog
+ *
+ * @namespace
+ */
 var config = config || {};
 (function(Public){
 
 /**
- * cardlist.jsの内容をキャラ別に分割するクラス
+ * cardlist.jsの内容をキャラ別に分割するクラス.
+ * @class
  */
 let Prism = class{
     static labels = PrimitiveSuits.map((e) => CharacterNames[e]).concat(["多人数"]);
@@ -362,7 +373,8 @@ Public.SideboardDialog = class extends DialogBase{
 }
 
 /**
- * コンフィグ画面
+ * コンフィグ画面を実装するSceneオブジェクト.
+ * @type {Scene}
  */
 Public.configScene = new stdgam.Scene({
 saveConfig(){
@@ -512,7 +524,8 @@ execute(GE){
 });
 
 /**
- * 特殊設定のコンフィグ画面
+ * 特殊設定のコンフィグ画面を実装するSceneオブジェクト.
+ * @type {Scene}
  */
 Public.configScene2 = new stdgam.Scene({
 saveConfig(){

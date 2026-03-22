@@ -84,10 +84,6 @@ class BasicStatus{
 
         this.HPMeter.init(maxHP, maxHP);
         this.MPMeter.init(defaultMP, 99999);
-        this.bind = (scene) => {
-            scene.add(this.HPMeter);
-            scene.add(this.MPMeter);
-        };
 
         this.addHP = (v) => {
             S.HP += v;
@@ -147,10 +143,6 @@ class Player extends BasicStatus{
         this.SGMeter = this.SGMeter || createMeter(100, 100, 60);
         this.SGMeter.init(100, 100);
         const tmp = this.bind;
-        this.bind = (scene) => {
-            tmp(scene);
-            scene.add(this.SGMeter);
-        };
 
         this.SG = () => SG;
         this.addSG = (v, frames=60) => {
