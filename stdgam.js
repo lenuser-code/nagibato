@@ -2,11 +2,13 @@
  * @file
  * namespace stdgamの定義と, ZzFXのZzFX Micro Codeのインポートを行う.
  *
- * ZzFX - Zuper Zmall Zound Zynth
+ * ZzFX - Zuper Zmall Zound Zynth (by Frank Force)
  * https://github.com/KilledByAPixel/ZzFX?tab=readme-ov-file
  *
  * stdgamの実装が主要な作業内容だが, 他に適切な方法がなかったので
  * ZzFX Micro Codeもこのファイルに記述する.
+ *
+ * @author lenuser
  */
 
 //--- 最初にnamespace stdgamを定義する
@@ -32,11 +34,29 @@ var stdgam = stdgam || {};
  * @class
  */
 Public.Scene = class {
-    // optが渡された場合、共通の処理を済ませた後にその内容を自身に代入する
-    constructor(opt = {}){
+    /**
+     * dfnが渡された場合、共通の処理を済ませた後にその内容を自身に代入する.
+     * これにより, 派生クラスを作らなくても, dfnの中に追加の定義を書いておけば
+     * それを自身に適用できる.
+     *
+     * 例)
+     * let scene = new stdgam.Scene({
+     *     onLoad(GE, args){ ...初期化処理... },
+     *     draw(GE, ctx){ ,,,描画処理... } }
+     * });
+     *
+     * 上の例は次と等価である:
+     * let scene = new stdgam.Scene();
+     * scene.onLoad = function(GE, args){ ...初期化処理... };
+     * scene.draw(GE, ctx) = function{ ...描画処理... };
+     *
+     * @param {Object.<string,*>} dfn - このオブジェクトに追加で定義する
+     * 要素を集めた連想配列.
+     */
+    constructor(dfn = {}){
         this.init();
         this.GE = null;
-        Object.assign(this, opt);
+        Object.assign(this, dfn);
     }
 
     // このシーンがGEのカレントシーンになったとき呼び出される
@@ -155,8 +175,8 @@ Public.Scene = class {
     }
 
     // genにより作られるGeneratorを回す関数を作り, これをexecuteに代入する
-    useCoroutine(GE, opt, gen){
-        const iter = gen.call(this, GE);
+    useCoroutine(GE, gen, opt = {}){
+        const iter = gen.call(this, GE, opt);
         this.execute = (GE) => {
             const result = iter.next();
             if(result.done) this.execute = null;

@@ -144,7 +144,7 @@ class SelectWindow extends stdtask.Scroll{
         const select = new stdtask.Select(
             menu.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
         );
-        super(select, rowCount, true);
+        super(select, rowCount);
 
         this.menu = menu;
         this.callback = callback;

@@ -784,10 +784,10 @@ onLoad(GE, args){
 
     this.add(this.poolView);
     this.addSprite(this.deckView);
-    this.useCoroutine(GE, args, this.chart);
+    this.useCoroutine(GE, this.chart);
 },
 
-*chart(GE){
+*chart(GE, opt){
     yield* this.SD.wait(10);
     yield* this.firstDeal(GE, this);
     while(this.turn <= 4 && this.player.HP() > 0){

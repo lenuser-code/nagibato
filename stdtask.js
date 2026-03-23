@@ -1,4 +1,19 @@
-﻿
+﻿/**
+ * @file
+ * namespace stdtaskを定義し, よく使うタスクの雛形を事前に用意しておく.
+ *
+ * @author lenuser
+ */
+
+/**
+ * 頻繁に必要になり, かつGUIに直接依存しないタスクをまとめたnamespace.
+ * 以下の要素が外部に公開される.
+ * - stdtask.Select
+ * - stdtask.CyclicSelect
+ * - stdtask.Scroll
+ *
+ * @namespace
+ */
 var stdtask = stdtask || {};
 (function(Public){
 
@@ -55,7 +70,7 @@ Public.Select = class{
 
     move(k, itemCount){
         if(k == 0 && this.index > 0) this.index--;
-        if(k == 1 && this.index < this.#itemCount - 1) this.index++;
+        if(k == 1 && this.index < itemCount - 1) this.index++;
     }
 
     action(GE, index){ }
