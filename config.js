@@ -25,8 +25,18 @@ var config = config || {};
  * @class
  */
 let Prism = class{
+    /**
+     * それぞれの分類に付ける名前
+     * @type {string[]}
+     */
     static labels = PrimitiveSuits.map((e) => CharacterNames[e]).concat(["多人数"]);
 
+    /**
+     * RAW_CARD_DATAの要素をキャラクター別に分類して, 結果をthis.subsetsに代入する.
+     * 具体的には, Prism.labels[k] に属する要素の集合がthis.subsets[k] であるような
+     * 配列をthis.subsetsに保持する.
+     * ただし, 多人数カードはすべて「多人数」という1つの分類にまとめる.
+     */
     constructor(){
         this.subsets = [];
         for(let i = 0; i < Prism.labels.length; i++){
@@ -62,10 +72,6 @@ let DialogBase = class{
         this.active = true;
     }
 
-    addMod(a, b, mod){
-        return (a + b + mod) % mod;
-    }
-
     draw(GE, ctx){
         ctx.save();
         ctx.fillStyle = DialogBase.bgColor;
@@ -87,18 +93,10 @@ let MainCardDialog = class extends DialogBase{
     constructor(owner, defaultValue, x, y, w, h){
         super(owner, defaultValue, x, y, w, h, "← or → で項目を選んで A で決定");
         this.prism = new Prism();
-        this.category = { body: Prism.labels, i: 0 };
-        this.subset = null;
-        this.busy = 0;
-    }
-
-    checkInput(GE){
-        if(this.busy > 0) this.busy--;
-        return GE.input.checkInput(
-            ["ArrowLeft", "ArrowRight", "KeyA", "KeyS"],
-            ["ArrowLeft", "ArrowRight"],
-            this.busy
+        this.categorySelect = new stdtask.CyclicSelect(
+            Prism.labels.length, ["ArrowLeft", "ArrowRight"], "KeyA", "KeyS", 0, 10
         );
+        this.categorySelect.bind(this);
     }
 
     draw(GE, ctx){
@@ -107,12 +105,13 @@ let MainCardDialog = class extends DialogBase{
         ctx.font = DialogBase.font;
         ctx.fillStyle = DialogBase.color;
 
-        if(!this.subset){
-            ctx.fillText(`分類： 《 ${this.category.body[this.category.i]} 》`, this.x + 50, this.y+70);
+        const m = this.categorySelect.index;
+        if(!this.cardSelect){
+            ctx.fillText(`分類： 《 ${Prism.labels[m]} 》`, this.x + 50, this.y+70);
         }
         else{
-            const d = this.subset.body[this.subset.i];
-            ctx.fillText(`分類： 　 ${this.category.body[this.category.i]}`, this.x + 50, this.y+70);
+            const d = this.prism.subsets[m][this.cardSelect.index];
+            ctx.fillText(`分類： 　 ${Prism.labels[m]}`, this.x + 50, this.y+70);
             ctx.fillText("カード：", this.x + 50, this.y+110);
             ctx.fillText(`《 ${d.id} ${d.character} 》`, this.x + 140, this.y+110);
             ctx.fillText(`HP ${d.HP}, MP ${d.MP}`, this.x + 143, this.y+150);
@@ -125,35 +124,38 @@ let MainCardDialog = class extends DialogBase{
     }
 
     execute(GE){
-        const [code, k] = this.checkInput(GE);
-        const target = (this.subset || this.category);
-        if(k == 0 || k == 1){
-            target.i = this.addMod(target.i, 2*k - 1, target.body.length);
-            this.busy = 10;
+        return (this.cardSelect || this.categorySelect).execute(GE);
+    }
+
+    action(GE, n){
+        const s = this.prism.subsets[n];
+        if(s.length > 0){
+            this.cardSelect = new stdtask.CyclicSelect(
+                s.length, ["ArrowLeft", "ArrowRight"], "KeyA", "KeyS", 0, 10
+            );
+            this.cardSelect.bind(this);
+            const backup = [ this.action, this.cancel ];
+            this.action = (GE, n) => {
+                this.result = this.prism.subsets[this.categorySelect.index][this.cardSelect.index];
+                this.active = false;
+            };
+            this.cancel = (GE, n) => {
+                this.cardSelect = null;
+                this.action = backup[0];
+                this.cancel = backup[1];
+            };
         }
-        if(k == 2){
-            if(this.subset){
-                this.result = this.subset.body[this.subset.i];
-                this.active = false; // メインカード決定
-            }
-            else{
-                const s = this.prism.subsets[this.category.i];
-                if(s.length > 0){
-                    this.subset = { body: s, i: 0 };
-                }
-                else{
-                    const obj = T.finite(T.text(
-                        "この分類は空です", {x: this.x + 140, y: this.y + 190, font: DialogBase.font}
-                    ), 30);
-                    this.owner.addSprite(obj);
-                    this.owner.addTask(obj, true);
-                }
-            }
+        else{
+            const obj = T.finite(T.text(
+                "この分類は空です", {x: this.x + 140, y: this.y + 190, font: DialogBase.font}
+            ), 30);
+            this.owner.addSprite(obj);
+            this.owner.addTask(obj, true);
         }
-        if(k == 3){
-            if(this.subset) this.subset = null;  // 分類選択に戻る
-            else this.active = false;  // キャンセルして戻る
-        }
+    }
+
+    cancel(GE, n){
+        this.active = false;
     }
 }
 
@@ -168,20 +170,14 @@ let SimpleChoice = class extends DialogBase{
 
     constructor(owner, label, options, defaultValue, x, y, w, h){
         super(owner, defaultValue, x, y, w, h, "↑ or ↓ で項目を選んで A で決定");
-        this.index = defaultValue;
-        this.busy = 0;
         this.label = label;
         this.options = options;
         this.active = true;
-    }
 
-    checkInput(GE){
-        if(this.busy > 0) this.busy--;
-        return GE.input.checkInput(
-            ["ArrowUp", "ArrowDown", "KeyA", "KeyS"],
-            ["ArrowUp", "ArrowDown"],
-            this.busy
+        this.select = new stdtask.Select(
+            options.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", defaultValue, 10
         );
+        this.select.bind(this);
     }
 
     draw(GE, ctx){
@@ -194,7 +190,7 @@ let SimpleChoice = class extends DialogBase{
         const p = ctx.measureText("→ ").width;
         for(let i = 0; i < this.options.length; i++){
             const y = this.y + 120 + SimpleChoice.step * i;
-            if(i == this.index){
+            if(i == this.select.index){
                 ctx.fillText("→ " + this.options[i], this.x + 100, y);
             }
             else{
@@ -205,18 +201,16 @@ let SimpleChoice = class extends DialogBase{
     }
 
     execute(GE){
-        const [code, k] = this.checkInput(GE);
-        if(k == 0 || k == 1){
-            this.index = (1 - this.index);
-            this.busy = 10;
-        }
-        if(k == 2){
-            this.result = this.index;
-            this.active = false; // 選択決定
-        }
-        if(k == 3){
-            this.active = false;  // キャンセルして戻る
-        }
+        return this.select.execute(GE);
+    }
+
+    action(){
+        this.result = this.select.index;
+        this.active = false; // 選択決定
+    }
+
+    cancel(){
+        this.active = false;  // キャンセルして戻る
     }
 }
 
@@ -228,18 +222,11 @@ let SimpleChoice = class extends DialogBase{
 let LocalStorageDialog = class extends DialogBase{
     constructor(owner, defaultValue, x, y, w, h){
         super(owner, defaultValue, x, y, w, h, "↑ or ↓ で項目を選んで A で決定");
-        this.index = (defaultValue ? 1 : 0);
-        this.busy = 0;
-        this.active = true;
-    }
-
-    checkInput(GE){
-        if(this.busy > 0) this.busy--;
-        return GE.input.checkInput(
-            ["ArrowUp", "ArrowDown", "KeyA", "KeyS"],
-            ["ArrowUp", "ArrowDown"],
-            this.busy
+        this.select = new stdtask.Select(
+            2, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", defaultValue, 10
         );
+        this.select.bind(this);
+        this.active = true;
     }
 
     draw(GE, ctx){
@@ -255,7 +242,7 @@ let LocalStorageDialog = class extends DialogBase{
 
         ctx.fillStyle = DialogBase.color;
         const p = ctx.measureText("→ ").width;
-        if(this.index == 0){
+        if(this.select.index == 0){
             ctx.fillText("→ 使用しない", this.x + 100, this.y + 220);
             ctx.fillText("使用する", this.x + 100 + p, this.y + 270);
          }
@@ -267,18 +254,16 @@ let LocalStorageDialog = class extends DialogBase{
     }
 
     execute(GE){
-        const [code, k] = this.checkInput(GE);
-        if(k == 0 || k == 1){
-            this.index = (1 - this.index);
-            this.busy = 10;
-        }
-        if(k == 2){
-            this.result = this.index;
-            this.active = false; // 選択決定
-        }
-        if(k == 3){
-            this.active = false;  // キャンセルして戻る
-        }
+        return this.select.execute(GE);
+    }
+
+    action(){
+        this.result = this.select.index;
+        this.active = false; // 選択決定
+    }
+
+    cancel(){
+        this.active = false;  // キャンセルして戻る
     }
 }
 
@@ -303,33 +288,23 @@ Public.SideboardDialog = class extends DialogBase{
     constructor(owner, sideboardObj, defaultValue, x, y, w, h){
         super(owner, defaultValue, x, y, w, h, "← or → で項目を選んで A で決定");
         this.initPartition(sideboardObj);
-        this.category = { body: Public.SideboardDialog.labels, i: 0 };
-        this.subset = null;
-        this.busy = 0;
         this.prevDesc = null;
         this.lines = null;
+
+        this.categorySelect = new stdtask.CyclicSelect(
+            this.subsets.length, ["ArrowLeft", "ArrowRight"], "KeyA", "KeyS", 0, 10
+        );
+        this.categorySelect.bind(this);
     }
 
     // sideboardObjはDeckなので微妙に処理が違う
     initPartition(sideboardObj){
-        this.subsets = [];
-        for(let i = 0; i < Public.SideboardDialog.labels.length; i++){
-            this.subsets.push([]);
-        }
+        this.subsets = Public.SideboardDialog.labels.map((e) => []);
         for(const card of sideboardObj.cards){
             const m = card.mark;
             if(m < Public.SideboardDialog.labels.length - 1) this.subsets[m].push(card);
             else this.subsets.at(-1).push(card);
         }
-    }
-
-    checkInput(GE){
-        if(this.busy > 0) this.busy--;
-        return GE.input.checkInput(
-            ["ArrowLeft", "ArrowRight", "KeyA", "KeyS"],
-            ["ArrowLeft", "ArrowRight"],
-            this.busy
-        );
     }
 
     draw(GE, ctx){
@@ -338,12 +313,14 @@ Public.SideboardDialog = class extends DialogBase{
         ctx.font = DialogBase.font;
         ctx.fillStyle = DialogBase.color;
 
-        if(!this.subset){
-            ctx.fillText(`分類： 《 ${this.category.body[this.category.i]} 》`, this.x + 50, this.y+70);
+        const m = this.categorySelect.index;
+        const label = Public.SideboardDialog.labels[m];
+        if(!this.cardSelect){
+            ctx.fillText(`分類： 《 ${label} 》`, this.x + 50, this.y+70);
         }
         else{
-            const card = this.subset.body[this.subset.i];
-            ctx.fillText(`分類： 　 ${this.category.body[this.category.i]}`, this.x + 50, this.y+70);
+            const card = this.subsets[m][this.cardSelect.index];
+            ctx.fillText(`分類： 　 ${label}`, this.x + 50, this.y+70);
             ctx.fillText("カード：", this.x + 50, this.y+110);
             ctx.fillText(`《 ${getCharacterName(Suits[card.mark])} ${card.value} /  MP ${card.MP} 》`, this.x + 140, this.y+110);
             if(card.skill){
@@ -361,35 +338,38 @@ Public.SideboardDialog = class extends DialogBase{
     }
 
     execute(GE){
-        const [code, k] = this.checkInput(GE);
-        const target = (this.subset || this.category);
-        if(k == 0 || k == 1){
-            target.i = this.addMod(target.i, 2*k - 1, target.body.length);
-            this.busy = 10;
+        return (this.cardSelect || this.categorySelect).execute(GE);
+    }
+
+    action(GE, n){
+        const s = this.subsets[n];
+        if(s.length > 0){
+            this.cardSelect = new stdtask.CyclicSelect(
+                s.length, ["ArrowLeft", "ArrowRight"], "KeyA", "KeyS", 0, 10
+            );
+            this.cardSelect.bind(this);
+            const backup = [ this.action, this.cancel ];
+            this.action = (GE, n) => {
+                this.result = this.subsets[this.categorySelect.index][n];
+                this.active = false;
+            };
+            this.cancel = (GE, n) => {
+                this.cardSelect = null;
+                this.action = backup[0];
+                this.cancel = backup[1];
+            };
         }
-        if(k == 2){
-            if(this.subset){
-                this.result = this.subset.body[this.subset.i];
-                this.active = false; // カード決定
-            }
-            else{
-                const s = this.subsets[this.category.i];
-                if(s.length > 0){
-                    this.subset = { body: s, i: 0 };
-                }
-                else{
-                    const obj = T.finite(T.text(
-                        "この分類は空です", {x: this.x + 140, y: this.y + 190, font: DialogBase.font}
-                    ), 30);
-                    this.owner.addSprite(obj);
-                    this.owner.addTask(obj, true);
-                }
-            }
+        else{
+            const obj = T.finite(T.text(
+                "この分類は空です", {x: this.x + 140, y: this.y + 190, font: DialogBase.font}
+            ), 30);
+            this.owner.addSprite(obj);
+            this.owner.addTask(obj, true);
         }
-        if(k == 3){
-            if(this.subset) this.subset = null;  // 分類選択に戻る
-            else this.active = false;  // キャンセルして戻る
-        }
+    }
+
+    cancel(GE, n){
+        this.active = false;
     }
 }
 
@@ -430,15 +410,6 @@ displayObject: {
     }
 },
 
-checkInput(GE){
-    if(this.busy > 0) this.busy--;
-    return GE.input.checkInput(
-        ["ArrowUp", "ArrowDown", "KeyA", "KeyS"],
-        ["ArrowUp", "ArrowDown"],
-        this.busy
-    );
-},
-
 onLoad(GE, setting){
     this.setting = setting;
     this.deck = setting.deckSet.cards;  // localStorageを使うとき、すぐに保存するため必要
@@ -459,9 +430,11 @@ onLoad(GE, setting){
     this.add(T.text("コンボ成立条件の設定を変更する", {x: 90, y:510, font: "32px Sans-Serif"}));
     this.add(T.ftext("現在の設定：  第${}弾ルール", this.setting, "chainRule", {x: 160, y:553, font: "24px Sans-Serif"}));
 
-    this.index = 0;
-    this.busy = 0;
     this.itemY = [ 90, 330, 510 ];
+    this.select = new stdtask.CyclicSelect(
+        this.itemY.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
+    );
+    this.select.bind(this);
 
     const mainCardView = {
         owner: this,
@@ -471,40 +444,48 @@ onLoad(GE, setting){
 },
 
 operations: [
-    { createDialog: (owner) => {
-          return new MainCardDialog(owner, owner.setting.mainCardData, 200, 140, 600, 420);
-      },
-      treatResult: (owner, result) => {
-          owner.setting.mainCardData = result;
-          if(LocalStorageInfo.isUsed()){
-              owner.saveConfig();
-          }
-      }
+    function*(GE, opt){
+        const dialog = new MainCardDialog(
+            opt.scene, opt.scene.setting.mainCardData, 200, 140, 600, 420
+        );
+        opt.scene.addSprite(dialog);
+        opt.scene.addTask(dialog, true);
+        while(dialog.active) yield true;
+
+        opt.scene.setting.mainCardData = dialog.result;
+        if(LocalStorageInfo.isUsed()){
+            opt.scene.saveConfig();
+        }
     },
-    { createDialog: (owner) => {
-          return new LocalStorageDialog(owner, LocalStorageInfo.isUsed() ? 1 : 0, 200, 140, 600, 420);
-      },
-      treatResult: (owner, result) => {
-          if(result == 1){
-              owner.saveConfig();
-              LocalStorageInfo.saveDeck(owner.deck);
-          }
-          else if(LocalStorageInfo.isUsed()){
-              LocalStorageInfo.removeStorage();
-          }
-      }
+    function*(GE, opt){
+        const dialog = new LocalStorageDialog(
+            opt.scene, LocalStorageInfo.isUsed() ? 1 : 0, 200, 140, 600, 420
+        );
+        opt.scene.addSprite(dialog);
+        opt.scene.addTask(dialog, true);
+        while(dialog.active) yield true;
+
+        if(dialog.result == 1){
+            opt.scene.saveConfig();
+            LocalStorageInfo.saveDeck(opt.scene.deck);
+        }
+        else if(LocalStorageInfo.isUsed()){
+            LocalStorageInfo.removeStorage();
+        }
     },
-    { createDialog: (owner) => {
-          const options = ["第1弾ルール", "第2弾ルール"];
-          return new SimpleChoice(owner, "コンボ成立条件", options,
-                                     owner.setting.chainRule-1, 200, 140, 600, 420);
-      },
-      treatResult: (owner, result) => {
-          owner.setting.chainRule = result + 1;
-          if(LocalStorageInfo.isUsed()){
-              owner.saveConfig();
-          }
-      }
+    function*(GE, opt){
+        const dialog = new SimpleChoice(
+            opt.scene, "コンボ成立条件", ["第1弾ルール", "第2弾ルール"],
+            opt.scene.setting.chainRule-1, 200, 140, 600, 420
+        );
+        opt.scene.addSprite(dialog);
+        opt.scene.addTask(dialog, true);
+        while(dialog.active) yield true;
+
+        opt.scene.setting.chainRule = dialog.result + 1;
+        if(LocalStorageInfo.isUsed()){
+            opt.scene.saveConfig();
+        }
     }
 ],
 
@@ -512,37 +493,20 @@ draw(GE, ctx){
     ctx.save();
     ctx.font = "32px Sans-Serif";
     ctx.fillStyle = "white";
-    ctx.fillText("→ ", 50, this.itemY[this.index]);
+    ctx.fillText("→ ", 50, this.itemY[this.select.index]);
     ctx.restore();
 },
 
 execute(GE){
-    if(this.dialog && this.dialog.active) return;
-    if(this.dialog){
-        const r = this.dialog.result;
-        this.operations[this.index].treatResult(this, r);
-        this.dialog = null;
-    }
-    else{
-        const [code, k] = this.checkInput(GE);
-        if(k == 0){
-            this.index = (this.index + this.itemY.length - 1) % this.itemY.length;
-            this.busy = 10;
-        }
-        if(k == 1){
-            this.index = (this.index + 1) % this.itemY.length;
-            this.busy = 10;
-        }
-        if(k == 2){
-            this.dialog = this.operations[this.index].createDialog(this);
-            this.addSprite(this.dialog);
-            this.addTask(this.dialog, true);
-            this.busy = 10;
-        }
-        else if(k == 3){
-            GE.changeScene("select");
-        }
-    }
+    this.select.execute(GE);
+},
+
+action(GE, n){
+    this.useCoroutine(GE, this.operations[this.select.index], {scene: this});
+},
+
+cancel(GE, n){
+    GE.changeScene("select");
 }
 
 });
@@ -556,18 +520,9 @@ saveConfig(){
     LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag);
 },
 
-checkInput(GE){
-    if(this.busy > 0) this.busy--;
-    return GE.input.checkInput(
-        ["ArrowUp", "ArrowDown", "KeyA", "KeyS"],
-        ["ArrowUp", "ArrowDown"],
-        this.busy
-    );
-},
-
 onLoad(GE, setting){
     this.setting = setting;
-    this.deck = setting.deckSet.cards;  // localStorageを使うとき、すぐに保存するため必要
+    this.deck = setting.deckSet.cards;  // localStorageを使うとき, すぐに保存するため必要
 
     this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
     this.add(T.text("スキル持ちカードのマーカー表示", {x: 90, y:90, font: "32px Sans-Serif"}));
@@ -578,24 +533,28 @@ onLoad(GE, setting){
     };
     this.add(tmp);
 
-    this.index = 0;
-    this.busy = 0;
     this.itemY = [ 90 ];
-
+    this.select = new stdtask.CyclicSelect(
+        this.itemY.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
+    );
+    this.select.bind(this);
 },
 
 operations: [
-    { createDialog: (owner) => {
-          const options = ["表示する", "表示しない"];
-          return new SimpleChoice(owner, "スキル持ちカードのマーカー表示をしますか？", options,
-                                     Card.MarkerFlag ? 0 : 1, 200, 140, 600, 420);
-      },
-      treatResult: (owner, result) => {
-          Card.MarkerFlag = (result == 0);
-          if(LocalStorageInfo.isUsed()){
-              owner.saveConfig();
-          }
-      }
+    function*(GE, opt){
+        const dialog = new SimpleChoice(
+            opt.scene, "スキル持ちカードのマーカー表示をしますか？",
+            ["表示する", "表示しない"],
+            Card.MarkerFlag ? 0 : 1, 200, 140, 600, 420
+        );
+        opt.scene.addSprite(dialog);
+        opt.scene.addTask(dialog, true);
+        while(dialog.active) yield true;
+
+        Card.MarkerFlag = (dialog.result == 0);
+        if(LocalStorageInfo.isUsed()){
+            opt.scene.saveConfig();
+        }
     }
 ],
 
@@ -603,38 +562,22 @@ draw(GE, ctx){
     ctx.save();
     ctx.font = "32px Sans-Serif";
     ctx.fillStyle = "white";
-    ctx.fillText("→ ", 50, this.itemY[this.index]);
+    ctx.fillText("→ ", 50, this.itemY[this.select.index]);
     ctx.restore();
 },
 
 execute(GE){
-    if(this.dialog && this.dialog.active) return;
-    if(this.dialog){
-        const r = this.dialog.result;
-        this.operations[this.index].treatResult(this, r);
-        this.dialog = null;
-    }
-    else{
-        const [code, k] = this.checkInput(GE);
-        if(k == 0){
-            this.index = (this.index + this.itemY.length - 1) % this.itemY.length;
-            this.busy = 10;
-        }
-        if(k == 1){
-            this.index = (this.index + 1) % this.itemY.length;
-            this.busy = 10;
-        }
-        if(k == 2){
-            this.dialog = this.operations[this.index].createDialog(this);
-            this.addSprite(this.dialog);
-            this.addTask(this.dialog, true);
-            this.busy = 10;
-        }
-        else if(k == 3){
-            GE.changeScene("select");
-        }
-    }
+    this.select.execute(GE);
+},
+
+action(GE, n){
+    this.useCoroutine(GE, this.operations[this.select.index], {scene: this});
+},
+
+cancel(GE, n){
+    GE.changeScene("select");
 }
+
 });
 
 })(config);

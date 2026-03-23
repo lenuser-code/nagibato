@@ -157,11 +157,6 @@ class SelectWindow extends stdtask.Scroll{
         this.padY = 40 + (h - this.step * rowCount) / 2;
         this.width = w;
         this.height = h;
-
-        select.action = (GE, n) => {
-            this.callback(select.index);
-        };
-        select.cancel = (GE,n) => { this.active = false; };
     }
 
     draw(GE, ctx){
@@ -195,6 +190,14 @@ class SelectWindow extends stdtask.Scroll{
             ctx.fillText("▼", this.x + this.width/2, this.y+this.padY+this.step*(this.rowCount-1)+40);
         }
         ctx.restore();
+    }
+
+    action(GE, n){
+        this.callback(n);
+    }
+
+    cancel(GE, n){
+        this.active = false;
     }
 }
 
@@ -286,42 +289,49 @@ class Shelflike extends stdtask.CyclicSelect{
  * @type {stdgam.Scene}
  */
 const selectScene = new Scene({
-battleSelected(opt){
+
+// バトル開始前の処理
+*confirmationBattle(GE, opt){
     this.yesno = createConfirmatingQB_BeforeBattle(this.setting);
-    this.yesno.action = (GE, scene) => {
-        const deckObj = new Deck(scene.setting.deckSet.cards);
-        const sideboardObj = new Deck(RAW_CARD_DATA.map((e) => CardAtlas.get(e.id)));
-        const mainCard = CardAtlas.get(scene.setting.mainCardData.id);
-        deckObj.remove(mainCard);
-        sideboardObj.remove(mainCard);
-        deckObj.shuffle();
-        opt2 = {
-            deck: deckObj, sideboard: sideboardObj,
-            playerData: this.setting.mainCardData,
-            chainRule: this.setting.chainRule, ...opt
-        };
-        GE.changeScene("intermediate", opt2);
-    };
     this.addSprite(this.yesno);
     this.addTask(this.yesno, true);
+    while(this.yesno.active) yield true;
+
+    const ans = this.yesno.result;
+    if(!ans) return;
+
+    const deckObj = new Deck(this.setting.deckSet.cards);
+    const sideboardObj = new Deck(RAW_CARD_DATA.map((e) => CardAtlas.get(e.id)));
+    const mainCard = CardAtlas.get(this.setting.mainCardData.id);
+    deckObj.remove(mainCard);
+    sideboardObj.remove(mainCard);
+    deckObj.shuffle();
+
+    opt2 = {
+        deck: deckObj, sideboard: sideboardObj,
+        playerData: this.setting.mainCardData,
+        chainRule: this.setting.chainRule, ...opt
+    };
+    GE.changeScene("intermediate", opt2);
 },
-tutorialSelected(opt){
+battleSelected(GE, opt){
+    this.useCoroutine(GE, this.confirmationBattle, opt);
+},
+
+// チュートリアル開始前の処理
+*confirmationTutorial(GE, opt){
     this.yesno = createTutorialQB(this.setting);
-    this.yesno.action = (GE, scene) => {
-        GE.changeScene("intermediate", opt);
-    };
     this.addSprite(this.yesno);
     this.addTask(this.yesno, true);
+    while(this.yesno.active) yield true;
+
+    const ans = this.yesno.result;
+    if(!ans) return;
+
+    GE.changeScene("intermediate", opt);
 },
-execute(GE){
-    if(this.yesno && !this.yesno.active){
-        const ans = this.yesno.result;
-        const opt = this.yesno.opt;
-        if(ans){
-            this.yesno.action(GE, this);
-        }
-        this.yesno = null;
-    }
+tutorialSelected(GE, opt){
+    this.useCoroutine(GE, this.confirmationTutorial, opt);
 },
 
 actions:  [
@@ -342,7 +352,7 @@ actions:  [
             });
         }
         const op = (i) => {
-            scene.tutorialSelected(values[i]);
+            scene.tutorialSelected(GE, values[i]);
         };
         const sw = new SelectWindow(menu, op, 6, 50, 180, 700, 450);
         scene.addSprite(sw);
@@ -356,7 +366,7 @@ actions:  [
         ];
         const values = menu.map((name) => { return {enemyData: EnemyData[name]}; });
         const op = (i) => {
-            scene.battleSelected(values[i]);
+            scene.battleSelected(GE, values[i]);
         };
         const sw = new SelectWindow(menu, op, 6, 50, 180, 700, 450);
         scene.addSprite(sw);

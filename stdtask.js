@@ -73,6 +73,11 @@ Public.Select = class{
         if(k == 1 && this.index < itemCount - 1) this.index++;
     }
 
+    bind(other){
+        this.action = (GE, index) => { other.action(GE, index) };
+        this.cancel = (GE, index) => { other.cancel(GE, index) };
+    }
+
     action(GE, index){ }
     cancel(GE, index){ }
 }
@@ -106,6 +111,7 @@ Public.Scroll = class{
         this.#contents = selectObj;
         this.#viewCount = viewCount;
         this.initScroll();
+        selectObj.bind(this);
         this.active = true;
     }
 
@@ -140,6 +146,14 @@ Public.Scroll = class{
             else this.scroll++;
         }
     }
+
+    bind(other){
+        this.action = (GE, index) => { other.action(GE, index) };
+        this.cancel = (GE, index) => { other.cancel(GE, index) };
+    }
+
+    action(GE, index){ }
+    cancel(GE, index){ }
 }
 
 })(stdtask);

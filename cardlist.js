@@ -1712,7 +1712,7 @@
       "nagibato_code": [
         "multiAttack",
         [
-          1,
+          100,
           2
         ],
         "一つの願い",
