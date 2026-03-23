@@ -174,12 +174,21 @@ Public.Scene = class {
         if(this.execute) this.execute(this.GE);
     }
 
-    // genにより作られるGeneratorを回す関数を作り, これをexecuteに代入する
+    /**
+     * 指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの
+     * 更新処理をこのジェネレータに委任する.
+     * 具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.
+     * ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.
+     * @param {GameEngine} GE - ジェネレータ関数の初期化時に渡すGameEngine
+     * @param {GeneratorFunction} gen - 処理を委任するジェネレータ関数
+     * @param {Object.<*,*>} [opt={}] - ジェネレータ関数の初期化時に渡すオプション
+     */
     useCoroutine(GE, gen, opt = {}){
         const iter = gen.call(this, GE, opt);
+        const backup = this.execute;
         this.execute = (GE) => {
             const result = iter.next();
-            if(result.done) this.execute = null;
+            if(result.done) this.execute = backup;
         };
     }
 }
