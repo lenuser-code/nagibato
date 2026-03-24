@@ -89,7 +89,7 @@ Public.Scene = class {
      * まず, GEをプライベートフィールドに保存する.
      * 次に, もしthis.onLoad(GE, args)が定義されていればこれを実行する.
      * @param {stdgam.GameEngine} GE - このシーンを実行するGameEngine
-     * @param {Object.<*,*>} args - ロード処理のために引き渡す設定リスト
+     * @param {Object.<string,*>} args - ロード処理のために引き渡す設定リスト
      */
     superOnLoad(GE, args){
         this.#GE = GE;
@@ -111,7 +111,7 @@ Public.Scene = class {
      * 追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.
      * 省略したときは「末尾に」追加する.
      * @param {Sprite} spr - 登録するスプライト
-     * @param {boolean} [first = false] - trueなら先頭に追加, falseなら末尾に追加
+     * @param {boolean} [first=false] - trueなら先頭に追加, falseなら末尾に追加
      */
     addSprite(spr, first = false){
         if(first){
@@ -127,7 +127,7 @@ Public.Scene = class {
      * 追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.
      * 省略したときは「末尾に」追加する.
      * @param {Task} task - 登録するタスク
-     * @first {boolean} [first = false] - trueなら先頭に追加, falseなら末尾に追加
+     * @param {boolean} [first=false] - trueなら先頭に追加, falseなら末尾に追加
      */
     addTask(task, first = false){
         if(first){
@@ -144,7 +144,7 @@ Public.Scene = class {
      * 次に, objがタスクの条件を満たすならタスクリストに登録する.
      * 両方の条件を満たす場合は, 両方のリストに追加される.
      * @param {(Task|Sprite)} obj - 登録するオブジェクト
-     * @first {boolean} [first = false] - trueなら先頭に追加, falseなら末尾に追加
+     * @param {boolean} [first=false] - trueなら先頭に追加, falseなら末尾に追加
      */
     add(obj, first = false){
         if (obj.draw) this.addSprite(obj, first);
@@ -193,7 +193,7 @@ Public.Scene = class {
     /**
      * タスクリストの中に登録されているtargetの位置を探し,
      * 第2引数以降に指定されたタスクをその直後に追加する (順序を保つ).
-     * もしtargetが登録されていない場合, リストの先頭に追加する.
+     * もしtargetが登録されていない場合, リストの末尾に追加する.
      * @param {Task} target - 追加位置の基準となるタスク
      * @param {...Task} objs - 追加する1つ以上のタスク
      */
@@ -211,7 +211,7 @@ Public.Scene = class {
      * 第2引数がfalseの場合, 順序を維持したままリストの末尾に追加する.
      * 省略時は末尾に追加する.
      * @param {(Sprite|Task)[]} list - 追加するオブジェクトの配列
-     * @first {boolean} [first = false] - trueなら先頭に追加, falseなら末尾に追加
+     * @param {boolean} [first=false] - trueなら先頭に追加, falseなら末尾に追加
      */
     addSequence(list, first = false) {
         if (first) {
@@ -247,6 +247,10 @@ Public.Scene = class {
      * その後, 「activeが真」または「activeがundefined」のタスクだけを
      * リストに残して, 他のタスクはリストから削除する.
      * 最後に, もしthis.execute(GE)が定義されている場合, これを実行する.
+     *
+     * 実際には, stdgam.Templatesの機能を実現するために, execute(GE)の実行後,
+     * タスクが_traits要素を持つかどうかチェックする.
+     * もし存在すれば, その中身の関数も順番に実行する (引数はexecuteと同じ).
      *
      * 【注意】execute()の中でタスクの追加・削除を行うと, for文の実行中に
      * 配列を変更したのと同じ現象が発生します！　特に、自身よりも前に新しい要素を、
@@ -296,46 +300,74 @@ Public.Scene = class {
  * @class
  */
 let InputManager = class {
+    #currentKeys;
+    #previousKeys;
+
     constructor(){
-        this.currentKeys = new Set();
-        this.previousKeys = new Set();
-        window.addEventListener('keydown', (e) => this.currentKeys.add(e.code));
-        window.addEventListener('keyup', (e) => this.currentKeys.delete(e.code));
-        window.addEventListener('blur', () => this.currentKeys.clear());
+        this.#currentKeys = new Set();
+        this.#previousKeys = new Set();
+        window.addEventListener('keydown', (e) => this.#currentKeys.add(e.code));
+        window.addEventListener('keyup', (e) => this.#currentKeys.delete(e.code));
+        window.addEventListener('blur', () => this.#currentKeys.clear());
     }
 
-    // 現在の状態を「1フレーム前の状態」としてコピー
+    /**
+     * 現在の状態を「1フレーム前の状態」としてコピーする.
+     */
     update() {
-        this.previousKeys = new Set(this.currentKeys);
+        this.#previousKeys = new Set(this.#currentKeys);
     }
 
-    // そのキーが今押されているか？
-    isDown(code) {
-        return this.currentKeys.has(code);
-    }
-
-    // 「今は押されている」かつ「1フレーム前は押されていなかった」ときtrueを返す
-    isJustPressed(code) {
-        return this.currentKeys.has(code) && !this.previousKeys.has(code);
-    }
-
-    // シーン切り替え時に「今押されているキー」を「前から押されていたこと」にする.
-    // これにより, 新しいシーンで isJustPressed が false になる
+    /**
+     * シーン切り替え時に「今押されているキー」を「前から押されていたこと」にする.
+     * これにより, 新しいシーンでisJustPressedが最初からtrueになるのを防ぐ
+     * (現時点の実装はupdate()と同じ挙動だが, 念のため別途定義しておく).
+     */
     sync() {
-        this.previousKeys = new Set(this.currentKeys);
+        this.#previousKeys = new Set(this.#currentKeys);
     }
 
-    // キー入力のチェックを補佐する関数.
-    // キーを押し続けたときに毎フレーム反応するのでは困るが,
-    // 一定の間隔が空いていればキーを離していなくてもキー入力を受け付けたい、
-    // というケースに用いる.
-    //
-    // (1) もし codes1 の中に isJustPressed が真のものがあれば,
-    //     そのような一番最初のキー入力とそのインデックスの組を返す.
-    // (2) さらに、(1)に該当するものが無く, かつbusyFlagが偽のとき
-    //     codes2 の中で isDown が真である最初のキーを探す.
-    //     見つかればそのキーとインデックスの組を返す.
-    // (3) 上記のどちらにも該当しないとき, [null, -1]を返す.
+    /**
+     * そのキーが今押されているか調べる.
+     * @param {string} code - 調べるキーのコード値
+     * @returns {boolean} 押されていればtrue, そうでなければfalse
+     */
+    isDown(code) {
+        return this.#currentKeys.has(code);
+    }
+
+    /**
+     * そのキーが「今は押されている」かつ「1フレーム前は押されていなかった」とき
+     * trueを返す. そうでないとき, falseを返す.
+     * @param {string} code - 調べるキーのコード値
+     * @returns {boolean} 条件を満たすならばtrue, そうでなければfalse
+     */
+    isJustPressed(code) {
+        return this.#currentKeys.has(code) && !this.#previousKeys.has(code);
+    }
+
+    /**
+     * キー入力のチェックを補佐する関数.
+     * 「キーを押し続けたときに毎フレーム反応するのでは困るが, 一定の間隔が
+     * 空いていればキーを離していなくてもキー入力を受け付けたい」ケースに用いる.
+     *
+     * 具体的には, 次の処理を実行する.
+     * 1. もし codes1 の中に isJustPressed が真のものがあれば,
+     *    そのような一番最初のキーコードとそのインデックスの組を返す.
+     * 2. さらに、(1)に該当するものが無く, かつbusyFlagが偽のとき,
+     *    codes2 の中で isDown が真である最初のキーを探す.
+     *    見つかればそのキーコードとインデックスの組を返す.
+     * 3. 上記のどちらにも該当しないとき, [null, -1]を返す.
+     *
+     * 【注意】インデックスはあくまで利用時の利便性のために返している.
+     * インデックスだけではどちらのリストのものか判別できないので注意.
+     * @param {string[]} codes1 - isJustPressedで判定するキーのリスト
+     * @param {string[]} codes2 - busyでなければisDownで済ませてもよいキーのリスト
+     * @param {boolean} busyFlag - trueならばisJustPressedによる判定だけを行う.
+     * falseならば一部のキー (codes2の要素) についてisDownで判定を代用する.
+     * @returns {[?string,number]} 条件を満たすキーが見つかったとき, そのキーコードと,
+     * code1またはcode2におけるインデックスの組を返す.
+     */
     checkInput(codes1, codes2 = null, busyFlag = true){
         let i = codes1.findIndex((e) => this.isJustPressed(e));
         if(i >= 0) return [ codes1[i], i ];
@@ -352,20 +384,29 @@ let InputManager = class {
 /**
  * タイマー処理を担当するヘルパークラス.
  * @class
+ * @constant {number} fps - このゲームで目標とするフレームレート
+ * @prop {stdgam.GameEngine} owner - タイマーイベントを送る対象
+ * @prop {boolean} isRunning - 既にタイマーが稼働中か
  */
 let TimeKeeper = class {
+    static fps = 60; // ターゲットfps
+
     constructor(owner){
         this.owner = owner;
         this.isRunning = false;
-        this.fps = 60; // ターゲットfps
     }
 
-    // タイマー処理を開始する
+    /**
+     * タイマー処理を開始する.
+     * requestAnimationFrameを利用してタイマー処理のループを動かし,
+     * 目標フレームレートに概ね従うタイミングでタイマーイベントを発生させる.
+     * もし既にタイマー処理が稼働中なら何もしない.
+     */
     run(){
         if(this.isRunning) return;
         this.isRunning = true;
 
-        const interval = 1000 / this.fps; // 1フレームあたりのミリ秒（約16.6ms）
+        const interval = 1000 / TimeKeeper.fps; // 1フレームあたりのミリ秒（約16.6ms）
         let lastTime = performance.now();
 
         const loop = (currentTime) => {
@@ -383,56 +424,117 @@ let TimeKeeper = class {
 
 /**
  * ゲームの全体的な挙動を管理するクラス.
+ * Sceneオブジェクトをロードし, 毎フレームごとに更新処理を実行させることにより
+ * ゲーム処理を実現する.
+ *
+ * 管理を簡単にするため, 使用するシーンは最初にaddSceneメソッドで登録する.
+ * このときに設定したシーン名を使って, どのシーンをロードするか指定する.
+ * また, キー入力判定に必要なInputManagerや画像・音声を管理するオブジェクトも
+ * まとめて提供する.
  * @class
+ * @prop {stdgam.InputManager} input - キー入力の管理をするオブジェクト
+ * @prop {stdgam.SEPool} se - ZzFXによるSEを管理するオブジェクト
+ * @prop {stdgam.ImagePool} images - 画像を管理するオブジェクト
+ * @prop {stdgam.SoundPool} sounds - 音声を管理するオブジェクト
+ * @prop {stdgam.CachePool} caches - オフスクリーン・キャンバスを管理するオブジェクト
  */
 Public.GameEngine = class {
-    constructor(canvasId) {
-        this.canvas = document.getElementById(canvasId);
-        this.ctx = this.canvas.getContext('2d');
-        this.scenes = {};
-        this.currentScene = null;
+    #canvas;
+    #ctx;
+    #scenes;
+    #currentScene;
+    #timer;
+
+    /**
+     * 指定されたキャンバスを描画に用いるGameEngineを生成する.
+     * @param {string} canvasID - HTMLのキャンバス要素のID
+     */
+    constructor(canvasID) {
+        this.#canvas = document.getElementById(canvasID);
+        this.#ctx = this.#canvas.getContext('2d');
+        this.#scenes = {};
+        this.#currentScene = null;
 
         this.input = new InputManager();
-        this.timer = new TimeKeeper(this);
+        this.#timer = new TimeKeeper(this);
         this.se = new Public.SEPool();
         this.images = new Public.ImagePool();
         this.sounds = new Public.SoundPool();
         this.caches = new Public.CachePool();
     }
 
-    // ゲームの実行を開始する
+    /**
+     * ゲームの実行を開始する.
+     */
     run(){
-        this.timer.run();
+        this.#timer.run();
     }
 
-    // nameという名前で指定されたシーンを登録する
+    /**
+     * nameという名前で指定されたシーンを登録する.
+     * @param {string} name - シーンの登録名
+     * @param {stdgam.Scene} scene - 登録するシーン
+     */
     addScene(name, scene) {
-        this.scenes[name] = scene;
+        this.#scenes[name] = scene;
     }
 
-    // nameという名前で登録されているシーンをカレントシーンとする.
-    // 第２引数としてハッシュを指定した場合, これをカレントシーンに伝える
-    changeScene(name, data = {}) {
+    /**
+     * nameという名前で登録されているシーンをカレントシーンとする.
+     * 第2引数としてオプションリストを指定した場合, これをカレントシーンに伝える.
+     * もし該当するシーンがなければ何もしない.
+     * @param {string} name - シーンの登録名
+     * @param {Object.<string,*>} [opt={}] - カレントシーンに渡す設定リスト
+     */
+    changeScene(name, opt = {}) {
         this.input.sync();
-        if(this.scenes[name]){
-            this.currentScene = this.scenes[name];
-            this.currentScene.superOnLoad(this, data);
+        if(this.#scenes[name]){
+            this.#currentScene = this.#scenes[name];
+            this.#currentScene.superOnLoad(this, opt);
         }
     }
 
-    // カレントシーンに１フレーム分の処理を実行させる
+    /**
+     * 基本的にTimeKeeperから呼ばれる.
+     * カレントシーンに1フレーム分の処理を実行させる. 具体的には
+     * 1. 画面をクリアする.
+     * 2. カレントシーンのsuperexecuteを呼び出しタスク処理を実行させる.
+     * 3. その後, カレントシーンのsuperdrawを呼び出し描画処理を実行させる.
+     * という手順を行う.
+     */
     update(){
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.#ctx.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
 
-        if(this.currentScene){
-            this.currentScene.superexecute();
-            this.currentScene.superdraw(this.ctx);
+        if(this.#currentScene){
+            this.#currentScene.superexecute();
+            this.#currentScene.superdraw(this.#ctx);
         }
 
         this.input.update();
     }
 
-    // 画像・音声のロードを待ってからcallbackを実行する
+    /**
+     * 画像・音声のロード完了を待ってからcallbackを実行するasync関数.
+     * このメソッドを呼び出しても, 呼び出したプロセス自体は停止しない.
+     * (既にロードが完了していれば, 即座にcallbackが非同期処理として実行される)
+     *
+     * JavaScriptでは画像や音声のオブジェクトを作っても即座にロードが完了せず,
+     * バックグラウンドで読み込み処理を行う. それらが確実に完了した状態で
+     * 目的の処理を実行したいときにこのメソッドを使う.
+     *
+     * 例)
+     * const GE = new stdgam.GameEngine("myCanvas");
+     * GE.images.load("IMAGE_01", "./my_image1.png");
+     * GE.images.load("IMAGE_02", "./my_image2.png");
+     *
+     * GE.ready(() => {
+     *    my_paint_operation( pool.get("IMAGE_01") );
+     *    my_paint_operation( pool.get("IMAGE_02") );
+     * });
+     *
+     * @param {function(): void} callback - ロードが確実に完了した状態で
+     * 呼び出される関数
+     */
     async ready(callback){
         this.images.ready().then(() => {
             this.sounds.ready().then(callback);
@@ -445,50 +547,85 @@ Public.GameEngine = class {
 
 /**
  * イメージを指定された幅・高さに基づいて分割するクラス.
+ * より正確に言うと, 実際に分割した画像を生成するのではなく,
+ * 単に「設定に基づいて元画像の適切な一部分を描画する」機能を持つだけである.
  * @class
  */
 Public.ImageCutter = class {
+    #img;
+    #w;
+    #h;
+
+    /**
+     * 指定された画像を横width, 縦heightのブロックに等分割して扱う.
+     * @param {HTMLImageElement} img - 分割対象となる画像
+     * @param {number} width - ブロック1個分の幅
+     * @param {number} height - ブロック1個分の高さ
+     */
     constructor(img, width, height){
-        this.img = img;
-        this.w = width;  // 1コマの横幅
-        this.h = height; // 1コマの縦幅
+        this.#img = img;
+        this.#w = width;  // 1コマの横幅
+        this.#h = height; // 1コマの縦幅
     }
 
-    // 分割した画像のうち上からa番目, 左からb番目の部分を描画する.
-    // ただし, a, bは0から数え始めるものとする
+    /**
+     * 分割した画像のうち上からa番目, 左からb番目の部分を描画する.
+     * ただし, a, bは0から数え始めるものとする.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number} x - 描画位置のx座標
+     * @param {number} y - 描画位置のy座標
+     * @param {number} a - 分割のうち, 上から何番目を使うか (0から数え始める)
+     * @param {number} b - 分割のうち, 左から何番目を使うか (0から数え始める)
+     */
     paint(ctx, x, y, a, b){
-        const sx = this.w * a;
-        const sy = this.h * b;
+        const sx = this.#w * a;
+        const sy = this.#h * b;
         ctx.drawImage(
-            this.img, sx, sy, this.w, this.h,
-            x, y, this.w, this.h
+            this.#img, sx, sy, this.#w, this.#h,
+            x, y, this.#w, this.#h
         );
     }
 }
 
 /**
  * オフスクリーン・キャンバスを管理するクラス.
+ * JavaScriptでは画像のキャッシュを作るためにオフスクリーン・キャンバスを使う.
+ * このオフスクリーン・キャンバス (以下, 単にキャンバスと呼ぶ) を生成・管理する.
  * @class
  */
 Public.CachePool = class {
+    #pool;
+
     constructor(){
-        this.pool = {};
+        this.#pool = {};
     }
 
-    // オフスクリーン・キャンバスを作ってプールに登録する.
-    // (drawFnが与えられた場合, それを実行する)
+    /**
+     * 新しいキャンバスを作り, nameという名前で登録する.
+     * もしdrawFnが与えられた場合, キャンバスを生成したあと, このキャンバスの
+     * コンテクストを引数として drawFn(ctx) を実行する.
+     * @param {string} name - 作られたキャンバスの登録名
+     * @param {function(CanvasRenderingContext2D): void} [drawFn=(ctx)=>{}] -
+     * 作られたキャンバスに対してすぐに作業をしたい場合はコールバック関数を指定する.
+     * ここで, コールバック関数の引数は生成されたキャンバスのコンテクストである.
+     * @returns {HTMLCanvasElement} - 生成されたキャンバス
+     */
     createCache(name, w, h, drawFn = (ctx) => {}){
         const c = document.createElement('canvas');
         c.width = w;
         c.height = h;
         drawFn(c.getContext('2d'));
-        this.pool[name] = c;
+        this.#pool[name] = c;
         return c;
     }
 
-    // プールに登録されているキャンバスを返す
+    /**
+     * 指定した名前で登録されているキャンバスを返す.
+     * @param {string} name - キャンバスの登録名
+     * @returns {HTMLCanvasElement} - 指定された登録名のキャンバス. 存在しなければundefined
+     */
     get(name){
-        return this.pool[name];
+        return this.#pool[name];
     }
 }
 
@@ -497,79 +634,173 @@ Public.CachePool = class {
  * @class
  */
 Public.ImagePool = class {
+    #pool;
+    #promises;
+
     constructor(){
-        this.pool = {};
-        this.promises = []; // ロード状態を追跡するリスト
+        this.#pool = {};
+        this.#promises = []; // ロード状態を追跡するリスト
     }
 
-    // 画像を読み込み、それをプールに登録する。
-    // 返却値は画像のロード待ちを行なっているPromiseオブジェクト
+    /**
+     * 画像を読み込み, それを指定した名前で登録する.
+     * ただし, JavaScriptでは画像オブジェクトを作っても即座にロードが
+     * 完了するのではなく, バックグラウンドで読み込み処理を行う. 
+     * そのため, 返却値は画像のロード待ちを行なっているPromiseオブジェクトである.
+     *
+     * 例)
+     * const pool = new stdgam.ImagePool();
+     * const promise = pool.load("IMAGE_01", "./my_image1.png");
+     * promise.then((v) => {
+     *     my_paint_operation( pool.get("IMAGE_01") );
+     * });
+     *
+     * 普通はこのPromiseオブジェクトを直接使うのではなく, readyメソッドを利用する
+     * (readyメソッドの例を参照のこと).
+     *
+     * また, GameEngineオブジェクトがデフォルトで所持するImagePoolに関しては,
+     * GameEngineのreadyメソッドによりロード待ちを行うほうが好ましい.
+     * @param {string} name - ロードした画像に付ける登録名
+     * @param {string} url - 読み込む画像のURL
+     * @returns {Promise<HTMLImageElement>} 画像のロード待ちを行うPromiseオブジェクト
+     */
     load(name, url){
         const promise = new Promise((resolve, reject) => {
             const img = new Image();
             img.onload = () => resolve(img);
             img.onerror = () => reject(new Error(`Failed to load: ${url}`));
             img.src = url;
-            this.pool[name] = img;
+            this.#pool[name] = img;
         });
-        this.promises.push(promise);
+        this.#promises.push(promise);
         return promise;
     }
 
-    // 全ての画像が揃うまで待機するためのPromise
+    /**
+     * 全ての画像のロードが完了するまで待機するためのPromiseを返す.
+     * 通常は次のようなコードを書く.
+     *
+     * 例)
+     * const pool = new stdgam.ImagePool();
+     * pool.load("IMAGE_01", "./my_image1.png");
+     * pool.load("IMAGE_02", "./my_image2.png");
+     *
+     * pool.ready().then((v) => {
+     *    my_paint_operation( pool.get("IMAGE_01") );
+     *    my_paint_operation( pool.get("IMAGE_02") );
+     * });
+     *
+     * ただし, GameEngineオブジェクトがデフォルトで所持するImagePoolに関しては,
+     * GameEngineのreadyメソッドによりロード待ちを行うほうが好ましい.
+     * @returns {Promise<HTMLImageElement[]>} 全部の画像のロード待ちを行うPromiseオブジェクト
+     */
     ready() {
-        return Promise.all(this.promises);
+        return Promise.all(this.#promises);
     }
 
-    // 登録されている画像を返す
+    /**
+     * 指定した名前で登録されている画像を返す.
+     * @param {string} name - 画像の登録名
+     * @returns {HTMLImageElement} - 指定された登録名の画像. 存在しなければundefined
+     */
     get(name){
-        return this.pool[name];
+        return this.#pool[name];
     }
 }
 
 /**
- * 音声ファイルを管理するクラス.
- * [注意] 現在のブラウザでは、ユーザがそのページ内で何か操作をするまで
- * 勝手に音声を鳴らすことができない！
+ * 音声ファイルから読み込んだ音声 (HTMLAudioElement) を管理するクラス.
+ * 事前に登録しておいた音声の再生・停止を行う
+ * (HTMLAudioElementオブジェクトを直接返す機能はない).
+ *
+ * 【注意】現在のブラウザでは、ユーザがそのページ内で何か操作をするまで
+ * 勝手に音声を鳴らすことができない！　何かしらの入力を受けてから使うこと.
  * @class
  */
 Public.SoundPool = class {
+    #pool;
+    #promises;
+
     constructor() {
-        this.pool = {};
-        this.promises = [];
+        this.#pool = {};
+        this.#promises = [];
     }
 
-    // 音声ファイルをロードして、それをプールに登録する。
-    // 返却値はロード待ちを行なっているPromiseオブジェクト
+    /**
+     * 音声をHTMLAudioElementとして読み込み, それを指定した名前で登録する.
+     * ただし, JavaScriptでは音声オブジェクトを作っても即座にロードが
+     * 完了するのではなく, バックグラウンドで読み込み処理を行う. 
+     * そのため, 返却値は音声のロード待ちを行なっているPromiseオブジェクトである.
+     *
+     * 例)
+     * const pool = new stdgam.SoundPool();
+     * const promise = pool.load("BGM_01", "./my_bgm.wav");
+     * promise.then((v) => {
+     *     pool.play("BGM_01");
+     * });
+     *
+     * 普通はこのPromiseオブジェクトを直接使うのではなく, readyメソッドを利用する
+     * (readyメソッドの例を参照のこと).
+     *
+     * また, GameEngineオブジェクトがデフォルトで所持するSoundPoolに関しては,
+     * GameEngineのreadyメソッドによりロード待ちを行うほうが好ましい.
+     * @param {string} name - ロードした音声に付ける登録名
+     * @param {string} url - 読み込む音声のURL
+     * @returns {Promise<HTMLAudioElement>} 音声のロード待ちを行うPromiseオブジェクト
+     */
     load(name, url) {
         const promise = new Promise((resolve, reject) => {
             const audio = new Audio();
             audio.oncanplaythrough = () => resolve(audio);
             audio.onerror = () => reject(new Error(`Failed to load audio: ${url}`));
             audio.src = url;
-            this.pool[name] = audio;
+            this.#pool[name] = audio;
         });
-        this.promises.push(promise);
+        this.#promises.push(promise);
         return promise;
     }
 
-    // 全ての音声が揃うまで待機するためのPromise
+    /**
+     * 全ての音声のロードが完了するまで待機するためのPromiseを返す.
+     * 通常は次のようなコードを書く.
+     *
+     * 例)
+     * const pool = new stdgam.SoundPool();
+     * pool.load("BGM_01", "./bgm_01.wav");
+     * pool.load("BGM_02", "./bgm_02.wav");
+     *
+     * pool.ready().then((v) => {
+     *    my_operation_with_sounds(pool);
+     * });
+     *
+     * ただし, GameEngineオブジェクトがデフォルトで所持するSoundPoolに関しては,
+     * GameEngineのreadyメソッドによりロード待ちを行うほうが好ましい.
+     * @returns {Promise<HTMLAudioElement[]>} 全部の音声のロード待ちを行うPromiseオブジェクト
+     */
     ready() {
-        return Promise.all(this.promises);
+        return Promise.all(this.#promises);
     }
 
-    // 登録されている音声を再生する (毎回音声の最初から流す)
+    /**
+     * 指定した名前で登録されている音声を再生する (存在しなければ何もしない).
+     * 既に再生中の場合, 最初に巻き戻して再生し直す.
+     * @param {string} name - 再生する音声の登録名
+     */
     play(name) {
-        const ad = this.pool[name];
+        const ad = this.#pool[name];
         if (ad) {
             ad.currentTime = 0; // 巻き戻し
             ad.play().catch(e => console.warn("再生に失敗:", e));
         }
     }
 
-    // 音声を停止する
+    /**
+     * 指定した名前で登録されている音声が再生中なら、再生を停止する.
+     * 該当する音声がなかったり再生中でなければ何もしない.
+     * @param {string} name - 停止するする音声の登録名
+     */
     stop(name) {
-        const ad = this.pool[name];
+        const ad = this.#pool[name];
         if (ad) {
             ad.pause();
             ad.currentTime = 0; // 巻き戻し
@@ -579,23 +810,34 @@ Public.SoundPool = class {
 
 /**
  * ZzFXを使用した効果音（SE）を管理するクラス.
+ * このクラスでは, 「ZzFXに渡すパラメータの配列」のことを単にSEと呼ぶ.
+ * これを事前に登録しておき, playメソッドでSEを再生する.
  * @class
  */
 Public.SEPool = class {
+    #pool;
+
     constructor() {
-        this.pool = {};
+        this.#pool = {};
     }
 
-    // SEを名前付きで登録する
-    // @param {string} name - SEの名前
-    // @param {Array} params - ZzFXのパラメータ配列 [,,150,...]
+    /**
+     * 指定した名前でSEを登録する.
+     * ここで「SE」とは「ZzFXに渡すパラメータの配列」のことである.
+     * @param {string} name - SEの名前
+     * @param {Array} params - ZzFXのパラメータの配列 ( [,,150,...] など)
+     */
     register(name, params) {
-        this.pool[name] = params;
+        this.#pool[name] = params;
     }
 
-    // 名前を指定してSEを再生する
+    /**
+     * 指定した名前で登録されているSEを再生する.
+     * もし存在しなければ何もしない.
+     * @param {string} name - 再生するSEの登録名
+     */
     play(name) {
-        const params = this.pool[name];
+        const params = this.#pool[name];
         if (params) {
             // ZzFX関数に配列を展開して渡す
             if (typeof zzfx === 'function') {
@@ -609,6 +851,53 @@ Public.SEPool = class {
 
 
 // #4. スプライト・タスクの作成をサポートする機能
+
+/*---------- 先にJSDocの型定義を行う ----------*/
+
+/**
+ * @typedef {Sprite} Templates_text
+ * @prop {string} text - 表示するテキスト
+ * @prop {number} x - 描画位置のx座標
+ * @prop {number} y - 描画位置のy座標
+ * @prop {string} color - テキストの色
+ * @prop {string} font - テキストのフォント
+ * @prop {number} alpha - 不透明度
+ */
+
+/**
+ * @typedef {Template_text & Task} Template_ftext
+ */
+
+/**
+ * @typedef {Sprite} Templates_image
+ * @prop {HTMLImageElement} image - 描画する画像
+ * @prop {number} x - 描画位置のx座標
+ * @prop {number} y - 描画位置のy座標
+ * @prop {number} alpha - 不透明度
+ */
+
+/**
+ * @typedef {Task} Templates_scheduler
+ * @prop {function(number, function(stdgam.GameEngine, Templates_scheduler): void): void} after - 
+ * 指定時間が経過したとき第2引数で指定したコールバック関数を実行する.
+ * ここで, コールバック関数の引数は (GE, self) である
+ * (GEはタスク処理に用いるGameEngine, selfはこのオブジェクト自身).
+ * @prop {function(number, function(stdgam.GameEngine, Templates_scheduler): boolean): void} loop -
+ * コールバック関数の実行結果がtrueである限り, afterと同じ処理を繰り返す
+ */
+
+/**
+ * @typedef {Task} Templates_slider
+ * @prop {function(number, number): void} moveTo - this.x, this.yを指定した値に変更する
+ * @prop {function(number, number, number): void} slideTo - 現在位置から第1～第2引数で指定した座標まで, 第3引数で指定したフレーム数を掛けてthis.x, this.yの値を等速変化させる
+ */
+
+/**
+ * @typedef {Task} Templates_fader
+ * @prop {function(number, number): void} fadeTo - 現在値から第1引数で指定した値まで, 第3引数で指定したフレーム数を掛けてthis.alphaの値を等速変化させる
+ */
+
+/*---------- ここまでJSDocの型定義 ----------*/
 
 /**
  * 頻繁に必要になる定型のオブジェクトを作成するためのテンプレート群.
@@ -647,9 +936,15 @@ Public.SEPool = class {
 Public.Templates = {
     // --- 1. ジェネレータ ---
 
-    // テキストの描画を行うオブジェクト.
-    // optを使って x, y, color, font, alpha を指定できる.
-    // これらに加えて, ctxの持っている他の属性もoptで渡すことが可能
+    /**
+     * テキストの描画を行うオブジェクト.
+     * オプションリストを使って x, y, color, font, alpha を指定できる.
+     * これらに加えて, CanvasRenderingContext2Dに対して指定可能な他の属性も
+     * optで渡すことができる.
+     * @param {string} str - 表示する文字列
+     * @param {Object.<string,*>} [opt={}] - オプションリスト
+     * @returns {Template_text} 生成されたオブジェクト
+     */
     text: (str, opt = {}) => {
         const obj = {
             text: str, active: true,
@@ -675,10 +970,19 @@ Public.Templates = {
         return obj;
     },
 
-    // formatに含まれる "${}" という文字列を target[key] に置き換えて
-    // 得られるテキストを表示するオブジェクト.
-    // もしtargetが偽の場合は, このオブジェクト自身をターゲットとする.
-    // 自動的にテキストが更新されること以外はtextと同じ挙動をする
+    /**
+     * formatに含まれる "${}" という文字列を全部 target[key] に置き換えて
+     * 得られるテキストを表示するオブジェクト.
+     * もしtargetが偽の場合は, このオブジェクト自身をターゲットとする.
+     *
+     * 自動的にテキストが更新されること以外はtextと同じ挙動をする.
+     * オプションリストの扱いなども共通である.
+     * @param {string} format - 雛形となる文字列
+     * @param {Object|null|false} target - 観察対象
+     * @param {string} key - 取得するプロパティの名前
+     * @param {Object.<string,*>} [opt={}] - オプションリスト
+     * @returns {Template_ftext} 生成されたオブジェクト
+     */
     ftext: (format, target, key, opt = {}) => {
         const obj = stdgam.Templates.text("", opt);
         target = target || obj;
@@ -695,8 +999,13 @@ Public.Templates = {
         return obj;
     },
 
-    // 画像の描画を行うオブジェクト.
-    // optを使って x, y, color, alppha を指定できる.
+    /**
+     * 画像の描画を行うオブジェクト.
+     * オプションリストを使って x, y, alpha を指定できる.
+     * @param {HTMLImageElement} img - 表示する画像
+     * @param {Object.<string,*>} [opt={}] - オプションリスト
+     * @returns {Template_image} 生成されたオブジェクト
+     */
     image: (img, opt = {}) => ({
         image: img, active: true,
         x: opt["x"] || 0, y: opt["y"] || 0,
@@ -709,9 +1018,19 @@ Public.Templates = {
         }
     }),
 
-    // paint(GE, ctx, x, y)を持つオブジェクトを受け取り,
-    // それを描画するオブジェクトを生成する.
-    // optを使って x, y, alppha を指定できる.
+    /**
+     * paint(GE, ctx, x, y)を持つオブジェクトを受け取り,
+     * それを描画するオブジェクトを生成する.
+     * ここで, GEはstdgam.GameEngine, ctxは描画に使うコンテクストを表す.
+     *
+     * 文字列でも画像でもないオブジェクトをTemplatesの枠組みで使いたいとき,
+     * customでラップして用いる.
+     *
+     * オプションリストを使って x, y, alppha を指定することもできる.
+     * @param {Object} contents - 実際に描画を行うオブジェクト
+     * @param {Object.<string,*>} [opt={}] - オプションリスト
+     * @returns {Template_image} 生成されたオブジェクト
+     */
     custom: (contents, opt = {}) => ({
         contents: contents, active: true,
         x: opt["x"] || 0, y: opt["y"] || 0,
@@ -728,9 +1047,12 @@ Public.Templates = {
         }
     }),
 
-    // 指定されたフレーム数の間 「return false;」を実行し続けるオブジェクトを
-    // 生成する. ただし, もし引数として負の数が与えられた場合はこの処理を
-    // 無限に実行し続ける
+    /**
+     * 指定されたフレーム数の間 「return false;」を実行し続けるオブジェクト.
+     * もし引数として負の数が与えられた場合はこの処理を無限に実行し続ける.
+     * @param {number} frames - 動作を続けるフレーム数. 負の数の場合は無限に実行し続ける.
+     * @returns {Task} 生成されたオブジェクト
+     */
     pause: (frames) => ({
         active: true,
         execute(GE) {
@@ -740,7 +1062,11 @@ Public.Templates = {
         }
     }),
 
-    // 指定された関数を１回実行した後, 自動的に消滅するオブジェクト
+    /**
+     * 指定された関数を1回実行した後, 自動的に消滅するオブジェクト.
+     * @param {function(stdgam.GameEngine): void} callback - 実行する関数
+     * @returns {Task} 生成されたオブジェクト
+     */
     call: (callback) => ({
         active: true,
         execute(GE) {
@@ -751,7 +1077,16 @@ Public.Templates = {
     }),
 
     // --- 2. デコレータ ---
-    // 内部ヘルパー: Traitsの受け皿と, タスクとして認識されるための execute を用意
+
+    /**
+     * デコレータの機能を実現するために使うヘルパー関数.
+     * objに _traits 要素が定義されていなければ _traits に空リストをセットする. 
+     * さらに, もし execute(GE) メソッドがなければ, obj.execute に
+     * true を返すだけの空の関数をセットする.
+     * @template T
+     * @param {T} obj - 対象のオブジェクト
+     * @returns {T & Task} objを返す
+     */
     _initTraits: (obj) => {
         if (!obj._traits) obj._traits = [];
         // Scene.add(obj) でタスクとして登録されるよう、空のexecuteを生やしておく
@@ -759,7 +1094,12 @@ Public.Templates = {
         return obj;
     },
 
-    // 指定されたフレーム数が経過すると自動で消滅するようにする
+    /**
+     * 指定されたフレーム数が経過すると自動で消滅するようにする.
+     * @template T
+     * @param {T} obj - 対象のオブジェクト
+     * @returns {T & Task} objを返す
+     */
     finite: function(obj, frames) {
         this._initTraits(obj);
         let timer = frames;
@@ -770,9 +1110,17 @@ Public.Templates = {
         return obj;
     },
 
-    // after(frames, callback) と loop(frames, callback) を実装する.
-    // after: 指定時間が経過したとき、callbackを実行する
-    // loop: callbackの実行結果がtrueである限り、afterと同じ処理を繰り返す
+    /**
+     * objに after(frames, callback) と loop(frames, callback) を付与する.
+     * - after: 指定時間が経過したときcallbackを実行する
+     * - loop: callbackの実行結果がtrueである限りafterと同じ処理を繰り返す
+     *
+     * ここで, callbackの受け取る引数は (GE, self) である.
+     * GEはタスク処理を実行しているGameEngine, selfはobj自身である.
+     * @template T
+     * @param {T} obj - 対象のオブジェクト
+     * @returns {T & Templates_scheduler} objを返す
+     */
     scheduler: function(obj) {
         this._initTraits(obj);
         let timer = 0;
@@ -804,9 +1152,14 @@ Public.Templates = {
         return obj;
     },
 
-    // moveTo(x, y) と slideTo(x, y, frames)を実装する.
-    // moveTo: this.x, this.yを指定した値に変更する
-    // slideTo: 現在位置から(x,y)までthis.x, this.yの値を変化させる
+    /**
+     * objに moveTo(x, y) と slideTo(x, y, frames) を付与する.
+     * moveTo: this.x, this.yを指定した値に変更する.
+     * slideTo: 現在位置から(x,y)までthis.x, this.yの値を等速変化させる.
+     * @template T
+     * @param {T} obj - 対象のオブジェクト
+     * @returns {T & Templates_slider} objを返す
+     */
     slider: function(obj, x, y) {
         this._initTraits(obj);
         obj.x = x; obj.y = y;
@@ -837,8 +1190,13 @@ Public.Templates = {
         return obj;
     },
 
-    // fadeTo(alpha, frames)を実装する.
-    // fadeTo: 現在位置からalphaまでthis.alphaの値を変化させる
+    /**
+     * objに fadeTo(alpha, frames) を付与する.
+     * - fadeTo: 現在位置からalphaまでthis.alphaの値を変化させる
+     * @template T
+     * @param {T} obj - 対象のオブジェクト
+     * @returns {T & Templates_fader} objを返す
+     */
     fader: function(obj, alpha) {
         this._initTraits(obj);
         obj.alpha = alpha;
