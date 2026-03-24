@@ -47,7 +47,7 @@ let SkillDealer = class extends SkillDealerBase{
 
     *addMP(percent){
         const v = this.owner.player.percentMP(percent);
-        GE.se.play("powerup");
+        GE.se.play("chargeUp");
         this.owner.player.addMP(v);
         yield* this.wait(60);
     }
@@ -75,6 +75,7 @@ let SkillDealer = class extends SkillDealerBase{
         this.owner.poolView.frames = 45;
         this.owner.pool.chargeBonus += percent;
         this.owner.pool.applyBonus();
+        GE.se.play("chargeUp");
         yield* this.wait(60);
     }
 
@@ -85,11 +86,13 @@ let SkillDealer = class extends SkillDealerBase{
     }
 
     *suitSpecificBoost(str, mark, percent){
+        let f = false;
         if(mark < PrimitiveSuits.length){
             MPBoostBySuit.primitive[mark] += percent;
             if(this.owner.player.mark() == mark){
                 const v = this.owner.player.percentMP(percent);
                 this.owner.player.addMP(v);
+                f = true;
             }
         }
         else{
@@ -97,9 +100,13 @@ let SkillDealer = class extends SkillDealerBase{
             if(this.owner.player.isPrismatic()){
                 const v = this.owner.player.percentMP(percent);
                 this.owner.player.addMP(v);
+                f = true;
             }
         }
+
+        const prev = this.owner.pool.chargedMP;
         this.owner.pool.recalculate();
+        if(f || prev != this.owner.pool.chagedMP) GE.se.play("chargeUp");
         yield* this.wait(60);
     }
 
@@ -158,7 +165,8 @@ let SkillDealer = class extends SkillDealerBase{
                 const a = percent - this.appliedCB;
                 this.owner.player.addMP(this.owner.player.percentMP(a));
                 this.appliedCB = percent;
-                if(a > 0) yield* this.wait(60);
+                if(a > 0) GE.se.play("chargeUp"); 
+                if(a != 0) yield* this.wait(90);
             }
             else if(!f && this.appliedCB > 0){
                 //条件を満たしていない

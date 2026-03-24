@@ -475,8 +475,8 @@ const TutorialInfo = [
     },
     {
         caption: "スキル持ちカードのマーカー", chainRule: 1,
-        playerData: RAW_CARD_DATA.find((e) => e.id == "2-039"),
-        enemyData: { name: "使い魔６", affinity: { }, HP: 4000, MP: 7000, actions: [] },
+        playerData: RAW_CARD_DATA.find((e) => e.id == "1-005"),
+        enemyData: { name: "使い魔６", affinity: { }, HP: 6450, MP: 7000, actions: [] },
         cardIDs: [
             "1-035", "2-037", "3-030", "1-017", "2-021", "2-039", "1-016", "1-032",
             "1-025", "2-040", "1-005", "1-018", "3-019", "3-027"

@@ -19,7 +19,7 @@
  * @param {number} v - 初期値
  * @param {number} max - 最大値
  * @param {number} frames - 変化に要するフレーム数の既定値
- * @returns {Meter} 生成されたMeterオブジェクト
+ * @returns {stdtask.Meter} 生成されたMeterオブジェクト
  */
 createMeter = function(v, max, frames){
     return new stdtask.Meter(v, max, frames);
@@ -35,6 +35,8 @@ createMeter = function(v, max, frames){
  * また, HPに対してHPMeter, MPに対してMPMeterも同時に用意する.
  * この2つは公開されている.
  * @class
+ * @prop {stdtask.Meter} HPMeter - HPの値を表すMeterオブジェクト
+ * @prop {stdtask.Meter} MPMeter - MPの値を表すMeterオブジェクト
  */
 class BasicStatus{
     #HP;
@@ -145,6 +147,9 @@ class BasicStatus{
  * メソッドでアクセスする.
  *
  * @class
+ * @prop {stdtask.Meter} HPMeter - HPの値を表すMeterオブジェクト
+ * @prop {stdtask.Meter} MPMeter - MPの値を表すMeterオブジェクト
+ * @prop {stdtask.Meter} SGMeter - SGの値を表すMeterオブジェクト
  */
 class Player extends BasicStatus{
     #id;
@@ -336,6 +341,8 @@ class Player extends BasicStatus{
  * - antiskill: この敵に対してアンチスキルを使用できるカードの一覧
  *
  * @class
+ * @prop {stdtask.Meter} HPMeter - HPの値を表すMeterオブジェクト
+ * @prop {stdtask.Meter} MPMeter - MPの値を表すMeterオブジェクト
  */
 class Enemy extends BasicStatus{
     #antiskill;
