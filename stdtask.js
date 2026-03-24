@@ -11,6 +11,7 @@
  * - stdtask.Select
  * - stdtask.CyclicSelect
  * - stdtask.Scroll
+ * - stdtask.Meter
  *
  * @namespace
  */
@@ -154,6 +155,71 @@ Public.Scroll = class{
 
     action(GE, index){ }
     cancel(GE, index){ }
+}
+
+/**
+ * 数値の等速変化を実現するMeterオブジェクトを作る.
+ * あるパラメータがAからBへ変化するとき, モデル内部では一瞬で値がBになるが,
+ * GUIではAからBまで一定の時間を掛けて変化する様子を描画したい.
+ * この時間変化を表現するために使う.
+ * @class
+ * @prop {number} value - そのパラメータの現在値
+ * @prop {number} max - パラメータの最大値
+ * @prop {number} frames - 等速変化に掛けるフレーム数 (既に実行中のアクションには影響しない)
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
+ */
+Public.Meter = class{
+    #sv;
+    #tv;
+    #duration;
+    #elapsed;
+
+    constructor(v, max, frames){
+        this.init(v, max, frames);
+    }
+
+    /**
+     * 初期化する.
+     */
+    init(newValue, newMax, newFrames = null){
+        this.value = this.#sv = this.#tv = newValue;
+        this.max = newMax;
+        this.frames = newFrames || this.frames;
+        this.#duration = this.#elapsed = 0;
+        this.active = true;
+    }
+
+    /**
+     * 目標値への変化を開始する.
+     */
+    changeTo(target, dur = this.frames){
+        this.#sv = this.value;
+        this.#tv = target;
+        this.#duration = dur;
+        this.#elapsed = 0;
+        this.active = true;
+    }
+
+    /**
+     * 1フレーム分のタスク処理を実行する.
+     */
+    execute(GE){
+        if(this.#elapsed < this.#duration){
+            this.#elapsed++;
+
+            // 残りのフレーム数を全体フレーム数で割った比を求める.
+            // ただし, 残りがないときは厳密に 0 になるようにする.
+            let t = 0;
+            if(this.#elapsed < this.#duration){
+                t = (this.#duration - this.#elapsed) / this.#duration;
+            }
+
+            // ゴールから逆算して現在値を決める.
+            const v = Math.floor(this.#tv - (this.#tv - this.#sv) * t);
+            this.value = Math.max(0, Math.min(this.max, v));
+        }
+        return true;
+    }
 }
 
 })(stdtask);
