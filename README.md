@@ -8,10 +8,10 @@ a tiny simulator of "MAGICARD BATTLE"
 * nagibato.html - ゲームを実行するHTMLファイル
 * stdgam.js - いわゆるゲームエンジン部分
 * stdtask.js - 頻出するタスクは抽出してここに置くつもり
-* card.js - カードに関連するオブジェクトの実装
-* enemy.js - 敵スキルの実装、および敵ステータスの管理
+* card.js - カードに関連するオブジェクトの実装 (プレイヤー側スキルも含む)
+* enemy.js - 敵スキルの実装, および敵ステータスの管理
 * model.js - プレイヤーおよび敵を表すクラスを実装
-* QB.js - システムメッセージ、およびチュートリアルに関する実装
+* QB.js - システムメッセージ, およびチュートリアルに関する実装
 * edit.js - デッキ編集画面
 * config.js - 設定画面
 * battle.js - バトル画面
