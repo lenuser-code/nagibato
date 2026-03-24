@@ -26,14 +26,39 @@
 var stdgam = stdgam || {};
 (function(Public){
 
+/**
+ * @typedef {Object} Sprite - 描画処理を行うオブジェクト
+ * @property {function(stdgam.GameEngine, CanvasRenderingContext2D): void} draw - 1フレーム分の描画処理を行う
+ */
+
+/**
+ * @typedef {Object} Task - 1フレームごとにタスク処理を行うオブジェクト
+ * @property {function(stdgam.GameEngine): void} execute - 1フレーム分のタスク処理を行う
+ */
+
 // #1. Sceneの実装
 
 /**
  * ゲームにおける１つのモード, または１つのステージを表すクラス.
- * GameEndineからロードして使う.
+ * GameEngineからロードして使う.
+ *
+ * シーンは「スプライトリスト」と「タスクリスト」を持つ.
+ * スプライトは draw(GE, ctx) メソッドを持つものの総称であり, 各フレームの描画処理を行う
+ * (ここで, GEはGameEngine, ctxは描画に使うコンテクスト).
+ * 一方, タスクは execute(GE) メソッドを持つものの総称であり, 1フレームごとにタスク処理を行う.
+ *
+ * これに加えて, Scene自体も draw(GE, ctx) や execute(GE) を持つことができる.
+ * これらの機能を組み合わせてゲーム内の処理を実現する.
  * @class
+ * @prop {function(stdgam.GameEngine, Object): void} [onLoad] - シーンがロードされた時に実行される初期化処理 (任意)
+ * @prop {function(stdgam.GameEngine, CanvasRenderingContext2D): void} [draw] - シーン独自の描画処理 (任意)
+ * @prop {function(stdgam.GameEngine): void} [execute] - シーン独自のタスク処理 (任意)
  */
 Public.Scene = class {
+    #GE;
+    #sprites;
+    #tasks;
+
     /**
      * dfnが渡された場合、共通の処理を済ませた後にその内容を自身に代入する.
      * これにより, 派生クラスを作らなくても, dfnの中に追加の定義を書いておけば
@@ -55,123 +80,191 @@ Public.Scene = class {
      */
     constructor(dfn = {}){
         this.init();
-        this.GE = null;
+        this.#GE = null;
         Object.assign(this, dfn);
     }
 
-    // このシーンがGEのカレントシーンになったとき呼び出される
+    /**
+     * このシーンがGEのカレントシーンになったとき呼び出される.
+     * まず, GEをプライベートフィールドに保存する.
+     * 次に, もしthis.onLoad(GE, args)が定義されていればこれを実行する.
+     * @param {stdgam.GameEngine} GE - このシーンを実行するGameEngine
+     * @param {Object.<*,*>} args - ロード処理のために引き渡す設定リスト
+     */
     superOnLoad(GE, args){
-        this.GE = GE;
+        this.#GE = GE;
         if(this.onLoad) this.onLoad(GE, args);
     }
 
-    // スプライトとタスクのリストを初期化する
+    /**
+     * スプライトとタスクのリストを初期化する.
+     * このメソッドを明示的に呼ばない限り, superOnLoadを実行しても
+     * スプライトリストやタスクリストは初期化されない.
+     */
     init(){
-        this.sprites = [];
-        this.tasks = [];
+        this.#sprites = [];
+        this.#tasks = [];
     }
 
-    // スプライトを追加する.
-    // もし第2引数にtrueを指定した場合は先頭に追加する
+    /**
+     * スプライトをスプライトリストに追加する.
+     * 追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.
+     * 省略したときは「末尾に」追加する.
+     * @param {Sprite} spr - 登録するスプライト
+     * @param {boolean} [first = false] - trueなら先頭に追加, falseなら末尾に追加
+     */
     addSprite(spr, first = false){
         if(first){
-            this.sprites.unshift(spr);
+            this.#sprites.unshift(spr);
         }
         else{
-            this.sprites.push(spr);
+            this.#sprites.push(spr);
         }
     }
 
-    addSpriteBefore(target, ...objs) {
-        const i = this.sprites.indexOf(target);
-        if (i >= 0) this.sprites.splice(i, 0, ...objs);
-        else this.sprites.unshift(...objs); // 見つからなければ先頭へ
-    }
-
-    addSpriteAfter(target, ...objs) {
-        const i = this.sprites.indexOf(target);
-        if (i >= 0) this.sprites.splice(i + 1, 0, ...objs);
-        else this.sprites.push(...objs); // 見つからなければ末尾へ
-    }
-
-    // タスクを追加する.
-    // もし第2引数にtrueを指定した場合は先頭に追加する.
+    /**
+     * タスクをタスクリストに追加する.
+     * 追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.
+     * 省略したときは「末尾に」追加する.
+     * @param {Task} task - 登録するタスク
+     * @first {boolean} [first = false] - trueなら先頭に追加, falseなら末尾に追加
+     */
     addTask(task, first = false){
         if(first){
-            this.tasks.unshift(task);
+            this.#tasks.unshift(task);
         }
         else{
-            this.tasks.push(task);
+            this.#tasks.push(task);
         }
     }
 
-    addTaskBefore(target, ...objs) {
-        const i = this.tasks.indexOf(target);
-        if (i >= 0) this.tasks.splice(i, 0, ...objs);
-        else this.tasks.unshift(...objs); // 見つからなければ先頭へ
-    }
-
-    addTaskAfter(target, ...objs) {
-        const i = this.tasks.indexOf(target);
-        if (i >= 0) this.tasks.splice(i + 1, 0, ...objs);
-        else this.tasks.push(...objs); // 見つからなければ末尾へ
-    }
-
-    // スプライトとタスクを同時に登録するショートカット
+    /**
+     * スプライトとタスクを同時に登録するショートカット.
+     * まず, objがスプライトの条件を満たすならスプライトリストに登録する.
+     * 次に, objがタスクの条件を満たすならタスクリストに登録する.
+     * 両方の条件を満たす場合は, 両方のリストに追加される.
+     * @param {(Task|Sprite)} obj - 登録するオブジェクト
+     * @first {boolean} [first = false] - trueなら先頭に追加, falseなら末尾に追加
+     */
     add(obj, first = false){
         if (obj.draw) this.addSprite(obj, first);
         if (obj.execute) this.addTask(obj, first);
-        return obj;
     }
 
-    // 複数のオブジェクトを登録するためのショートカット.
-    // 先頭に追加する場合, リスト内の順序を維持したままリストの先頭に連結する.
-    // 末尾に追加する場合は単にaddを繰り返すのと同じである.
+    /**
+     * スプライトリストの中に登録されているtargetの位置を探し,
+     * 第2引数以降に指定されたスプライトをその直前に追加する (順序を保つ).
+     * もしtargetが登録されていない場合, リストの先頭に追加する.
+     * @param {Sprite} target - 追加位置の基準となるスプライト
+     * @param {...Sprite} objs - 追加する1つ以上のスプライト
+     */
+    addSpriteBefore(target, ...objs) {
+        const i = this.#sprites.indexOf(target);
+        if (i >= 0) this.#sprites.splice(i, 0, ...objs);
+        else this.#sprites.unshift(...objs); // 見つからなければ先頭へ
+    }
+
+    /**
+     * スプライトリストの中に登録されているtargetの位置を探し,
+     * 第2引数以降に指定されたスプライトをその直後に追加する (順序を保つ).
+     * もしtargetが登録されていない場合, リストの末尾に追加する.
+     * @param {Sprite} target - 追加位置の基準となるスプライト
+     * @param {...Sprite} objs - 追加する1つ以上のスプライト
+     */
+    addSpriteAfter(target, ...objs) {
+        const i = this.#sprites.indexOf(target);
+        if (i >= 0) this.#sprites.splice(i + 1, 0, ...objs);
+        else this.#sprites.push(...objs); // 見つからなければ末尾へ
+    }
+
+    /**
+     * タスクリストの中に登録されているtargetの位置を探し,
+     * 第2引数以降に指定されたタスクをその直前に追加する (順序を保つ).
+     * もしtargetが登録されていない場合, リストの先頭に追加する.
+     * @param {Task} target - 追加位置の基準となるタスク
+     * @param {...Task} objs - 追加する1つ以上のタスク
+     */
+    addTaskBefore(target, ...objs) {
+        const i = this.#tasks.indexOf(target);
+        if (i >= 0) this.#tasks.splice(i, 0, ...objs);
+        else this.#tasks.unshift(...objs); // 見つからなければ先頭へ
+    }
+
+    /**
+     * タスクリストの中に登録されているtargetの位置を探し,
+     * 第2引数以降に指定されたタスクをその直後に追加する (順序を保つ).
+     * もしtargetが登録されていない場合, リストの先頭に追加する.
+     * @param {Task} target - 追加位置の基準となるタスク
+     * @param {...Task} objs - 追加する1つ以上のタスク
+     */
+    addTaskAfter(target, ...objs) {
+        const i = this.#tasks.indexOf(target);
+        if (i >= 0) this.#tasks.splice(i + 1, 0, ...objs);
+        else this.#tasks.push(...objs); // 見つからなければ末尾へ
+    }
+
+    /**
+     * 複数のオブジェクトを登録するためのショートカット.
+     * listの要素のうち, スプライトであるものはスプライトリストに,
+     * タスクであるものはタスクリストに追加する.
+     * 第2引数がtrueの場合, 順序を維持したままリストの先頭に追加する.
+     * 第2引数がfalseの場合, 順序を維持したままリストの末尾に追加する.
+     * 省略時は末尾に追加する.
+     * @param {(Sprite|Task)[]} list - 追加するオブジェクトの配列
+     * @first {boolean} [first = false] - trueなら先頭に追加, falseなら末尾に追加
+     */
     addSequence(list, first = false) {
         if (first) {
             const sprites = list.filter(e => e.draw);
             const tasks = list.filter(e => e.execute);
-            this.sprites = [...sprites, ...this.sprites];
-            this.tasks = [...tasks, ...this.tasks];
+            this.#sprites = [...sprites, ...this.#sprites];
+            this.#tasks = [...tasks, ...this.#tasks];
         } else {
             list.forEach(e => this.add(e));
         }
-        return list;
     }
 
-    // 登録されているスプライトのdraw(GE, ctx)を順番に実行する.
-    // ここでGEはこのゲームのGameEngine, ctxは描画に使うコンテクストである.
-    // 最後に「activeが真」または「activeがundefined」のスプライトだけを
-    // リストに残して, 他のスプライトはリストから削除する.
+    /**
+     * 登録されているスプライトのdraw(GE, ctx)を順番に実行する.
+     * ここでGEはこのゲームのGameEngine, ctxは描画に使うコンテクストである.
+     * その後, 「activeが真」または「activeがundefined」のスプライトだけを
+     * リストに残して, 他のスプライトはリストから削除する.
+     *
+     * もしthis.draw(GE, ctx)が定義されている場合, 最後にこれを実行する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     */
     superdraw(ctx){
-        this.sprites.forEach(e => e.draw(this.GE, ctx));
-        this.sprites = this.sprites.filter(e => (e.active || e.active === undefined));
-        if(this.draw) this.draw(this.GE, ctx);
+        this.#sprites.forEach(e => e.draw(this.#GE, ctx));
+        this.#sprites = this.#sprites.filter(e => (e.active || e.active === undefined));
+        if(this.draw) this.draw(this.#GE, ctx);
     }
 
-    // 登録されているタスクのexecute(GE)を順番に実行する.
-    // ここでGEはこのゲームのGameEngineである.
-    // ただし, あるタスクがfalseを返した場合, それより後のタスクは実行しない
-    // 
-    // スプライトの場合と同様, 最後に「activeが真」または「activeがundefined」の
-    // タスクだけをリストに残して, 他のタスクはリストから削除する.
-    // 
-    // 【注意】execute()の中でタスクの追加・削除を行うと, for文の実行中に
-    // 配列を変更したのと同じ現象が発生します！　特に、自身よりも前に新しい要素を、
-    // 追加する場合は, falseを返して後続の処理を止めてください.
+    /**
+     * 登録されているタスクのexecute(GE)を順番に実行する.
+     * ここでGEはこのゲームのGameEngineである.
+     * ただし, あるタスクがfalseを返した場合, それより後のタスクは実行しない.
+     *
+     * その後, 「activeが真」または「activeがundefined」のタスクだけを
+     * リストに残して, 他のタスクはリストから削除する.
+     * 最後に, もしthis.execute(GE)が定義されている場合, これを実行する.
+     *
+     * 【注意】execute()の中でタスクの追加・削除を行うと, for文の実行中に
+     * 配列を変更したのと同じ現象が発生します！　特に、自身よりも前に新しい要素を、
+     * 追加する場合は, falseを返して後続の処理を止めてください.
+     */
     superexecute(){
         let i, f;
-        for(i = 0, f = true; i < this.tasks.length && f; i++){
-            const task = this.tasks[i];
-            f = task.execute(this.GE);
+        for(i = 0, f = true; i < this.#tasks.length && f; i++){
+            const task = this.#tasks[i];
+            f = task.execute(this.#GE);
             if(task._traits){
                 for(let trait of task._traits){
-                    trait.call(task, this.GE);
+                    trait.call(task, this.#GE);
                 }
             }
         }
-        this.tasks = this.tasks.filter(e => (e.active || e.active === undefined));
-        if(this.execute) this.execute(this.GE);
+        this.#tasks = this.#tasks.filter(e => (e.active || e.active === undefined));
+        if(this.execute) this.execute(this.#GE);
     }
 
     /**
@@ -179,7 +272,7 @@ Public.Scene = class {
      * 更新処理をこのジェネレータに委任する.
      * 具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.
      * ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.
-     * @param {GameEngine} GE - ジェネレータ関数の初期化時に渡すGameEngine
+     * @param {stdgam.GameEngine} GE - ジェネレータ関数の初期化時に渡すGameEngine
      * @param {GeneratorFunction} gen - 処理を委任するジェネレータ関数
      * @param {Object.<*,*>} [opt={}] - ジェネレータ関数の初期化時に渡すオプション
      */
