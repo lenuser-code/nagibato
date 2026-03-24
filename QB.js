@@ -11,157 +11,280 @@
 
 /**
  * 時間経過で消える会話ダイアログのクラス.
+ * 画面下端からせり出してきて, メッセージを表示したあと再び下に消えていく.
  * @class
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
 class QBTalk{
+    #a;
+    #y;
+    #_y;
+    #step;
+    #frames;
+    #lines;
+    #iter;
+
+    /**
+     * 指定されたメッセージを表示するインスタンスを作る.
+     * メッセージは "\n" で区切ることにより改行させることができる.
+     * @param {string} msg - 表示するメッセージ
+     * @param {number} [frames=120] - 完全に登場してから消え始めるまでの持続時間
+     */
     constructor(msg, frames = 120){
-        this.a = 10;
-        this.y = 700;
-        this.step = 40;
+        this.#a = 10;
+        this.#y = 700;
+        this.#step = 40;
         this.activate(msg, frames);
     }
 
+    /**
+     * このオブジェクトを初期化する.
+     * 一度使い終わったオブジェクトを再利用するときに用いる.
+     * @param {string} msg - 表示するメッセージ
+     * @param {number} [frames=120] - 完全に登場してから消え始めるまでの持続時間
+     */
     activate(msg, frames = 120){
-        this._y = this.y
-        this.frames = frames;
-        this.lines = msg.split("\n");
-        this.iter = this.chart.call(this, this);
+        this.#_y = this.#y
+        this.#frames = frames;
+        this.#lines = msg.split("\n");
+        this.#iter = this.chart.call(this, this);
         this.active = true;
     }
 
+    /**
+     * 経過フレーム数に基づき, メッセージ枠とテキストを描画する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に用いるコンテクスト
+     */
     draw(GE, ctx){
         ctx.save();
         ctx.fillStyle = "rgb(0,0,0,0.5)";
-        ctx.fillRect(0, this._y, 1000, 300);
+        ctx.fillRect(0, this.#_y, 1000, 300);
 
         ctx.fillStyle = "white";
         ctx.font = "30px Sans-Serif";
-        for(let i = 0; i < this.lines.length; i++){
-            ctx.fillText(this.lines[i], 40, this._y + 50 + i * this.step);
+        for(let i = 0; i < this.#lines.length; i++){
+            ctx.fillText(this.#lines[i], 40, this.#_y + 50 + i * this.#step);
         }
         ctx.restore();
     }
 
+    /**
+     * 1フレーム分のタスク処理を行う.
+     * 具体的には, this.chart に記されたプランに基づき自身を変化させる.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     * @returns {boolean} 常にtrueを返す
+     */
     execute(GE){
-        const result = this.iter.next();
+        const result = this.#iter.next();
         if(result.done) this.active = false;
         return true;
     }
 
+    /**
+     * このオブジェクトの状態変化を担当するジェネレータを生成する.
+     * @yields {boolean} 常にtrueを返す
+     */
     *chart(){
         let i;
-        for(i = 0; i < 20; i++){ this._y -= this.a; yield true; }
-        for(i = 0; i < this.frames; i++) yield true;
-        for(i = 0; i < 20; i++){ this._y += this.a; yield true; }
+        for(i = 0; i < 20; i++){ this.#_y -= this.#a; yield true; }
+        for(i = 0; i < this.#frames; i++) yield true;
+        for(i = 0; i < 20; i++){ this.#_y += this.#a; yield true; }
     }
 }
 
 /**
  * 画面中央に一定時間表示されるメッセージのクラス.
+ * 枠などを伴わない, いわゆるテロップに近い見た目をしている.
  * @class
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
 class QBTelop{
+    #a;
+    #step;
+    #_alpha;
+    #frames;
+    #lines;
+    #iter;
+
+    /**
+     * 指定されたメッセージを表示するインスタンスを作る.
+     * メッセージは "\n" で区切ることにより改行させることができる.
+     * @param {string} msg - 表示するメッセージ
+     * @param {number} [frames=20] - 完全に登場してから消え始めるまでの持続時間
+     */
     constructor(msg, frames = 20){
-        this.a = (1 / 15);
-        this.step = 40;
+        this.#a = (1 / 15);
+        this.#step = 40;
         this.activate(msg, frames);
     }
 
+    /**
+     * このオブジェクトを初期化する.
+     * 一度使い終わったオブジェクトを再利用するときに用いる.
+     * @param {string} msg - 表示するメッセージ
+     * @param {number} [frames=20] - 完全に登場してから消え始めるまでの持続時間
+     */
     activate(msg, frames = 20){
-        this._alpha = 0;
-        this.frames = frames;
-        this.lines = msg.split("\n");
-        this.iter = this.chart.call(this);
+        this.#_alpha = 0;
+        this.#frames = frames;
+        this.#lines = msg.split("\n");
+        this.#iter = this.chart.call(this);
         this.active = true;
     }
 
+    /**
+     * 経過フレーム数に基づき, メッセージ枠とテキストを描画する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に用いるコンテクスト
+     */
     draw(GE, ctx){
         ctx.save();
-        ctx.globalAlpha = Math.max(this._alpha, 0);
+        ctx.globalAlpha = Math.max(this.#_alpha, 0);
         ctx.fillStyle = "white";
         ctx.font = "32px Sans-Serif";
         ctx.textAlign = "center";
-        const y = 350 - this.lines.length * this.step/2;
-        for(let i = 0; i < this.lines.length; i++){
-            ctx.fillText(this.lines[i], 500, y + i * this.step);
+        const y = 350 - this.#lines.length * this.#step/2;
+        for(let i = 0; i < this.#lines.length; i++){
+            ctx.fillText(this.#lines[i], 500, y + i * this.#step);
         }
         ctx.restore();
     }
 
+    /**
+     * 1フレーム分のタスク処理を行う.
+     * 具体的には, this.chart に記されたプランに基づき自身を変化させる.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     * @returns {boolean} 常にtrueを返す
+     */
     execute(GE){
-        const result = this.iter.next(this);
+        const result = this.#iter.next(this);
         if(result.done) this.active = false;
         return true;
     }
 
+    /**
+     * このオブジェクトの状態変化を担当するジェネレータを生成する.
+     * @yields {boolean} 常にtrueを返す
+     */
     *chart(){
         let i;
-        for(i = 0; i < 15; i++){ this._alpha += this.a; yield true; }
-        for(i = 0; i < this.frames; i++) yield true;
-        for(i = 0; i < 15; i++){ this._alpha -= this.a; yield true; }
+        for(i = 0; i < 15; i++){ this.#_alpha += this.#a; yield true; }
+        for(i = 0; i < this.#frames; i++) yield true;
+        for(i = 0; i < 15; i++){ this.#_alpha -= this.#a; yield true; }
     }
 }
 
 /**
  * ユーザーに入力を要求する会話ダイアログのクラス.
+ * 見た目はQBTalkと同じだが, ユーザーがAまたはSのキーを押すまで消えない.
+ * また, Aを押した場合はtrue, Sを押した場合はfalseをresult要素に保存する.
  * @class
+ * @prop {boolean} result - Aを押して終了したときtrue, Sを押して終了したときfalse
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
 class QBYesNo{
+    #a;
+    #y;
+    #_y;
+    #step;
+    #seName;
+    #busy;
+    #lines;
+    #iter;
+    #GE;
+
+    /**
+     * 指定されたメッセージを表示するインスタンスを作る.
+     * 完全にメッセージが表示されてから入力受付を開始するまでの待ち時間も
+     * 合わせて設定する.
+     * また, 必要ならAキーが押された場合にSEを鳴らすことができる.
+     * @param {string} msg - 表示するメッセージ
+     * @param {number} [minWait=20] - 完全に登場してから入力受付を開始するまでの待ち時間
+     * @param {string} [seName=null] - Aキーが押されたときに鳴らすSEの登録名. nullならば何も鳴らさない
+     */
     constructor(msg, minWait = 20, seName = null){
-        this.a = 10;
-        this.y = 700;
-        this.step = 40;
-        this.seName = seName;
+        this.#a = 10;
+        this.#y = 700;
+        this.#step = 40;
+        this.#seName = seName;
         this.activate(msg, minWait);
     }
 
+    /**
+     * このオブジェクトを初期化する.
+     * 一度使い終わったオブジェクトを再利用するときに用いる.
+     * なお, 再利用が主な目的なのでAキーが押されたときに鳴らすSEの再設定はできない.
+     * @param {string} msg - 表示するメッセージ
+     * @param {number} [minWait=20] - 完全に登場してから入力受付を開始するまでの待ち時間
+     */
     activate(msg, minWait = 20){
-        this._y = this.y
-        this.busy = minWait;
-        this.lines = msg.split("\n");
-        this.iter = this.chart.call(this, this);
+        this.#_y = this.#y
+        this.#busy = minWait;
+        this.#lines = msg.split("\n");
+        this.#iter = this.chart.call(this, this);
         this.result = false;
         this.active = true;
     }
 
+    /**
+     * 現在の状態に基づき, メッセージ枠とテキストを描画する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に用いるコンテクスト
+     */
     draw(GE, ctx){
         ctx.save();
         ctx.fillStyle = "rgb(0,0,0,0.5)";
-        ctx.fillRect(0, this._y, 1000, 300);
+        ctx.fillRect(0, this.#_y, 1000, 300);
 
         ctx.fillStyle = "white";
         ctx.font = "30px Sans-Serif";
-        for(let i = 0; i < this.lines.length; i++){
-            ctx.fillText(this.lines[i], 40, this._y + 50 + i * this.step);
+        for(let i = 0; i < this.#lines.length; i++){
+            ctx.fillText(this.#lines[i], 40, this.#_y + 50 + i * this.#step);
         }
         ctx.restore();
     }
 
+    /**
+     * 1フレーム分のタスク処理を行う.
+     * 具体的には, this.chart に記されたプランに基づき自身を変化させる.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     * @returns {boolean} 常にfalseを返す
+     */
     execute(GE){
-        this.GE = GE;
-        const result = this.iter.next();
-        this.GE = null;
+        this.#GE = GE;
+        const result = this.#iter.next();
+        this.#GE = null;
         if(result.done) this.active = false;
         return false;
     }
 
+    /**
+     * このオブジェクトの状態変化を担当するジェネレータを生成する.
+     * @yields {boolean} 常にfalseを返す
+     */
     *chart(){
         let i;
-        for(i = 0; i < 20; i++){ this._y -= this.a; this.busy--; yield false; }
+        for(i = 0; i < 20; i++){ this.#_y -= this.#a; this.#busy--; yield false; }
         yield* this.waitForAnswer();
-        for(i = 0; i < 20; i++){ this._y += this.a; yield false; }
+        for(i = 0; i < 20; i++){ this.#_y += this.#a; yield false; }
     }
 
+    /**
+     * キー入力待ちの状態を実装するジェネレータを生成する.
+     * chartから呼び出される.
+     * @yields {boolean} 常にfalseを返す
+     */
     *waitForAnswer(){
         let f = true;
         while(f){
             const codes = ["KeyA", "KeyS"];
-            const i = codes.findIndex((e) => this.GE.input.isJustPressed(e));
-            if(this.busy > 0) this.busy--;
+            const i = codes.findIndex((e) => this.#GE.input.isJustPressed(e));
+            if(this.#busy > 0) this.#busy--;
             else{
                 if(i >= 0){
                     this.result = (i == 0);
-                    if(this.seName && this.result) this.GE.se.play(this.seName);
+                    if(this.#seName && this.result) this.#GE.se.play(this.#seName);
                     f = false;
                 }
             }
@@ -172,77 +295,128 @@ class QBYesNo{
 
 /**
  * 複数のメッセージを順番に表示する会話ダイアログのクラス.
+ * QBTalkに文字送り機能を持たせたもの. ただし, A, S, Dのいずれかのキーが
+ * 入力されるまで表示は切り替わらない (自動的に進まない).
  * @class
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
 class QBLecture{
+    #a;
+    #y;
+    #_y;
+    #step;
+    #messages;
+    #lines;
+    #minWait;
+    #busy;
+    #iter;
+    #GE;
+
+    /**
+     * 指定されたメッセージリストを表示するインスタンスを作る.
+     * 各メッセージは "\n" で区切ることにより改行させることができる.
+     * @param {string[]} msgs - 表示するメッセージのリスト
+     * @param {number} [minWait=20] 完全に登場してから入力受付を開始するまでの待ち時間
+     */
     constructor(msgs, minWait=20){
-        this.a = 10;
-        this.y = 700;
-        this.step = 40;
+        this.#a = 10;
+        this.#y = 700;
+        this.#step = 40;
         this.activate(msgs, minWait);
     }
 
-    activate(msgs, minWait=30){
-        this._y = this.y
-        this.messages = [...msgs];
-        this.lines = [];
-        this.minWait = minWait;
-        this.busy = 0;
+    /**
+     * このオブジェクトを初期化する.
+     * 一度使い終わったオブジェクトを再利用するときに用いる.
+     * @param {string[]} msgs - 表示するメッセージのリスト
+     * @param {number} [minWait=20] - 完全に登場してから入力受付を開始するまでの待ち時間
+     */
+    activate(msgs, minWait=20){
+        this.#_y = this.#y
+        this.#messages = [...msgs];
+        this.#lines = [];
+        this.#minWait = minWait;
+        this.#busy = 0;
 
-        this.iter = this.chart.call(this);
+        this.#iter = this.chart.call(this);
         this.active = true;
     }
 
+    /**
+     * 現在の状態に基づき, メッセージ枠とテキストを描画する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に用いるコンテクスト
+     */
     draw(GE, ctx){
         ctx.save();
         ctx.fillStyle = "rgb(0,0,0,0.5)";
-        ctx.fillRect(0, this._y, 1000, 300);
+        ctx.fillRect(0, this.#_y, 1000, 300);
 
         ctx.fillStyle = "white";
         ctx.font = "30px Sans-Serif";
-        for(let i = 0; i < this.lines.length; i++){
-            ctx.fillText(this.lines[i], 40, this._y + 50 + i * this.step);
+        for(let i = 0; i < this.#lines.length; i++){
+            ctx.fillText(this.#lines[i], 40, this.#_y + 50 + i * this.#step);
         }
-        if(this._y <= this.y - this.a*20){
+        if(this.#_y <= this.#y - this.#a*20){
             ctx.font = "20px Sans-Serif";
             ctx.fillText("▼NEXT", 850, 660);
         }
         ctx.restore();
     }
 
+    /**
+     * 1フレーム分のタスク処理を行う.
+     * 具体的には, this.chart に記されたプランに基づき自身を変化させる.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     * @returns {boolean} 常にtrueを返す
+     */
     execute(GE){
-        this.GE = GE;
-        const result = this.iter.next();
-        this.GE = null;
+        this.#GE = GE;
+        const result = this.#iter.next();
+        this.#GE = null;
         if(result.done) this.active = false;
         return true;
     }
 
+    /**
+     * このオブジェクトの状態変化を担当するジェネレータを生成する.
+     * @yields {boolean} 常にtrueを返す
+     */
     *chart(){
         let i;
-        for(i = 0; i < 20; i++){ this._y -= this.a; yield true; }
+        for(i = 0; i < 20; i++){ this.#_y -= this.#a; yield true; }
         yield* this.talk();
-        for(i = 0; i < 20; i++){ this._y += this.a; yield true; }
+        for(i = 0; i < 20; i++){ this.#_y += this.#a; yield true; }
     }
 
+    /**
+     * キー入力待ちとページ送りを繰り返すジェネレータを生成する.
+     * chartから呼び出される.
+     * @yields {boolean} 常にtrueを返す
+     */
     *talk(){
-        while(this.nextPage()){
+        while(this.#nextPage()){
             let f = true;
             while(f){
                 const codes = ["KeyA", "KeyS", "KeyD"];
-                const i = codes.findIndex((e) => this.GE.input.isJustPressed(e));
-                if(this.busy > 0) this.busy--;
-                if(this.busy == 0 && i >= 0) f = false;
+                const i = codes.findIndex((e) => this.#GE.input.isJustPressed(e));
+                if(this.#busy > 0) this.#busy--;
+                if(this.#busy == 0 && i >= 0) f = false;
                 yield true;
             }
         }
     }
 
-    nextPage(){
-        if(this.messages.length == 0) return false;
-        const msg = this.messages.shift();
-        this.lines = msg.split("\n");
-        this.busy = this.minWait;
+    /**
+     * 次のページが残っていれば, それを分解してthis.#linesに格納する.
+     * 残っていなければ何もしない.
+     * @returns {boolean} 次のページが残っていたときtrue, 残っていなかったときfalse
+     */
+    #nextPage(){
+        if(this.#messages.length == 0) return false;
+        const msg = this.#messages.shift();
+        this.#lines = msg.split("\n");
+        this.#busy = this.#minWait;
         return true;
     }
 }
@@ -296,7 +470,7 @@ const createOpeningQB = function(battleOpt){
 /**
  * バトルが選択されたときに喋る内容を生成する.
  * @param {Objcet.<string,*>} setting - selectSceneの設定データ
- * @returns {(QBYesNo)} 生成されたオブジェクト
+ * @returns {QBYesNo} 生成されたオブジェクト
  */
 const createConfirmatingQB_BeforeBattle = function(setting){
     const usedCards = setting.deckSet.cards;
