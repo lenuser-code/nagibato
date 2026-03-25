@@ -1158,6 +1158,8 @@ class SestetsuitGenerator extends Polysuit{
  * @class
  * @prop {number} mark - このカードのマーク数値
  * @prop {number} value - このカードのコスト
+ * @prop {PlayerSkill_skill} [skill] - このカードが持つスキル
+ * @prop {string} [CardAtlasID] - cardlist.jsにおけるこのカードのID
  */
 class Card{
     /**
@@ -1221,6 +1223,7 @@ class Card{
      * @param {number} y - 描画位置のy座標
      */
     paint(GE, ctx, x, y){
+        if(this.value == 0) return;
         Card.IC.paint(ctx, x, y, this.value, this.mark);
         if(this.skill &amp;&amp; Card.MarkerFlag){
             const indicator = this.version ? "*".repeat(this.version) : "*!";
@@ -1234,12 +1237,35 @@ class Card{
 }
 
 /**
- * 複合属性を持つカードのクラス.
- * インスタンスの生成を行う前にPrismaticCardクラスの初期化を実行しないといけない.
- * 具体的には PrismaticCard.init(GE, width, height) を最初に実行する.
+ * 複合属性を持つカードのクラス. 最初に  PrismaticCard.init(GE, width, height) を
+ * 実行してからインスタンスの生成を行う.
+ *
+ * Cardクラスと同様, 各インスタンスは次のプロパティを持つ.
+ * - mark
+ * - value
+ * - MP
+ * - skill (任意)
+ * - CardAtlassId (任意)
+ *
+ * 各要素の意味はCardクラスと共通である. ただし, 複合属性を持つため,
+ * mark の取りうる値は PrimitiveSuits.length ～ (Suits.length-1) の範囲の整数である.
+ *
  * @class
+ * @prop {number} mark - このカードのマーク数値
+ * @prop {number} value - このカードのコスト
+ * @prop {PlayerSkill_skill} [skill] - このカードが持つスキル
+ * @prop {string} [CardAtlasID] - cardlist.jsにおけるこのカードのID
  */
 class PrismaticCard{
+    /**
+     * PrismaticCardクラスを初期化する.
+     * 具体的には, 複合カードの描画に必要なオブジェクト (より正確には,
+     * Polysuitの「すべての」サブクラスのインスタンスを1つずつ) を生成する.
+     * 以降, これらをカードの描画に用いる.
+     * @param {stdgam.GameEngine} GE - 画像のロードに用いるGameEngine
+     * @param {number} width - カードの横幅
+     * @param {number} height - カードの縦幅
+     */
     static init(GE, width, height){
         PrismaticCard.generators = [
             new DuosuitGenerator(GE.images, GE.caches, width, height),
@@ -1250,6 +1276,13 @@ class PrismaticCard{
         ];
     }
 
+    /**
+     * 複合属性のカードを生成する. どの基本属性を構成要素として含むかは,
+     * マーク数値のリスト marks により指定する.
+     * @param {number[]} [marks] - マーク数値のリスト
+     * @param {number} [n=0] - このカードのコスト
+     * @param {?number} [mp=null] - このカードのMP. 省略時は n*20 で代用する
+     */
     constructor(marks, n, mp = null){
         const key = getPolysuitName(marks);
         if(!Suits.includes(key)){
@@ -1266,11 +1299,24 @@ class PrismaticCard{
         this.image = this.generator.getCache(marks);
     }
 
+    /**
+     * MPBoostBySuitの補正を適用した後のMPを計算する.
+     * @returns {number} 計算結果
+     */
     getMP(){
         return Math.floor(this.MP * MPBoostBySuit.get(this.mark));
     }
 
+    /**
+     * 指定された座標を左上端としてこのカードを描画する.
+     * ただし, コストが 0 のカードは何も描画しない.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画処理に用いるコンテクスト
+     * @param {number} x - 描画位置のx座標
+     * @param {number} y - 描画位置のy座標
+     */
     paint(GE, ctx, x, y){
+        if(this.value == 0) return;
         ctx.save();
         ctx.drawImage(this.image, x, y);
         this.generator.paintCost(ctx, x, y, this.components, this.value);
