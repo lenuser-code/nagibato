@@ -1,0 +1,10 @@
+{
+  "name": "nagibato-docs",
+  "version": "1.0.0",
+  "devDependencies": {
+    "jsdoc": "^4.0.0"
+  },
+  "scripts": {
+    "generate-docs": "jsdoc -c jsdoc.json"
+  }
+}
