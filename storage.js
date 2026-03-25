@@ -15,6 +15,7 @@
  * 1. メインカードのID (string)
  * 2, コンボ成立ルールのバージョン (number)
  * 3. スキル持ちカードのマーカー設定 (boolean)
+ *
  * がこの順番に格納されている. ロードする前, および, localStorageを利用しない設定のときはnull
  * @prop {string[]|null} deckInfo - デッキに含まれる各カードのIDを並べた配列.
  * ロードする前, および, localStorageを利用しない設定のときはnull
@@ -87,6 +88,7 @@ removeStorage(alreadyConfirmed){
  * 1. メインカードのID (string)
  * 2, コンボ成立ルールのバージョン (number)
  * 3. スキル持ちカードのマーカー設定 (boolean)
+ *
  * が保存の対象である.
  * @param {string} mainCardID - メインカードのID
  * @param {number} chainRuleVersion - コンボ成立ルールのバージョン

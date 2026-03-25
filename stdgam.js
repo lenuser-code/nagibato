@@ -885,7 +885,7 @@ stdgam.SEPool = class {
  */
 
 /**
- * @typedef {Template_text} Template_ftext
+ * @typedef {Templates_text} Template_ftext
  */
 
 /**
