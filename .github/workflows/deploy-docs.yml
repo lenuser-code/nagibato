@@ -3,11 +3,11 @@ name: Deploy JSDoc to GitHub Pages
 on:
   push:
     branches:
-      - main  # mainブランチに更新があったら実行
+      - main
 
-# ここを追加！GitHub Actionsの裏側を最新環境(Node 24)で動かすおまじない
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+# 【重要】GitHub Actionsに「書き込み権限」を明示的に与えます
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -19,16 +19,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'  # 私たちのJSDoc生成用は安定版の22でOK
+          node-version: '22'
 
       - name: Install dependencies
+        # package.jsonの内容に基づいてjsdocをインストールします
         run: npm install
 
       - name: Generate Documentation
-        run: npx jsdoc -c jsdoc.json
+        # package.jsonのscriptsで定義した "generate-docs" を実行します
+        run: npm run generate-docs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs  # jsdoc.jsonで指定した出力先
+          publish_dir: ./docs
