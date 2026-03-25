@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Enemy - Documentation</title>
+    <title>stdgam - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -35,7 +35,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Enemy</h1>
+    <h1 class="page-title">stdgam</h1>
     
 
     
@@ -49,11 +49,9 @@
     
         <h2>
         
-            Enemy
+            Namespace
         
         </h2>
-        
-            <div class="class-description usertext">敵のステータスを保持するクラス.HP, MP, nameに加えて, 以下のステータスを持つ.- antiskill: この敵に対してアンチスキルを使用できるカードの一覧</div>
         
     
 </header>
@@ -64,11 +62,10 @@
         
             
 
-    
-    <h2>Constructor</h2>
+
     
 
-    <h4 class="name" id="Enemy"><span class="type-signature"></span>new Enemy<span class="signature">(opt, playerSS<span class="signature-attributes">opt, nullable</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="stdgam">stdgam</h4>
 
     
 
@@ -78,13 +75,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定された敵データとプレイヤーの属性を元にインスタンスを生成する(これらの情報はinit()により取り込まれる. init()も参照のこと).</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li>ゲームエンジンの実装を行うnamespace. 以下の要素が外部に公開される.- stdgam.GameEngine- stdgam.Scene- stdgam.CachePool- stdgam.ImagePool- stdgam.SoundPool- stdgam.SEPool- stdgam.Templates</li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line347">line 347</a>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -121,199 +118,14 @@
 
 
 
-    <h5 class="subsection-title">Properties:</h5>
 
-    
 
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
 
-        <th>Type</th>
 
-        
 
-        
 
-        <th class="last">Description</th>
-    </tr>
-    </thead>
 
-    <tbody>
-    
 
-        <tr>
-            
-                <td class="name"><code>HPMeter</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">stdtask.Meter</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">HPの値を表すMeterオブジェクト</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>MPMeter</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">stdtask.Meter</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">MPの値を表すMeterオブジェクト</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">敵データを格納した連想配列</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>playerSS</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>null</code>
-                
-                </td>
-            
-
-            <td class="description last">プレイヤーの属性を表す文字列.属性を設定しない場合はnullを指定する</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -351,361 +163,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="antiskillContains"><span class="type-signature"></span>antiskillContains<span class="signature">(cardID)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-    
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定されたIDのカードがこの敵に対してアンチスキルを使えるか調べる.</li></ul></dd>
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line355">line 355</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>cardID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">カードのID</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5 class="h5-returns">Returns:</h5>
-
-        
-<div class="param-desc">
-    使用可能ならtrue, そうでなければfalse
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="init"><span class="type-signature"></span>init<span class="signature">(opt, playerSS<span class="signature-attributes">opt, nullable</span>)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-    
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定された敵データとプレイヤーの属性を元にこのオブジェクトを初期化する.ここで, 敵データとは1. EnemyDataに値として登録されている要素のいずれか2. または, それらと互換性のある連想配列のことを指す.具体的には, optに次の要素が設定されていればよい.- name- affinity- HP- MP- actionsまた, プレイヤーの属性は相性の判定に用いられる.プレイヤーから見て, この敵と相性が良ければ敵のHP, MPが低くなり,相性が悪ければ敵のHP, MPが高くなる.</li></ul></dd>
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line380">line 380</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">敵データを格納した連想配列</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>playerSS</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>null</code>
-                
-                </td>
-            
-
-            <td class="description last">プレイヤーの属性を表す文字列.属性を設定しない場合はnullを指定する</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
     
 
     

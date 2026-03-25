@@ -22,6 +22,8 @@
  * - stdgam.SoundPool
  * - stdgam.SEPool
  * - stdgam.Templates
+ *
+ * @namespace
  */
 var stdgam = stdgam || {};
 (function(Public){
