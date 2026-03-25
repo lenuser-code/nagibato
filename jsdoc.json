@@ -1,7 +1,14 @@
 {
+    "plugins": [
+        "plugins/markdown"
+    ],
     "source": {
         "include": ["stdgam.js", "stdtask.js", "card.js", "model.js", "enemy.js", "QB.js", "edit.js", "config.js", "battle.js", "storage.js"],
         "exclude": ["node_modules"]
+    },
+    "markdown": {
+        "hardwrap": false,
+        "idInHeadings": true
     },
     "opts": {
         "readme": "README.md",  // これを追加
