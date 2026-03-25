@@ -453,6 +453,32 @@ onLoad(GE, args){
  * 以上の準備のもとで次を実行する
  */
 
+/**
+ * ロード画面.
+ * @type {stdgam.Scene}
+ */
+const bootstrap = new Scene({
+    onLoad(GE, args){
+        this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+        this.message = new QBTalk("セーガー♪", 30);
+        this.add(this.message);
+        this.flag = false;
+        GE.ready(() => { this.flag = true; });
+    },
+    execute(GE){
+        if(this.flag && !this.message.active){
+            Card.init(GE, 90, 120);
+            GE.addScene("select", selectScene);
+            GE.addScene("edit", edit.editScene);
+            GE.addScene("config", config.configScene);
+            GE.addScene("config2", config.configScene2);
+            GE.addScene("intermediate", intermediateScene);
+            GE.addScene("main", battle.mainScene);
+            GE.changeScene("select");
+        }
+    }
+});
+
 var exitflag = false;
 
 try{
@@ -469,19 +495,10 @@ try{
 }
 
 if(!exitflag){   // ----------(*)
-PrismaticCard.init(GE, 90, 120);
-
-GE.ready(() => {
-    Card.init(GE, 90, 120);
-    GE.addScene("select", selectScene);
-    GE.addScene("edit", edit.editScene);
-    GE.addScene("config", config.configScene);
-    GE.addScene("config2", config.configScene2);
-    GE.addScene("intermediate", intermediateScene);
-    GE.addScene("main", battle.mainScene);
-    GE.changeScene("select");
+    PrismaticCard.init(GE, 90, 120);
+    GE.addScene("bootstrap", bootstrap);
+    GE.changeScene("bootstrap");
     GE.run();
-});
 }  // ----------(*)
 </script>
 </body>
