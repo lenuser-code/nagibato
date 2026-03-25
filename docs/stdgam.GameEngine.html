@@ -1,82 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> GameEngine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>GameEngine - Documentation</title>
 
-  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="./build/entry.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
-  <link type="text/css" rel="stylesheet" href="">
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-  
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
+<body>
 
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
+<label for="nav-trigger" class="overlay"></label>
 
-<body class="layout small-header">
-    <div id="stickyNavbarOverlay"></div>
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BasicStatus.html">BasicStatus</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#HP">HP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#MP">MP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#addHP">addHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#addMP">addMP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#name">name</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#percentHP">percentHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#percentMP">percentMP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#retentionRateHP">retentionRateHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#retentionRateMP">retentionRateMP</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Card.html">Card</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="CardSet.html">CardSet</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Deck.html">Deck</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="DuosuitGenerator.html">DuosuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Enemy.html">Enemy</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Enemy.html#antiskillContains">antiskillContains</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Enemy.html#init">init</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Player.html">Player</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#SG">SG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#addSG">addSG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#addShield">addShield</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#addStun">addStun</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#id">id</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#isPrismatic">isPrismatic</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#mainSkillCount">mainSkillCount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#mark">mark</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#parseMainSkill">parseMainSkill</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#payCost">payCost</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#resetSG">resetSG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#shield">shield</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#shiftMainSkill">shiftMainSkill</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#stun">stun</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#suitString">suitString</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Polysuit.html">Polysuit</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Pool.html">Pool</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="PrismaticCard.html">PrismaticCard</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Public.SideboardDialog.html">SideboardDialog</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBLecture.html">QBLecture</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#talk">talk</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBTalk.html">QBTalk</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#execute">execute</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBTelop.html">QBTelop</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#execute">execute</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBYesNo.html">QBYesNo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#waitForAnswer">waitForAnswer</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SkillDealerBase.html">SkillDealerBase</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="TriosuitGenerator.html">TriosuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.CachePool.html">CachePool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.CachePool.html#createCache">createCache</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.CachePool.html#get">get</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.GameEngine.html">GameEngine</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#addScene">addScene</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#changeScene">changeScene</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#ready">ready</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#run">run</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.ImageCutter.html">ImageCutter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImageCutter.html#paint">paint</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.ImagePool.html">ImagePool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImagePool.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImagePool.html#load">load</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImagePool.html#ready">ready</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.SEPool.html">SEPool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SEPool.html#play">play</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SEPool.html#register">register</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.Scene.html">Scene</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#add">add</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSequence">addSequence</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSprite">addSprite</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSpriteAfter">addSpriteAfter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSpriteBefore">addSpriteBefore</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addTask">addTask</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addTaskAfter">addTaskAfter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addTaskBefore">addTaskBefore</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#superOnLoad">superOnLoad</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#superdraw">superdraw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#superexecute">superexecute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#useCoroutine">useCoroutine</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.SoundPool.html">SoundPool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#load">load</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#play">play</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#ready">ready</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#stop">stop</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.CyclicSelect.html">CyclicSelect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.CyclicSelect.html#addMod">addMod</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.CyclicSelect.html#move">move</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.Meter.html">Meter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Meter.html#changeTo">changeTo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Meter.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Meter.html#init">init</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.Scroll.html">Scroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#action">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#bind">bind</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#cancel">cancel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#initScroll">initScroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#viewCount">viewCount</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.Select.html">Select</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#action">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#bind">bind</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#cancel">cancel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#move">move</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="battle.html">battle</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="edit.html">edit</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="stdgam.html">stdgam</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="stdgam.Templates.html">Templates</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#._initTraits">_initTraits</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.call">call</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.custom">custom</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.fader">fader</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.finite">finite</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.ftext">ftext</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.image">image</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.pause">pause</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.scheduler">scheduler</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.slider">slider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.text">text</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="stdtask.html">stdtask</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CardAtlas">CardAtlas</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ChainFunc">ChainFunc</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ChainMask">ChainMask</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CharacterNames">CharacterNames</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#EnemyAction">EnemyAction</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#EnemyData">EnemyData</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PlayerSkill">PlayerSkill</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#Suits">Suits</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TutorialInfo">TutorialInfo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createMeter">createMeter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createOpeningQB">createOpeningQB</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createTutorialQB">createTutorialQB</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCharacterName">getCharacterName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPolysuitMask">getPolysuitMask</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPolysuitName">getPolysuitName</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">GameEngine</h1>
     
 
-<div class="top-nav">
-    <div class="inner">
-        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-        <div class="logo">
-            
-            
-        </div>
-        <div class="menu">
-            
-            <div class="navigation">
-                <a
-                    href="index.html"
-                    class="link"
-                >
-                    Documentation
-                </a>
-                
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-    <div id="main">
-        <div
-            class="sidebar "
-            id="sidebarNav"
-        >
-            
-            <nav>
-                
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdgam.html">stdgam</a></li><li><a href="stdgam.Templates.html">Templates</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li><li><a href="stdgam.CachePool.html">CachePool</a></li><li><a href="stdgam.GameEngine.html">GameEngine</a></li><li><a href="stdgam.ImageCutter.html">ImageCutter</a></li><li><a href="stdgam.ImagePool.html">ImagePool</a></li><li><a href="stdgam.SEPool.html">SEPool</a></li><li><a href="stdgam.Scene.html">Scene</a></li><li><a href="stdgam.SoundPool.html">SoundPool</a></li><li><a href="stdtask.CyclicSelect.html">CyclicSelect</a></li><li><a href="stdtask.Meter.html">Meter</a></li><li><a href="stdtask.Scroll.html">Scroll</a></li><li><a href="stdtask.Select.html">Select</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li></ul></div>
-                
-            </nav>
-        </div>
-        <div class="core" id="main-content-wrapper">
-            <div class="content">
-                <header class="page-title">
-                    <p>Class</p>
-                    <h1>GameEngine</h1>
-                </header>
-                
+    
 
 
 
@@ -85,8 +41,11 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>GameEngine<span class="signature">(canvasID)</span><span class="type-signature"></span></h2>
+        <h2>
+            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>
+        
+        GameEngine
+        </h2>
         
             <div class="class-description"><p>ゲームの全体的な挙動を管理するクラス.
 Sceneオブジェクトをロードし, 毎フレームごとに更新処理を実行させることにより
@@ -103,91 +62,20 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
     <div class="container-overview">
     
         
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
+<div class="section-method">
 
     
-    <h4 class="name" id="GameEngine">
-        <a class="href-link" href="#GameEngine">#</a>
-        
-        <span class="code-name">
-            
-                new GameEngine<span class="signature">(canvasID)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
+    <h2>Constructor</h2>
     
 
-    
-    
-    <div class="description">
-        <p>指定されたキャンバスを描画に用いるGameEngineを生成する.</p>
-    </div>
+    <h4 class="name" id="GameEngine"><span class="type-signature"></span>new GameEngine<span class="signature">(canvasID)</span><span class="type-signature"></span></h4>
+
     
 
 
 
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>canvasID</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>HTMLのキャンバス要素のID</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
+<div class="description">
+    <p>指定されたキャンバスを描画に用いるGameEngineを生成する.</p>
 </div>
 
 
@@ -197,144 +85,154 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
     <h5 class="subsection-title">Properties:</h5>
 
     
-<div class="table-container">
-    <table class="props table">
-        <thead>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
-            <th>Name</th>
+                <td class="name"><code>input</code></td>
             
 
-            <th>Type</th>
+            <td class="type">
+            
+                
+<span class="param-type"><code>stdgam.InputManager</code></span>
+
+
+            
+            </td>
 
             
 
             
 
-            <th class="last">Description</th>
+            <td class="description last"><p>キー入力の管理をするオブジェクト</p></td>
         </tr>
-        </thead>
 
-        <tbody>
         
+
+    
+
+        <tr>
             
-<tr class="deep-level-0">
-    
-        <td class="name"><code>input</code></td>
-    
-
-    <td class="type">
-    
-        
-<code class="param-type">stdgam.InputManager</code>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>キー入力の管理をするオブジェクト</p></td>
-</tr>
-
-        
+                <td class="name"><code>se</code></td>
             
-<tr class="deep-level-0">
-    
-        <td class="name"><code>se</code></td>
-    
 
-    <td class="type">
-    
-        
-<code class="param-type"><a href="stdgam.SEPool.html">stdgam.SEPool</a></code>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>ZzFXによるSEを管理するオブジェクト</p></td>
-</tr>
-
-        
+            <td class="type">
             
-<tr class="deep-level-0">
-    
-        <td class="name"><code>images</code></td>
-    
-
-    <td class="type">
-    
-        
-<code class="param-type"><a href="stdgam.ImagePool.html">stdgam.ImagePool</a></code>
+                
+<span class="param-type"><code><a href="stdgam.SEPool.html">stdgam.SEPool</a></code></span>
 
 
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>画像を管理するオブジェクト</p></td>
-</tr>
-
-        
             
-<tr class="deep-level-0">
-    
-        <td class="name"><code>sounds</code></td>
-    
+            </td>
 
-    <td class="type">
-    
-        
-<code class="param-type"><a href="stdgam.SoundPool.html">stdgam.SoundPool</a></code>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>音声を管理するオブジェクト</p></td>
-</tr>
-
-        
             
-<tr class="deep-level-0">
-    
-        <td class="name"><code>caches</code></td>
-    
 
-    <td class="type">
-    
-        
-<code class="param-type"><a href="stdgam.CachePool.html">stdgam.CachePool</a></code>
+            
 
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>オフスクリーン・キャンバスを管理するオブジェクト</p></td>
-</tr>
+            <td class="description last"><p>ZzFXによるSEを管理するオブジェクト</p></td>
+        </tr>
 
         
-        </tbody>
-    </table>
-</div>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>images</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="stdgam.ImagePool.html">stdgam.ImagePool</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>画像を管理するオブジェクト</p></td>
+        </tr>
+
+        
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sounds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="stdgam.SoundPool.html">stdgam.SoundPool</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>音声を管理するオブジェクト</p></td>
+        </tr>
+
+        
+
+    
+
+        <tr>
+            
+                <td class="name"><code>caches</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="stdgam.CachePool.html">stdgam.CachePool</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>オフスクリーン・キャンバスを管理するオブジェクト</p></td>
+        </tr>
+
+        
+
+    
+    </tbody>
+</table>
+
 
 
 
@@ -363,90 +261,20 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line450">line 450</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line450">line 450</a>
-            </span>
-        </p>
     
 </dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class='vertical-section'>
-            <h1>Methods</h1>
-            <div class="members">
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="addScene">
-        <a class="href-link" href="#addScene">#</a>
-        
-        <span class="code-name">
-            
-                addScene<span class="signature">(name, scene)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>nameという名前で指定されたシーンを登録する.</p>
-    </div>
-    
 
 
 
@@ -458,78 +286,103 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
 
     <h5>Parameters:</h5>
     
-<div class="table-container">
-    <table class="params table">
-        <thead>
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
-            <th>Name</th>
+                <td class="name"><code>canvasID</code></td>
             
 
-            <th>Type</th>
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
 
             
 
             
 
-            <th class="last">Description</th>
+            <td class="description last">
+                <p>HTMLのキャンバス要素のID</p>
+                
+            </td>
         </tr>
-        </thead>
 
-        <tbody>
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
         
-
             
-<tr class="deep-level-0">
-  
-      <td class="name"><code>name</code></td>
-  
+<div class="section-method">
 
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
+    
+
+    <h4 class="name" id="addScene"><span class="type-signature"></span>addScene<span class="signature">(name, scene)</span><span class="type-signature"></span></h4>
+
+    
 
 
-  
-  </td>
 
-  
-
-  
-
-  <td class="description last"><p>シーンの登録名</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>scene</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="stdgam.Scene.html">stdgam.Scene</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>登録するシーン</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
+<div class="description">
+    <p>nameという名前で指定されたシーンを登録する.</p>
 </div>
 
 
@@ -561,19 +414,18 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line487">line 487</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line487">line 487</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -581,6 +433,86 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>シーンの登録名</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scene</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="stdgam.Scene.html">stdgam.Scene</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>登録するシーン</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -598,145 +530,22 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="changeScene">
-        <a class="href-link" href="#changeScene">#</a>
         
-        <span class="code-name">
             
-                changeScene<span class="signature">(name, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="changeScene"><span class="type-signature"></span>changeScene<span class="signature">(name, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>nameという名前で登録されているシーンをカレントシーンとする.
+
+
+
+<div class="description">
+    <p>nameという名前で登録されているシーンをカレントシーンとする.
 第2引数としてオプションリストを指定した場合, これをカレントシーンに伝える.
 もし該当するシーンがなければ何もしない.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-            <th>Attributes</th>
-            
-
-            
-            <th>Default</th>
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>name</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-      </td>
-  
-
-  <td class="description last"><p>シーンの登録名</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>opt</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Object.&lt;string, *></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-          {}
-      
-      </td>
-  
-
-  <td class="description last"><p>カレントシーンに渡す設定リスト</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -768,19 +577,18 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line498">line 498</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line498">line 498</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -788,6 +596,118 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>シーンの登録名</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Object.&lt;string, *></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {}
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>カレントシーンに渡す設定リスト</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -805,30 +725,20 @@ Sceneオブジェクトをロードし, 毎フレームごとに更新処理を�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="ready">
-        <a class="href-link" href="#ready">#</a>
         
             
-                <span class='tag'>async</span>
-            
-        
-        <span class="code-name">
-            
-                ready<span class="signature">(callback)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="ready"><span class="type-signature">(async) </span>ready<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>画像・音声のロード完了を待ってからcallbackを実行するasync関数.
+
+
+
+<div class="description">
+    <p>画像・音声のロード完了を待ってからcallbackを実行するasync関数.
 このメソッドを呼び出しても, 呼び出したプロセス自体は停止しない.
 (既にロードが完了していれば, 即座にcallbackが非同期処理として実行される)</p>
 <p>JavaScriptでは画像や音声のオブジェクトを作っても即座にロードが完了せず,
@@ -844,8 +754,51 @@ GE.ready(() => {
    my_paint_operation( pool.get(&quot;IMAGE_02&quot;) );
 });
 </code></pre>
-    </div>
+</div>
+
+
+
+
+
+<dl class="details">
+
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line550">line 550</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -857,54 +810,86 @@ GE.ready(() => {
 
     <h5>Parameters:</h5>
     
-<div class="table-container">
-    <table class="params table">
-        <thead>
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
-            <th>Name</th>
+                <td class="name"><code>callback</code></td>
             
 
-            <th>Type</th>
+            <td class="type">
+            
+                
+<span class="param-type"><code>function</code></span>
+
+
+            
+            </td>
 
             
 
             
 
-            <th class="last">Description</th>
+            <td class="description last">
+                <p>ロードが確実に完了した状態で
+呼び出される関数</p>
+                
+            </td>
         </tr>
-        </thead>
 
-        <tbody>
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
         
-
             
-<tr class="deep-level-0">
-  
-      <td class="name"><code>callback</code></td>
-  
+<div class="section-method">
 
-  <td class="type">
-  
-      
-<code class="param-type">function</code>
+    
+
+    <h4 class="name" id="run"><span class="type-signature"></span>run<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
 
 
-  
-  </td>
 
-  
-
-  
-
-  <td class="description last"><p>ロードが確実に完了した状態で
-呼び出される関数</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
+<div class="description">
+    <p>ゲームの実行を開始する.</p>
 </div>
 
 
@@ -936,19 +921,18 @@ GE.ready(() => {
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line478">line 478</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line550">line 550</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -972,124 +956,23 @@ GE.ready(() => {
 
 
 
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="run">
-        <a class="href-link" href="#run">#</a>
-        
-        <span class="code-name">
-            
-                run<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>ゲームの実行を開始する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line478">line 478</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="update">
-        <a class="href-link" href="#update">#</a>
         
-        <span class="code-name">
             
-                update<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">()</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>基本的にTimeKeeperから呼ばれる.
+
+
+
+<div class="description">
+    <p>基本的にTimeKeeperから呼ばれる.
 カレントシーンに1フレーム分の処理を実行させる. 具体的には</p>
 <ol>
 <li>画面をクリアする.</li>
@@ -1097,16 +980,7 @@ GE.ready(() => {
 <li>その後, カレントシーンのsuperdrawを呼び出し描画処理を実行させる.</li>
 </ol>
 <p>という手順を行う.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -1137,19 +1011,18 @@ GE.ready(() => {
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line515">line 515</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line515">line 515</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -1173,10 +1046,10 @@ GE.ready(() => {
 
 
 
+
+
 </div>
-            
-            </div>
-        </div>
+        
     
 
     
@@ -1189,26 +1062,15 @@ GE.ready(() => {
 
 
 
-            </div>
-            
-            <footer class="footer">
-                <div class="content has-text-centered">
-                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a></p>
-                    <p class="sidebar-created-by">
-                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
-                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
-                    </p>
-                </div>
-            </footer>
-            
-        </div>
-        <div id="side-nav" class="side-nav">
-        </div>
-    </div>
-<script src="scripts/app.min.js"></script>
-<script>PR.prettyPrint();</script>
-<script src="scripts/linenumber.js"> </script>
+</div>
 
+<br class="clear">
 
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 05:22:24 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
 </body>
 </html>

@@ -1,82 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Scene</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Scene - Documentation</title>
 
-  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="./build/entry.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
-  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
-  <link type="text/css" rel="stylesheet" href="">
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-  
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
+<body>
 
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
+<label for="nav-trigger" class="overlay"></label>
 
-<body class="layout small-header">
-    <div id="stickyNavbarOverlay"></div>
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BasicStatus.html">BasicStatus</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#HP">HP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#MP">MP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#addHP">addHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#addMP">addMP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#name">name</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#percentHP">percentHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#percentMP">percentMP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#retentionRateHP">retentionRateHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#retentionRateMP">retentionRateMP</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Card.html">Card</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="CardSet.html">CardSet</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Deck.html">Deck</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="DuosuitGenerator.html">DuosuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Enemy.html">Enemy</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Enemy.html#antiskillContains">antiskillContains</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Enemy.html#init">init</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Player.html">Player</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#SG">SG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#addSG">addSG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#addShield">addShield</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#addStun">addStun</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#id">id</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#isPrismatic">isPrismatic</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#mainSkillCount">mainSkillCount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#mark">mark</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#parseMainSkill">parseMainSkill</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#payCost">payCost</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#resetSG">resetSG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#shield">shield</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#shiftMainSkill">shiftMainSkill</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#stun">stun</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#suitString">suitString</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Polysuit.html">Polysuit</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Pool.html">Pool</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="PrismaticCard.html">PrismaticCard</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Public.SideboardDialog.html">SideboardDialog</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBLecture.html">QBLecture</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#talk">talk</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBTalk.html">QBTalk</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#execute">execute</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBTelop.html">QBTelop</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#execute">execute</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBYesNo.html">QBYesNo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#waitForAnswer">waitForAnswer</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SkillDealerBase.html">SkillDealerBase</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="TriosuitGenerator.html">TriosuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.CachePool.html">CachePool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.CachePool.html#createCache">createCache</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.CachePool.html#get">get</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.GameEngine.html">GameEngine</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#addScene">addScene</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#changeScene">changeScene</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#ready">ready</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#run">run</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.ImageCutter.html">ImageCutter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImageCutter.html#paint">paint</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.ImagePool.html">ImagePool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImagePool.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImagePool.html#load">load</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImagePool.html#ready">ready</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.SEPool.html">SEPool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SEPool.html#play">play</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SEPool.html#register">register</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.Scene.html">Scene</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#add">add</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSequence">addSequence</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSprite">addSprite</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSpriteAfter">addSpriteAfter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSpriteBefore">addSpriteBefore</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addTask">addTask</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addTaskAfter">addTaskAfter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addTaskBefore">addTaskBefore</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#superOnLoad">superOnLoad</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#superdraw">superdraw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#superexecute">superexecute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#useCoroutine">useCoroutine</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.SoundPool.html">SoundPool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#load">load</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#play">play</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#ready">ready</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#stop">stop</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.CyclicSelect.html">CyclicSelect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.CyclicSelect.html#addMod">addMod</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.CyclicSelect.html#move">move</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.Meter.html">Meter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Meter.html#changeTo">changeTo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Meter.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Meter.html#init">init</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.Scroll.html">Scroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#action">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#bind">bind</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#cancel">cancel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#initScroll">initScroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#viewCount">viewCount</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.Select.html">Select</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#action">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#bind">bind</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#cancel">cancel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#move">move</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="battle.html">battle</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="edit.html">edit</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="stdgam.html">stdgam</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="stdgam.Templates.html">Templates</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#._initTraits">_initTraits</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.call">call</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.custom">custom</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.fader">fader</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.finite">finite</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.ftext">ftext</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.image">image</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.pause">pause</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.scheduler">scheduler</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.slider">slider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.text">text</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="stdtask.html">stdtask</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CardAtlas">CardAtlas</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ChainFunc">ChainFunc</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ChainMask">ChainMask</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CharacterNames">CharacterNames</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#EnemyAction">EnemyAction</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#EnemyData">EnemyData</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PlayerSkill">PlayerSkill</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#Suits">Suits</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TutorialInfo">TutorialInfo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createMeter">createMeter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createOpeningQB">createOpeningQB</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createTutorialQB">createTutorialQB</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCharacterName">getCharacterName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPolysuitMask">getPolysuitMask</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPolysuitName">getPolysuitName</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Scene</h1>
     
 
-<div class="top-nav">
-    <div class="inner">
-        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-        <div class="logo">
-            
-            
-        </div>
-        <div class="menu">
-            
-            <div class="navigation">
-                <a
-                    href="index.html"
-                    class="link"
-                >
-                    Documentation
-                </a>
-                
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-    <div id="main">
-        <div
-            class="sidebar "
-            id="sidebarNav"
-        >
-            
-            <nav>
-                
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdgam.html">stdgam</a></li><li><a href="stdgam.Templates.html">Templates</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li><li><a href="stdgam.CachePool.html">CachePool</a></li><li><a href="stdgam.GameEngine.html">GameEngine</a></li><li><a href="stdgam.ImageCutter.html">ImageCutter</a></li><li><a href="stdgam.ImagePool.html">ImagePool</a></li><li><a href="stdgam.SEPool.html">SEPool</a></li><li><a href="stdgam.Scene.html">Scene</a></li><li><a href="stdgam.SoundPool.html">SoundPool</a></li><li><a href="stdtask.CyclicSelect.html">CyclicSelect</a></li><li><a href="stdtask.Meter.html">Meter</a></li><li><a href="stdtask.Scroll.html">Scroll</a></li><li><a href="stdtask.Select.html">Select</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li></ul></div>
-                
-            </nav>
-        </div>
-        <div class="core" id="main-content-wrapper">
-            <div class="content">
-                <header class="page-title">
-                    <p>Class</p>
-                    <h1>Scene</h1>
-                </header>
-                
+    
 
 
 
@@ -85,8 +41,11 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>Scene<span class="signature">(dfn)</span><span class="type-signature"></span></h2>
+        <h2>
+            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>
+        
+        Scene
+        </h2>
         
             <div class="class-description"><p>ゲームにおける１つのモード, または１つのステージを表すクラス.
 GameEngineからロードして使う.</p>
@@ -104,31 +63,20 @@ GameEngineからロードして使う.</p>
     <div class="container-overview">
     
         
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
+<div class="section-method">
 
     
-    <h4 class="name" id="Scene">
-        <a class="href-link" href="#Scene">#</a>
-        
-        <span class="code-name">
-            
-                new Scene<span class="signature">(dfn)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
+    <h2>Constructor</h2>
     
 
+    <h4 class="name" id="Scene"><span class="type-signature"></span>new Scene<span class="signature">(dfn)</span><span class="type-signature"></span></h4>
+
     
-    
-    <div class="description">
-        <p>dfnが渡された場合、共通の処理を済ませた後にその内容を自身に代入する.
+
+
+
+<div class="description">
+    <p>dfnが渡された場合、共通の処理を済ませた後にその内容を自身に代入する.
 これにより, 派生クラスを作らなくても, dfnの中に追加の定義を書いておけば
 それを自身に適用できる.</p>
 <p>例)</p>
@@ -142,67 +90,6 @@ GameEngineからロードして使う.</p>
 scene.onLoad = function(GE, args){ ...初期化処理... };
 scene.draw(GE, ctx) = function{ ...描画処理... };
 </code></pre>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>dfn</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Object.&lt;string, *></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>このオブジェクトに追加で定義する
-要素を集めた連想配列.</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -212,124 +99,130 @@ scene.draw(GE, ctx) = function{ ...描画処理... };
     <h5 class="subsection-title">Properties:</h5>
 
     
-<div class="table-container">
-    <table class="props table">
-        <thead>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
-            <th>Name</th>
+                <td class="name"><code>onLoad</code></td>
             
 
-            <th>Type</th>
+            <td class="type">
+            
+                
+<span class="param-type"><code>function</code></span>
+
 
             
-            <th>Attributes</th>
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
             
 
             
 
-            <th class="last">Description</th>
+            <td class="description last"><p>シーンがロードされた時に実行される初期化処理 (任意)</p></td>
         </tr>
-        </thead>
 
-        <tbody>
         
+
+    
+
+        <tr>
             
-<tr class="deep-level-0">
-    
-        <td class="name"><code>onLoad</code></td>
-    
-
-    <td class="type">
-    
-        
-<code class="param-type">function</code>
-
-
-    
-    </td>
-
-    
-        <td class="attributes">
-        
-            &lt;optional><br>
-        
-
-        
-        </td>
-    
-
-    
-
-    <td class="description last"><p>シーンがロードされた時に実行される初期化処理 (任意)</p></td>
-</tr>
-
-        
+                <td class="name"><code>draw</code></td>
             
-<tr class="deep-level-0">
-    
-        <td class="name"><code>draw</code></td>
-    
 
-    <td class="type">
-    
-        
-<code class="param-type">function</code>
-
-
-    
-    </td>
-
-    
-        <td class="attributes">
-        
-            &lt;optional><br>
-        
-
-        
-        </td>
-    
-
-    
-
-    <td class="description last"><p>シーン独自の描画処理 (任意)</p></td>
-</tr>
-
-        
+            <td class="type">
             
-<tr class="deep-level-0">
-    
-        <td class="name"><code>execute</code></td>
-    
-
-    <td class="type">
-    
-        
-<code class="param-type">function</code>
+                
+<span class="param-type"><code>function</code></span>
 
 
-    
-    </td>
+            
+            </td>
 
-    
-        <td class="attributes">
-        
-            &lt;optional><br>
-        
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
-        
-        </td>
-    
+                
+                </td>
+            
 
-    
+            
 
-    <td class="description last"><p>シーン独自のタスク処理 (任意)</p></td>
-</tr>
+            <td class="description last"><p>シーン独自の描画処理 (任意)</p></td>
+        </tr>
 
         
-        </tbody>
-    </table>
-</div>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>execute</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>function</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>シーン独自のタスク処理 (任意)</p></td>
+        </tr>
+
+        
+
+    
+    </tbody>
+</table>
+
 
 
 
@@ -358,93 +251,20 @@ scene.draw(GE, ctx) = function{ ...描画処理... };
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line59">line 59</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line59">line 59</a>
-            </span>
-        </p>
     
 </dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class='vertical-section'>
-            <h1>Methods</h1>
-            <div class="members">
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="add">
-        <a class="href-link" href="#add">#</a>
-        
-        <span class="code-name">
-            
-                add<span class="signature">(obj, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>スプライトとタスクを同時に登録するショートカット.
-まず, objがスプライトの条件を満たすならスプライトリストに登録する.
-次に, objがタスクの条件を満たすならタスクリストに登録する.
-両方の条件を満たす場合は, 両方のリストに追加される.</p>
-    </div>
-    
 
 
 
@@ -456,113 +276,107 @@ scene.draw(GE, ctx) = function{ ...描画処理... };
 
     <h5>Parameters:</h5>
     
-<div class="table-container">
-    <table class="params table">
-        <thead>
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
-            <th>Name</th>
+                <td class="name"><code>dfn</code></td>
             
 
-            <th>Type</th>
+            <td class="type">
+            
+                
+<span class="param-type"><code>Object.&lt;string, *></code></span>
+
 
             
-            <th>Attributes</th>
+            </td>
+
             
 
             
-            <th>Default</th>
-            
 
-            <th class="last">Description</th>
+            <td class="description last">
+                <p>このオブジェクトに追加で定義する
+要素を集めた連想配列.</p>
+                
+            </td>
         </tr>
-        </thead>
 
-        <tbody>
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
         
-
             
-<tr class="deep-level-0">
-  
-      <td class="name"><code>obj</code></td>
-  
+<div class="section-method">
 
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Task">Task</a></code>
-|
+    
 
-<code class="param-type"><a href="global.html#Sprite">Sprite</a></code>
+    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(obj, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
 
 
-  
-  </td>
 
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-      </td>
-  
-
-  <td class="description last"><p>登録するオブジェクト</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>first</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">boolean</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-          false
-      
-      </td>
-  
-
-  <td class="description last"><p>trueなら先頭に追加, falseなら末尾に追加</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
+<div class="description">
+    <p>スプライトとタスクを同時に登録するショートカット.
+まず, objがスプライトの条件を満たすならスプライトリストに登録する.
+次に, objがタスクの条件を満たすならタスクリストに登録する.
+両方の条件を満たす場合は, 両方のリストに追加される.</p>
 </div>
 
 
@@ -594,19 +408,18 @@ scene.draw(GE, ctx) = function{ ...描画処理... };
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line155">line 155</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line155">line 155</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -614,6 +427,121 @@ scene.draw(GE, ctx) = function{ ...描画処理... };
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Task">Task</a></code></span>
+|
+
+<span class="param-type"><code><a href="global.html#Sprite">Sprite</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>登録するオブジェクト</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>first</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>boolean</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>trueなら先頭に追加, falseなら末尾に追加</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -631,148 +559,25 @@ scene.draw(GE, ctx) = function{ ...描画処理... };
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="addSequence">
-        <a class="href-link" href="#addSequence">#</a>
         
-        <span class="code-name">
             
-                addSequence<span class="signature">(list, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="addSequence"><span class="type-signature"></span>addSequence<span class="signature">(list, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>複数のオブジェクトを登録するためのショートカット.
+
+
+
+<div class="description">
+    <p>複数のオブジェクトを登録するためのショートカット.
 listの要素のうち, スプライトであるものはスプライトリストに,
 タスクであるものはタスクリストに追加する.
 第2引数がtrueの場合, 順序を維持したままリストの先頭に追加する.
 第2引数がfalseの場合, 順序を維持したままリストの末尾に追加する.
 省略時は末尾に追加する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-            <th>Attributes</th>
-            
-
-            
-            <th>Default</th>
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>list</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Array.&lt;(<a href="global.html#Sprite">Sprite</a>|<a href="global.html#Task">Task</a>)></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-      </td>
-  
-
-  <td class="description last"><p>追加するオブジェクトの配列</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>first</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">boolean</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-          false
-      
-      </td>
-  
-
-  <td class="description last"><p>trueなら先頭に追加, falseなら末尾に追加</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -804,19 +609,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line222">line 222</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line222">line 222</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -824,6 +628,118 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>list</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Array.&lt;(<a href="global.html#Sprite">Sprite</a>|<a href="global.html#Task">Task</a>)></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>追加するオブジェクトの配列</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>first</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>boolean</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>trueなら先頭に追加, falseなら末尾に追加</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -841,145 +757,22 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="addSprite">
-        <a class="href-link" href="#addSprite">#</a>
         
-        <span class="code-name">
             
-                addSprite<span class="signature">(spr, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="addSprite"><span class="type-signature"></span>addSprite<span class="signature">(spr, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>スプライトをスプライトリストに追加する.
+
+
+
+<div class="description">
+    <p>スプライトをスプライトリストに追加する.
 追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.
 省略したときは「末尾に」追加する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-            <th>Attributes</th>
-            
-
-            
-            <th>Default</th>
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>spr</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Sprite">Sprite</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-      </td>
-  
-
-  <td class="description last"><p>登録するスプライト</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>first</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">boolean</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-          false
-      
-      </td>
-  
-
-  <td class="description last"><p>trueなら先頭に追加, falseなら末尾に追加</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -1011,19 +804,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line122">line 122</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line122">line 122</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -1031,6 +823,118 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>spr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Sprite">Sprite</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>登録するスプライト</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>first</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>boolean</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>trueなら先頭に追加, falseなら末尾に追加</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1048,133 +952,22 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="addSpriteAfter">
-        <a class="href-link" href="#addSpriteAfter">#</a>
         
-        <span class="code-name">
             
-                addSpriteAfter<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="addSpriteAfter"><span class="type-signature"></span>addSpriteAfter<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>スプライトリストの中に登録されているtargetの位置を探し,
+
+
+
+<div class="description">
+    <p>スプライトリストの中に登録されているtargetの位置を探し,
 第2引数以降に指定されたスプライトをその直後に追加する (順序を保つ).
 もしtargetが登録されていない場合, リストの末尾に追加する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-            <th>Attributes</th>
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>target</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Sprite">Sprite</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last"><p>追加位置の基準となるスプライト</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>objs</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Sprite">Sprite</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-          &lt;repeatable><br>
-      
-      </td>
-  
-
-  
-
-  <td class="description last"><p>追加する1つ以上のスプライト</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -1206,19 +999,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line180">line 180</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line180">line 180</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -1226,6 +1018,106 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Sprite">Sprite</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>追加位置の基準となるスプライト</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>objs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Sprite">Sprite</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>追加する1つ以上のスプライト</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1243,133 +1135,22 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="addSpriteBefore">
-        <a class="href-link" href="#addSpriteBefore">#</a>
         
-        <span class="code-name">
             
-                addSpriteBefore<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="addSpriteBefore"><span class="type-signature"></span>addSpriteBefore<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>スプライトリストの中に登録されているtargetの位置を探し,
+
+
+
+<div class="description">
+    <p>スプライトリストの中に登録されているtargetの位置を探し,
 第2引数以降に指定されたスプライトをその直前に追加する (順序を保つ).
 もしtargetが登録されていない場合, リストの先頭に追加する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-            <th>Attributes</th>
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>target</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Sprite">Sprite</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last"><p>追加位置の基準となるスプライト</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>objs</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Sprite">Sprite</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-          &lt;repeatable><br>
-      
-      </td>
-  
-
-  
-
-  <td class="description last"><p>追加する1つ以上のスプライト</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -1401,19 +1182,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line167">line 167</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line167">line 167</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -1421,6 +1201,106 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Sprite">Sprite</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>追加位置の基準となるスプライト</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>objs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Sprite">Sprite</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>追加する1つ以上のスプライト</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1438,145 +1318,22 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="addTask">
-        <a class="href-link" href="#addTask">#</a>
         
-        <span class="code-name">
             
-                addTask<span class="signature">(task, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="addTask"><span class="type-signature"></span>addTask<span class="signature">(task, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>タスクをタスクリストに追加する.
+
+
+
+<div class="description">
+    <p>タスクをタスクリストに追加する.
 追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.
 省略したときは「末尾に」追加する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-            <th>Attributes</th>
-            
-
-            
-            <th>Default</th>
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>task</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Task">Task</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-      </td>
-  
-
-  <td class="description last"><p>登録するタスク</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>first</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">boolean</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-          false
-      
-      </td>
-  
-
-  <td class="description last"><p>trueなら先頭に追加, falseなら末尾に追加</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -1608,19 +1365,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line138">line 138</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line138">line 138</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -1628,6 +1384,118 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Task">Task</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>登録するタスク</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>first</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>boolean</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>trueなら先頭に追加, falseなら末尾に追加</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1645,133 +1513,22 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="addTaskAfter">
-        <a class="href-link" href="#addTaskAfter">#</a>
         
-        <span class="code-name">
             
-                addTaskAfter<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="addTaskAfter"><span class="type-signature"></span>addTaskAfter<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>タスクリストの中に登録されているtargetの位置を探し,
+
+
+
+<div class="description">
+    <p>タスクリストの中に登録されているtargetの位置を探し,
 第2引数以降に指定されたタスクをその直後に追加する (順序を保つ).
 もしtargetが登録されていない場合, リストの末尾に追加する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-            <th>Attributes</th>
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>target</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Task">Task</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last"><p>追加位置の基準となるタスク</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>objs</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Task">Task</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-          &lt;repeatable><br>
-      
-      </td>
-  
-
-  
-
-  <td class="description last"><p>追加する1つ以上のタスク</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -1803,19 +1560,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line206">line 206</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line206">line 206</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -1823,6 +1579,106 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Task">Task</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>追加位置の基準となるタスク</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>objs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Task">Task</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>追加する1つ以上のタスク</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1840,133 +1696,22 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="addTaskBefore">
-        <a class="href-link" href="#addTaskBefore">#</a>
         
-        <span class="code-name">
             
-                addTaskBefore<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="addTaskBefore"><span class="type-signature"></span>addTaskBefore<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>タスクリストの中に登録されているtargetの位置を探し,
+
+
+
+<div class="description">
+    <p>タスクリストの中に登録されているtargetの位置を探し,
 第2引数以降に指定されたタスクをその直前に追加する (順序を保つ).
 もしtargetが登録されていない場合, リストの先頭に追加する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-            <th>Attributes</th>
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>target</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Task">Task</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last"><p>追加位置の基準となるタスク</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>objs</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Task">Task</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-          &lt;repeatable><br>
-      
-      </td>
-  
-
-  
-
-  <td class="description last"><p>追加する1つ以上のタスク</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -1998,19 +1743,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line193">line 193</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line193">line 193</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -2018,6 +1762,106 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Task">Task</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>追加位置の基準となるタスク</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>objs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="global.html#Task">Task</a></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last">
+                <p>追加する1つ以上のタスク</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -2035,38 +1879,23 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="init">
-        <a class="href-link" href="#init">#</a>
         
-        <span class="code-name">
             
-                init<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="init"><span class="type-signature"></span>init<span class="signature">()</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>スプライトとタスクのリストを初期化する.
+
+
+
+<div class="description">
+    <p>スプライトとタスクのリストを初期化する.
 このメソッドを明示的に呼ばない限り, superOnLoadを実行しても
 スプライトリストやタスクリストは初期化されない.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -2097,19 +1926,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line110">line 110</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line110">line 110</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -2133,31 +1961,70 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="superOnLoad">
-        <a class="href-link" href="#superOnLoad">#</a>
         
-        <span class="code-name">
             
-                superOnLoad<span class="signature">(GE, args)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="superOnLoad"><span class="type-signature"></span>superOnLoad<span class="signature">(GE, args)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>このシーンがGEのカレントシーンになったとき呼び出される.
+
+
+
+<div class="description">
+    <p>このシーンがGEのカレントシーンになったとき呼び出される.
 まず, GEをプライベートフィールドに保存する.
 次に, もしthis.onLoad(GE, args)が定義されていればこれを実行する.</p>
-    </div>
+</div>
+
+
+
+
+
+<dl class="details">
+
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line100">line 100</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2169,129 +2036,80 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
     <h5>Parameters:</h5>
     
-<div class="table-container">
-    <table class="params table">
-        <thead>
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
-            <th>Name</th>
+                <td class="name"><code>GE</code></td>
             
 
-            <th>Type</th>
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="stdgam.GameEngine.html">stdgam.GameEngine</a></code></span>
+
+
+            
+            </td>
 
             
 
             
 
-            <th class="last">Description</th>
+            <td class="description last">
+                <p>このシーンを実行するGameEngine</p>
+                
+            </td>
         </tr>
-        </thead>
 
-        <tbody>
-        
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Object.&lt;string, *></code></span>
+
 
             
-<tr class="deep-level-0">
-  
-      <td class="name"><code>GE</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="stdgam.GameEngine.html">stdgam.GameEngine</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>このシーンを実行するGameEngine</p></td>
-</tr>
-
-
-        
+            </td>
 
             
-<tr class="deep-level-0">
-  
-      <td class="name"><code>args</code></td>
-  
 
-  <td class="type">
-  
-      
-<code class="param-type">Object.&lt;string, *></code>
+            
 
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>ロード処理のために引き渡す設定リスト</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
+            <td class="description last">
+                <p>ロード処理のために引き渡す設定リスト</p>
+                
+            </td>
+        </tr>
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line100">line 100</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -2309,90 +2127,24 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="superdraw">
-        <a class="href-link" href="#superdraw">#</a>
         
-        <span class="code-name">
             
-                superdraw<span class="signature">(ctx)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="superdraw"><span class="type-signature"></span>superdraw<span class="signature">(ctx)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>登録されているスプライトのdraw(GE, ctx)を順番に実行する.
+
+
+
+<div class="description">
+    <p>登録されているスプライトのdraw(GE, ctx)を順番に実行する.
 ここでGEはこのゲームのGameEngine, ctxは描画に使うコンテクストである.
 その後, 「activeが真」または「activeがundefined」のスプライトだけを
 リストに残して, 他のスプライトはリストから削除する.</p>
 <p>もしthis.draw(GE, ctx)が定義されている場合, 最後にこれを実行する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>ctx</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">CanvasRenderingContext2D</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>描画に使うコンテクスト</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
 </div>
 
 
@@ -2424,19 +2176,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line242">line 242</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line242">line 242</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -2444,6 +2195,60 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ctx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>CanvasRenderingContext2D</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>描画に使うコンテクスト</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -2461,26 +2266,20 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="superexecute">
-        <a class="href-link" href="#superexecute">#</a>
         
-        <span class="code-name">
             
-                superexecute<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="superexecute"><span class="type-signature"></span>superexecute<span class="signature">()</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>登録されているタスクのexecute(GE)を順番に実行する.
+
+
+
+<div class="description">
+    <p>登録されているタスクのexecute(GE)を順番に実行する.
 ここでGEはこのゲームのGameEngineである.
 ただし, あるタスクがfalseを返した場合, それより後のタスクは実行しない.</p>
 <p>その後, 「activeが真」または「activeがundefined」のタスクだけを
@@ -2492,16 +2291,7 @@ listの要素のうち, スプライトであるものはスプライトリス�
 <p>【注意】execute()の中でタスクの追加・削除を行うと, for文の実行中に
 配列を変更したのと同じ現象が発生します！　特に、自身よりも前に新しい要素を、
 追加する場合は, falseを返して後続の処理を止めてください.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -2532,19 +2322,18 @@ listの要素のうち, スプライトであるものはスプライトリス�
     
 
     
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line265">line 265</a>
+    </li></ul></dd>
     
 
     
 
     
 
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line265">line 265</a>
-            </span>
-        </p>
     
 </dl>
 
@@ -2568,32 +2357,71 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
+
+
 </div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="useCoroutine">
-        <a class="href-link" href="#useCoroutine">#</a>
         
-        <span class="code-name">
             
-                useCoroutine<span class="signature">(GE, gen, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
+<div class="section-method">
 
     
+
+    <h4 class="name" id="useCoroutine"><span class="type-signature"></span>useCoroutine<span class="signature">(GE, gen, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
     
-    <div class="description">
-        <p>指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの
+
+
+
+<div class="description">
+    <p>指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの
 更新処理をこのジェネレータに委任する.
 具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.
 ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.</p>
-    </div>
+</div>
+
+
+
+
+
+<dl class="details">
+
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line289">line 289</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2605,198 +2433,150 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
     <h5>Parameters:</h5>
     
-<div class="table-container">
-    <table class="params table">
-        <thead>
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
         <tr>
             
-            <th>Name</th>
+                <td class="name"><code>GE</code></td>
             
 
-            <th>Type</th>
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="stdgam.GameEngine.html">stdgam.GameEngine</a></code></span>
+
 
             
-            <th>Attributes</th>
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
             
 
             
-            <th>Default</th>
+                <td class="default">
+                
+                </td>
             
 
-            <th class="last">Description</th>
+            <td class="description last">
+                <p>ジェネレータ関数の初期化時に渡すGameEngine</p>
+                
+            </td>
         </tr>
-        </thead>
 
-        <tbody>
-        
+    
+
+        <tr>
+            
+                <td class="name"><code>gen</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>GeneratorFunction</code></span>
+
 
             
-<tr class="deep-level-0">
-  
-      <td class="name"><code>GE</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="stdgam.GameEngine.html">stdgam.GameEngine</a></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-      </td>
-  
-
-  <td class="description last"><p>ジェネレータ関数の初期化時に渡すGameEngine</p></td>
-</tr>
-
-
-        
+            </td>
 
             
-<tr class="deep-level-0">
-  
-      <td class="name"><code>gen</code></td>
-  
+                <td class="attributes">
+                
 
-  <td class="type">
-  
-      
-<code class="param-type">GeneratorFunction</code>
+                
 
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-      </td>
-  
-
-  <td class="description last"><p>処理を委任するジェネレータ関数</p></td>
-</tr>
-
-
-        
+                
+                </td>
+            
 
             
-<tr class="deep-level-0">
-  
-      <td class="name"><code>opt</code></td>
-  
+                <td class="default">
+                
+                </td>
+            
 
-  <td class="type">
-  
-      
-<code class="param-type">Object.&lt;*, *></code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-      <td class="default">
-      
-          {}
-      
-      </td>
-  
-
-  <td class="description last"><p>ジェネレータ関数の初期化時に渡すオプション</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
+            <td class="description last">
+                <p>処理を委任するジェネレータ関数</p>
+                
+            </td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>opt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Object.&lt;*, *></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {}
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>ジェネレータ関数の初期化時に渡すオプション</p>
+                
+            </td>
+        </tr>
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line289">line 289</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -2814,9 +2594,7 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 </div>
-            
-            </div>
-        </div>
+        
     
 
     
@@ -2829,26 +2607,15 @@ listの要素のうち, スプライトであるものはスプライトリス�
 
 
 
-            </div>
-            
-            <footer class="footer">
-                <div class="content has-text-centered">
-                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a></p>
-                    <p class="sidebar-created-by">
-                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
-                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
-                    </p>
-                </div>
-            </footer>
-            
-        </div>
-        <div id="side-nav" class="side-nav">
-        </div>
-    </div>
-<script src="scripts/app.min.js"></script>
-<script>PR.prettyPrint();</script>
-<script src="scripts/linenumber.js"> </script>
+</div>
 
+<br class="clear">
 
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 05:22:24 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
 </body>
 </html>
