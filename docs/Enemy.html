@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Class: Enemy</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Enemy - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Class: Enemy</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a><ul class='methods'><li data-type='method'><a href="BasicStatus.html#HP">HP</a></li><li data-type='method'><a href="BasicStatus.html#MP">MP</a></li><li data-type='method'><a href="BasicStatus.html#addHP">addHP</a></li><li data-type='method'><a href="BasicStatus.html#addMP">addMP</a></li><li data-type='method'><a href="BasicStatus.html#init">init</a></li><li data-type='method'><a href="BasicStatus.html#name">name</a></li><li data-type='method'><a href="BasicStatus.html#percentHP">percentHP</a></li><li data-type='method'><a href="BasicStatus.html#percentMP">percentMP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateHP">retentionRateHP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateMP">retentionRateMP</a></li></ul></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a><ul class='methods'><li data-type='method'><a href="Enemy.html#antiskillContains">antiskillContains</a></li><li data-type='method'><a href="Enemy.html#init">init</a></li></ul></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method'><a href="Player.html#SG">SG</a></li><li data-type='method'><a href="Player.html#addSG">addSG</a></li><li data-type='method'><a href="Player.html#addShield">addShield</a></li><li data-type='method'><a href="Player.html#addStun">addStun</a></li><li data-type='method'><a href="Player.html#id">id</a></li><li data-type='method'><a href="Player.html#init">init</a></li><li data-type='method'><a href="Player.html#isPrismatic">isPrismatic</a></li><li data-type='method'><a href="Player.html#mainSkillCount">mainSkillCount</a></li><li data-type='method'><a href="Player.html#mark">mark</a></li><li data-type='method'><a href="Player.html#parseMainSkill">parseMainSkill</a></li><li data-type='method'><a href="Player.html#payCost">payCost</a></li><li data-type='method'><a href="Player.html#resetSG">resetSG</a></li><li data-type='method'><a href="Player.html#shield">shield</a></li><li data-type='method'><a href="Player.html#shiftMainSkill">shiftMainSkill</a></li><li data-type='method'><a href="Player.html#stun">stun</a></li><li data-type='method'><a href="Player.html#suitString">suitString</a></li></ul></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.CachePool.html">CachePool</a><ul class='methods'><li data-type='method'><a href="Public.CachePool.html#createCache">createCache</a></li><li data-type='method'><a href="Public.CachePool.html#get">get</a></li></ul></li><li><a href="Public.CyclicSelect.html">CyclicSelect</a><ul class='methods'><li data-type='method'><a href="Public.CyclicSelect.html#addMod">addMod</a></li><li data-type='method'><a href="Public.CyclicSelect.html#move">move</a></li></ul></li><li><a href="Public.GameEngine.html">GameEngine</a><ul class='methods'><li data-type='method'><a href="Public.GameEngine.html#addScene">addScene</a></li><li data-type='method'><a href="Public.GameEngine.html#changeScene">changeScene</a></li><li data-type='method'><a href="Public.GameEngine.html#ready">ready</a></li><li data-type='method'><a href="Public.GameEngine.html#run">run</a></li><li data-type='method'><a href="Public.GameEngine.html#update">update</a></li></ul></li><li><a href="Public.ImageCutter.html">ImageCutter</a><ul class='methods'><li data-type='method'><a href="Public.ImageCutter.html#paint">paint</a></li></ul></li><li><a href="Public.ImagePool.html">ImagePool</a><ul class='methods'><li data-type='method'><a href="Public.ImagePool.html#get">get</a></li><li data-type='method'><a href="Public.ImagePool.html#load">load</a></li><li data-type='method'><a href="Public.ImagePool.html#ready">ready</a></li></ul></li><li><a href="Public.Meter.html">Meter</a><ul class='methods'><li data-type='method'><a href="Public.Meter.html#changeTo">changeTo</a></li><li data-type='method'><a href="Public.Meter.html#execute">execute</a></li><li data-type='method'><a href="Public.Meter.html#init">init</a></li></ul></li><li><a href="Public.SEPool.html">SEPool</a><ul class='methods'><li data-type='method'><a href="Public.SEPool.html#play">play</a></li><li data-type='method'><a href="Public.SEPool.html#register">register</a></li></ul></li><li><a href="Public.Scene.html">Scene</a><ul class='methods'><li data-type='method'><a href="Public.Scene.html#add">add</a></li><li data-type='method'><a href="Public.Scene.html#addSequence">addSequence</a></li><li data-type='method'><a href="Public.Scene.html#addSprite">addSprite</a></li><li data-type='method'><a href="Public.Scene.html#addSpriteAfter">addSpriteAfter</a></li><li data-type='method'><a href="Public.Scene.html#addSpriteBefore">addSpriteBefore</a></li><li data-type='method'><a href="Public.Scene.html#addTask">addTask</a></li><li data-type='method'><a href="Public.Scene.html#addTaskAfter">addTaskAfter</a></li><li data-type='method'><a href="Public.Scene.html#addTaskBefore">addTaskBefore</a></li><li data-type='method'><a href="Public.Scene.html#init">init</a></li><li data-type='method'><a href="Public.Scene.html#superOnLoad">superOnLoad</a></li><li data-type='method'><a href="Public.Scene.html#superdraw">superdraw</a></li><li data-type='method'><a href="Public.Scene.html#superexecute">superexecute</a></li><li data-type='method'><a href="Public.Scene.html#useCoroutine">useCoroutine</a></li></ul></li><li><a href="Public.Scroll.html">Scroll</a><ul class='methods'><li data-type='method'><a href="Public.Scroll.html#action">action</a></li><li data-type='method'><a href="Public.Scroll.html#bind">bind</a></li><li data-type='method'><a href="Public.Scroll.html#cancel">cancel</a></li><li data-type='method'><a href="Public.Scroll.html#execute">execute</a></li><li data-type='method'><a href="Public.Scroll.html#initScroll">initScroll</a></li><li data-type='method'><a href="Public.Scroll.html#viewCount">viewCount</a></li></ul></li><li><a href="Public.Select.html">Select</a><ul class='methods'><li data-type='method'><a href="Public.Select.html#action">action</a></li><li data-type='method'><a href="Public.Select.html#bind">bind</a></li><li data-type='method'><a href="Public.Select.html#cancel">cancel</a></li><li data-type='method'><a href="Public.Select.html#execute">execute</a></li><li data-type='method'><a href="Public.Select.html#move">move</a></li></ul></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="Public.SoundPool.html">SoundPool</a><ul class='methods'><li data-type='method'><a href="Public.SoundPool.html#load">load</a></li><li data-type='method'><a href="Public.SoundPool.html#play">play</a></li><li data-type='method'><a href="Public.SoundPool.html#ready">ready</a></li><li data-type='method'><a href="Public.SoundPool.html#stop">stop</a></li></ul></li><li><a href="QBLecture.html">QBLecture</a><ul class='methods'><li data-type='method'><a href="QBLecture.html#activate">activate</a></li><li data-type='method'><a href="QBLecture.html#chart">chart</a></li><li data-type='method'><a href="QBLecture.html#draw">draw</a></li><li data-type='method'><a href="QBLecture.html#execute">execute</a></li><li data-type='method'><a href="QBLecture.html#talk">talk</a></li></ul></li><li><a href="QBTalk.html">QBTalk</a><ul class='methods'><li data-type='method'><a href="QBTalk.html#activate">activate</a></li><li data-type='method'><a href="QBTalk.html#chart">chart</a></li><li data-type='method'><a href="QBTalk.html#draw">draw</a></li><li data-type='method'><a href="QBTalk.html#execute">execute</a></li></ul></li><li><a href="QBTelop.html">QBTelop</a><ul class='methods'><li data-type='method'><a href="QBTelop.html#activate">activate</a></li><li data-type='method'><a href="QBTelop.html#chart">chart</a></li><li data-type='method'><a href="QBTelop.html#draw">draw</a></li><li data-type='method'><a href="QBTelop.html#execute">execute</a></li></ul></li><li><a href="QBYesNo.html">QBYesNo</a><ul class='methods'><li data-type='method'><a href="QBYesNo.html#activate">activate</a></li><li data-type='method'><a href="QBYesNo.html#chart">chart</a></li><li data-type='method'><a href="QBYesNo.html#draw">draw</a></li><li data-type='method'><a href="QBYesNo.html#execute">execute</a></li><li data-type='method'><a href="QBYesNo.html#waitForAnswer">waitForAnswer</a></li></ul></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li></ul><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#fps">fps</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li><li><a href="global.html#stdgam">stdgam</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Enemy</h1>
+    
 
     
 
@@ -28,149 +47,77 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Enemy<span class="signature">(opt, playerSS<span class="signature-attributes">opt, nullable</span>)</span><span class="type-signature"></span></h2>
+        <h2>
         
-            <div class="class-description">敵のステータスを保持するクラス.HP, MP, nameに加えて, 以下のステータスを持つ.- antiskill: この敵に対してアンチスキルを使用できるカードの一覧</div>
+            Enemy
+        
+        </h2>
+        
+            <div class="class-description usertext">敵のステータスを保持するクラス.HP, MP, nameに加えて, 以下のステータスを持つ.- antiskill: この敵に対してアンチスキルを使用できるカードの一覧</div>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
+            
 
     
     <h2>Constructor</h2>
     
 
-    
     <h4 class="name" id="Enemy"><span class="type-signature"></span>new Enemy<span class="signature">(opt, playerSS<span class="signature-attributes">opt, nullable</span>)</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
-    指定された敵データとプレイヤーの属性を元にインスタンスを生成する(これらの情報はinit()により取り込まれる. init()も参照のこと).
-</div>
 
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>指定された敵データとプレイヤーの属性を元にインスタンスを生成する(これらの情報はinit()により取り込まれる. init()も参照のこと).</li></ul></dd>
     
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">敵データを格納した連想配列</td>
-        </tr>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line347">line 347</a>
+    </li></ul></dd>
+    
 
     
 
-        <tr>
-            
-                <td class="name"><code>playerSS</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
-
-            <td class="description last">プレイヤーの属性を表す文字列.属性を設定しない場合はnullを指定する</td>
-        </tr>
+    
 
     
-    </tbody>
-</table>
 
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -209,6 +156,7 @@
 <span class="param-type">stdtask.Meter</span>
 
 
+
             
             </td>
 
@@ -232,6 +180,7 @@
 <span class="param-type">stdtask.Meter</span>
 
 
+
             
             </td>
 
@@ -249,270 +198,17 @@
 
 
 
-<dl class="details">
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line347">line 347</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="antiskillContains"><span class="type-signature"></span>antiskillContains<span class="signature">(cardID)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    指定されたIDのカードがこの敵に対してアンチスキルを使えるか調べる.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>cardID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">カードのID</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line355">line 355</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    使用可能ならtrue, そうでなければfalse
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="init"><span class="type-signature"></span>init<span class="signature">(opt, playerSS<span class="signature-attributes">opt, nullable</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    指定された敵データとプレイヤーの属性を元にこのオブジェクトを初期化する.ここで, 敵データとは1. EnemyDataに値として登録されている要素のいずれか2. または, それらと互換性のある連想配列のことを指す.具体的には, optに次の要素が設定されていればよい.- name- affinity- HP- MP- actionsまた, プレイヤーの属性は相性の判定に用いられる.プレイヤーから見て, この敵と相性が良ければ敵のHP, MPが低くなり,相性が悪ければ敵のHP, MPが高くなる.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -550,6 +246,7 @@
 <span class="param-type">Object</span>
 
 
+
             
             </td>
 
@@ -585,6 +282,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -605,7 +303,7 @@
             
                 <td class="default">
                 
-                    null
+                    <code>null</code>
                 
                 </td>
             
@@ -622,8 +320,63 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="antiskillContains"><span class="type-signature"></span>antiskillContains<span class="signature">(cardID)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
 <dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>指定されたIDのカードがこの敵に対してアンチスキルを使えるか調べる.</li></ul></dd>
+    
 
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line355">line 355</a>
+    </li></ul></dd>
     
 
     
@@ -646,6 +399,135 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cardID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">カードのID</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    使用可能ならtrue, そうでなければfalse
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="init"><span class="type-signature"></span>init<span class="signature">(opt, playerSS<span class="signature-attributes">opt, nullable</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>指定された敵データとプレイヤーの属性を元にこのオブジェクトを初期化する.ここで, 敵データとは1. EnemyDataに値として登録されている要素のいずれか2. または, それらと互換性のある連想配列のことを指す.具体的には, optに次の要素が設定されていればよい.- name- affinity- HP- MP- actionsまた, プレイヤーの属性は相性の判定に用いられる.プレイヤーから見て, この敵と相性が良ければ敵のHP, MPが低くなり,相性が悪ければ敵のHP, MPが高くなる.</li></ul></dd>
     
 
     
@@ -660,8 +542,150 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">敵データを格納した連想配列</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>playerSS</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>null</code>
+                
+                </td>
+            
+
+            <td class="description last">プレイヤーの属性を表す文字列.属性を設定しない場合はnullを指定する</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -694,19 +718,21 @@
 
 
 
+    
+    
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.CachePool.html">CachePool</a></li><li><a href="Public.CyclicSelect.html">CyclicSelect</a></li><li><a href="Public.GameEngine.html">GameEngine</a></li><li><a href="Public.ImageCutter.html">ImageCutter</a></li><li><a href="Public.ImagePool.html">ImagePool</a></li><li><a href="Public.Meter.html">Meter</a></li><li><a href="Public.SEPool.html">SEPool</a></li><li><a href="Public.Scene.html">Scene</a></li><li><a href="Public.Scroll.html">Scroll</a></li><li><a href="Public.Select.html">Select</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="Public.SoundPool.html">SoundPool</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#fps">fps</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li><li><a href="global.html#stdgam">stdgam</a></li></ul>
-</nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 02:03:13 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 02:04:01 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
 </body>
 </html>

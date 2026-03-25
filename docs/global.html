@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Global - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a><ul class='methods'><li data-type='method'><a href="BasicStatus.html#HP">HP</a></li><li data-type='method'><a href="BasicStatus.html#MP">MP</a></li><li data-type='method'><a href="BasicStatus.html#addHP">addHP</a></li><li data-type='method'><a href="BasicStatus.html#addMP">addMP</a></li><li data-type='method'><a href="BasicStatus.html#init">init</a></li><li data-type='method'><a href="BasicStatus.html#name">name</a></li><li data-type='method'><a href="BasicStatus.html#percentHP">percentHP</a></li><li data-type='method'><a href="BasicStatus.html#percentMP">percentMP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateHP">retentionRateHP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateMP">retentionRateMP</a></li></ul></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a><ul class='methods'><li data-type='method'><a href="Enemy.html#antiskillContains">antiskillContains</a></li><li data-type='method'><a href="Enemy.html#init">init</a></li></ul></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method'><a href="Player.html#SG">SG</a></li><li data-type='method'><a href="Player.html#addSG">addSG</a></li><li data-type='method'><a href="Player.html#addShield">addShield</a></li><li data-type='method'><a href="Player.html#addStun">addStun</a></li><li data-type='method'><a href="Player.html#id">id</a></li><li data-type='method'><a href="Player.html#init">init</a></li><li data-type='method'><a href="Player.html#isPrismatic">isPrismatic</a></li><li data-type='method'><a href="Player.html#mainSkillCount">mainSkillCount</a></li><li data-type='method'><a href="Player.html#mark">mark</a></li><li data-type='method'><a href="Player.html#parseMainSkill">parseMainSkill</a></li><li data-type='method'><a href="Player.html#payCost">payCost</a></li><li data-type='method'><a href="Player.html#resetSG">resetSG</a></li><li data-type='method'><a href="Player.html#shield">shield</a></li><li data-type='method'><a href="Player.html#shiftMainSkill">shiftMainSkill</a></li><li data-type='method'><a href="Player.html#stun">stun</a></li><li data-type='method'><a href="Player.html#suitString">suitString</a></li></ul></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.CachePool.html">CachePool</a><ul class='methods'><li data-type='method'><a href="Public.CachePool.html#createCache">createCache</a></li><li data-type='method'><a href="Public.CachePool.html#get">get</a></li></ul></li><li><a href="Public.CyclicSelect.html">CyclicSelect</a><ul class='methods'><li data-type='method'><a href="Public.CyclicSelect.html#addMod">addMod</a></li><li data-type='method'><a href="Public.CyclicSelect.html#move">move</a></li></ul></li><li><a href="Public.GameEngine.html">GameEngine</a><ul class='methods'><li data-type='method'><a href="Public.GameEngine.html#addScene">addScene</a></li><li data-type='method'><a href="Public.GameEngine.html#changeScene">changeScene</a></li><li data-type='method'><a href="Public.GameEngine.html#ready">ready</a></li><li data-type='method'><a href="Public.GameEngine.html#run">run</a></li><li data-type='method'><a href="Public.GameEngine.html#update">update</a></li></ul></li><li><a href="Public.ImageCutter.html">ImageCutter</a><ul class='methods'><li data-type='method'><a href="Public.ImageCutter.html#paint">paint</a></li></ul></li><li><a href="Public.ImagePool.html">ImagePool</a><ul class='methods'><li data-type='method'><a href="Public.ImagePool.html#get">get</a></li><li data-type='method'><a href="Public.ImagePool.html#load">load</a></li><li data-type='method'><a href="Public.ImagePool.html#ready">ready</a></li></ul></li><li><a href="Public.Meter.html">Meter</a><ul class='methods'><li data-type='method'><a href="Public.Meter.html#changeTo">changeTo</a></li><li data-type='method'><a href="Public.Meter.html#execute">execute</a></li><li data-type='method'><a href="Public.Meter.html#init">init</a></li></ul></li><li><a href="Public.SEPool.html">SEPool</a><ul class='methods'><li data-type='method'><a href="Public.SEPool.html#play">play</a></li><li data-type='method'><a href="Public.SEPool.html#register">register</a></li></ul></li><li><a href="Public.Scene.html">Scene</a><ul class='methods'><li data-type='method'><a href="Public.Scene.html#add">add</a></li><li data-type='method'><a href="Public.Scene.html#addSequence">addSequence</a></li><li data-type='method'><a href="Public.Scene.html#addSprite">addSprite</a></li><li data-type='method'><a href="Public.Scene.html#addSpriteAfter">addSpriteAfter</a></li><li data-type='method'><a href="Public.Scene.html#addSpriteBefore">addSpriteBefore</a></li><li data-type='method'><a href="Public.Scene.html#addTask">addTask</a></li><li data-type='method'><a href="Public.Scene.html#addTaskAfter">addTaskAfter</a></li><li data-type='method'><a href="Public.Scene.html#addTaskBefore">addTaskBefore</a></li><li data-type='method'><a href="Public.Scene.html#init">init</a></li><li data-type='method'><a href="Public.Scene.html#superOnLoad">superOnLoad</a></li><li data-type='method'><a href="Public.Scene.html#superdraw">superdraw</a></li><li data-type='method'><a href="Public.Scene.html#superexecute">superexecute</a></li><li data-type='method'><a href="Public.Scene.html#useCoroutine">useCoroutine</a></li></ul></li><li><a href="Public.Scroll.html">Scroll</a><ul class='methods'><li data-type='method'><a href="Public.Scroll.html#action">action</a></li><li data-type='method'><a href="Public.Scroll.html#bind">bind</a></li><li data-type='method'><a href="Public.Scroll.html#cancel">cancel</a></li><li data-type='method'><a href="Public.Scroll.html#execute">execute</a></li><li data-type='method'><a href="Public.Scroll.html#initScroll">initScroll</a></li><li data-type='method'><a href="Public.Scroll.html#viewCount">viewCount</a></li></ul></li><li><a href="Public.Select.html">Select</a><ul class='methods'><li data-type='method'><a href="Public.Select.html#action">action</a></li><li data-type='method'><a href="Public.Select.html#bind">bind</a></li><li data-type='method'><a href="Public.Select.html#cancel">cancel</a></li><li data-type='method'><a href="Public.Select.html#execute">execute</a></li><li data-type='method'><a href="Public.Select.html#move">move</a></li></ul></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="Public.SoundPool.html">SoundPool</a><ul class='methods'><li data-type='method'><a href="Public.SoundPool.html#load">load</a></li><li data-type='method'><a href="Public.SoundPool.html#play">play</a></li><li data-type='method'><a href="Public.SoundPool.html#ready">ready</a></li><li data-type='method'><a href="Public.SoundPool.html#stop">stop</a></li></ul></li><li><a href="QBLecture.html">QBLecture</a><ul class='methods'><li data-type='method'><a href="QBLecture.html#activate">activate</a></li><li data-type='method'><a href="QBLecture.html#chart">chart</a></li><li data-type='method'><a href="QBLecture.html#draw">draw</a></li><li data-type='method'><a href="QBLecture.html#execute">execute</a></li><li data-type='method'><a href="QBLecture.html#talk">talk</a></li></ul></li><li><a href="QBTalk.html">QBTalk</a><ul class='methods'><li data-type='method'><a href="QBTalk.html#activate">activate</a></li><li data-type='method'><a href="QBTalk.html#chart">chart</a></li><li data-type='method'><a href="QBTalk.html#draw">draw</a></li><li data-type='method'><a href="QBTalk.html#execute">execute</a></li></ul></li><li><a href="QBTelop.html">QBTelop</a><ul class='methods'><li data-type='method'><a href="QBTelop.html#activate">activate</a></li><li data-type='method'><a href="QBTelop.html#chart">chart</a></li><li data-type='method'><a href="QBTelop.html#draw">draw</a></li><li data-type='method'><a href="QBTelop.html#execute">execute</a></li></ul></li><li><a href="QBYesNo.html">QBYesNo</a><ul class='methods'><li data-type='method'><a href="QBYesNo.html#activate">activate</a></li><li data-type='method'><a href="QBYesNo.html#chart">chart</a></li><li data-type='method'><a href="QBYesNo.html#draw">draw</a></li><li data-type='method'><a href="QBYesNo.html#execute">execute</a></li><li data-type='method'><a href="QBYesNo.html#waitForAnswer">waitForAnswer</a></li></ul></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li></ul><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#fps">fps</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li><li><a href="global.html#stdgam">stdgam</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
     <h1 class="page-title">Global</h1>
+    
 
     
 
@@ -28,20 +47,23 @@
 
 <header>
     
-        <h2></h2>
+        <h2>
+        
+            
+        
+        </h2>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
-
-        
-
+            
 
 <dl class="details">
+    
 
     
 
@@ -77,10 +99,13 @@
 </dl>
 
 
+
+
+            
+
+            
         
-    
-    </div>
-
+        </div>
     
 
     
@@ -88,8 +113,10 @@
     
 
     
-
     
+    
+
+     
 
     
 
@@ -98,55 +125,16 @@
 
         
             
-<h4 class="name" id="CardAtlas"><span class="type-signature">(constant) </span>CardAtlas<span class="type-signature"> :Object</span></h4>
-
-
-
-
-<div class="description">
-    RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.以下のメソッドを持つ.get(id) : 指定されたカードIDのカードを返すforEach(callback) : すべてのカード x に対して callback(x) を実行するCardAtlasにより生成されたCardオブジェクトはcardAtlasID属性にカードのIDを代入される
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
+<h4 class="name" id="CardAtlas"><span class="type-signature type-signature-constant">(constant) </span>CardAtlas<span class="type-signature"> :Object</span></h4>
 
 
 
 
 
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.以下のメソッドを持つ.get(id) : 指定されたカードIDのカードを返すforEach(callback) : すべてのカード x に対して callback(x) を実行するCardAtlasにより生成されたCardオブジェクトはcardAtlasID属性にカードのIDを代入される</li></ul></dd>
     
 
     
@@ -161,31 +149,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
 
 
 
-
-        
-            
-<h4 class="name" id="ChainMask"><span class="type-signature">(constant) </span>ChainMask<span class="type-signature"> :Array.&lt;number></span></h4>
-
-
-
-
-<div class="description">
-    各属性に対して割り当てられたコンボ判定用のマスク.
+<div class="description usertext">
+    RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.以下のメソッドを持つ.get(id) : 指定されたカードIDのカードを返すforEach(callback) : すべてのカード x に対して callback(x) を実行するCardAtlasにより生成されたCardオブジェクトはcardAtlasID属性にカードのIDを代入される
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
-<span class="param-type">Array.&lt;number></span>
+<span class="param-type">Object</span>
+
 
 
         </li>
@@ -195,30 +200,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="ChainMask"><span class="type-signature type-signature-constant">(constant) </span>ChainMask<span class="type-signature"> :Array.&lt;number></span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>各属性に対して割り当てられたコンボ判定用のマスク.</li></ul></dd>
     
 
     
@@ -233,31 +227,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
 
 
 
-
-        
-            
-<h4 class="name" id="CharacterNames"><span class="type-signature">(constant) </span>CharacterNames<span class="type-signature"> :Object.&lt;string, string></span></h4>
-
-
-
-
-<div class="description">
-    基本属性をキャラクターのフルネームに変換する連想配列.
+<div class="description usertext">
+    各属性に対して割り当てられたコンボ判定用のマスク.
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
-<span class="param-type">Object.&lt;string, string></span>
+<span class="param-type">Array.&lt;number></span>
+
 
 
         </li>
@@ -267,30 +278,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="CharacterNames"><span class="type-signature type-signature-constant">(constant) </span>CharacterNames<span class="type-signature"> :Object.&lt;string, string></span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>基本属性をキャラクターのフルネームに変換する連想配列.</li></ul></dd>
     
 
     
@@ -305,31 +305,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
 
 
 
-
-        
-            
-<h4 class="name" id="EnemyAction"><span class="type-signature">(constant) </span>EnemyAction<span class="type-signature"> :Object.&lt;string, function()></span></h4>
-
-
-
-
-<div class="description">
-    敵の特殊攻撃を生成する関数をまとめたもの.
+<div class="description usertext">
+    基本属性をキャラクターのフルネームに変換する連想配列.
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
-<span class="param-type">Object.&lt;string, function()></span>
+<span class="param-type">Object.&lt;string, string></span>
+
 
 
         </li>
@@ -339,30 +356,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="EnemyAction"><span class="type-signature type-signature-constant">(constant) </span>EnemyAction<span class="type-signature"> :Object.&lt;string, function()></span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>敵の特殊攻撃を生成する関数をまとめたもの.</li></ul></dd>
     
 
     
@@ -377,31 +383,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
 
 
 
-
-        
-            
-<h4 class="name" id="EnemyData"><span class="type-signature">(constant) </span>EnemyData<span class="type-signature"> :Object.&lt;string, *></span></h4>
-
-
-
-
-<div class="description">
-    このゲームに登場する敵のデータを登録する連想配列.
+<div class="description usertext">
+    敵の特殊攻撃を生成する関数をまとめたもの.
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
-<span class="param-type">Object.&lt;string, *></span>
+<span class="param-type">Object.&lt;string, function()></span>
+
 
 
         </li>
@@ -411,30 +434,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="EnemyData"><span class="type-signature type-signature-constant">(constant) </span>EnemyData<span class="type-signature"> :Object.&lt;string, *></span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>このゲームに登場する敵のデータを登録する連想配列.</li></ul></dd>
     
 
     
@@ -449,7 +461,52 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
+
+
+
+
+
+<div class="description usertext">
+    このゲームに登場する敵のデータを登録する連想配列.
+</div>
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object.&lt;string, *></span>
+
+
+
+        </li>
+    </ul>
 
 
 
@@ -458,28 +515,55 @@
 
         
             
-<h4 class="name" id="LocalStorageInfo"><span class="type-signature">(constant) </span>LocalStorageInfo<span class="type-signature"> :Object</span></h4>
+<h4 class="name" id="LocalStorageInfo"><span class="type-signature type-signature-constant">(constant) </span>LocalStorageInfo<span class="type-signature"> :Object</span></h4>
 
 
 
 
-<div class="description">
-    localStorageの読み書きを行うオブジェクト.読み書きした情報の保持も行う. そのため, プログラムがlocalStorageを使用しているか否かは, このオブジェクトのisUsed()メソッドで判別できる.
-</div>
 
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>localStorageの読み書きを行うオブジェクト.読み書きした情報の保持も行う. そのため, プログラムがlocalStorageを使用しているか否かは, このオブジェクトのisUsed()メソッドで判別できる.</li></ul></dd>
+    
 
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
+    
 
+    
 
-        </li>
-    </ul>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -521,6 +605,7 @@
 <span class="param-type">null</span>
 
 
+
             
             </td>
 
@@ -547,6 +632,7 @@
 <span class="param-type">null</span>
 
 
+
             
             </td>
 
@@ -564,69 +650,20 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line22">line 22</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
-
-
-
-
-        
-            
-<h4 class="name" id="MPBoostBySuit"><span class="type-signature">(constant) </span>MPBoostBySuit<span class="type-signature"> :Object</span></h4>
-
-
-
-
-<div class="description">
-    各属性の強化倍率を扱うオブジェクト.一部のスキル (敵スキルを含む) では「特定の属性だけMPが増加」のように属性ごとに影響の違う効果を引き起こすことがある.これを管理するために用意する (複合属性は全部ひとまとめにして扱う).
+<div class="description usertext">
+    localStorageの読み書きを行うオブジェクト.読み書きした情報の保持も行う. そのため, プログラムがlocalStorageを使用しているか否かは, このオブジェクトのisUsed()メソッドで判別できる.
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
 <span class="param-type">Object</span>
+
 
 
         </li>
@@ -636,30 +673,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="MPBoostBySuit"><span class="type-signature type-signature-constant">(constant) </span>MPBoostBySuit<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>各属性の強化倍率を扱うオブジェクト.一部のスキル (敵スキルを含む) では「特定の属性だけMPが増加」のように属性ごとに影響の違う効果を引き起こすことがある.これを管理するために用意する (複合属性は全部ひとまとめにして扱う).</li></ul></dd>
     
 
     
@@ -674,31 +700,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
 
 
 
-
-        
-            
-<h4 class="name" id="PlayerSkill"><span class="type-signature">(constant) </span>PlayerSkill<span class="type-signature"> :Object.&lt;string, function()></span></h4>
-
-
-
-
-<div class="description">
-    プレイヤー側のスキルを生成する関数をまとめたもの.
+<div class="description usertext">
+    各属性の強化倍率を扱うオブジェクト.一部のスキル (敵スキルを含む) では「特定の属性だけMPが増加」のように属性ごとに影響の違う効果を引き起こすことがある.これを管理するために用意する (複合属性は全部ひとまとめにして扱う).
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
-<span class="param-type">Object.&lt;string, function()></span>
+<span class="param-type">Object</span>
+
 
 
         </li>
@@ -708,30 +751,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="PlayerSkill"><span class="type-signature type-signature-constant">(constant) </span>PlayerSkill<span class="type-signature"> :Object.&lt;string, function()></span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>プレイヤー側のスキルを生成する関数をまとめたもの.</li></ul></dd>
     
 
     
@@ -746,31 +778,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
 
 
 
-
-        
-            
-<h4 class="name" id="PrimitiveSuits"><span class="type-signature">(constant) </span>PrimitiveSuits<span class="type-signature"> :Array.&lt;string></span></h4>
-
-
-
-
-<div class="description">
-    基本属性を定義するリスト.
+<div class="description usertext">
+    プレイヤー側のスキルを生成する関数をまとめたもの.
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
-<span class="param-type">Array.&lt;string></span>
+<span class="param-type">Object.&lt;string, function()></span>
+
 
 
         </li>
@@ -780,30 +829,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="PrimitiveSuits"><span class="type-signature type-signature-constant">(constant) </span>PrimitiveSuits<span class="type-signature"> :Array.&lt;string></span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>基本属性を定義するリスト.</li></ul></dd>
     
 
     
@@ -818,31 +856,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
 
 
 
-
-        
-            
-<h4 class="name" id="ShortCharacterNames"><span class="type-signature">(constant) </span>ShortCharacterNames<span class="type-signature"> :Object.&lt;string, string></span></h4>
-
-
-
-
-<div class="description">
-    基本属性をキャラクターの下の名前に変換する連想配列.
+<div class="description usertext">
+    基本属性を定義するリスト.
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
-<span class="param-type">Object.&lt;string, string></span>
+<span class="param-type">Array.&lt;string></span>
+
 
 
         </li>
@@ -852,30 +907,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="ShortCharacterNames"><span class="type-signature type-signature-constant">(constant) </span>ShortCharacterNames<span class="type-signature"> :Object.&lt;string, string></span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>基本属性をキャラクターの下の名前に変換する連想配列.</li></ul></dd>
     
 
     
@@ -890,31 +934,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
 
 
 
-
-        
-            
-<h4 class="name" id="Suits"><span class="type-signature">(constant) </span>Suits<span class="type-signature"> :Array.&lt;string></span></h4>
-
-
-
-
-<div class="description">
-    プログラムで使われている属性を登録するリスト.
+<div class="description usertext">
+    基本属性をキャラクターの下の名前に変換する連想配列.
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
-<span class="param-type">Array.&lt;string></span>
+<span class="param-type">Object.&lt;string, string></span>
+
 
 
         </li>
@@ -924,30 +985,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="Suits"><span class="type-signature type-signature-constant">(constant) </span>Suits<span class="type-signature"> :Array.&lt;string></span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>プログラムで使われている属性を登録するリスト.</li></ul></dd>
     
 
     
@@ -962,31 +1012,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
 
 
 
-
-        
-            
-<h4 class="name" id="TutorialInfo"><span class="type-signature">(constant) </span>TutorialInfo<span class="type-signature"> :Array.&lt;Object.&lt;string, *>></span></h4>
-
-
-
-
-<div class="description">
-    チュートリアルの各項目の情報をまとめた配列.
+<div class="description usertext">
+    プログラムで使われている属性を登録するリスト.
 </div>
 
 
 
-    <h5>Type:</h5>
+    <h5 class="h5-types">Type:</h5>
     <ul>
         <li>
             
-<span class="param-type">Array.&lt;Object.&lt;string, *>></span>
+<span class="param-type">Array.&lt;string></span>
+
 
 
         </li>
@@ -996,30 +1063,19 @@
 
 
 
+
+        
+            
+<h4 class="name" id="TutorialInfo"><span class="type-signature type-signature-constant">(constant) </span>TutorialInfo<span class="type-signature"> :Array.&lt;Object.&lt;string, *>></span></h4>
+
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>チュートリアルの各項目の情報をまとめた配列.</li></ul></dd>
     
 
     
@@ -1034,7 +1090,52 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
+
+
+
+
+
+<div class="description usertext">
+    チュートリアルの各項目の情報をまとめた配列.
+</div>
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;Object.&lt;string, *>></span>
+
+
+
+        </li>
+    </ul>
 
 
 
@@ -1043,28 +1144,55 @@
 
         
             
-<h4 class="name" id="fps"><span class="type-signature">(constant) </span>fps<span class="type-signature"> :number</span></h4>
+<h4 class="name" id="fps"><span class="type-signature type-signature-constant">(constant) </span>fps<span class="type-signature"> :number</span></h4>
 
 
 
 
-<div class="description">
-    タイマー処理を担当するヘルパークラス.
-</div>
 
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>タイマー処理を担当するヘルパークラス.</li></ul></dd>
+    
 
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line384">line 384</a>
+    </li></ul></dd>
+    
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">number</span>
+    
 
+    
 
-        </li>
-    </ul>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -1103,6 +1231,7 @@
 <span class="param-type">stdgam.GameEngine</span>
 
 
+
             
             </td>
 
@@ -1126,6 +1255,7 @@
 <span class="param-type">boolean</span>
 
 
+
             
             </td>
 
@@ -1143,45 +1273,24 @@
 
 
 
-<dl class="details">
 
-    
 
-    
+<div class="description usertext">
+    タイマー処理を担当するヘルパークラス.
+</div>
 
-    
 
-    
 
-    
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
 
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line384">line 384</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
+        </li>
+    </ul>
 
 
 
@@ -1195,40 +1304,11 @@
 
 
 
-<div class="description">
-    ゲームエンジンの実装を行うnamespace. 以下の要素が外部に公開される.- stdgam.GameEngine- stdgam.Scene- stdgam.CachePool- stdgam.ImagePool- stdgam.SoundPool- stdgam.SEPool- stdgam.Templates
-</div>
-
-
-
-
-
-
 
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>ゲームエンジンの実装を行うnamespace. 以下の要素が外部に公開される.- stdgam.GameEngine- stdgam.Scene- stdgam.CachePool- stdgam.ImagePool- stdgam.SoundPool- stdgam.SEPool- stdgam.Templates</li></ul></dd>
     
 
     
@@ -1243,7 +1323,41 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
+
+
+
+
+
+<div class="description usertext">
+    ゲームエンジンの実装を行うnamespace. 以下の要素が外部に公開される.- stdgam.GameEngine- stdgam.Scene- stdgam.CachePool- stdgam.ImagePool- stdgam.SoundPool- stdgam.SEPool- stdgam.Templates
+</div>
+
+
 
 
 
@@ -1261,158 +1375,17 @@
 
     
 
-    
     <h4 class="name" id="ChainFunc"><span class="type-signature"></span>ChainFunc<span class="signature">(a, b, c)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
 
     
-
-
-
-<div class="description">
-    MAGICARD BATTLE第1弾のルールに従い, 3枚のカードがコンボの条件を満たしているか判定する(3枚目のカードがスキルを持つかどうかはチェックしない).
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>a</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Card.html">Card</a></span>
-|
-
-<span class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>b</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Card.html">Card</a></span>
-|
-
-<span class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>c</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Card.html">Card</a></span>
-|
-
-<span class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
 
 
 
 
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>MAGICARD BATTLE第1弾のルールに従い, 3枚のカードがコンボの条件を満たしているか判定する(3枚目のカードがスキルを持つかどうかはチェックしない).</li></ul></dd>
     
 
     
@@ -1427,6 +1400,30 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
@@ -1441,61 +1438,7 @@
 
 
 
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    コンボが成立していればtrue, 不成立ならfalse
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="ChainFuncVer2"><span class="type-signature"></span>ChainFuncVer2<span class="signature">(a, b, c)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    MAGICARD BATTLE第2弾のルールに従い, 3枚のカードがコンボの条件を満たしているか判定する(3枚目のカードがスキルを持つかどうかはチェックしない).
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -1532,6 +1475,7 @@
 <span class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></span>
 
 
+
             
             </td>
 
@@ -1556,6 +1500,7 @@
 |
 
 <span class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></span>
+
 
 
             
@@ -1584,6 +1529,7 @@
 <span class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></span>
 
 
+
             
             </td>
 
@@ -1603,30 +1549,58 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    コンボが成立していればtrue, 不成立ならfalse
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="ChainFuncVer2"><span class="type-signature"></span>ChainFuncVer2<span class="signature">(a, b, c)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>MAGICARD BATTLE第2弾のルールに従い, 3枚のカードがコンボの条件を満たしているか判定する(3枚目のカードがスキルを持つかどうかはチェックしない).</li></ul></dd>
     
 
     
@@ -1641,6 +1615,30 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
@@ -1655,9 +1653,128 @@
 
 
 
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Card.html">Card</a></span>
+|
+
+<span class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></span>
 
 
-<h5>Returns:</h5>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Card.html">Card</a></span>
+|
+
+<span class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>c</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Card.html">Card</a></span>
+|
+
+<span class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -1666,13 +1783,14 @@
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
 <span class="param-type">boolean</span>
+
 
 
     </dd>
@@ -1682,24 +1800,61 @@
 
 
 
-
-
         
             
 
     
 
-    
     <h4 class="name" id="createConfirmatingQB_BeforeBattle"><span class="type-signature"></span>createConfirmatingQB_BeforeBattle<span class="signature">(setting)</span><span class="type-signature"> &rarr; {<a href="QBYesNo.html">QBYesNo</a>}</span></h4>
-    
 
     
 
 
 
-<div class="description">
-    バトルが選択されたときに喋る内容を生成する.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>バトルが選択されたときに喋る内容を生成する.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line475">line 475</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -1709,7 +1864,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -1743,6 +1902,7 @@
 <span class="param-type">Objcet.&lt;string, *></span>
 
 
+
             
             </td>
 
@@ -1762,45 +1922,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line475">line 475</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -1811,12 +1932,7 @@
 
 
 
-
-
-
-
-
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -1825,13 +1941,14 @@
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
 <span class="param-type"><a href="QBYesNo.html">QBYesNo</a></span>
+
 
 
     </dd>
@@ -1841,24 +1958,61 @@
 
 
 
-
-
         
             
 
     
 
-    
     <h4 class="name" id="createMeter"><span class="type-signature"></span>createMeter<span class="signature">(v, max, frames)</span><span class="type-signature"> &rarr; {stdtask.Meter}</span></h4>
-    
 
     
 
 
 
-<div class="description">
-    ステータスの等速変化を実現するMeterオブジェクトを作る.あるパラメータがAからBへ変化するとき, モデル内部では一瞬で値がBになるが,GUIではAからBまで一定の時間を掛けて変化する様子を描画したい.この時間変化を表現するために使う.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>ステータスの等速変化を実現するMeterオブジェクトを作る.あるパラメータがAからBへ変化するとき, モデル内部では一瞬で値がBになるが,GUIではAからBまで一定の時間を掛けて変化する様子を描画したい.この時間変化を表現するために使う.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -1868,7 +2022,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -1902,6 +2060,7 @@
 <span class="param-type">number</span>
 
 
+
             
             </td>
 
@@ -1923,6 +2082,7 @@
             
                 
 <span class="param-type">number</span>
+
 
 
             
@@ -1948,6 +2108,7 @@
 <span class="param-type">number</span>
 
 
+
             
             </td>
 
@@ -1967,45 +2128,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line24">line 24</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -2016,12 +2138,7 @@
 
 
 
-
-
-
-
-
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -2030,13 +2147,14 @@
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
 <span class="param-type">stdtask.Meter</span>
+
 
 
     </dd>
@@ -2046,24 +2164,61 @@
 
 
 
-
-
         
             
 
     
 
-    
     <h4 class="name" id="createOpeningQB"><span class="type-signature"></span>createOpeningQB<span class="signature">(battleOpt)</span><span class="type-signature"> &rarr; {<a href="QBTalk.html">QBTalk</a>|<a href="QBLecture.html">QBLecture</a>}</span></h4>
-    
 
     
 
 
 
-<div class="description">
-    バトルの最初にQBが喋る内容を生成する.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>バトルの最初にQBが喋る内容を生成する.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line439">line 439</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2073,7 +2228,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -2107,6 +2266,7 @@
 <span class="param-type">Objcet.&lt;string, *></span>
 
 
+
             
             </td>
 
@@ -2126,45 +2286,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line439">line 439</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -2175,12 +2296,7 @@
 
 
 
-
-
-
-
-
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -2189,7 +2305,7 @@
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -2201,12 +2317,11 @@
 <span class="param-type"><a href="QBLecture.html">QBLecture</a></span>
 
 
+
     </dd>
 </dl>
 
     
-
-
 
 
 
@@ -2215,54 +2330,17 @@
 
     
 
-    
     <h4 class="name" id="createTutorialQB"><span class="type-signature"></span>createTutorialQB<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="QBYesNo.html">QBYesNo</a>}</span></h4>
-    
 
     
-
-
-
-<div class="description">
-    チュートリアルが選択されたときに喋る内容を生成する.
-</div>
-
-
-
-
-
-
-
-
-
 
 
 
 
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>チュートリアルが選択されたときに喋る内容を生成する.</li></ul></dd>
     
 
     
@@ -2277,6 +2355,30 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
@@ -2293,7 +2395,19 @@
 
 
 
-<h5>Returns:</h5>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -2302,13 +2416,14 @@
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
 <span class="param-type"><a href="QBYesNo.html">QBYesNo</a></span>
+
 
 
     </dd>
@@ -2318,24 +2433,61 @@
 
 
 
-
-
         
             
 
     
 
-    
     <h4 class="name" id="getCharacterName"><span class="type-signature"></span>getCharacterName<span class="signature">(suitString)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
 
     
 
 
 
-<div class="description">
-    指定された属性に対応するカード名を生成する.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>指定された属性に対応するカード名を生成する.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="card.js.html">card.js</a>, <a href="card.js.html#line79">line 79</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2345,7 +2497,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -2379,6 +2535,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -2398,45 +2555,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line79">line 79</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -2447,12 +2565,7 @@
 
 
 
-
-
-
-
-
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -2461,13 +2574,14 @@
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
 <span class="param-type">string</span>
+
 
 
     </dd>
@@ -2477,24 +2591,61 @@
 
 
 
-
-
         
             
 
     
 
-    
     <h4 class="name" id="getPolysuitMask"><span class="type-signature"></span>getPolysuitMask<span class="signature">(indices)</span><span class="type-signature"> &rarr; {number}</span></h4>
-    
 
     
 
 
 
-<div class="description">
-    複合クラスのためのマスクを計算する
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>複合クラスのためのマスクを計算する</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="card.js.html">card.js</a>, <a href="card.js.html#line100">line 100</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2504,7 +2655,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -2538,6 +2693,7 @@
 <span class="param-type">Array.&lt;number></span>
 
 
+
             
             </td>
 
@@ -2557,45 +2713,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line100">line 100</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -2606,12 +2723,7 @@
 
 
 
-
-
-
-
-
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -2620,13 +2732,14 @@
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
     <dd>
         
 <span class="param-type">number</span>
+
 
 
     </dd>
@@ -2636,24 +2749,61 @@
 
 
 
-
-
         
             
 
     
 
-    
     <h4 class="name" id="getPolysuitName"><span class="type-signature"></span>getPolysuitName<span class="signature">(marks)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
 
     
 
 
 
-<div class="description">
-    複合属性の属性名を生成する
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>複合属性の属性名を生成する</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="card.js.html">card.js</a>, <a href="card.js.html#line48">line 48</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2663,7 +2813,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -2697,6 +2851,7 @@
 <span class="param-type">Array.&lt;number></span>
 
 
+
             
             </td>
 
@@ -2716,45 +2871,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line48">line 48</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -2765,12 +2881,7 @@
 
 
 
-
-
-
-
-
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -2779,7 +2890,7 @@
 
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -2788,12 +2899,11 @@
 <span class="param-type">string</span>
 
 
+
     </dd>
 </dl>
 
     
-
-
 
 
 
@@ -2810,23 +2920,50 @@
 
 
 
-<div class="description">
-    描画処理を行うオブジェクト
-</div>
 
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>描画処理を行うオブジェクト</li></ul></dd>
+    
 
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line29">line 29</a>
+    </li></ul></dd>
+    
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
+    
 
+    
 
-        </li>
-    </ul>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2865,6 +3002,7 @@
 <span class="param-type">function</span>
 
 
+
             
             </td>
 
@@ -2882,45 +3020,24 @@
 
 
 
-<dl class="details">
 
-    
 
-    
+<div class="description usertext">
+    描画処理を行うオブジェクト
+</div>
 
-    
 
-    
 
-    
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
 
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line29">line 29</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
+        </li>
+    </ul>
 
 
 
@@ -2934,23 +3051,50 @@
 
 
 
-<div class="description">
-    1フレームごとにタスク処理を行うオブジェクト
-</div>
 
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>1フレームごとにタスク処理を行うオブジェクト</li></ul></dd>
+    
 
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
+    
 
+    
 
-        </li>
-    </ul>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2989,6 +3133,7 @@
 <span class="param-type">function</span>
 
 
+
             
             </td>
 
@@ -3006,45 +3151,24 @@
 
 
 
-<dl class="details">
 
-    
 
-    
+<div class="description usertext">
+    1フレームごとにタスク処理を行うオブジェクト
+</div>
 
-    
 
-    
 
-    
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
 
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line34">line 34</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
+        </li>
+    </ul>
 
 
 
@@ -3059,45 +3183,7 @@
 
 
 
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Template_text</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
 <dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
     
 
     
@@ -3112,7 +3198,48 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
+
+
+
+
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Template_text</span>
+
+
+
+        </li>
+    </ul>
 
 
 
@@ -3127,18 +3254,46 @@
 
 
 
+<dl class="details">
+    
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="global.html#Task">Task</a></span>
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line895">line 895</a>
+    </li></ul></dd>
+    
 
+    
 
-        </li>
-    </ul>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -3177,6 +3332,7 @@
 <span class="param-type">function</span>
 
 
+
             
             </td>
 
@@ -3194,45 +3350,20 @@
 
 
 
-<dl class="details">
 
-    
 
-    
 
-    
 
-    
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="global.html#Task">Task</a></span>
 
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line895">line 895</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
+        </li>
+    </ul>
 
 
 
@@ -3247,18 +3378,46 @@
 
 
 
+<dl class="details">
+    
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line871">line 871</a>
+    </li></ul></dd>
+    
 
+    
 
-        </li>
-    </ul>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -3297,6 +3456,7 @@
 <span class="param-type">HTMLImageElement</span>
 
 
+
             
             </td>
 
@@ -3318,6 +3478,7 @@
             
                 
 <span class="param-type">number</span>
+
 
 
             
@@ -3343,6 +3504,7 @@
 <span class="param-type">number</span>
 
 
+
             
             </td>
 
@@ -3366,6 +3528,7 @@
 <span class="param-type">number</span>
 
 
+
             
             </td>
 
@@ -3383,45 +3546,20 @@
 
 
 
-<dl class="details">
 
-    
 
-    
 
-    
 
-    
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
 
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line871">line 871</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
+        </li>
+    </ul>
 
 
 
@@ -3436,18 +3574,46 @@
 
 
 
+<dl class="details">
+    
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="global.html#Task">Task</a></span>
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line879">line 879</a>
+    </li></ul></dd>
+    
 
+    
 
-        </li>
-    </ul>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -3486,6 +3652,7 @@
 <span class="param-type">function</span>
 
 
+
             
             </td>
 
@@ -3509,6 +3676,7 @@
 <span class="param-type">function</span>
 
 
+
             
             </td>
 
@@ -3526,45 +3694,20 @@
 
 
 
-<dl class="details">
 
-    
 
-    
 
-    
 
-    
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="global.html#Task">Task</a></span>
 
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line879">line 879</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
+        </li>
+    </ul>
 
 
 
@@ -3579,18 +3722,46 @@
 
 
 
+<dl class="details">
+    
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="global.html#Task">Task</a></span>
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line889">line 889</a>
+    </li></ul></dd>
+    
 
+    
 
-        </li>
-    </ul>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -3629,6 +3800,7 @@
 <span class="param-type">function</span>
 
 
+
             
             </td>
 
@@ -3652,6 +3824,7 @@
 <span class="param-type">function</span>
 
 
+
             
             </td>
 
@@ -3669,45 +3842,20 @@
 
 
 
-<dl class="details">
 
-    
 
-    
 
-    
 
-    
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="global.html#Task">Task</a></span>
 
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line889">line 889</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
+        </li>
+    </ul>
 
 
 
@@ -3722,18 +3870,46 @@
 
 
 
+<dl class="details">
+    
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line857">line 857</a>
+    </li></ul></dd>
+    
 
+    
 
-        </li>
-    </ul>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -3772,6 +3948,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -3793,6 +3970,7 @@
             
                 
 <span class="param-type">number</span>
+
 
 
             
@@ -3818,6 +3996,7 @@
 <span class="param-type">number</span>
 
 
+
             
             </td>
 
@@ -3839,6 +4018,7 @@
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -3864,6 +4044,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -3887,6 +4068,7 @@
 <span class="param-type">number</span>
 
 
+
             
             </td>
 
@@ -3904,45 +4086,20 @@
 
 
 
-<dl class="details">
 
-    
 
-    
 
-    
 
-    
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
 
-    
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line857">line 857</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
+        </li>
+    </ul>
 
 
 
@@ -3960,19 +4117,21 @@
 
 
 
+    
+    
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.CachePool.html">CachePool</a></li><li><a href="Public.CyclicSelect.html">CyclicSelect</a></li><li><a href="Public.GameEngine.html">GameEngine</a></li><li><a href="Public.ImageCutter.html">ImageCutter</a></li><li><a href="Public.ImagePool.html">ImagePool</a></li><li><a href="Public.Meter.html">Meter</a></li><li><a href="Public.SEPool.html">SEPool</a></li><li><a href="Public.Scene.html">Scene</a></li><li><a href="Public.Scroll.html">Scroll</a></li><li><a href="Public.Select.html">Select</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="Public.SoundPool.html">SoundPool</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#fps">fps</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li><li><a href="global.html#stdgam">stdgam</a></li></ul>
-</nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 02:03:13 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 02:04:01 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
 </body>
 </html>

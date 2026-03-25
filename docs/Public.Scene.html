@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Class: Scene</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Scene - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Class: Scene</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a><ul class='methods'><li data-type='method'><a href="BasicStatus.html#HP">HP</a></li><li data-type='method'><a href="BasicStatus.html#MP">MP</a></li><li data-type='method'><a href="BasicStatus.html#addHP">addHP</a></li><li data-type='method'><a href="BasicStatus.html#addMP">addMP</a></li><li data-type='method'><a href="BasicStatus.html#init">init</a></li><li data-type='method'><a href="BasicStatus.html#name">name</a></li><li data-type='method'><a href="BasicStatus.html#percentHP">percentHP</a></li><li data-type='method'><a href="BasicStatus.html#percentMP">percentMP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateHP">retentionRateHP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateMP">retentionRateMP</a></li></ul></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a><ul class='methods'><li data-type='method'><a href="Enemy.html#antiskillContains">antiskillContains</a></li><li data-type='method'><a href="Enemy.html#init">init</a></li></ul></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method'><a href="Player.html#SG">SG</a></li><li data-type='method'><a href="Player.html#addSG">addSG</a></li><li data-type='method'><a href="Player.html#addShield">addShield</a></li><li data-type='method'><a href="Player.html#addStun">addStun</a></li><li data-type='method'><a href="Player.html#id">id</a></li><li data-type='method'><a href="Player.html#init">init</a></li><li data-type='method'><a href="Player.html#isPrismatic">isPrismatic</a></li><li data-type='method'><a href="Player.html#mainSkillCount">mainSkillCount</a></li><li data-type='method'><a href="Player.html#mark">mark</a></li><li data-type='method'><a href="Player.html#parseMainSkill">parseMainSkill</a></li><li data-type='method'><a href="Player.html#payCost">payCost</a></li><li data-type='method'><a href="Player.html#resetSG">resetSG</a></li><li data-type='method'><a href="Player.html#shield">shield</a></li><li data-type='method'><a href="Player.html#shiftMainSkill">shiftMainSkill</a></li><li data-type='method'><a href="Player.html#stun">stun</a></li><li data-type='method'><a href="Player.html#suitString">suitString</a></li></ul></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.CachePool.html">CachePool</a><ul class='methods'><li data-type='method'><a href="Public.CachePool.html#createCache">createCache</a></li><li data-type='method'><a href="Public.CachePool.html#get">get</a></li></ul></li><li><a href="Public.CyclicSelect.html">CyclicSelect</a><ul class='methods'><li data-type='method'><a href="Public.CyclicSelect.html#addMod">addMod</a></li><li data-type='method'><a href="Public.CyclicSelect.html#move">move</a></li></ul></li><li><a href="Public.GameEngine.html">GameEngine</a><ul class='methods'><li data-type='method'><a href="Public.GameEngine.html#addScene">addScene</a></li><li data-type='method'><a href="Public.GameEngine.html#changeScene">changeScene</a></li><li data-type='method'><a href="Public.GameEngine.html#ready">ready</a></li><li data-type='method'><a href="Public.GameEngine.html#run">run</a></li><li data-type='method'><a href="Public.GameEngine.html#update">update</a></li></ul></li><li><a href="Public.ImageCutter.html">ImageCutter</a><ul class='methods'><li data-type='method'><a href="Public.ImageCutter.html#paint">paint</a></li></ul></li><li><a href="Public.ImagePool.html">ImagePool</a><ul class='methods'><li data-type='method'><a href="Public.ImagePool.html#get">get</a></li><li data-type='method'><a href="Public.ImagePool.html#load">load</a></li><li data-type='method'><a href="Public.ImagePool.html#ready">ready</a></li></ul></li><li><a href="Public.Meter.html">Meter</a><ul class='methods'><li data-type='method'><a href="Public.Meter.html#changeTo">changeTo</a></li><li data-type='method'><a href="Public.Meter.html#execute">execute</a></li><li data-type='method'><a href="Public.Meter.html#init">init</a></li></ul></li><li><a href="Public.SEPool.html">SEPool</a><ul class='methods'><li data-type='method'><a href="Public.SEPool.html#play">play</a></li><li data-type='method'><a href="Public.SEPool.html#register">register</a></li></ul></li><li><a href="Public.Scene.html">Scene</a><ul class='methods'><li data-type='method'><a href="Public.Scene.html#add">add</a></li><li data-type='method'><a href="Public.Scene.html#addSequence">addSequence</a></li><li data-type='method'><a href="Public.Scene.html#addSprite">addSprite</a></li><li data-type='method'><a href="Public.Scene.html#addSpriteAfter">addSpriteAfter</a></li><li data-type='method'><a href="Public.Scene.html#addSpriteBefore">addSpriteBefore</a></li><li data-type='method'><a href="Public.Scene.html#addTask">addTask</a></li><li data-type='method'><a href="Public.Scene.html#addTaskAfter">addTaskAfter</a></li><li data-type='method'><a href="Public.Scene.html#addTaskBefore">addTaskBefore</a></li><li data-type='method'><a href="Public.Scene.html#init">init</a></li><li data-type='method'><a href="Public.Scene.html#superOnLoad">superOnLoad</a></li><li data-type='method'><a href="Public.Scene.html#superdraw">superdraw</a></li><li data-type='method'><a href="Public.Scene.html#superexecute">superexecute</a></li><li data-type='method'><a href="Public.Scene.html#useCoroutine">useCoroutine</a></li></ul></li><li><a href="Public.Scroll.html">Scroll</a><ul class='methods'><li data-type='method'><a href="Public.Scroll.html#action">action</a></li><li data-type='method'><a href="Public.Scroll.html#bind">bind</a></li><li data-type='method'><a href="Public.Scroll.html#cancel">cancel</a></li><li data-type='method'><a href="Public.Scroll.html#execute">execute</a></li><li data-type='method'><a href="Public.Scroll.html#initScroll">initScroll</a></li><li data-type='method'><a href="Public.Scroll.html#viewCount">viewCount</a></li></ul></li><li><a href="Public.Select.html">Select</a><ul class='methods'><li data-type='method'><a href="Public.Select.html#action">action</a></li><li data-type='method'><a href="Public.Select.html#bind">bind</a></li><li data-type='method'><a href="Public.Select.html#cancel">cancel</a></li><li data-type='method'><a href="Public.Select.html#execute">execute</a></li><li data-type='method'><a href="Public.Select.html#move">move</a></li></ul></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="Public.SoundPool.html">SoundPool</a><ul class='methods'><li data-type='method'><a href="Public.SoundPool.html#load">load</a></li><li data-type='method'><a href="Public.SoundPool.html#play">play</a></li><li data-type='method'><a href="Public.SoundPool.html#ready">ready</a></li><li data-type='method'><a href="Public.SoundPool.html#stop">stop</a></li></ul></li><li><a href="QBLecture.html">QBLecture</a><ul class='methods'><li data-type='method'><a href="QBLecture.html#activate">activate</a></li><li data-type='method'><a href="QBLecture.html#chart">chart</a></li><li data-type='method'><a href="QBLecture.html#draw">draw</a></li><li data-type='method'><a href="QBLecture.html#execute">execute</a></li><li data-type='method'><a href="QBLecture.html#talk">talk</a></li></ul></li><li><a href="QBTalk.html">QBTalk</a><ul class='methods'><li data-type='method'><a href="QBTalk.html#activate">activate</a></li><li data-type='method'><a href="QBTalk.html#chart">chart</a></li><li data-type='method'><a href="QBTalk.html#draw">draw</a></li><li data-type='method'><a href="QBTalk.html#execute">execute</a></li></ul></li><li><a href="QBTelop.html">QBTelop</a><ul class='methods'><li data-type='method'><a href="QBTelop.html#activate">activate</a></li><li data-type='method'><a href="QBTelop.html#chart">chart</a></li><li data-type='method'><a href="QBTelop.html#draw">draw</a></li><li data-type='method'><a href="QBTelop.html#execute">execute</a></li></ul></li><li><a href="QBYesNo.html">QBYesNo</a><ul class='methods'><li data-type='method'><a href="QBYesNo.html#activate">activate</a></li><li data-type='method'><a href="QBYesNo.html#chart">chart</a></li><li data-type='method'><a href="QBYesNo.html#draw">draw</a></li><li data-type='method'><a href="QBYesNo.html#execute">execute</a></li><li data-type='method'><a href="QBYesNo.html#waitForAnswer">waitForAnswer</a></li></ul></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li></ul><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#fps">fps</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li><li><a href="global.html#stdgam">stdgam</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Scene</h1>
+    
 
     
 
@@ -28,92 +47,77 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Scene<span class="signature">(dfn)</span><span class="type-signature"></span></h2>
+        <h2>
         
-            <div class="class-description">ゲームにおける１つのモード, または１つのステージを表すクラス.GameEngineからロードして使う.シーンは「スプライトリスト」と「タスクリスト」を持つ.スプライトは draw(GE, ctx) メソッドを持つものの総称であり, 各フレームの描画処理を行う(ここで, GEはGameEngine, ctxは描画に使うコンテクスト).一方, タスクは execute(GE) メソッドを持つものの総称であり, 1フレームごとにタスク処理を行う.これに加えて, Scene自体も draw(GE, ctx) や execute(GE) を持つことができる.これらの機能を組み合わせてゲーム内の処理を実現する.</div>
+            Scene
+        
+        </h2>
+        
+            <div class="class-description usertext">ゲームにおける１つのモード, または１つのステージを表すクラス.GameEngineからロードして使う.シーンは「スプライトリスト」と「タスクリスト」を持つ.スプライトは draw(GE, ctx) メソッドを持つものの総称であり, 各フレームの描画処理を行う(ここで, GEはGameEngine, ctxは描画に使うコンテクスト).一方, タスクは execute(GE) メソッドを持つものの総称であり, 1フレームごとにタスク処理を行う.これに加えて, Scene自体も draw(GE, ctx) や execute(GE) を持つことができる.これらの機能を組み合わせてゲーム内の処理を実現する.</div>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
+            
 
     
     <h2>Constructor</h2>
     
 
-    
     <h4 class="name" id="Scene"><span class="type-signature"></span>new Scene<span class="signature">(dfn)</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
-    dfnが渡された場合、共通の処理を済ませた後にその内容を自身に代入する.これにより, 派生クラスを作らなくても, dfnの中に追加の定義を書いておけばそれを自身に適用できる.例)let scene = new stdgam.Scene({    onLoad(GE, args){ ...初期化処理... },    draw(GE, ctx){ ,,,描画処理... } }});上の例は次と等価である:let scene = new stdgam.Scene();scene.onLoad = function(GE, args){ ...初期化処理... };scene.draw(GE, ctx) = function{ ...描画処理... };
-</div>
 
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>dfnが渡された場合、共通の処理を済ませた後にその内容を自身に代入する.これにより, 派生クラスを作らなくても, dfnの中に追加の定義を書いておけばそれを自身に適用できる.例)let scene = new stdgam.Scene({    onLoad(GE, args){ ...初期化処理... },    draw(GE, ctx){ ,,,描画処理... } }});上の例は次と等価である:let scene = new stdgam.Scene();scene.onLoad = function(GE, args){ ...初期化処理... };scene.draw(GE, ctx) = function{ ...描画処理... };</li></ul></dd>
     
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line57">line 57</a>
+    </li></ul></dd>
     
 
-        <tr>
-            
-                <td class="name"><code>dfn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object.&lt;string, *></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">このオブジェクトに追加で定義する要素を集めた連想配列.</td>
-        </tr>
+    
 
     
-    </tbody>
-</table>
 
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -154,6 +158,7 @@
 <span class="param-type">function</span>
 
 
+
             
             </td>
 
@@ -183,6 +188,7 @@
             
                 
 <span class="param-type">function</span>
+
 
 
             
@@ -216,6 +222,7 @@
 <span class="param-type">function</span>
 
 
+
             
             </td>
 
@@ -241,37 +248,151 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dfn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object.&lt;string, *></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">このオブジェクトに追加で定義する要素を集めた連想配列.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(obj, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>スプライトとタスクを同時に登録するショートカット.まず, objがスプライトの条件を満たすならスプライトリストに登録する.次に, objがタスクの条件を満たすならタスクリストに登録する.両方の条件を満たす場合は, 両方のリストに追加される.</li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line57">line 57</a>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line149">line 149</a>
     </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     
@@ -293,59 +414,7 @@
 
 
 
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(obj, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    スプライトとタスクを同時に登録するショートカット.まず, objがスプライトの条件を満たすならスプライトリストに登録する.次に, objがタスクの条件を満たすならタスクリストに登録する.両方の条件を満たす場合は, 両方のリストに追加される.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -386,6 +455,7 @@
 <span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
 
 
+
             
             </td>
 
@@ -421,6 +491,7 @@
 <span class="param-type">boolean</span>
 
 
+
             
             </td>
 
@@ -439,7 +510,7 @@
             
                 <td class="default">
                 
-                    false
+                    <code>false</code>
                 
                 </td>
             
@@ -450,52 +521,6 @@
     
     </tbody>
 </table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line149">line 149</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
 
 
 
@@ -520,17 +545,56 @@
 
     
 
-    
     <h4 class="name" id="addSequence"><span class="type-signature"></span>addSequence<span class="signature">(list, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
-    複数のオブジェクトを登録するためのショートカット.listの要素のうち, スプライトであるものはスプライトリストに,タスクであるものはタスクリストに追加する.第2引数がtrueの場合, 順序を維持したままリストの先頭に追加する.第2引数がfalseの場合, 順序を維持したままリストの末尾に追加する.省略時は末尾に追加する.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>複数のオブジェクトを登録するためのショートカット.listの要素のうち, スプライトであるものはスプライトリストに,タスクであるものはタスクリストに追加する.第2引数がtrueの場合, 順序を維持したままリストの先頭に追加する.第2引数がfalseの場合, 順序を維持したままリストの末尾に追加する.省略時は末尾に追加する.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line216">line 216</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -540,7 +604,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -578,6 +646,7 @@
 <span class="param-type">Array.&lt;(<a href="global.html#Sprite">Sprite</a>|<a href="global.html#Task">Task</a>)></span>
 
 
+
             
             </td>
 
@@ -613,6 +682,7 @@
 <span class="param-type">boolean</span>
 
 
+
             
             </td>
 
@@ -631,7 +701,7 @@
             
                 <td class="default">
                 
-                    false
+                    <code>false</code>
                 
                 </td>
             
@@ -642,52 +712,6 @@
     
     </tbody>
 </table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line216">line 216</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
 
 
 
@@ -712,17 +736,56 @@
 
     
 
-    
     <h4 class="name" id="addSprite"><span class="type-signature"></span>addSprite<span class="signature">(spr, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
-    スプライトをスプライトリストに追加する.追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.省略したときは「末尾に」追加する.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>スプライトをスプライトリストに追加する.追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.省略したときは「末尾に」追加する.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -732,7 +795,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -770,6 +837,7 @@
 <span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
 
 
+
             
             </td>
 
@@ -805,6 +873,7 @@
 <span class="param-type">boolean</span>
 
 
+
             
             </td>
 
@@ -823,7 +892,7 @@
             
                 <td class="default">
                 
-                    false
+                    <code>false</code>
                 
                 </td>
             
@@ -840,52 +909,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line116">line 116</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
 
 
 
@@ -904,146 +927,17 @@
 
     
 
-    
     <h4 class="name" id="addSpriteAfter"><span class="type-signature"></span>addSpriteAfter<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
-    
 
     
-
-
-
-<div class="description">
-    スプライトリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたスプライトをその直後に追加する (順序を保つ).もしtargetが登録されていない場合, リストの末尾に追加する.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>target</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">追加位置の基準となるスプライト</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>objs</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                    &lt;repeatable><br>
-                
-                </td>
-            
-
-            
-
-            <td class="description last">追加する1つ以上のスプライト</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
 
 
 
 
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>スプライトリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたスプライトをその直後に追加する (順序を保つ).もしtargetが登録されていない場合, リストの末尾に追加する.</li></ul></dd>
     
 
     
@@ -1058,6 +952,30 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
@@ -1072,39 +990,7 @@
 
 
 
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="addSpriteBefore"><span class="type-signature"></span>addSpriteBefore<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    スプライトリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたスプライトをその直前に追加する (順序を保つ).もしtargetが登録されていない場合, リストの先頭に追加する.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -1140,6 +1026,7 @@
 <span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
 
 
+
             
             </td>
 
@@ -1171,6 +1058,7 @@
 <span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
 
 
+
             
             </td>
 
@@ -1200,30 +1088,35 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addSpriteBefore"><span class="type-signature"></span>addSpriteBefore<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>スプライトリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたスプライトをその直前に追加する (順序を保つ).もしtargetが登録されていない場合, リストの先頭に追加する.</li></ul></dd>
     
 
     
@@ -1238,8 +1131,136 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">追加位置の基準となるスプライト</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>objs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Sprite">Sprite</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last">追加する1つ以上のスプライト</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1264,17 +1285,56 @@
 
     
 
-    
     <h4 class="name" id="addTask"><span class="type-signature"></span>addTask<span class="signature">(task, first<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
-    タスクをタスクリストに追加する.追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.省略したときは「末尾に」追加する.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>タスクをタスクリストに追加する.追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.省略したときは「末尾に」追加する.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line132">line 132</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -1284,7 +1344,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -1322,6 +1386,7 @@
 <span class="param-type"><a href="global.html#Task">Task</a></span>
 
 
+
             
             </td>
 
@@ -1357,6 +1422,7 @@
 <span class="param-type">boolean</span>
 
 
+
             
             </td>
 
@@ -1375,7 +1441,7 @@
             
                 <td class="default">
                 
-                    false
+                    <code>false</code>
                 
                 </td>
             
@@ -1392,52 +1458,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line132">line 132</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
 
 
 
@@ -1456,146 +1476,17 @@
 
     
 
-    
     <h4 class="name" id="addTaskAfter"><span class="type-signature"></span>addTaskAfter<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
-    
 
     
-
-
-
-<div class="description">
-    タスクリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたタスクをその直後に追加する (順序を保つ).もしtargetが登録されていない場合, リストの末尾に追加する.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>target</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Task">Task</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">追加位置の基準となるタスク</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>objs</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Task">Task</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                    &lt;repeatable><br>
-                
-                </td>
-            
-
-            
-
-            <td class="description last">追加する1つ以上のタスク</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
 
 
 
 
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>タスクリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたタスクをその直後に追加する (順序を保つ).もしtargetが登録されていない場合, リストの末尾に追加する.</li></ul></dd>
     
 
     
@@ -1610,6 +1501,30 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
 
@@ -1624,39 +1539,7 @@
 
 
 
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="addTaskBefore"><span class="type-signature"></span>addTaskBefore<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    タスクリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたタスクをその直前に追加する (順序を保つ).もしtargetが登録されていない場合, リストの先頭に追加する.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -1692,6 +1575,7 @@
 <span class="param-type"><a href="global.html#Task">Task</a></span>
 
 
+
             
             </td>
 
@@ -1723,6 +1607,7 @@
 <span class="param-type"><a href="global.html#Task">Task</a></span>
 
 
+
             
             </td>
 
@@ -1752,30 +1637,35 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addTaskBefore"><span class="type-signature"></span>addTaskBefore<span class="signature">(target, &hellip;objs)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>タスクリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたタスクをその直前に追加する (順序を保つ).もしtargetが登録されていない場合, リストの先頭に追加する.</li></ul></dd>
     
 
     
@@ -1790,8 +1680,136 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
 
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Task">Task</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">追加位置の基準となるタスク</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>objs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Task">Task</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last">追加する1つ以上のタスク</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1816,54 +1834,17 @@
 
     
 
-    
     <h4 class="name" id="init"><span class="type-signature"></span>init<span class="signature">()</span><span class="type-signature"></span></h4>
-    
 
     
-
-
-
-<div class="description">
-    スプライトとタスクのリストを初期化する.このメソッドを明示的に呼ばない限り, superOnLoadを実行してもスプライトリストやタスクリストは初期化されない.
-</div>
-
-
-
-
-
-
-
-
-
 
 
 
 
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>スプライトとタスクのリストを初期化する.このメソッドを明示的に呼ばない限り, superOnLoadを実行してもスプライトリストやタスクリストは初期化されない.</li></ul></dd>
     
 
     
@@ -1878,7 +1859,41 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1904,17 +1919,56 @@
 
     
 
-    
     <h4 class="name" id="superOnLoad"><span class="type-signature"></span>superOnLoad<span class="signature">(GE, args)</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
-    このシーンがGEのカレントシーンになったとき呼び出される.まず, GEをプライベートフィールドに保存する.次に, もしthis.onLoad(GE, args)が定義されていればこれを実行する.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>このシーンがGEのカレントシーンになったとき呼び出される.まず, GEをプライベートフィールドに保存する.次に, もしthis.onLoad(GE, args)が定義されていればこれを実行する.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line94">line 94</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -1924,7 +1978,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -1958,6 +2016,7 @@
 <span class="param-type">stdgam.GameEngine</span>
 
 
+
             
             </td>
 
@@ -1981,6 +2040,7 @@
 <span class="param-type">Object.&lt;string, *></span>
 
 
+
             
             </td>
 
@@ -1994,52 +2054,6 @@
     
     </tbody>
 </table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line94">line 94</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
 
 
 
@@ -2064,17 +2078,56 @@
 
     
 
-    
     <h4 class="name" id="superdraw"><span class="type-signature"></span>superdraw<span class="signature">(ctx)</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
-    登録されているスプライトのdraw(GE, ctx)を順番に実行する.ここでGEはこのゲームのGameEngine, ctxは描画に使うコンテクストである.その後, 「activeが真」または「activeがundefined」のスプライトだけをリストに残して, 他のスプライトはリストから削除する.もしthis.draw(GE, ctx)が定義されている場合, 最後にこれを実行する.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>登録されているスプライトのdraw(GE, ctx)を順番に実行する.ここでGEはこのゲームのGameEngine, ctxは描画に使うコンテクストである.その後, 「activeが真」または「activeがundefined」のスプライトだけをリストに残して, 他のスプライトはリストから削除する.もしthis.draw(GE, ctx)が定義されている場合, 最後にこれを実行する.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line236">line 236</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2084,7 +2137,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -2118,6 +2175,7 @@
 <span class="param-type">CanvasRenderingContext2D</span>
 
 
+
             
             </td>
 
@@ -2137,52 +2195,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line236">line 236</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
 
 
 
@@ -2201,54 +2213,17 @@
 
     
 
-    
     <h4 class="name" id="superexecute"><span class="type-signature"></span>superexecute<span class="signature">()</span><span class="type-signature"></span></h4>
-    
 
     
-
-
-
-<div class="description">
-    登録されているタスクのexecute(GE)を順番に実行する.ここでGEはこのゲームのGameEngineである.ただし, あるタスクがfalseを返した場合, それより後のタスクは実行しない.その後, 「activeが真」または「activeがundefined」のタスクだけをリストに残して, 他のタスクはリストから削除する.最後に, もしthis.execute(GE)が定義されている場合, これを実行する.実際には, stdgam.Templatesの機能を実現するために, execute(GE)の実行後,タスクが_traits要素を持つかどうかチェックする.もし存在すれば, その中身の関数も順番に実行する (引数はexecuteと同じ).【注意】execute()の中でタスクの追加・削除を行うと, for文の実行中に配列を変更したのと同じ現象が発生します！　特に、自身よりも前に新しい要素を、追加する場合は, falseを返して後続の処理を止めてください.
-</div>
-
-
-
-
-
-
-
-
-
 
 
 
 
 <dl class="details">
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>登録されているタスクのexecute(GE)を順番に実行する.ここでGEはこのゲームのGameEngineである.ただし, あるタスクがfalseを返した場合, それより後のタスクは実行しない.その後, 「activeが真」または「activeがundefined」のタスクだけをリストに残して, 他のタスクはリストから削除する.最後に, もしthis.execute(GE)が定義されている場合, これを実行する.実際には, stdgam.Templatesの機能を実現するために, execute(GE)の実行後,タスクが_traits要素を持つかどうかチェックする.もし存在すれば, その中身の関数も順番に実行する (引数はexecuteと同じ).【注意】execute()の中でタスクの追加・削除を行うと, for文の実行中に配列を変更したのと同じ現象が発生します！　特に、自身よりも前に新しい要素を、追加する場合は, falseを返して後続の処理を止めてください.</li></ul></dd>
     
 
     
@@ -2263,7 +2238,41 @@
     
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 </dl>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2289,17 +2298,56 @@
 
     
 
-    
     <h4 class="name" id="useCoroutine"><span class="type-signature"></span>useCoroutine<span class="signature">(GE, gen, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
-    指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの更新処理をこのジェネレータに委任する.具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.
-</div>
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li>指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの更新処理をこのジェネレータに委任する.具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.</li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line283">line 283</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2309,7 +2357,11 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -2347,6 +2399,7 @@
 <span class="param-type">stdgam.GameEngine</span>
 
 
+
             
             </td>
 
@@ -2380,6 +2433,7 @@
             
                 
 <span class="param-type">GeneratorFunction</span>
+
 
 
             
@@ -2417,6 +2471,7 @@
 <span class="param-type">Object.&lt;*, *></span>
 
 
+
             
             </td>
 
@@ -2435,7 +2490,7 @@
             
                 <td class="default">
                 
-                    {}
+                    <code>{}</code>
                 
                 </td>
             
@@ -2446,52 +2501,6 @@
     
     </tbody>
 </table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line283">line 283</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
 
 
 
@@ -2524,19 +2533,21 @@
 
 
 
+    
+    
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.CachePool.html">CachePool</a></li><li><a href="Public.CyclicSelect.html">CyclicSelect</a></li><li><a href="Public.GameEngine.html">GameEngine</a></li><li><a href="Public.ImageCutter.html">ImageCutter</a></li><li><a href="Public.ImagePool.html">ImagePool</a></li><li><a href="Public.Meter.html">Meter</a></li><li><a href="Public.SEPool.html">SEPool</a></li><li><a href="Public.Scene.html">Scene</a></li><li><a href="Public.Scroll.html">Scroll</a></li><li><a href="Public.Select.html">Select</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="Public.SoundPool.html">SoundPool</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#fps">fps</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li><li><a href="global.html#stdgam">stdgam</a></li></ul>
-</nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 02:03:13 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 02:04:01 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
 </body>
 </html>
