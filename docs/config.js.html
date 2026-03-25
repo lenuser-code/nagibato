@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: config.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: config.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>﻿/**
+ * @file
+ * namsspace configを定義し, その中にconfigScene, configScene2を実装する.
+ *
+ * @author lenuser
+ */
+
+/*
+ * configScene, configScene2の構成要素をまとめたnamespace.
+ * 以下の要素が外部に公開される.
+ * - config.configScene
+ * - config.configScene2
+ * - config.SideboardDialog
+ *
+ * @namespace
+ */
+var config = config || {};
+(function(Public){
+
+// #1. 各項目の設定ダイアログの実装
+
+/**
+ * cardlist.jsの内容をキャラ別に分割するクラス.
+ * RAW_CARD_DATAの各要素をそのまま使うので注意.
+ * @class
+ */
+let Prism = class{
+    /**
+     * それぞれの分類に付ける名前
+     * @type {string[]}
+     */
+    static labels = PrimitiveSuits.map((e) => CharacterNames[e]).concat(["多人数"]);
+
+    /**
+     * RAW_CARD_DATAの要素をキャラクター別に分類して, 結果をthis.subsetsに代入する.
+     * 具体的には, Prism.labels[k] に属する要素の集合がthis.subsets[k] であるような
+     * 配列をthis.subsetsに保持する.
+     * ただし, 多人数カードはすべて「多人数」という1つの分類にまとめる.
+     */
+    constructor(){
+        this.subsets = [];
+        for(let i = 0; i &lt; Prism.labels.length; i++){
+            this.subsets.push([]);
+        }
+        for(const data of RAW_CARD_DATA){
+            const m = PrimitiveSuits.indexOf(data.suit_string);
+            if(m >= 0) this.subsets[m].push(data);
+            else this.subsets.at(-1).push(data);
+        }
+    }
+}
+
+/**
+ * 各項目の設定変更ダイアログを実装するための土台を提供する.
+ * @class
+ */
+let DialogBase = class{
+    static font = "23px Sans-Serif";
+    static color = "white";
+    static bgColor = "rgb(0,0,0,0.8)";
+    static padLeft = 50;
+    static padBottom = 20;
+
+    constructor(owner, defaultValue, x, y, w, h, footnote = null){
+        this.owner = owner;
+        this.result = defaultValue;
+        this.footnote = footnote || "矢印キーで項目を選んで A で決定";
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
+        this.active = true;
+    }
+
+    draw(GE, ctx){
+        ctx.save();
+        ctx.fillStyle = DialogBase.bgColor;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        ctx.font = DialogBase.font;
+        ctx.fillStyle = DialogBase.color;
+        ctx.fillText(this.footnote, this.x + DialogBase.padLeft,
+                                    this.y + this.height - DialogBase.padBottom);
+        ctx.restore();
+    }
+}
+
+/**
+ * メインカード選択ダイアログを実装する.
+ * @class
+ */
+let MainCardDialog = class extends DialogBase{
+    constructor(owner, defaultValue, x, y, w, h){
+        super(owner, defaultValue, x, y, w, h, "← or → で項目を選んで A で決定");
+        this.prism = new Prism();
+        this.categorySelect = new stdtask.CyclicSelect(
+            Prism.labels.length, ["ArrowLeft", "ArrowRight"], "KeyA", "KeyS", 0, 10
+        );
+        this.categorySelect.bind(this);
+    }
+
+    draw(GE, ctx){
+        super.draw(GE, ctx);
+        ctx.save();
+        ctx.font = DialogBase.font;
+        ctx.fillStyle = DialogBase.color;
+
+        const m = this.categorySelect.index;
+        if(!this.cardSelect){
+            ctx.fillText(`分類： 《 ${Prism.labels[m]} 》`, this.x + 50, this.y+70);
+        }
+        else{
+            const d = this.prism.subsets[m][this.cardSelect.index];
+            ctx.fillText(`分類： 　 ${Prism.labels[m]}`, this.x + 50, this.y+70);
+            ctx.fillText("カード：", this.x + 50, this.y+110);
+            ctx.fillText(`《 ${d.id} ${d.character} 》`, this.x + 140, this.y+110);
+            ctx.fillText(`HP ${d.HP}, MP ${d.MP}`, this.x + 143, this.y+150);
+            if(d.main){
+                ctx.fillText(`メインスキル『${d.main.name}』`, this.x + 143, this.y+190);
+                ctx.fillText("　" + d.main.desc, this.x + 143, this.y + 230);
+            }
+        }
+        ctx.restore();
+    }
+
+    execute(GE){
+        return (this.cardSelect || this.categorySelect).execute(GE);
+    }
+
+    action(GE, n){
+        const s = this.prism.subsets[n];
+        if(s.length > 0){
+            this.cardSelect = new stdtask.CyclicSelect(
+                s.length, ["ArrowLeft", "ArrowRight"], "KeyA", "KeyS", 0, 10
+            );
+            this.cardSelect.bind(this);
+            const backup = [ this.action, this.cancel ];
+            this.action = (GE, n) => {
+                this.result = this.prism.subsets[this.categorySelect.index][this.cardSelect.index];
+                this.active = false;
+            };
+            this.cancel = (GE, n) => {
+                this.cardSelect = null;
+                this.action = backup[0];
+                this.cancel = backup[1];
+            };
+        }
+        else{
+            const obj = T.finite(T.text(
+                "この分類は空です", {x: this.x + 140, y: this.y + 190, font: DialogBase.font}
+            ), 30);
+            this.owner.addSprite(obj);
+            this.owner.addTask(obj, true);
+        }
+    }
+
+    cancel(GE, n){
+        this.active = false;
+    }
+}
+
+/**
+ * 選択肢を縦に並べて表示し, その中から1つを選択させるダイアログを実装する.
+ * 選択肢群の前に１行だけラベルを表示できる. また, ダイアログの下部に
+ * footnoteを表示できる.
+ * @class
+ */
+let SimpleChoice = class extends DialogBase{
+    static step = 50;
+
+    constructor(owner, label, options, defaultValue, x, y, w, h){
+        super(owner, defaultValue, x, y, w, h, "↑ or ↓ で項目を選んで A で決定");
+        this.label = label;
+        this.options = options;
+        this.active = true;
+
+        this.select = new stdtask.Select(
+            options.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", defaultValue, 10
+        );
+        this.select.bind(this);
+    }
+
+    draw(GE, ctx){
+        super.draw(GE, ctx);
+        ctx.save();
+        ctx.font = DialogBase.font;
+        ctx.fillStyle = DialogBase.color;
+        ctx.fillText(this.label, this.x + 50, this.y + 70);
+
+        const p = ctx.measureText("→ ").width;
+        for(let i = 0; i &lt; this.options.length; i++){
+            const y = this.y + 120 + SimpleChoice.step * i;
+            if(i == this.select.index){
+                ctx.fillText("→ " + this.options[i], this.x + 100, y);
+            }
+            else{
+                ctx.fillText(this.options[i], this.x + 100 + p, y);
+            }
+        }
+        ctx.restore();
+    }
+
+    execute(GE){
+        return this.select.execute(GE);
+    }
+
+    action(){
+        this.result = this.select.index;
+        this.active = false; // 選択決定
+    }
+
+    cancel(){
+        this.active = false;  // キャンセルして戻る
+    }
+}
+
+/**
+ * localStorage設定のダイアログを実装する.
+ * SimpleChoiceに似ているが, 独自の確認事項があるので別途用意する.
+ * @class
+ */
+let LocalStorageDialog = class extends DialogBase{
+    constructor(owner, defaultValue, x, y, w, h){
+        super(owner, defaultValue, x, y, w, h, "↑ or ↓ で項目を選んで A で決定");
+        this.select = new stdtask.Select(
+            2, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", defaultValue, 10
+        );
+        this.select.bind(this);
+        this.active = true;
+    }
+
+    draw(GE, ctx){
+        super.draw(GE, ctx);
+        ctx.save();
+        ctx.font = DialogBase.font;
+        ctx.fillStyle = DialogBase.color;
+        ctx.fillText("localStorageを使用しますか？", this.x + 50, this.y + 70);
+
+        ctx.fillStyle = "orange";
+        ctx.fillText("【注意】「使用しない」を選択した場合、", this.x + 45, this.y + 110);
+        ctx.fillText("使用中のlocalStorageは即座に消去されます！", this.x + 50, this.y + 150);
+
+        ctx.fillStyle = DialogBase.color;
+        const p = ctx.measureText("→ ").width;
+        if(this.select.index == 0){
+            ctx.fillText("→ 使用しない", this.x + 100, this.y + 220);
+            ctx.fillText("使用する", this.x + 100 + p, this.y + 270);
+         }
+         else{
+            ctx.fillText("使用しない", this.x + 100 + p, this.y + 220);
+            ctx.fillText("→ 使用する", this.x + 100, this.y + 270);
+         }
+        ctx.restore();
+    }
+
+    execute(GE){
+        return this.select.execute(GE);
+    }
+
+    action(){
+        this.result = this.select.index;
+        this.active = false; // 選択決定
+    }
+
+    cancel(){
+        this.active = false;  // キャンセルして戻る
+    }
+}
+
+
+// #2. 追加スキャン用のダイアログの実装
+
+/*
+ * 追加スキャンを実装するときにサイドボードのカードを選択する必要があるので,
+ * このnamespaceで作っておく.
+ */
+
+/**
+ * mainSceneで追加スキャンのために使うダイアログの実装.
+ * 使用するのは別のシーンだが, 「カードライブラリから１枚を選ぶ」という操作が
+ * メインカードの選択と酷似しているので, 実装の効率化や見た目の統一ために
+ * ここで定義して外部に提供する.
+ * @class
+ */
+Public.SideboardDialog = class extends DialogBase{
+    static labels = PrimitiveSuits.map((e) => CharacterNames[e]).concat(["多人数"]);
+
+    constructor(owner, sideboardObj, defaultValue, x, y, w, h){
+        super(owner, defaultValue, x, y, w, h, "← or → で項目を選んで A で決定");
+        this.initPartition(sideboardObj);
+        this.prevDesc = null;
+        this.lines = null;
+
+        this.categorySelect = new stdtask.CyclicSelect(
+            this.subsets.length, ["ArrowLeft", "ArrowRight"], "KeyA", "KeyS", 0, 10
+        );
+        this.categorySelect.bind(this);
+    }
+
+    // sideboardObjはDeckなので微妙に処理が違う
+    initPartition(sideboardObj){
+        this.subsets = Public.SideboardDialog.labels.map((e) => []);
+        for(const card of sideboardObj.cards){
+            const m = card.mark;
+            if(m &lt; Public.SideboardDialog.labels.length - 1) this.subsets[m].push(card);
+            else this.subsets.at(-1).push(card);
+        }
+    }
+
+    draw(GE, ctx){
+        super.draw(GE, ctx);
+        ctx.save();
+        ctx.font = DialogBase.font;
+        ctx.fillStyle = DialogBase.color;
+
+        const m = this.categorySelect.index;
+        const label = Public.SideboardDialog.labels[m];
+        if(!this.cardSelect){
+            ctx.fillText(`分類： 《 ${label} 》`, this.x + 50, this.y+70);
+        }
+        else{
+            const card = this.subsets[m][this.cardSelect.index];
+            ctx.fillText(`分類： 　 ${label}`, this.x + 50, this.y+70);
+            ctx.fillText("カード：", this.x + 50, this.y+110);
+            ctx.fillText(`《 ${getCharacterName(Suits[card.mark])} ${card.value} /  MP ${card.MP} 》`, this.x + 140, this.y+110);
+            if(card.skill){
+                ctx.fillText(`サブスキル 『${card.skill.caption}』`, this.x + 50, this.y + 150);
+                if(!this.lines || this.prevDesc != card.skill.desc){
+                    this.lines = card.skill.desc.split("\n");
+                    this.prevDesc = card.skill.desc;
+                }
+                for(let i = 0; i &lt; this.lines.length; i++){
+                    ctx.fillText(this.lines[i], this.x + 50, this.y + 190 + 40*i);
+                }
+            }
+        }
+        ctx.restore();
+    }
+
+    execute(GE){
+        return (this.cardSelect || this.categorySelect).execute(GE);
+    }
+
+    action(GE, n){
+        const s = this.subsets[n];
+        if(s.length > 0){
+            this.cardSelect = new stdtask.CyclicSelect(
+                s.length, ["ArrowLeft", "ArrowRight"], "KeyA", "KeyS", 0, 10
+            );
+            this.cardSelect.bind(this);
+            const backup = [ this.action, this.cancel ];
+            this.action = (GE, n) => {
+                this.result = this.subsets[this.categorySelect.index][n];
+                this.active = false;
+            };
+            this.cancel = (GE, n) => {
+                this.cardSelect = null;
+                this.action = backup[0];
+                this.cancel = backup[1];
+            };
+        }
+        else{
+            const obj = T.finite(T.text(
+                "この分類は空です", {x: this.x + 140, y: this.y + 190, font: DialogBase.font}
+            ), 30);
+            this.owner.addSprite(obj);
+            this.owner.addTask(obj, true);
+        }
+    }
+
+    cancel(GE, n){
+        this.active = false;
+    }
+}
+
+
+// #3. configScene, configScene2の実装
+
+/**
+ * コンフィグ画面を実装するSceneオブジェクト.
+ * @type {stdgam.Scene}
+ */
+Public.configScene = new stdgam.Scene({
+saveConfig(){
+    LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag);
+},
+
+displayObject: {
+    x: 340,
+    y: 150,
+    paint(ctx, mainCard){
+        ctx.save();
+        ctx.strokeStyle = "rgb(255,255,255,0.5)";
+        ctx.lineWidth = 5;
+        ctx.strokeRect(this.x, this.y-40, 600, 30*4+40);
+        ctx.fillStyle = "rgb(0,0,0,0.5)";
+        ctx.fillRect(this.x, this.y-40, 600, 30*4+40);
+
+        ctx.fillStyle = "white";
+        ctx.font = "22px Sans-Serif";
+        ctx.fillText(`${mainCard.id} ${mainCard.character}`,
+                     this.x + 20, this.y);
+        ctx.fillText(`HP ${mainCard.HP},  MP ${mainCard.MP}`,
+                     this.x + 20, this.y+30);
+        if(mainCard.main){
+            ctx.fillText(`メインスキル 『${mainCard.main.name}』`, this.x + 20, this.y + 60);
+            ctx.fillText("　" + mainCard.main.desc, this.x + 20, this.y + 90);
+        }
+        ctx.restore();
+    }
+},
+
+onLoad(GE, setting){
+    this.setting = setting;
+    this.deck = setting.deckSet.cards;  // localStorageを使うとき、すぐに保存するため必要
+
+    this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+    this.add(T.text("メインカードを変更する", {x: 90, y:90, font: "32px Sans-Serif"}));
+    this.add(T.text("現在の設定：", {x: 160, y:133, font: "24px Sans-Serif"}));
+
+    this.add(T.text("localStorageの設定を変更する", {x: 90, y:330, font: "32px Sans-Serif"}));
+
+    let tmp = T.text("現在の設定：  ", {x: 160, y:373, font: "24px Sans-Serif"});
+    tmp.execute = (GE) => {
+        tmp.text = LocalStorageInfo.isUsed() ? "現在の設定：　使用する" : "現在の設定：　使用しない";
+        return true;
+    };
+    this.add(tmp);
+
+    this.add(T.text("コンボ成立条件の設定を変更する", {x: 90, y:510, font: "32px Sans-Serif"}));
+    this.add(T.ftext("現在の設定：  第${}弾ルール", this.setting, "chainRule", {x: 160, y:553, font: "24px Sans-Serif"}));
+
+    this.itemY = [ 90, 330, 510 ];
+    this.select = new stdtask.CyclicSelect(
+        this.itemY.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
+    );
+    this.select.bind(this);
+
+    const mainCardView = {
+        owner: this,
+        draw(GE, ctx){ this.owner.displayObject.paint(ctx, this.owner.setting.mainCardData); }
+    };
+    this.add(mainCardView);
+},
+
+operations: [
+    function*(GE, opt){
+        const dialog = new MainCardDialog(
+            opt.scene, opt.scene.setting.mainCardData, 200, 140, 600, 420
+        );
+        opt.scene.addSprite(dialog);
+        opt.scene.addTask(dialog, true);
+        while(dialog.active) yield true;
+
+        opt.scene.setting.mainCardData = dialog.result;
+        if(LocalStorageInfo.isUsed()){
+            opt.scene.saveConfig();
+        }
+    },
+    function*(GE, opt){
+        const dialog = new LocalStorageDialog(
+            opt.scene, LocalStorageInfo.isUsed() ? 1 : 0, 200, 140, 600, 420
+        );
+        opt.scene.addSprite(dialog);
+        opt.scene.addTask(dialog, true);
+        while(dialog.active) yield true;
+
+        if(dialog.result == 1){
+            opt.scene.saveConfig();
+            LocalStorageInfo.saveDeck(opt.scene.deck);
+        }
+        else if(LocalStorageInfo.isUsed()){
+            LocalStorageInfo.removeStorage();
+        }
+    },
+    function*(GE, opt){
+        const dialog = new SimpleChoice(
+            opt.scene, "コンボ成立条件", ["第1弾ルール", "第2弾ルール"],
+            opt.scene.setting.chainRule-1, 200, 140, 600, 420
+        );
+        opt.scene.addSprite(dialog);
+        opt.scene.addTask(dialog, true);
+        while(dialog.active) yield true;
+
+        opt.scene.setting.chainRule = dialog.result + 1;
+        if(LocalStorageInfo.isUsed()){
+            opt.scene.saveConfig();
+        }
+    }
+],
+
+draw(GE, ctx){
+    ctx.save();
+    ctx.font = "32px Sans-Serif";
+    ctx.fillStyle = "white";
+    ctx.fillText("→ ", 50, this.itemY[this.select.index]);
+    ctx.restore();
+},
+
+execute(GE){
+    this.select.execute(GE);
+},
+
+action(GE, n){
+    this.useCoroutine(GE, this.operations[this.select.index], {scene: this});
+},
+
+cancel(GE, n){
+    GE.changeScene("select");
+}
+
+});
+
+/**
+ * 特殊設定のコンフィグ画面を実装するSceneオブジェクト.
+ * @type {stdgam.Scene}
+ */
+Public.configScene2 = new stdgam.Scene({
+saveConfig(){
+    LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag);
+},
+
+onLoad(GE, setting){
+    this.setting = setting;
+    this.deck = setting.deckSet.cards;  // localStorageを使うとき, すぐに保存するため必要
+
+    this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+    this.add(T.text("スキル持ちカードのマーカー表示", {x: 90, y:90, font: "32px Sans-Serif"}));
+    let tmp = T.text("現在の設定：  ", {x: 160, y:133, font: "24px Sans-Serif"});
+    tmp.execute = (GE) => {
+        tmp.text = Card.MarkerFlag ? "現在の設定：　表示する" : "現在の設定：　表示しない";
+        return true;
+    };
+    this.add(tmp);
+
+    this.itemY = [ 90 ];
+    this.select = new stdtask.CyclicSelect(
+        this.itemY.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
+    );
+    this.select.bind(this);
+},
+
+operations: [
+    function*(GE, opt){
+        const dialog = new SimpleChoice(
+            opt.scene, "スキル持ちカードのマーカー表示をしますか？",
+            ["表示する", "表示しない"],
+            Card.MarkerFlag ? 0 : 1, 200, 140, 600, 420
+        );
+        opt.scene.addSprite(dialog);
+        opt.scene.addTask(dialog, true);
+        while(dialog.active) yield true;
+
+        Card.MarkerFlag = (dialog.result == 0);
+        if(LocalStorageInfo.isUsed()){
+            opt.scene.saveConfig();
+        }
+    }
+],
+
+draw(GE, ctx){
+    ctx.save();
+    ctx.font = "32px Sans-Serif";
+    ctx.fillStyle = "white";
+    ctx.fillText("→ ", 50, this.itemY[this.select.index]);
+    ctx.restore();
+},
+
+execute(GE){
+    this.select.execute(GE);
+},
+
+action(GE, n){
+    this.useCoroutine(GE, this.operations[this.select.index], {scene: this});
+},
+
+cancel(GE, n){
+    GE.changeScene("select");
+}
+
+});
+
+})(config);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.CachePool.html">CachePool</a></li><li><a href="Public.CyclicSelect.html">CyclicSelect</a></li><li><a href="Public.GameEngine.html">GameEngine</a></li><li><a href="Public.ImageCutter.html">ImageCutter</a></li><li><a href="Public.ImagePool.html">ImagePool</a></li><li><a href="Public.Meter.html">Meter</a></li><li><a href="Public.SEPool.html">SEPool</a></li><li><a href="Public.Scene.html">Scene</a></li><li><a href="Public.Scroll.html">Scroll</a></li><li><a href="Public.Select.html">Select</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="Public.SoundPool.html">SoundPool</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#fps">fps</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li><li><a href="global.html#stdgam">stdgam</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 01:49:39 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
