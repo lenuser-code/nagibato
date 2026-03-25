@@ -53,7 +53,7 @@
         
         </h2>
         
-            <div class="class-description usertext">指定されたSelectオブジェクトをラップし, スクロール機能を追加するクラス.すなわち, indexの値をscroll + offset (0 <= offset < viewCount) に分解し,かつ, 直前の状態からの遷移が自然になるようにこれらの値を更新する.たとえば「optionsの要素のうち一度に表示できるものの個数が最大5個」であるようなUIを作りたい場合, 次のようなコードを書く.class MyUI extends stdtask.Scroll{    constructor(options){        const select = new stdtask.Select(            options.length, ["ArrowUp", "ArrowDown"], "Enter", "Escape"        );        super(select, 5);        this.options = options;    }    draw(GE, ctx){        for(let i = 0; i < 5; i++){            const targetIndex = this.scroll + i;            my_paint_operation( this.options[targetIndex] );  // 普通はiも使うはずだが        }    }    action(GE, index){ 決定時の処理 }    cancel(GE, index){ キャンセル時の処理 }}選択肢の個数が表示できる最大数に満たない場合, 普通にSelectを使うのと変わらない.また, SelectではなくCyclicSelectを渡してもよい.</div>
+            <div class="class-description usertext">指定されたSelectオブジェクトをラップし, スクロール機能を追加するクラス.すなわち, indexの値をscroll + offset (0 <= offset < viewCount) に分解し,かつ, 直前の状態からの遷移が自然になるようにこれらの値を更新する.たとえば「optionsの要素のうち一度に表示できるものの個数が最大5個」であるようなUIを作りたい場合, 次のようなコードを書く.```class MyUI extends stdtask.Scroll{    constructor(options){        const select = new stdtask.Select(            options.length, ["ArrowUp", "ArrowDown"], "Enter", "Escape"        );        super(select, 5);        this.options = options;    }    draw(GE, ctx){        for(let i = 0; i < 5; i++){            const targetIndex = this.scroll + i;            my_paint_operation( this.options[targetIndex] );  // 普通はiも使うはずだが        }    }    action(GE, index){ 決定時の処理 }    cancel(GE, index){ キャンセル時の処理 }}```選択肢の個数が表示できる最大数に満たない場合, 普通にSelectを使うのと変わらない.また, SelectではなくCyclicSelectを渡してもよい.</div>
         
     
 </header>
@@ -84,7 +84,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line240">line 240</a>
+        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line251">line 251</a>
     </li></ul></dd>
     
 
@@ -274,7 +274,7 @@
 
             
 
-            <td class="description last">ラップするSelectオブジェクト</td>
+            <td class="description last">ラップするSelectオブジェクト (CyclicSelectなどでも可)</td>
         </tr>
 
     
@@ -365,7 +365,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line329">line 329</a>
+        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line344">line 344</a>
     </li></ul></dd>
     
 
@@ -518,13 +518,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>actionやcancelの実行を指定したオブジェクトに委任する.すなわち, 以下の処理を行う.- other.action(GE, index) を実行するだけの関数を this.action に代入- other.cancel(GE, index) を実行するだけの関数を this.cancel に代入</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li>actionやcancelの実行を指定したオブジェクトに委任する.すなわち, 以下の処理を行う.- other.action(GE, index) を実行するだけの関数を this.action に代入- other.cancel(GE, index) を実行するだけの関数を this.cancel に代入</li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line318">line 318</a>
+        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line333">line 333</a>
     </li></ul></dd>
     
 
@@ -659,7 +659,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line337">line 337</a>
+        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line352">line 352</a>
     </li></ul></dd>
     
 
@@ -818,7 +818,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line270">line 270</a>
+        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line281">line 281</a>
     </li></ul></dd>
     
 
@@ -947,13 +947,13 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>ラップされているSelectオブジェクトのindexの値を元に,this.scroll と this.offset の値を初期化する.具体的には次のように決める.1. indexの値がviewCount未満なら, scroll = 0, offset = index でよい.2. そうでないとき, 先に offset = viewCount - 1 を決定してしまい,それから scroll = index - offset とすればよい.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li>ラップされているSelectオブジェクトのindexの値を元に,this.scroll と this.offset の値を初期化する.具体的には次のように決める.1. indexの値がviewCount未満なら, scroll = 0, offset = index でよい.2. そうでないとき, 先に offset = viewCount - 1 を決定してしまい,それから scroll = index - offset とすればよい.</li></ul></dd>
     
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line285">line 285</a>
+        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line298">line 298</a>
     </li></ul></dd>
     
 
@@ -1035,7 +1035,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line260">line 260</a>
+        <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line271">line 271</a>
     </li></ul></dd>
     
 
@@ -1142,7 +1142,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:07:52 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:20:49 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
