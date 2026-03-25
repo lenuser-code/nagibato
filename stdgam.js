@@ -365,7 +365,7 @@ let InputManager = class {
      * @param {string[]} codes2 - busyでなければisDownで済ませてもよいキーのリスト
      * @param {boolean} busyFlag - trueならばisJustPressedによる判定だけを行う.
      * falseならば一部のキー (codes2の要素) についてisDownで判定を代用する.
-     * @returns {[?string,number]} 条件を満たすキーが見つかったとき, そのキーコードと,
+     * @returns {Array<?string|number>} 条件を満たすキーが見つかったとき, そのキーコードと,
      * code1またはcode2におけるインデックスの組を返す.
      */
     checkInput(codes1, codes2 = null, busyFlag = true){
@@ -865,7 +865,7 @@ Public.SEPool = class {
  */
 
 /**
- * @typedef {Template_text & Task} Template_ftext
+ * @typedef {Template_text} Template_ftext
  */
 
 /**
@@ -1085,7 +1085,7 @@ Public.Templates = {
      * true を返すだけの空の関数をセットする.
      * @template T
      * @param {T} obj - 対象のオブジェクト
-     * @returns {T & Task} objを返す
+     * @returns {T} objを返す
      */
     _initTraits: (obj) => {
         if (!obj._traits) obj._traits = [];
@@ -1098,7 +1098,7 @@ Public.Templates = {
      * 指定されたフレーム数が経過すると自動で消滅するようにする.
      * @template T
      * @param {T} obj - 対象のオブジェクト
-     * @returns {T & Task} objを返す
+     * @returns {T} objを返す
      */
     finite: function(obj, frames) {
         this._initTraits(obj);
@@ -1119,7 +1119,7 @@ Public.Templates = {
      * GEはタスク処理を実行しているGameEngine, selfはobj自身である.
      * @template T
      * @param {T} obj - 対象のオブジェクト
-     * @returns {T & Templates_scheduler} objを返す
+     * @returns {T} objを返す
      */
     scheduler: function(obj) {
         this._initTraits(obj);
@@ -1158,7 +1158,7 @@ Public.Templates = {
      * slideTo: 現在位置から(x,y)までthis.x, this.yの値を等速変化させる.
      * @template T
      * @param {T} obj - 対象のオブジェクト
-     * @returns {T & Templates_slider} objを返す
+     * @returns {T} objを返す
      */
     slider: function(obj, x, y) {
         this._initTraits(obj);
@@ -1195,7 +1195,7 @@ Public.Templates = {
      * - fadeTo: 現在位置からalphaまでthis.alphaの値を変化させる
      * @template T
      * @param {T} obj - 対象のオブジェクト
-     * @returns {T & Templates_fader} objを返す
+     * @returns {T} objを返す
      */
     fader: function(obj, alpha) {
         this._initTraits(obj);

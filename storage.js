@@ -10,7 +10,7 @@
  * 読み書きした情報の保持も行う. そのため, プログラムがlocalStorageを
  * 使用しているか否かは, このオブジェクトのisUsed()メソッドで判別できる.
  * @type {Object}
- * @prop {(string|number|boolean)[]|null} config - 設定情報のうちlocalStorageに保存するものの配列.
+ * @prop {Array<string|number|boolean>|null} config - 設定情報のうちlocalStorageに保存するものの配列.
  * 現在のバージョンでは,
  * 1. メインカードのID (string)
  * 2, コンボ成立ルールのバージョン (number)
