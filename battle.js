@@ -73,8 +73,7 @@ let SkillDealer = class extends SkillDealerBase{
 
     *chargeUp(percent){
         this.owner.poolView.frames = 45;
-        this.owner.pool.chargeBonus += percent;
-        this.owner.pool.applyBonus();
+        this.owner.pool.addChargeBonus(percent);
         GE.se.play("chargeUp");
         yield* this.wait(60);
     }
@@ -104,7 +103,7 @@ let SkillDealer = class extends SkillDealerBase{
             }
         }
 
-        const prev = this.owner.pool.chargedMP;
+        const prev = this.owner.pool.chargedMP();
         this.owner.pool.recalculate();
         if(f || prev != this.owner.pool.chagedMP) GE.se.play("chargeUp");
         yield* this.wait(60);
@@ -454,9 +453,9 @@ let createPoolView = function(target, x, y){
             ctx.restore();
         },
         execute(GE){
-            if(this.history != this.target.chargedMP){
-                this.history = this.target.chargedMP;
-                this.meter.changeTo(this.target.chargedMP, this.frames);
+            if(this.history != this.target.chargedMP()){
+                this.history = this.target.chargedMP();
+                this.meter.changeTo(this.target.chargedMP(), this.frames);
             }
             if(this.frames > 10) this.frames = 10;
             this.meter.execute(GE);
@@ -926,7 +925,7 @@ phase2_body(GE, i){
     this.add( delivery(this.hand[i].contents, this.hand[i], this.poolView.addr(),
         (card) => {
             this.pool.push(card);
-            if(this.pool.hyped){
+            if(this.pool.hyped()){
                  this.add(this.poolView.createChainEffect(GE));
             }
             this.busy = false;
@@ -962,7 +961,7 @@ phase2_body(GE, i){
     stop.active = false;
     yield* this.attackPhase_choice(n);
 
-    const pts = this.pool.chargedMP + this.player.MP();
+    const pts = this.pool.chargedMP() + this.player.MP();
     yield* this.SD.wait(60);
     this.poolView.frames = 60;
     this.pool.init();
@@ -982,7 +981,7 @@ phase2_body(GE, i){
     if(n == 1){
         yield* this.SD.wait(30);
         this.poolView.frames = 45;
-        this.pool.chargedMP = Math.floor(this.pool.chargedMP / 2);
+        this.pool.setCorrectionFlag(true);
         GE.se.play("powerup");
         this.player.resetSG();
         yield* this.SD.wait(60);

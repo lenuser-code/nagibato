@@ -1261,175 +1261,335 @@ class PrismaticCard{
  */
 
 /**
- * 重複を持たずソートされたカードの集合を表すクラス.
+ * 重複を持たず, Card.compareでソートされたカードの集合を表す.
+ * Deckクラスが「実際にゲーム中に使用する山札」を表すのに対し,
+ * このクラスは「デッキに採用するカードのカタログ」として扱われる.
+ * たとえば, Deckクラスには「シャッフルする」という概念が存在するが,
+ * CardSetは常にCard.compareの順序でソートされている.
  * @class
  */
 class CardSet{
+    /**
+     * watch()メソッドなどにおいて該当する要素が存在しないときに
+     * 返されるオブジェクト. コストが0なのでpaint()で何も描画されない
+     * @type {Card}
+     */
     static NullCard = new Card(0, 0);
 
+    #cards;
+
+    /**
+     * cardsと同じ要素を持つインスタンスを生成する.
+     * shallow copyをとるので, このインスタンスを変更してもcardsには影響しない.
+     * @param {Card[]} cards - 使用するカードを並べた配列
+     */
     constructor(cards){
         this.init(cards);
     }
 
+    /**
+     * cardsと同じ要素を持つように初期化する.
+     * shallow copyをとるので, このインスタンスを変更してもcardsには影響しない.
+     * @param {Card[]} cards - 使用するカードを並べた配列
+     */
     init(cards){
-        this.cards = [...cards];
-        this.cards.sort(Card.compare);
+        this.#cards = [...cards];
+        this.#cards.sort(Card.compare);
     }
 
+    /** @returns {number} 含まれているカードの枚数 */
     size(){
-        return this.cards.length;
+        return this.#cards.length;
     }
 
+    /**
+     * このCardSetに含まれるカードを並べた配列を新しく生成する.
+     * @returns {Card[]} 生成された配列
+     */
+    cards(){
+        return [...this.#cards];
+    }
+
+    /**
+     * cardがこのCardSetに含まれているか判定する.
+     * @param {Card} card - 調べるカード
+     * @returns {boolean} 含まれているときtrue, そうでないときfalse
+     */
+    includes(card){
+        return this.#cards.includes(card);
+    }
+
+    /**
+     * 前からn番目のカードを返す (nは0から数え始める).
+     * もし該当するカードが無ければ CardSet.NullCardを返す.
+     * @returns {Card} n番目のカード. 該当するカードが無ければCard.NullCard
+     */
     watch(n){
-        if(n < this.cards.length) return this.cards[n];
+        if(n < this.#cards.length) return this.#cards[n];
         return CardSet.NullCard;
     }
 
+    /**
+     * cardをこのCardSetに追加する. もし既にCardSetの中に存在する場合は何もしない.
+     * @param {Card} card - 追加するカード
+     */
     push(card){
-        this.cards.push(card);
-        this.cards.sort(Card.compare);
+        if(!this.#cards.includes(card)) this.#cards.push(card);
+        this.#cards.sort(Card.compare);
     }
 
+    /**
+     * 前からn番目の要素をこのCardSetから削除し, そのカードを返す
+     * (nは0から数え始める). もし該当するカードが無ければ CardSet.NullCardを返す.
+     * @param {number} n - 抜き出すカードのインデックス
+     * @returns {Card} 抜き出されたカード. 該当するカードが無ければCard.NullCard
+     */
     slice(n){
         const card = this.watch(n);
-        this.cards.splice(n, 1);
+        if(card !== CardSet.NullCard) this.#cards.splice(n, 1);
         return card;
     }
 }
 
 /**
  * バトルで使うデッキを実装するクラス.
+ * シャッフルしてカードを並び替えたり, 先頭から1枚ずつカードを引いたりできる.
  * @class
  */
 class Deck{
-    // cardsに格納されているカード達をそのままの並び順で使う
-    // （shallow copyをとる）
+    #cards;
+
+    /**
+     * cardsに格納されているカード達をそのままの並び順で使って
+     * インスタンスを生成する. shallow copyをとるので, このインスタンスを
+     * 変更してもcardsには影響しない.
+     * @param {Card[]} cards - 使用するカードを並べた配列
+     */
     constructor(cards){
-        this.cards = [...cards];
+        this.#cards = [...cards];
     }
 
+    /**
+     * このデッキを複製して新しいインスタンスを生成する.
+     * 片方を変更しても, もう片方に影響しない.
+     * @returns {Deck} 複製して作られたオブジェクト
+     */
     clone(){
-        return new Deck(this.cards);
+        return new Deck(this.#cards);
     }
 
+    /**
+     * このデッキに含まれるカードを並べた配列を新しく生成する.
+     * @returns {Card[]} 生成された配列
+     */
+    cards(){
+        return [...this.#cards];
+    }
+
+    /** @returns {number} 含まれているカードの枚数 */
     size(){
-        return this.cards.length;
+        return this.#cards.length;
     }
 
+    /** @returns {boolean} このデッキが空ならtrue, そうでなければfalse */
     isEmpty(){
-        return this.cards.length == 0;
+        return this.#cards.length == 0;
     }
 
+    /**
+     * このデッキの一番最初のカードを削除して, そのカードを返す.
+     * もし該当するカードが無ければ, コストが0のカードを返す
+     * (現在の仕様では「コストが0」という以外の特徴は規定されていない).
+     * @returns {Card} 取り除かれたカード. 該当するカードが無ければコストが0のカード
+     */
     shift(){
         if(this.isEmpty()){
             return new Card();
         }
-        const card = this.cards[0];
-        this.cards.splice(0, 1);
+        const card = this.#cards[0];
+        this.#cards.splice(0, 1);
         return card;
     }
 
+    /**
+     * このデッキから指定されたカードを取り除く.
+     * もし複数の箇所に含まれるなら, それらをすべて削除する.
+     * @param {Card} card - 削除するカード
+     */
     remove(card){
-        this.cards = this.cards.filter((e) => e !== card);
+        this.#cards = this.#cards.filter((e) => e !== card);
     }
 
+    /**
+     * 前からn番目のカードを返す (nは0から数え始める).
+     * もし該当するカードが無ければ, コストが0のカードを返す
+     * (現在の仕様では「コストが0」という以外の特徴は規定されていない).
+     * @returns {Card} n番目のカード. 該当するカードが無ければコストが0のカード
+     */
     watch(i){
-        if(this.cards.length <= i){
-            return new Card();
+        if(this.#cards.length <= i){
+            return new Card(0, 0);
         }
-        return this.cards[i];
+        return this.#cards[i];
     }
 
+    /**
+     * このデッキの中身をシャッフルする.
+     */
     shuffle(){
         let i, len;
-        i = this.cards.length;
+        i = this.#cards.length;
         while(i > 0){
             let j = Math.floor(Math.random()*i);
-            let t = this.cards[(--i)];
-            this.cards[i] = this.cards[j];
-            this.cards[j] = t;
+            let t = this.#cards[(--i)];
+            this.#cards[i] = this.#cards[j];
+            this.#cards[j] = t;
         }
     }
 }
 
 /**
- * 場に出されたカードを管理するクラス.
- * class
+ * 場に出されたカードを管理するクラス. 主に次の3つの情報を公開する.
+ * - このターン出されたカードの履歴
+ * - 現在のチャージMP
+ * - 成立しているスキルのリスト
+ *
+ * ここで, チャージMPは次の計算式で算出される.
+ * 1. ベースMP = すべてのカードのgetMP()の値を合計した値
+ * 2. 選択肢補正 = (プレイヤーがSG回復を選択した ? 0.5 : 1)
+ * 3. チャージMP = Math.floor( Math.floor(ベースMP * チャージボーナス) *  選択肢補正)
+ *
+ * @class
+ * @prop skills  length, shift
  */
 class Pool{
+    #cards;
+    #baseMP;
+    #chargeBonus;
+    #correctionFlag;
+    #hyped;
+    #ChainFunc;
+
+    /**
+     * 空のインスタンスを作る.
+     * @param {number} [version=1] - 使用するコンボ成立条件のバージョン
+     */
     constructor(version = 1){
         this.init();
         this.skills = [];
-        this.ChainFunc = (version == 1 ? ChainFunc : ChainFuncVer2);
+        this.#ChainFunc = (version == 1 ? ChainFunc : ChainFuncVer2);
     }
 
-    // カードの枚数
+    /** @returns {number} 場に出されているカードの枚数 */
     size(){
-        return this.cards.length;
+        return this.#cards.length;
     }
 
-    // ターンが切り替わったときの処理
-    // (前ターンに成立したスキルは持ち越される)
+    /**
+     * ターンが切り替わったときの処理を行う.
+     * (前ターンに成立したスキルは持ち越される)
+     */
     init(){
-        this.chargedMP = 0;
-        this.baseMP = 0;
-        this.chargeBonus = 0;
-        this.cards = [];
-        this.hyped = false;
+        this.#cards = [];
+        this.#baseMP = 0;
+        this.#chargeBonus = 0;
+        this.#correctionFlag = false;
+        this.#hyped = false;
     }
 
-    // chargeMPを更新する
-    // （chargeBonusを変更してもこの関数を呼ぶまでは更新されない！）
-    applyBonus(){
-        const v = Math.floor(this.baseMP * this.chargeBonus / 100);
-        this.chargedMP = this.baseMP + v;
+    /**
+     * チャージMPの値を計算する.
+     * @returns {number} 現在のチャージMPの値
+     */
+    chargedMP(){
+        if(this.#chargeBonus == 0 && !this.#correctionFlag) return this.#baseMP;
+        const v = this.#baseMP + Math.floor(this.#baseMP * this.#chargeBonus / 100);
+        return this.#correctionFlag ? Math.floor(v / 2) : v;
     }
 
-    // MPを再計算する
-    // （MPBoostBySuitが変更された場合などに使用する）
+    /**
+     * 指定した値をチャージボーナスに加算する. 加算する量はベースMPに対するパーセント表示で表現する.
+     * @param {number} percent - 加算する量をベースMPに対するパーセント表示で表した値
+     */
+    addChargeBonus(percent){
+        this.#chargeBonus += percent;
+    }
+
+    /**
+     * fが真ならば選択肢補正を0.5にする. 一方, fが偽ならば選択肢補正を1にする.
+     * @param {boolean} SG回復が選択された場合はtrue, 他の選択肢が選ばれた場合はfalseを指定する
+     */
+    setCorrectionFlag(f){
+        this.#correctionFlag = f;
+    }
+
+    /**
+     * 一番最後に出したカードでコンボが成立していればtrueを返す.
+     * @returns {boolean} コンボが成立していればtrue, そうでなければfalse
+     */
+    hyped(){
+        return this.#hyped;
+    }
+
+    /**
+     * ベースMPを再計算する
+     * （MPBoostBySuitが変更された場合などに使用する）
+     */
     recalculate(){
-        this.baseMP = 0;
-        for(const card of this.cards){
-            this.baseMP += card.getMP();
+        this.#baseMP = 0;
+        for(const card of this.#cards){
+            this.#baseMP += card.getMP();
         }
-        this.applyBonus();
     }
 
-    // 場にカードを出す. 具体的には,
-    // (1) baseMPを増加させる
-    // (2) chargeMPをボーナス適用前の値に戻す
-    // (3) cardをカードリストに追加する
-    // (4) コンボの判定を行い, 成立時はcard.skillをスキルリストに追加する
-    //     （このときhypeの値も更新する）
+    /**
+     * 場にカードを出す. 具体的には, 次の処理を行う.
+     * 1. ベースMPを増加させる.
+     * 2. cardをカードリストに追加する.
+     * 3. コンボの判定を行い, 成立時はcard.skillをスキルリストに追加する.
+     * このときhypeの値も更新する.
+     *
+     * ただし, コスト0のカードの場合は何もしない.
+     * @param {Card} card - 場に出すカード
+     */
     push(card){
         if(card.value == 0) return;
-        this.baseMP += card.getMP();
-        this.chargedMP = this.baseMP;
-        this.cards.push(card);
-        const len = this.cards.length;
-        this.hyped = 
-            (len >= 3 && this.ChainFunc(this.cards[len-3], this.cards[len-2], card)
+        this.#baseMP += card.getMP();
+        this.#cards.push(card);
+        const len = this.#cards.length;
+        this.#hyped = (len >= 3
+                      && this.#ChainFunc(this.#cards[len-3], this.#cards[len-2], card)
                       && card.skill);
-        if(this.hyped){
+        if(this.#hyped){
             this.skills.push(card.skill);
         }
     }
 
-    // i番目のカード（該当するカードが無いときは Card(0, 0) を返す）
-    watch(i){
-        if(this.cards.length <= i){
+    /**
+     * 前からn番目のカードを返す (nは0から数え始める).
+     * もし該当するカードが無ければ, コストが0のカードを返す
+     * (現在の仕様では「コストが0」という以外の特徴は規定されていない).
+     * @returns {Card} n番目のカード. 該当するカードが無ければコストが0のカード
+     */
+    watch(n){
+        if(this.#cards.length <= n){
             return new Card(0, 0);
         }
-        return this.cards[i];
+        return this.#cards[n];
     }
 
-    // 追加スキャンのためのメソッド.
-    // この場合, １枚だけでもコンボ成立扱いになる
+    /**
+     * 追加スキャンの処理を行う.
+     * 基本的にはpush(card)と同じだが, この場合は無条件でコンボ成立扱いになる.
+     * @param {Card} card - 追加スキャンで読み込んだカード
+     */
     extraScan(card){
         if(card.value == 0) return;
         this.push(card);
-        this.hyped = true;  // 追加スキャンはスキルが発動
-        this.skills.push(card.skill);
+        if(card.skill){
+            this.#hyped = true;  // 追加スキャンは無条件でスキルが発動
+            this.skills.push(card.skill);
+        }
     }
 }
 
@@ -1444,12 +1604,12 @@ class Pool{
 /**
  * RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.
  * 以下のメソッドを持つ.
- * get(id) : 指定されたカードIDのカードを返す
- * forEach(callback) : すべてのカード x に対して callback(x) を実行する
+ * - get(id) : 指定されたカードIDのカードを返す
+ * - forEach(callback) : すべてのカード x に対して callback(x) を実行する
  *
  * CardAtlasにより生成されたCardオブジェクトはcardAtlasID属性に
  * カードのIDを代入される
- * @type {Object}
+ * @namespace
  */
 const CardAtlas = {
     parseSuitString(ss){

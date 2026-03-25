@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> ImageCutter</title>
+  <title> CardAtlas</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,8 +73,8 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>ImageCutter</h1>
+                    <p>Namespace</p>
+                    <h1>CardAtlas</h1>
                 </header>
                 
 
@@ -85,12 +85,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>ImageCutter<span class="signature">(img, width, height)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description"><p>イメージを指定された幅・高さに基づいて分割するクラス.
-より正確に言うと, 実際に分割した画像を生成するのではなく,
-単に「設定に基づいて元画像の適切な一部分を描画する」機能を持つだけである.</p></div>
+        <h2>CardAtlas</h2>
         
     
 </header>
@@ -99,145 +94,17 @@
     <div class="container-overview">
     
         
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="ImageCutter">
-        <a class="href-link" href="#ImageCutter">#</a>
-        
-        <span class="code-name">
-            
-                new ImageCutter<span class="signature">(img, width, height)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>指定された画像を横width, 縦heightのブロックに等分割して扱う.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
+            <div class="description"><p>RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.
+以下のメソッドを持つ.</p>
+<ul>
+<li>get(id) : 指定されたカードIDのカードを返す</li>
+<li>forEach(callback) : すべてのカード x に対して callback(x) を実行する</li>
+</ul>
+<p>CardAtlasにより生成されたCardオブジェクトはcardAtlasID属性に
+カードのIDを代入される</p></div>
         
 
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>img</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">HTMLImageElement</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>分割対象となる画像</p></td>
-</tr>
-
-
         
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>width</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>ブロック1個分の幅</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>height</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>ブロック1個分の高さ</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
 
 
 <dl class="details">
@@ -273,38 +140,15 @@
 
     
         <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
+            <a href="card.js.html" class="button">View Source</a>
             <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line566">line 566</a>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1614">line 1614</a>
             </span>
         </p>
     
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
         
     
     </div>
@@ -323,262 +167,6 @@
 
     
 
-    
-        <div class='vertical-section'>
-            <h1>Methods</h1>
-            <div class="members">
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="paint">
-        <a class="href-link" href="#paint">#</a>
-        
-        <span class="code-name">
-            
-                paint<span class="signature">(ctx, x, y, a, b)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>分割した画像のうち上からa番目, 左からb番目の部分を描画する.
-ただし, a, bは0から数え始めるものとする.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>ctx</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">CanvasRenderingContext2D</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>描画に使うコンテクスト</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>x</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>描画位置のx座標</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>y</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>描画位置のy座標</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>a</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>分割のうち, 上から何番目を使うか (0から数え始める)</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>b</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>分割のうち, 左から何番目を使うか (0から数え始める)</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line592">line 592</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-            </div>
-        </div>
     
 
     
