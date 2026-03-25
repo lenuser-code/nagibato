@@ -109,20 +109,27 @@ const getPolysuitMask = function(indices){
  * 属性ごとに影響の違う効果を引き起こすことがある.
  * これを管理するために用意する (複合属性は全部ひとまとめにして扱う).
  * @type {Object}
+ * @prop {number[]} primive - 各基本属性に対するMPの補正量をパーセントで表した値
+ * @prop {number} prismatic - 複合属性 ("Ng"を含むもの以外) に対するMPの補正量をパーセントで表した値
  */
 const MPBoostBySuit = {
     primitive: PrimitiveSuits.map((e) => 100),
     prismatic: 100,
 
-    // 初期化
+    /**
+     * このオブジェクトを初期化する.
+     */
     init(){
         this.primitive.fill(100);
         this.prismatic = 100;
     },
 
-    // Suit[m]に対する強化倍率を計算する.
-    // 複合属性は基本的に白属性 (prismatic) として扱われるが,
-    // "Ng" を含むものは例外的に "Ng" として扱う (理由は不明・・・)
+    /**
+     * Suits[m]に対する強化倍率を計算する.
+     * 複合属性は基本的に全部「白属性」という単一の括りで扱うが,
+     * "Ng" を含むものは例外的に "Ng" として扱う (理由は不明・・・)
+     * @param {number} m - Suitsにおけるその属性のインデックス
+     */
     get(m){
         if(ChainMask[m] & ChainMask[5]) m = 5;
         return (this.primitive[m] ?? this.prismatic) / 100;
@@ -231,10 +238,25 @@ class SkillDealerBase{
 }
 
 /**
+ * @typedef {Object} PlayerSkill_skill
+ * @prop {string} caption - スキル名
+ * @prop {string} desc - 効果の説明
+ * @prop {GeneratorFunction} effect - 引数として受け取ったSkillDealerBaseを使ってスキルの効果を実装する
+ */
+
+/**
  * プレイヤー側のスキルを生成する関数をまとめたもの.
  * @type {Object.<string, function>}
+ * @namespace
  */
 const PlayerSkill = {
+    /**
+     * HPを回復するスキル.
+     * @param {number} percent - 回復量が最大HPの何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     addHP: function(percent, cap = null, desc = null){
         return {
             caption: cap || "体力回復",
@@ -245,6 +267,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * MPを増加させるスキル.
+     * @param {number} percent - 増加量が基本MPの何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     addMP: function(percent, cap = null, desc = null){
         return {
             caption: cap || "MPアップ",
@@ -255,6 +284,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * SGを回復するスキル.
+     * @param {number} percent - 回復量が何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     addSG: function(percent, cap = null, desc = null){
         return {
             caption: cap || "ソウルジェム回復",
@@ -265,6 +301,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * HPとSGを回復するスキル.
+     * @param {number} percent - 回復量がそれぞれの最大値の何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     addHPSG: function(percent, cap = null, desc = null){
         return {
             caption: cap || "HPとソウルジェムを回復",
@@ -275,6 +318,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * ターン開始時にHPを回復するスキル.
+     * @param {number} percent - 回復量が最大HPの何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     heal: function(percent, cap = null, desc = null){
         return {
             caption: cap || "癒し効果",
@@ -285,6 +335,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * ターン開始時にSGを回復するスキル.
+     * @param {number} percent - 回復量が何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     SGHeal: function(percent, cap = null, desc = null){
         return {
             caption: cap || "浄化効果",
@@ -295,6 +352,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * シールドを増やすスキル.
+     * @param {number} n - シールドの増加量
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     addShield: function(n, cap = null, desc = null){
         return {
             caption: cap || "防御シールド",
@@ -305,6 +369,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * チャージMPを増加させるスキル.
+     * @param {number} percent - 増加量が基本チャージMP (チャージボーナスを加算する前のMP合計値) の何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     chargeUp: function(percent, cap = null, desc = null){
         return {
             caption: cap || "チャージボーナス",
@@ -315,6 +386,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * 残りHPが最大値の半分以下のときにMPを増加させるスキル.
+     * @param {number} percent - 増加量が基本MPの何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     crisisBoost: function(percent, cap = null, desc = null){
         return {
             caption: cap || "ピンチでMPアップ",
@@ -326,6 +404,14 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * 特定の属性のカード＆プレイヤーのMPを増加させるスキル.
+     * @param {Array<string|number>} option - 「効果対象を説明する文字列,
+     * 対象の属性のインデックス, 効果量をパーセントで表した値」をこの順番に並べた配列
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     suitSpecificBoost: function(option, cap = null, desc = null){
         const [str, mark, percent] = option;
         return {
@@ -337,6 +423,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * 敵にダメージを与えるスキル.
+     * @param {number} percent - ダメージ量がプレイヤーのMPの何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     attack: function(percent, cap = null, desc = null){
         return {
             caption: cap || "強力な一撃",
@@ -347,6 +440,14 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * 敵に複数回ダメージを与えるスキル.
+     * @param {number[]} option - 「1回のダメージ量がプレイヤーMPの何％か指定する値」と
+     * 「攻撃回数」をこの順番に並べた配列
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     multiAttack: function(option, cap = null, desc = null){
         const [percent, n] = option;
         return {
@@ -362,6 +463,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * 敵のMPを減少させるスキル.
+     * @param {number} percent - 増加量が敵の基本MPの何％か指定する
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     reduceEnemyMP: function(percent, cap = null, desc = null){
         return {
             caption: cap || "敵MPの低下",
@@ -372,6 +480,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * 各ターンの制限時間を延長するスキル.
+     * @param {number} n - 延長される秒数
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     extendTime: function(n, cap = null, desc = null){
         return {
             caption: cap || "制限時間延長",
@@ -382,6 +497,13 @@ const PlayerSkill = {
         };
     },
 
+    /**
+     * HP, SGを全回復して1ターン目に戻すスキル.
+     * @param {number} n - 使用しないが型を揃えるために存在している
+     * @param {string} [?cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [?desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     timeWarp: function(n, cap = null, desc = null){
         return {
             caption: cap || "時間跳躍",
