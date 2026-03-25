@@ -1,38 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Global - Documentation</title>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Global</title>
 
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
 </head>
-<body>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
 
-<label for="nav-trigger" class="overlay"></label>
 
-<nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BasicStatus.html">BasicStatus</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#HP">HP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#MP">MP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#addHP">addHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#addMP">addMP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#name">name</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#percentHP">percentHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#percentMP">percentMP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#retentionRateHP">retentionRateHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BasicStatus.html#retentionRateMP">retentionRateMP</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Card.html">Card</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="CardSet.html">CardSet</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Deck.html">Deck</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="DuosuitGenerator.html">DuosuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Enemy.html">Enemy</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Enemy.html#antiskillContains">antiskillContains</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Enemy.html#init">init</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Player.html">Player</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#SG">SG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#addSG">addSG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#addShield">addShield</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#addStun">addStun</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#id">id</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#isPrismatic">isPrismatic</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#mainSkillCount">mainSkillCount</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#mark">mark</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#parseMainSkill">parseMainSkill</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#payCost">payCost</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#resetSG">resetSG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#shield">shield</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#shiftMainSkill">shiftMainSkill</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#stun">stun</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Player.html#suitString">suitString</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Polysuit.html">Polysuit</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Pool.html">Pool</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="PrismaticCard.html">PrismaticCard</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Public.SideboardDialog.html">SideboardDialog</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBLecture.html">QBLecture</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBLecture.html#talk">talk</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBTalk.html">QBTalk</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTalk.html#execute">execute</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBTelop.html">QBTelop</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBTelop.html#execute">execute</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QBYesNo.html">QBYesNo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#activate">activate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#chart">chart</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#draw">draw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="QBYesNo.html#waitForAnswer">waitForAnswer</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SkillDealerBase.html">SkillDealerBase</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="TriosuitGenerator.html">TriosuitGenerator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.CachePool.html">CachePool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.CachePool.html#createCache">createCache</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.CachePool.html#get">get</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.GameEngine.html">GameEngine</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#addScene">addScene</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#changeScene">changeScene</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#ready">ready</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#run">run</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.GameEngine.html#update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.ImageCutter.html">ImageCutter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImageCutter.html#paint">paint</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.ImagePool.html">ImagePool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImagePool.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImagePool.html#load">load</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.ImagePool.html#ready">ready</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.SEPool.html">SEPool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SEPool.html#play">play</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SEPool.html#register">register</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.Scene.html">Scene</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#add">add</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSequence">addSequence</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSprite">addSprite</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSpriteAfter">addSpriteAfter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addSpriteBefore">addSpriteBefore</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addTask">addTask</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addTaskAfter">addTaskAfter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#addTaskBefore">addTaskBefore</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#superOnLoad">superOnLoad</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#superdraw">superdraw</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#superexecute">superexecute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Scene.html#useCoroutine">useCoroutine</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdgam.SoundPool.html">SoundPool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#load">load</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#play">play</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#ready">ready</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.SoundPool.html#stop">stop</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.CyclicSelect.html">CyclicSelect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.CyclicSelect.html#addMod">addMod</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.CyclicSelect.html#move">move</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.Meter.html">Meter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Meter.html#changeTo">changeTo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Meter.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Meter.html#init">init</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.Scroll.html">Scroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#action">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#bind">bind</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#cancel">cancel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#initScroll">initScroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Scroll.html#viewCount">viewCount</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="stdtask.Select.html">Select</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#action">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#bind">bind</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#cancel">cancel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#execute">execute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdtask.Select.html#move">move</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="PlayerSkill.html">PlayerSkill</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.SGHeal">SGHeal</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.addHP">addHP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.addHPSG">addHPSG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.addMP">addMP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.addSG">addSG</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.addShield">addShield</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.attack">attack</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.chargeUp">chargeUp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.crisisBoost">crisisBoost</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.extendTime">extendTime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.heal">heal</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.multiAttack">multiAttack</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.reduceEnemyMP">reduceEnemyMP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.suitSpecificBoost">suitSpecificBoost</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PlayerSkill.html#.timeWarp">timeWarp</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="battle.html">battle</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="edit.html">edit</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="stdgam.html">stdgam</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="stdgam.Templates.html">Templates</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#._initTraits">_initTraits</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.call">call</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.custom">custom</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.fader">fader</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.finite">finite</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.ftext">ftext</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.image">image</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.pause">pause</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.scheduler">scheduler</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.slider">slider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="stdgam.Templates.html#.text">text</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="stdtask.html">stdtask</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CardAtlas">CardAtlas</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ChainFunc">ChainFunc</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ChainMask">ChainMask</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CharacterNames">CharacterNames</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#EnemyAction">EnemyAction</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#EnemyData">EnemyData</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#Suits">Suits</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#TutorialInfo">TutorialInfo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createMeter">createMeter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createOpeningQB">createOpeningQB</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createTutorialQB">createTutorialQB</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getCharacterName">getCharacterName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPolysuitMask">getPolysuitMask</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getPolysuitName">getPolysuitName</a></span></li>
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">Global</h1>
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
     
 
-    
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="PlayerSkill.html">PlayerSkill</a></li><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdgam.html">stdgam</a></li><li><a href="stdgam.Templates.html">Templates</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li><li><a href="stdgam.CachePool.html">CachePool</a></li><li><a href="stdgam.GameEngine.html">GameEngine</a></li><li><a href="stdgam.ImageCutter.html">ImageCutter</a></li><li><a href="stdgam.ImagePool.html">ImagePool</a></li><li><a href="stdgam.SEPool.html">SEPool</a></li><li><a href="stdgam.Scene.html">Scene</a></li><li><a href="stdgam.SoundPool.html">SoundPool</a></li><li><a href="stdtask.CyclicSelect.html">CyclicSelect</a></li><li><a href="stdtask.Meter.html">Meter</a></li><li><a href="stdtask.Scroll.html">Scroll</a></li><li><a href="stdtask.Select.html">Select</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p></p>
+                    <h1>Global</h1>
+                </header>
+                
 
 
 
@@ -41,9 +85,7 @@
 
 <header>
     
-        <h2>
-        
-        </h2>
+        <h2></h2>
         
     
 </header>
@@ -81,7 +123,6 @@
     
 
     
-
     
 
     
@@ -95,6 +136,12 @@
         
     
     </div>
+    
+    
+
+    
+
+    
 
     
 
@@ -102,17 +149,33 @@
 
     
 
-     
-
     
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
             
-<div class="section-members">
-<h4 class="name" id="CardAtlas"><span class="type-signature">(constant) </span>CardAtlas<span class="type-signature"> :Object</span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="CardAtlas">
+    <a class="href-link" href="#CardAtlas">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        CardAtlas
+    </span>
+    
+</h4>
 
 
 
@@ -155,43 +218,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line1144">line 1144</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1144">line 1144</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object</code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="ChainMask"><span class="type-signature">(constant) </span>ChainMask<span class="type-signature"> :Array.&lt;number></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Array.&lt;number></code>
+
+
+    </span>
+
+<h4 class="name" id="ChainMask">
+    <a class="href-link" href="#ChainMask">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        ChainMask
+    </span>
+    
+</h4>
 
 
 
@@ -229,43 +299,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line93">line 93</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line93">line 93</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Array.&lt;number></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="CharacterNames"><span class="type-signature">(constant) </span>CharacterNames<span class="type-signature"> :Object.&lt;string, string></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object.&lt;string, string></code>
+
+
+    </span>
+
+<h4 class="name" id="CharacterNames">
+    <a class="href-link" href="#CharacterNames">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        CharacterNames
+    </span>
+    
+</h4>
 
 
 
@@ -303,43 +380,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line60">line 60</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line60">line 60</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object.&lt;string, string></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="EnemyAction"><span class="type-signature">(constant) </span>EnemyAction<span class="type-signature"> :Object.&lt;string, function()></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object.&lt;string, function()></code>
+
+
+    </span>
+
+<h4 class="name" id="EnemyAction">
+    <a class="href-link" href="#EnemyAction">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        EnemyAction
+    </span>
+    
+</h4>
 
 
 
@@ -377,43 +461,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line65">line 65</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="enemy.js.html" class="button">View Source</a>
+            <span>
+                <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line65">line 65</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object.&lt;string, function()></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="EnemyData"><span class="type-signature">(constant) </span>EnemyData<span class="type-signature"> :Object.&lt;string, *></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object.&lt;string, *></code>
+
+
+    </span>
+
+<h4 class="name" id="EnemyData">
+    <a class="href-link" href="#EnemyData">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        EnemyData
+    </span>
+    
+</h4>
 
 
 
@@ -451,43 +542,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line141">line 141</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="enemy.js.html" class="button">View Source</a>
+            <span>
+                <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line141">line 141</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object.&lt;string, *></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="LocalStorageInfo"><span class="type-signature">(constant) </span>LocalStorageInfo<span class="type-signature"> :Object</span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="LocalStorageInfo">
+    <a class="href-link" href="#LocalStorageInfo">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        LocalStorageInfo
+    </span>
+    
+</h4>
 
 
 
@@ -505,49 +603,49 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>config</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
-<span class="param-type"><code>Array.&lt;(string|number|boolean)></code></span>
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>config</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Array.&lt;(string|number|boolean)></code>
 |
 
-<span class="param-type"><code>null</code></span>
+<code class="param-type">null</code>
 
 
-            
-            </td>
+    
+    </td>
 
-            
+    
 
-            
+    
 
-            <td class="description last"><p>設定情報のうちlocalStorageに保存するものの配列.
+    <td class="description last"><p>設定情報のうちlocalStorageに保存するものの配列.
 現在のバージョンでは,</p>
 <ol>
 <li>メインカードのID (string)
@@ -555,43 +653,39 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
 <li>スキル持ちカードのマーカー設定 (boolean)
 がこの順番に格納されている. ロードする前, および, localStorageを利用しない設定のときはnull</li>
 </ol></td>
-        </tr>
+</tr>
 
         
-
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>deckInfo</code></td>
     
 
-        <tr>
-            
-                <td class="name"><code>deckInfo</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>Array.&lt;string></code></span>
+    <td class="type">
+    
+        
+<code class="param-type">Array.&lt;string></code>
 |
 
-<span class="param-type"><code>null</code></span>
+<code class="param-type">null</code>
 
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>デッキに含まれる各カードのIDを並べた配列.
-ロードする前, および, localStorageを利用しない設定のときはnull</p></td>
-        </tr>
-
-        
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last"><p>デッキに含まれる各カードのIDを並べた配列.
+ロードする前, および, localStorageを利用しない設定のときはnull</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -620,43 +714,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line22">line 22</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="storage.js.html" class="button">View Source</a>
+            <span>
+                <a href="storage.js.html">storage.js</a>, <a href="storage.js.html#line22">line 22</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object</code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="MPBoostBySuit"><span class="type-signature">(constant) </span>MPBoostBySuit<span class="type-signature"> :Object</span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="MPBoostBySuit">
+    <a class="href-link" href="#MPBoostBySuit">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        MPBoostBySuit
+    </span>
+    
+</h4>
 
 
 
@@ -675,79 +776,75 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>primive</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>Array.&lt;number></code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>各基本属性に対するMPの補正量をパーセントで表した値</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
+        <tbody>
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>primive</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Array.&lt;number></code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>prismatic</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>複合属性 (&quot;Ng&quot;を含むもの以外) に対するMPの補正量をパーセントで表した値</p></td>
-        </tr>
+    <td class="description last"><p>各基本属性に対するMPの補正量をパーセントで表した値</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>prismatic</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last"><p>複合属性 (&quot;Ng&quot;を含むもの以外) に対するMPの補正量をパーセントで表した値</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -776,43 +873,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line115">line 115</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line115">line 115</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object</code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="PrimitiveSuits"><span class="type-signature">(constant) </span>PrimitiveSuits<span class="type-signature"> :Array.&lt;string></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Array.&lt;string></code>
+
+
+    </span>
+
+<h4 class="name" id="PrimitiveSuits">
+    <a class="href-link" href="#PrimitiveSuits">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        PrimitiveSuits
+    </span>
+    
+</h4>
 
 
 
@@ -850,43 +954,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line35">line 35</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line35">line 35</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Array.&lt;string></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="ShortCharacterNames"><span class="type-signature">(constant) </span>ShortCharacterNames<span class="type-signature"> :Object.&lt;string, string></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object.&lt;string, string></code>
+
+
+    </span>
+
+<h4 class="name" id="ShortCharacterNames">
+    <a class="href-link" href="#ShortCharacterNames">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        ShortCharacterNames
+    </span>
+    
+</h4>
 
 
 
@@ -924,43 +1035,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line69">line 69</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line69">line 69</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object.&lt;string, string></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="Suits"><span class="type-signature">(constant) </span>Suits<span class="type-signature"> :Array.&lt;string></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Array.&lt;string></code>
+
+
+    </span>
+
+<h4 class="name" id="Suits">
+    <a class="href-link" href="#Suits">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        Suits
+    </span>
+    
+</h4>
 
 
 
@@ -998,43 +1116,50 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line41">line 41</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line41">line 41</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Array.&lt;string></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
             
-<div class="section-members">
-<h4 class="name" id="TutorialInfo"><span class="type-signature">(constant) </span>TutorialInfo<span class="type-signature"> :Array.&lt;Object.&lt;string, *>></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Array.&lt;Object.&lt;string, *>></code>
+
+
+    </span>
+
+<h4 class="name" id="TutorialInfo">
+    <a class="href-link" href="#TutorialInfo">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        TutorialInfo
+    </span>
+    
+</h4>
 
 
 
@@ -1072,61 +1197,177 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line511">line 511</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="QB.js.html" class="button">View Source</a>
+            <span>
+                <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line511">line 511</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Array.&lt;Object.&lt;string, *>></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
-        
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
             
-<div class="section-method">
-
+            </div>
+        </div>
     
 
-    <h4 class="name" id="ChainFunc"><span class="type-signature"></span>ChainFunc<span class="signature">(a, b, c)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
 
     
+    <h4 class="name" id="ChainFunc">
+        <a class="href-link" href="#ChainFunc">#</a>
+        
+        <span class="code-name">
+            
+                ChainFunc<span class="signature">(a, b, c)</span><span class="type-signature"> &rarr; {boolean}</span>
+            
+        </span>
+    </h4>
+    
 
-
-
-<div class="description">
-    <p>MAGICARD BATTLE第1弾のルールに従い, 3枚のカードがコンボの条件を
+    
+    
+    <div class="description">
+        <p>MAGICARD BATTLE第1弾のルールに従い, 3枚のカードがコンボの条件を
 満たしているか判定する
 (3枚目のカードがスキルを持つかどうかはチェックしない).</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>a</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Card.html">Card</a></code>
+|
+
+<code class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>b</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Card.html">Card</a></code>
+|
+
+<code class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>c</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Card.html">Card</a></code>
+|
+
+<code class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
 
@@ -1158,18 +1399,19 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line157">line 157</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line157">line 157</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1181,175 +1423,185 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    <div class='param-desc column is-7'><p>コンボが成立していればtrue, 不成立ならfalse</p></div>
     
-
-        <tr>
-            
-                <td class="name"><code>a</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code><a href="Card.html">Card</a></code></span>
-|
-
-<span class="param-type"><code><a href="PrismaticCard.html">PrismaticCard</a></code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                
-                
-            </td>
-        </tr>
-
     
-
-        <tr>
-            
-                <td class="name"><code>b</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code><a href="Card.html">Card</a></code></span>
-|
-
-<span class="param-type"><code><a href="PrismaticCard.html">PrismaticCard</a></code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>c</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code><a href="Card.html">Card</a></code></span>
-|
-
-<span class="param-type"><code><a href="PrismaticCard.html">PrismaticCard</a></code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>boolean</code></span>
+<code class="param-type">boolean</code>
 
 
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    <p>コンボが成立していればtrue, 不成立ならfalse</p>
-</div>
-
+    </div>
     
 </div>
+
+                
+        </div>
+    </div>
+
 
 
 
 </div>
-        
             
-<div class="section-method">
+                <div class="member">
+
 
     
-
-    <h4 class="name" id="ChainFuncVer2"><span class="type-signature"></span>ChainFuncVer2<span class="signature">(a, b, c)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-
+    <h4 class="name" id="ChainFuncVer2">
+        <a class="href-link" href="#ChainFuncVer2">#</a>
+        
+        <span class="code-name">
+            
+                ChainFuncVer2<span class="signature">(a, b, c)</span><span class="type-signature"> &rarr; {boolean}</span>
+            
+        </span>
+    </h4>
     
 
-
-
-<div class="description">
-    <p>MAGICARD BATTLE第2弾のルールに従い, 3枚のカードがコンボの条件を
+    
+    
+    <div class="description">
+        <p>MAGICARD BATTLE第2弾のルールに従い, 3枚のカードがコンボの条件を
 満たしているか判定する
 (3枚目のカードがスキルを持つかどうかはチェックしない).</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>a</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Card.html">Card</a></code>
+|
+
+<code class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>b</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Card.html">Card</a></code>
+|
+
+<code class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>c</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Card.html">Card</a></code>
+|
+
+<code class="param-type"><a href="PrismaticCard.html">PrismaticCard</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
 
@@ -1381,20 +1633,90 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line170">line 170</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line170">line 170</a>
+            </span>
+        </p>
     
 </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>コンボが成立していればtrue, 不成立ならfalse</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">boolean</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createConfirmatingQB_BeforeBattle">
+        <a class="href-link" href="#createConfirmatingQB_BeforeBattle">#</a>
+        
+        <span class="code-name">
+            
+                createConfirmatingQB_BeforeBattle<span class="signature">(setting)</span><span class="type-signature"> &rarr; {<a href="QBYesNo.html">QBYesNo</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>バトルが選択されたときに喋る内容を生成する.</p>
+    </div>
+    
 
 
 
@@ -1406,171 +1728,53 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>a</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code><a href="Card.html">Card</a></code></span>
-|
-
-<span class="param-type"><code><a href="PrismaticCard.html">PrismaticCard</a></code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">
-                
-                
-            </td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>b</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code><a href="Card.html">Card</a></code></span>
-|
-
-<span class="param-type"><code><a href="PrismaticCard.html">PrismaticCard</a></code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>c</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code><a href="Card.html">Card</a></code></span>
-|
-
-<span class="param-type"><code><a href="PrismaticCard.html">PrismaticCard</a></code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
+        <tbody>
         
 
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>boolean</code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    <p>コンボが成立していればtrue, 不成立ならfalse</p>
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
             
-<div class="section-method">
+<tr class="deep-level-0">
+  
+      <td class="name"><code>setting</code></td>
+  
 
-    
-
-    <h4 class="name" id="createConfirmatingQB_BeforeBattle"><span class="type-signature"></span>createConfirmatingQB_BeforeBattle<span class="signature">(setting)</span><span class="type-signature"> &rarr; {<a href="QBYesNo.html">QBYesNo</a>}</span></h4>
-
-    
-
+  <td class="type">
+  
+      
+<code class="param-type">Objcet.&lt;string, *></code>
 
 
-<div class="description">
-    <p>バトルが選択されたときに喋る内容を生成する.</p>
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>selectSceneの設定データ</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
 
@@ -1602,18 +1806,19 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line475">line 475</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="QB.js.html" class="button">View Source</a>
+            <span>
+                <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line475">line 475</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1625,115 +1830,177 @@ forEach(callback) : すべてのカード x に対して callback(x) を実行�
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    <div class='param-desc column is-7'><p>生成されたオブジェクト</p></div>
     
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="QBYesNo.html">QBYesNo</a></code>
 
-        <tr>
-            
-                <td class="name"><code>setting</code></td>
-            
 
-            <td class="type">
-            
+    </div>
+    
+</div>
+
                 
-<span class="param-type"><code>Objcet.&lt;string, *></code></span>
+        </div>
+    </div>
 
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>selectSceneの設定データ</p>
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code><a href="QBYesNo.html">QBYesNo</a></code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    <p>生成されたオブジェクト</p>
-</div>
-
-    
-</div>
 
 
 
 </div>
-        
             
-<div class="section-method">
+                <div class="member">
+
 
     
-
-    <h4 class="name" id="createMeter"><span class="type-signature"></span>createMeter<span class="signature">(v, max, frames)</span><span class="type-signature"> &rarr; {<a href="stdtask.Meter.html">stdtask.Meter</a>}</span></h4>
-
+    <h4 class="name" id="createMeter">
+        <a class="href-link" href="#createMeter">#</a>
+        
+        <span class="code-name">
+            
+                createMeter<span class="signature">(v, max, frames)</span><span class="type-signature"> &rarr; {<a href="stdtask.Meter.html">stdtask.Meter</a>}</span>
+            
+        </span>
+    </h4>
     
 
-
-
-<div class="description">
-    <p>ステータスの等速変化を実現するMeterオブジェクトを作る.
+    
+    
+    <div class="description">
+        <p>ステータスの等速変化を実現するMeterオブジェクトを作る.
 あるパラメータがAからBへ変化するとき, モデル内部では一瞬で値がBになるが,
 GUIではAからBまで一定の時間を掛けて変化する様子を描画したい.
 この時間変化を表現するために使う.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>v</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>初期値</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>max</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>最大値</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>frames</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>変化に要するフレーム数の既定値</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
 
@@ -1765,20 +2032,90 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line24">line 24</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="model.js.html" class="button">View Source</a>
+            <span>
+                <a href="model.js.html">model.js</a>, <a href="model.js.html#line24">line 24</a>
+            </span>
+        </p>
     
 </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたMeterオブジェクト</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="stdtask.Meter.html">stdtask.Meter</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createOpeningQB">
+        <a class="href-link" href="#createOpeningQB">#</a>
+        
+        <span class="code-name">
+            
+                createOpeningQB<span class="signature">(battleOpt)</span><span class="type-signature"> &rarr; {<a href="QBTalk.html">QBTalk</a>|<a href="QBLecture.html">QBLecture</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>バトルの最初にQBが喋る内容を生成する.</p>
+    </div>
+    
 
 
 
@@ -1790,162 +2127,53 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>v</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">
-                <p>初期値</p>
-                
-            </td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>max</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>最大値</p>
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>frames</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>変化に要するフレーム数の既定値</p>
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
+        <tbody>
         
 
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code><a href="stdtask.Meter.html">stdtask.Meter</a></code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    <p>生成されたMeterオブジェクト</p>
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
             
-<div class="section-method">
+<tr class="deep-level-0">
+  
+      <td class="name"><code>battleOpt</code></td>
+  
 
-    
-
-    <h4 class="name" id="createOpeningQB"><span class="type-signature"></span>createOpeningQB<span class="signature">(battleOpt)</span><span class="type-signature"> &rarr; {<a href="QBTalk.html">QBTalk</a>|<a href="QBLecture.html">QBLecture</a>}</span></h4>
-
-    
-
+  <td class="type">
+  
+      
+<code class="param-type">Objcet.&lt;string, *></code>
 
 
-<div class="description">
-    <p>バトルの最初にQBが喋る内容を生成する.</p>
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>バトルの設定データ</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
 
@@ -1977,18 +2205,19 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line439">line 439</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="QB.js.html" class="button">View Source</a>
+            <span>
+                <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line439">line 439</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -2000,116 +2229,77 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    <div class='param-desc column is-7'><p>生成されたオブジェクト</p></div>
     
-
-        <tr>
-            
-                <td class="name"><code>battleOpt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>Objcet.&lt;string, *></code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>バトルの設定データ</p>
-                
-            </td>
-        </tr>
-
     
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code><a href="QBTalk.html">QBTalk</a></code></span>
+<code class="param-type"><a href="QBTalk.html">QBTalk</a></code>
 |
 
-<span class="param-type"><code><a href="QBLecture.html">QBLecture</a></code></span>
+<code class="param-type"><a href="QBLecture.html">QBLecture</a></code>
 
 
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    <p>生成されたオブジェクト</p>
-</div>
-
+    </div>
     
 </div>
 
+                
+        </div>
+    </div>
+
+
 
 
 </div>
-        
             
-<div class="section-method">
+                <div class="member">
+
 
     
+    <h4 class="name" id="createTutorialQB">
+        <a class="href-link" href="#createTutorialQB">#</a>
+        
+        <span class="code-name">
+            
+                createTutorialQB<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="QBYesNo.html">QBYesNo</a>}</span>
+            
+        </span>
+    </h4>
+    
 
-    <h4 class="name" id="createTutorialQB"><span class="type-signature"></span>createTutorialQB<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="QBYesNo.html">QBYesNo</a>}</span></h4>
-
+    
+    
+    <div class="description">
+        <p>チュートリアルが選択されたときに喋る内容を生成する.</p>
+    </div>
     
 
 
 
-<div class="description">
-    <p>チュートリアルが選択されたときに喋る内容を生成する.</p>
-</div>
+
+
+
+
+
 
 
 
@@ -2140,18 +2330,19 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line495">line 495</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="QB.js.html" class="button">View Source</a>
+            <span>
+                <a href="QB.js.html">QB.js</a>, <a href="QB.js.html#line495">line 495</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -2172,96 +2363,57 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
 
 
 
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code><a href="QBYesNo.html">QBYesNo</a></code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    <p>生成されたオブジェクト</p>
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
             
-<div class="section-method">
+                    
 
+<div class="columns">
     
-
-    <h4 class="name" id="getCharacterName"><span class="type-signature"></span>getCharacterName<span class="signature">(suitString)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
+    <div class='param-desc column is-7'><p>生成されたオブジェクト</p></div>
     
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="QBYesNo.html">QBYesNo</a></code>
 
 
-
-<div class="description">
-    <p>指定された属性に対応するカード名を生成する.</p>
+    </div>
+    
 </div>
 
+                
+        </div>
+    </div>
 
 
 
 
-<dl class="details">
+</div>
+            
+                <div class="member">
 
+
+    
+    <h4 class="name" id="getCharacterName">
+        <a class="href-link" href="#getCharacterName">#</a>
+        
+        <span class="code-name">
+            
+                getCharacterName<span class="signature">(suitString)</span><span class="type-signature"> &rarr; {string}</span>
+            
+        </span>
+    </h4>
     
 
     
-
     
-
+    <div class="description">
+        <p>指定された属性に対応するカード名を生成する.</p>
+    </div>
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line79">line 79</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -2273,110 +2425,53 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>suitString</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">
-                <p>属性の値</p>
-                
-            </td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
+        <tbody>
         
 
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>string</code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    <p>生成されたカード名</p>
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
             
-<div class="section-method">
+<tr class="deep-level-0">
+  
+      <td class="name"><code>suitString</code></td>
+  
 
-    
-
-    <h4 class="name" id="getPolysuitMask"><span class="type-signature"></span>getPolysuitMask<span class="signature">(indices)</span><span class="type-signature"> &rarr; {number}</span></h4>
-
-    
-
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
 
-<div class="description">
-    <p>複合クラスのためのマスクを計算する</p>
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>属性の値</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
 
@@ -2408,20 +2503,90 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line100">line 100</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line79">line 79</a>
+            </span>
+        </p>
     
 </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたカード名</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">string</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getPolysuitMask">
+        <a class="href-link" href="#getPolysuitMask">#</a>
+        
+        <span class="code-name">
+            
+                getPolysuitMask<span class="signature">(indices)</span><span class="type-signature"> &rarr; {number}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>複合クラスのためのマスクを計算する</p>
+    </div>
+    
 
 
 
@@ -2433,110 +2598,53 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>indices</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>Array.&lt;number></code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">
-                <p>各構成要素のPrimitiveSuitsにおけるインデックス</p>
-                
-            </td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
+        <tbody>
         
 
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>number</code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    <p>生成されたマスクの値</p>
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
             
-<div class="section-method">
+<tr class="deep-level-0">
+  
+      <td class="name"><code>indices</code></td>
+  
 
-    
-
-    <h4 class="name" id="getPolysuitName"><span class="type-signature"></span>getPolysuitName<span class="signature">(marks)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-    
-
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;number></code>
 
 
-<div class="description">
-    <p>複合属性の属性名を生成する</p>
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>各構成要素のPrimitiveSuitsにおけるインデックス</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
 
@@ -2568,20 +2676,90 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line48">line 48</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line100">line 100</a>
+            </span>
+        </p>
     
 </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたマスクの値</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">number</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getPolysuitName">
+        <a class="href-link" href="#getPolysuitName">#</a>
+        
+        <span class="code-name">
+            
+                getPolysuitName<span class="signature">(marks)</span><span class="type-signature"> &rarr; {string}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>複合属性の属性名を生成する</p>
+    </div>
+    
 
 
 
@@ -2593,106 +2771,174 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>marks</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>Array.&lt;number></code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">
-                <p>各構成要素のPrimitiveSuitsにおけるインデックス</p>
-                
-            </td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>marks</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;number></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>各構成要素のPrimitiveSuitsにおけるインデックス</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
 
     
-    </tbody>
-</table>
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
+    
 
+    
 
+    
 
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>string</code></span>
-
-
-    </dd>
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line48">line 48</a>
+            </span>
+        </p>
+    
 </dl>
 
 
-<div class="param-desc">
-    <p>生成された属性名</p>
-</div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
     
-</div>
-
-
-
-</div>
+    <div class='param-desc column is-7'><p>生成された属性名</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-    
+<code class="param-type">string</code>
 
-    
-        <h3 class="subsection-title">Type Definitions</h3>
 
-        
+    </div>
+    
+</div>
+
                 
-<div class="section-members">
-<h4 class="name" id="PlayerSkill_skill">PlayerSkill_skill</h4>
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Type Definitions</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="PlayerSkill_skill">
+    <a class="href-link" href="#PlayerSkill_skill">#</a>
+    
+    <span class="code-name">
+        PlayerSkill_skill
+    </span>
+    
+</h4>
 
 
 
@@ -2704,104 +2950,98 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>caption</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>スキル名</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
+        <tbody>
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>caption</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">string</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>desc</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>効果の説明</p></td>
-        </tr>
+    <td class="description last"><p>スキル名</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>desc</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">string</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>effect</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>GeneratorFunction</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>引数として受け取ったSkillDealerBaseを使ってスキルの効果を実装する</p></td>
-        </tr>
+    <td class="description last"><p>効果の説明</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>effect</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">GeneratorFunction</code>
+
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last"><p>引数として受け取ったSkillDealerBaseを使ってスキルの効果を実装する</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -2830,43 +3070,46 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line241">line 241</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line241">line 241</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object</code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
             
-                
-<div class="section-members">
-<h4 class="name" id="Sprite">Sprite</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="Sprite">
+    <a class="href-link" href="#Sprite">#</a>
+    
+    <span class="code-name">
+        Sprite
+    </span>
+    
+</h4>
 
 
 
@@ -2882,54 +3125,52 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>draw</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>1フレーム分の描画処理を行う</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
+        <tbody>
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>draw</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">function</code>
+
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last"><p>1フレーム分の描画処理を行う</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -2958,43 +3199,46 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line31">line 31</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line31">line 31</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object</code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
             
-                
-<div class="section-members">
-<h4 class="name" id="Task">Task</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="Task">
+    <a class="href-link" href="#Task">#</a>
+    
+    <span class="code-name">
+        Task
+    </span>
+    
+</h4>
 
 
 
@@ -3010,53 +3254,124 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>execute</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>1フレーム分のタスク処理を行う</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>execute</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">function</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>1フレーム分のタスク処理を行う</p></td>
+</tr>
 
         
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
 
     
-    </tbody>
-</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line36">line 36</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Template_text</code>
+
+
+    </span>
+
+<h4 class="name" id="Template_ftext">
+    <a class="href-link" href="#Template_ftext">#</a>
+    
+    <span class="code-name">
+        Template_ftext
+    </span>
+    
+</h4>
+
+
+
+
 
 
 
@@ -3086,113 +3401,46 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line36">line 36</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line887">line 887</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Object</code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
             
-                
-<div class="section-members">
-<h4 class="name" id="Template_ftext">Template_ftext</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="global.html#Task">Task</a></code>
 
 
+    </span>
 
-
-
-
-
-
-<dl class="details">
-
+<h4 class="name" id="Templates_fader">
+    <a class="href-link" href="#Templates_fader">#</a>
     
-
+    <span class="code-name">
+        Templates_fader
+    </span>
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line887">line 887</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code>Template_text</code></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</div>
-
-            
-                
-<div class="section-members">
-<h4 class="name" id="Templates_fader">Templates_fader</h4>
+</h4>
 
 
 
@@ -3204,54 +3452,52 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>fadeTo</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>現在値から第1引数で指定した値まで, 第3引数で指定したフレーム数を掛けてthis.alphaの値を等速変化させる</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
+        <tbody>
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>fadeTo</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">function</code>
+
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last"><p>現在値から第1引数で指定した値まで, 第3引数で指定したフレーム数を掛けてthis.alphaの値を等速変化させる</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -3280,43 +3526,46 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line915">line 915</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line915">line 915</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code><a href="global.html#Task">Task</a></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
             
-                
-<div class="section-members">
-<h4 class="name" id="Templates_image">Templates_image</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="global.html#Sprite">Sprite</a></code>
+
+
+    </span>
+
+<h4 class="name" id="Templates_image">
+    <a class="href-link" href="#Templates_image">#</a>
+    
+    <span class="code-name">
+        Templates_image
+    </span>
+    
+</h4>
 
 
 
@@ -3328,129 +3577,121 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>image</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>HTMLImageElement</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>描画する画像</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
+        <tbody>
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>image</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">HTMLImageElement</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>描画位置のx座標</p></td>
-        </tr>
+    <td class="description last"><p>描画する画像</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>x</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>描画位置のy座標</p></td>
-        </tr>
+    <td class="description last"><p>描画位置のx座標</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>y</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>alpha</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>不透明度</p></td>
-        </tr>
+    <td class="description last"><p>描画位置のy座標</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>alpha</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last"><p>不透明度</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -3479,43 +3720,46 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line891">line 891</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line891">line 891</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code><a href="global.html#Sprite">Sprite</a></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
             
-                
-<div class="section-members">
-<h4 class="name" id="Templates_scheduler">Templates_scheduler</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="global.html#Task">Task</a></code>
+
+
+    </span>
+
+<h4 class="name" id="Templates_scheduler">
+    <a class="href-link" href="#Templates_scheduler">#</a>
+    
+    <span class="code-name">
+        Templates_scheduler
+    </span>
+    
+</h4>
 
 
 
@@ -3527,81 +3771,77 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>after</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>指定時間が経過したとき第2引数で指定したコールバック関数を実行する.
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>after</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">function</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>指定時間が経過したとき第2引数で指定したコールバック関数を実行する.
 ここで, コールバック関数の引数は (GE, self) である
 (GEはタスク処理に用いるGameEngine, selfはこのオブジェクト自身).</p></td>
-        </tr>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>loop</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">function</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>loop</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>コールバック関数の実行結果がtrueである限り, afterと同じ処理を繰り返す</p></td>
-        </tr>
+    <td class="description last"><p>コールバック関数の実行結果がtrueである限り, afterと同じ処理を繰り返す</p></td>
+</tr>
 
         
-
-    
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -3630,43 +3870,46 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line899">line 899</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line899">line 899</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code><a href="global.html#Task">Task</a></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
             
-                
-<div class="section-members">
-<h4 class="name" id="Templates_slider">Templates_slider</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="global.html#Task">Task</a></code>
+
+
+    </span>
+
+<h4 class="name" id="Templates_slider">
+    <a class="href-link" href="#Templates_slider">#</a>
+    
+    <span class="code-name">
+        Templates_slider
+    </span>
+    
+</h4>
 
 
 
@@ -3678,79 +3921,75 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>moveTo</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>this.x, this.yを指定した値に変更する</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
+        <tbody>
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>moveTo</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">function</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>slideTo</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>現在位置から第1～第2引数で指定した座標まで, 第3引数で指定したフレーム数を掛けてthis.x, this.yの値を等速変化させる</p></td>
-        </tr>
+    <td class="description last"><p>this.x, this.yを指定した値に変更する</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>slideTo</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">function</code>
+
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last"><p>現在位置から第1～第2引数で指定した座標まで, 第3引数で指定したフレーム数を掛けてthis.x, this.yの値を等速変化させる</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -3779,43 +4018,46 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line909">line 909</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line909">line 909</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code><a href="global.html#Task">Task</a></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
             
-                
-<div class="section-members">
-<h4 class="name" id="Templates_text">Templates_text</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="global.html#Sprite">Sprite</a></code>
+
+
+    </span>
+
+<h4 class="name" id="Templates_text">
+    <a class="href-link" href="#Templates_text">#</a>
+    
+    <span class="code-name">
+        Templates_text
+    </span>
+    
+</h4>
 
 
 
@@ -3827,179 +4069,167 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>text</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>表示するテキスト</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
+        <tbody>
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>text</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">string</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>描画位置のx座標</p></td>
-        </tr>
+    <td class="description last"><p>表示するテキスト</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>x</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>描画位置のy座標</p></td>
-        </tr>
+    <td class="description last"><p>描画位置のx座標</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>y</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>color</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>テキストの色</p></td>
-        </tr>
+    <td class="description last"><p>描画位置のy座標</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>color</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">string</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>font</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>string</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>テキストのフォント</p></td>
-        </tr>
+    <td class="description last"><p>テキストの色</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>font</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">string</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>alpha</code></td>
-            
+    
 
-            <td class="type">
-            
-                
-<span class="param-type"><code>number</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>不透明度</p></td>
-        </tr>
+    <td class="description last"><p>テキストのフォント</p></td>
+</tr>
 
         
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>alpha</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last"><p>不透明度</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -4028,40 +4258,30 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line877">line 877</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line877">line 877</a>
+            </span>
+        </p>
     
 </dl>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><code><a href="global.html#Sprite">Sprite</a></code></span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
 </div>
-
             
+            </div>
+        </div>
     
 
     
@@ -4072,15 +4292,26 @@ GUIではAからBまで一定の時間を掛けて変化する様子を描画し
 
 
 
-</div>
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
 
-<br class="clear">
 
-<footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 07:02:41 GMT+0000 (Coordinated Universal Time) using the Minami theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/linenumber.js"></script>
 </body>
 </html>
