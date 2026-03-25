@@ -36,7 +36,11 @@ jobs:
           cp *.js *.html release/ 2>/dev/null || true
           cp -r image release/ 2>/dev/null || true
           # 生成された docs フォルダも release の中に入れる
-          cp -r docs release/
+          cp -r docs release//
+          // release/indedx.htmlを作る
+          npx marked -i README.md -o release/index.html
+          sed -i '1i <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css"><style>body{box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px;}</style><article class="markdown-body">' release/index.html
+          echo "</article>" >> release/index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
