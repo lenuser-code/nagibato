@@ -509,6 +509,7 @@ Public.GameEngine = class {
      * 1. 画面をクリアする.
      * 2. カレントシーンのsuperexecuteを呼び出しタスク処理を実行させる.
      * 3. その後, カレントシーンのsuperdrawを呼び出し描画処理を実行させる.
+     *
      * という手順を行う.
      */
     update(){
@@ -952,7 +953,8 @@ Public.SEPool = class {
  * - slider: slideToにより自動的に平行移動させることができる
  * - fader: fadeToによりアルファを自動的に変化させることができる
  *
- * @type {Object.<string, function>}
+ * @namespace
+ * @memberof stdgam
  */
 Public.Templates = {
     // --- 1. ジェネレータ ---
