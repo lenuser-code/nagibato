@@ -300,7 +300,7 @@ Public.SideboardDialog = class extends DialogBase{
     // sideboardObjはDeckなので微妙に処理が違う
     initPartition(sideboardObj){
         this.subsets = Public.SideboardDialog.labels.map((e) => []);
-        for(const card of sideboardObj.cards){
+        for(const card of sideboardObj.cards()){
             const m = card.mark;
             if(m < Public.SideboardDialog.labels.length - 1) this.subsets[m].push(card);
             else this.subsets.at(-1).push(card);
@@ -410,39 +410,6 @@ displayObject: {
     }
 },
 
-onLoad(GE, setting){
-    this.setting = setting;
-    this.deck = setting.deckSet.cards;  // localStorageを使うとき、すぐに保存するため必要
-
-    this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
-    this.add(T.text("メインカードを変更する", {x: 90, y:90, font: "32px Sans-Serif"}));
-    this.add(T.text("現在の設定：", {x: 160, y:133, font: "24px Sans-Serif"}));
-
-    this.add(T.text("localStorageの設定を変更する", {x: 90, y:330, font: "32px Sans-Serif"}));
-
-    let tmp = T.text("現在の設定：  ", {x: 160, y:373, font: "24px Sans-Serif"});
-    tmp.execute = (GE) => {
-        tmp.text = LocalStorageInfo.isUsed() ? "現在の設定：　使用する" : "現在の設定：　使用しない";
-        return true;
-    };
-    this.add(tmp);
-
-    this.add(T.text("コンボ成立条件の設定を変更する", {x: 90, y:510, font: "32px Sans-Serif"}));
-    this.add(T.ftext("現在の設定：  第${}弾ルール", this.setting, "chainRule", {x: 160, y:553, font: "24px Sans-Serif"}));
-
-    this.itemY = [ 90, 330, 510 ];
-    this.select = new stdtask.CyclicSelect(
-        this.itemY.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
-    );
-    this.select.bind(this);
-
-    const mainCardView = {
-        owner: this,
-        draw(GE, ctx){ this.owner.displayObject.paint(ctx, this.owner.setting.mainCardData); }
-    };
-    this.add(mainCardView);
-},
-
 operations: [
     function*(GE, opt){
         const dialog = new MainCardDialog(
@@ -489,6 +456,39 @@ operations: [
     }
 ],
 
+onLoad(GE, setting){
+    this.setting = setting;
+    this.deck = setting.deckSet.cards();  // localStorageを使うとき、すぐに保存するため必要
+
+    this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+    this.add(T.text("メインカードを変更する", {x: 90, y:90, font: "32px Sans-Serif"}));
+    this.add(T.text("現在の設定：", {x: 160, y:133, font: "24px Sans-Serif"}));
+
+    this.add(T.text("localStorageの設定を変更する", {x: 90, y:330, font: "32px Sans-Serif"}));
+
+    let tmp = T.text("現在の設定：  ", {x: 160, y:373, font: "24px Sans-Serif"});
+    tmp.execute = (GE) => {
+        tmp.text = LocalStorageInfo.isUsed() ? "現在の設定：　使用する" : "現在の設定：　使用しない";
+        return true;
+    };
+    this.add(tmp);
+
+    this.add(T.text("コンボ成立条件の設定を変更する", {x: 90, y:510, font: "32px Sans-Serif"}));
+    this.add(T.ftext("現在の設定：  第${}弾ルール", this.setting, "chainRule", {x: 160, y:553, font: "24px Sans-Serif"}));
+
+    this.itemY = [ 90, 330, 510 ];
+    this.select = new stdtask.CyclicSelect(
+        this.itemY.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
+    );
+    this.select.bind(this);
+
+    const mainCardView = {
+        owner: this,
+        draw(GE, ctx){ this.owner.displayObject.paint(ctx, this.owner.setting.mainCardData); }
+    };
+    this.add(mainCardView);
+},
+
 draw(GE, ctx){
     ctx.save();
     ctx.font = "32px Sans-Serif";
@@ -520,26 +520,6 @@ saveConfig(){
     LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag);
 },
 
-onLoad(GE, setting){
-    this.setting = setting;
-    this.deck = setting.deckSet.cards;  // localStorageを使うとき, すぐに保存するため必要
-
-    this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
-    this.add(T.text("スキル持ちカードのマーカー表示", {x: 90, y:90, font: "32px Sans-Serif"}));
-    let tmp = T.text("現在の設定：  ", {x: 160, y:133, font: "24px Sans-Serif"});
-    tmp.execute = (GE) => {
-        tmp.text = Card.MarkerFlag ? "現在の設定：　表示する" : "現在の設定：　表示しない";
-        return true;
-    };
-    this.add(tmp);
-
-    this.itemY = [ 90 ];
-    this.select = new stdtask.CyclicSelect(
-        this.itemY.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
-    );
-    this.select.bind(this);
-},
-
 operations: [
     function*(GE, opt){
         const dialog = new SimpleChoice(
@@ -557,6 +537,26 @@ operations: [
         }
     }
 ],
+
+onLoad(GE, setting){
+    this.setting = setting;
+    this.deck = setting.deckSet.cards();  // localStorageを使うとき, すぐに保存するため必要
+
+    this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+    this.add(T.text("スキル持ちカードのマーカー表示", {x: 90, y:90, font: "32px Sans-Serif"}));
+    let tmp = T.text("現在の設定：  ", {x: 160, y:133, font: "24px Sans-Serif"});
+    tmp.execute = (GE) => {
+        tmp.text = Card.MarkerFlag ? "現在の設定：　表示する" : "現在の設定：　表示しない";
+        return true;
+    };
+    this.add(tmp);
+
+    this.itemY = [ 90 ];
+    this.select = new stdtask.CyclicSelect(
+        this.itemY.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
+    );
+    this.select.bind(this);
+},
 
 draw(GE, ctx){
     ctx.save();

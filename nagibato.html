@@ -302,7 +302,7 @@ const selectScene = new Scene({
     const ans = this.yesno.result;
     if(!ans) return;
 
-    const deckObj = new Deck(this.setting.deckSet.cards);
+    const deckObj = new Deck(this.setting.deckSet.cards());
     const sideboardObj = new Deck(RAW_CARD_DATA.map((e) => CardAtlas.get(e.id)));
     const mainCard = CardAtlas.get(this.setting.mainCardData.id);
     deckObj.remove(mainCard);

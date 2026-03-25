@@ -422,7 +422,7 @@ let Prism = class{
         for(let i = 0; i < Prism.labels.length; i++){
             tmp.push([]);
         }
-        source.cards.forEach((e) => {
+        source.cards().forEach((e) => {
             if(e.mark < tmp.length - 1) tmp[e.mark].push(e);
             else tmp[tmp.length-1].push(e);
         });
@@ -436,7 +436,7 @@ let Prism = class{
     union(){
         const a = [];
         for(let i = 0; i < this.subsets.length; i++){
-            a.push(...this.subsets[i].cards);
+            a.push(...this.subsets[i].cards());
         }
         return a;
     }
@@ -587,7 +587,7 @@ let createBaseMenu = function(owner, panels){
         owner.used.init(owner.prisms[0].union());
         owner.notUsed.init(owner.prisms[1].union());
         if(LocalStorageInfo.isUsed()){
-            LocalStorageInfo.saveDeck(owner.used.cards);
+            LocalStorageInfo.saveDeck(owner.used.cards());
         }
         GE.changeScene("select");
     };

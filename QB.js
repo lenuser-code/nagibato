@@ -473,12 +473,10 @@ const createOpeningQB = function(battleOpt){
  * @returns {QBYesNo} 生成されたオブジェクト
  */
 const createConfirmatingQB_BeforeBattle = function(setting){
-    const usedCards = setting.deckSet.cards;
-    const sideboardCards = setting.sideboardSet.cards;
     const mainCard = CardAtlas.get(setting.mainCardData.id);
 
     let msg;
-    if(usedCards.indexOf(mainCard) >= 0){
+    if(setting.deckSet.includes(mainCard)){
         msg = "メインカードに指定されたカードは、バトルの間デッキから\n取り除かれるよ。それでも構わないかい？\nA → YES    S → No";
     }
     else {
