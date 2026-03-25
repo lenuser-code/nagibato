@@ -8,7 +8,6 @@
 /**
  * 頻繁に必要になり, かつGUIに直接依存しないタスクをまとめたnamespace.
  * 以下の要素が外部に公開される.
- *
  * - stdtask.Select
  * - stdtask.CyclicSelect
  * - stdtask.Scroll
@@ -17,13 +16,14 @@
  * @namespace
  */
 var stdtask = stdtask || {};
-(function(Public){
+(function(stdtask){
 
 /**
  * indexプロパティを持ち, キー入力に応じて
  * - indexの増減
  * - this.action(GE, index)の実行
  * - this.cancel(GE, index)の実行
+ *
  * を実行するタスクオブジェクトを実装する.
  *
  * ここで登場したindexプロパティは「複数の選択肢から1つを選ばせるUI」における
@@ -66,7 +66,7 @@ var stdtask = stdtask || {};
  * @prop {number} index - このオブジェクトが管理するパラメータ
  * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
-Public.Select = class{
+stdtask.Select = class{
     #itemCount;
     #busy;
     #wait;
@@ -183,7 +183,7 @@ Public.Select = class{
  * @prop {number} index - このオブジェクトが管理するパラメータ
  * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
-Public.CyclicSelect = class extends Public.Select{
+stdtask.CyclicSelect = class extends stdtask.Select{
     /**
      * (a + b) の値を m で割った余りを返す. ゼロ除算のチェックなどはしない.
      * @param {number} a
@@ -244,7 +244,7 @@ Public.CyclicSelect = class extends Public.Select{
  * (selectObjはコンストラクタで与えたSelectオブジェクト)
  * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
-Public.Scroll = class{
+stdtask.Scroll = class{
     #contents;
     #viewCount;
 
@@ -357,7 +357,7 @@ Public.Scroll = class{
  * @prop {number} frames - 等速変化にかけるフレーム数 (既に実行中のアクションには影響しない)
  * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
-Public.Meter = class{
+stdtask.Meter = class{
     #sv;
     #tv;
     #duration;
