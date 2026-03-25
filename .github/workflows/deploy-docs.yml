@@ -29,8 +29,16 @@ jobs:
         # package.jsonのscriptsで定義した "generate-docs" を実行します
         run: npm run generate-docs
 
+      - name: Prepare files for deployment
+        run: |
+          mkdir release
+          # ゲームの実行に必要なファイル（HTML, JSなど）を release にコピー
+          cp *.js *.html release/ 2>/dev/null || true
+          # 生成された docs フォルダも release の中に入れる
+          cp -r docs release/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./release  # ここを ./docs から ./release に変更
