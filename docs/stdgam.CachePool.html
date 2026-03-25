@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>SestetsuitGenerator - Documentation</title>
+    <title>CachePool - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -35,7 +35,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">SestetsuitGenerator</h1>
+    <h1 class="page-title">CachePool</h1>
     
 
     
@@ -48,12 +48,16 @@
 <header>
     
         <h2>
+            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>
         
-            SestetsuitGenerator
+        
+            CachePool
         
         </h2>
         
-            <div class="class-description usertext"><p>なぎさを含む「魔法少女」のカードの画像を生成・管理するためのクラス.</p></div>
+            <div class="class-description usertext"><p>オフスクリーン・キャンバスを管理するクラス.
+JavaScriptでは画像のキャッシュを作るためにオフスクリーン・キャンバスを使う.
+このオフスクリーン・キャンバス (以下, 単にキャンバスと呼ぶ) を生成・管理する.</p></div>
         
     
 </header>
@@ -68,7 +72,7 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="SestetsuitGenerator"><span class="type-signature"></span>new SestetsuitGenerator<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="CachePool"><span class="type-signature"></span>new CachePool<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -81,7 +85,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line652">line 652</a>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line608">line 608</a>
     </li></ul></dd>
     
 
@@ -163,6 +167,389 @@
 
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="createCache"><span class="type-signature"></span>createCache<span class="signature">(name, drawFn<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {HTMLCanvasElement}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>新しいキャンバスを作り, nameという名前で登録する.
+もしdrawFnが与えられた場合, キャンバスを生成したあと, このキャンバスの
+コンテクストを引数として drawFn(ctx) を実行する.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line625">line 625</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>作られたキャンバスの登録名</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>drawFn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>(ctx)=>{}</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>作られたキャンバスに対してすぐに作業をしたい場合はコールバック関数を指定する.
+ここで, コールバック関数の引数は生成されたキャンバスのコンテクストである.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>生成されたキャンバス</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">HTMLCanvasElement</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(name)</span><span class="type-signature"> &rarr; {HTMLCanvasElement}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定した名前で登録されているキャンバスを返す.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line639">line 639</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>キャンバスの登録名</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>指定された登録名のキャンバス. 存在しなければundefined</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">HTMLCanvasElement</span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
     
 
     

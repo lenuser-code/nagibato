@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>SestetsuitGenerator - Documentation</title>
+    <title>SEPool - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -35,7 +35,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">SestetsuitGenerator</h1>
+    <h1 class="page-title">SEPool</h1>
     
 
     
@@ -48,12 +48,16 @@
 <header>
     
         <h2>
+            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>
         
-            SestetsuitGenerator
+        
+            SEPool
         
         </h2>
         
-            <div class="class-description usertext"><p>なぎさを含む「魔法少女」のカードの画像を生成・管理するためのクラス.</p></div>
+            <div class="class-description usertext"><p>ZzFXを使用した効果音（SE）を管理するクラス.
+このクラスでは, 「ZzFXに渡すパラメータの配列」のことを単にSEと呼ぶ.
+これを事前に登録しておき, playメソッドでSEを再生する.</p></div>
         
     
 </header>
@@ -68,7 +72,7 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="SestetsuitGenerator"><span class="type-signature"></span>new SestetsuitGenerator<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="SEPool"><span class="type-signature"></span>new SEPool<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -81,7 +85,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="card.js.html">card.js</a>, <a href="card.js.html#line652">line 652</a>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line837">line 837</a>
     </li></ul></dd>
     
 
@@ -163,6 +167,306 @@
 
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="play"><span class="type-signature"></span>play<span class="signature">(name)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定した名前で登録されているSEを再生する.
+もし存在しなければ何もしない.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line859">line 859</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>再生するSEの登録名</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="register"><span class="type-signature"></span>register<span class="signature">(name, params)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定した名前でSEを登録する.
+ここで「SE」とは「ZzFXに渡すパラメータの配列」のことである.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line850">line 850</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>SEの名前</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>ZzFXのパラメータの配列 ( [,,150,...] など)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     

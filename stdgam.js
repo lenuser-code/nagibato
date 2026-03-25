@@ -26,7 +26,7 @@
  * @namespace
  */
 var stdgam = stdgam || {};
-(function(Public){
+(function(stdgam){
 
 /**
  * @typedef {Object} Sprite - 描画処理を行うオブジェクト
@@ -56,7 +56,7 @@ var stdgam = stdgam || {};
  * @prop {function(stdgam.GameEngine, CanvasRenderingContext2D): void} [draw] - シーン独自の描画処理 (任意)
  * @prop {function(stdgam.GameEngine): void} [execute] - シーン独自のタスク処理 (任意)
  */
-Public.Scene = class {
+stdgam.Scene = class {
     #GE;
     #sprites;
     #tasks;
@@ -447,7 +447,7 @@ let TimeKeeper = class {
  * @prop {stdgam.SoundPool} sounds - 音声を管理するオブジェクト
  * @prop {stdgam.CachePool} caches - オフスクリーン・キャンバスを管理するオブジェクト
  */
-Public.GameEngine = class {
+stdgam.GameEngine = class {
     #canvas;
     #ctx;
     #scenes;
@@ -466,10 +466,10 @@ Public.GameEngine = class {
 
         this.input = new InputManager();
         this.#timer = new TimeKeeper(this);
-        this.se = new Public.SEPool();
-        this.images = new Public.ImagePool();
-        this.sounds = new Public.SoundPool();
-        this.caches = new Public.CachePool();
+        this.se = new stdgam.SEPool();
+        this.images = new stdgam.ImagePool();
+        this.sounds = new stdgam.SoundPool();
+        this.caches = new stdgam.CachePool();
     }
 
     /**
@@ -563,7 +563,7 @@ Public.GameEngine = class {
  * 単に「設定に基づいて元画像の適切な一部分を描画する」機能を持つだけである.
  * @class
  */
-Public.ImageCutter = class {
+stdgam.ImageCutter = class {
     #img;
     #w;
     #h;
@@ -605,7 +605,7 @@ Public.ImageCutter = class {
  * このオフスクリーン・キャンバス (以下, 単にキャンバスと呼ぶ) を生成・管理する.
  * @class
  */
-Public.CachePool = class {
+stdgam.CachePool = class {
     #pool;
 
     constructor(){
@@ -645,7 +645,7 @@ Public.CachePool = class {
  * 画像ファイルから読み込んだイメージを管理するクラス.
  * @class
  */
-Public.ImagePool = class {
+stdgam.ImagePool = class {
     #pool;
     #promises;
 
@@ -733,7 +733,7 @@ Public.ImagePool = class {
  * 勝手に音声を鳴らすことができない！　何かしらの入力を受けてから使うこと.
  * @class
  */
-Public.SoundPool = class {
+stdgam.SoundPool = class {
     #pool;
     #promises;
 
@@ -834,7 +834,7 @@ Public.SoundPool = class {
  * これを事前に登録しておき, playメソッドでSEを再生する.
  * @class
  */
-Public.SEPool = class {
+stdgam.SEPool = class {
     #pool;
 
     constructor() {
@@ -956,7 +956,7 @@ Public.SEPool = class {
  * @namespace
  * @memberof stdgam
  */
-Public.Templates = {
+stdgam.Templates = {
     // --- 1. ジェネレータ ---
 
     /**
