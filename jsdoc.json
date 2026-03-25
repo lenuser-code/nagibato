@@ -14,6 +14,6 @@
         "readme": "README.md",  // これを追加
         "destination": "./docs",
         "recurse": true,
-        "template": "node_modulesbetter-docs"
+        "template": "node_modules/better-docs"
     }
 }
