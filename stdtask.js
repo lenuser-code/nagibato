@@ -8,6 +8,7 @@
 /**
  * 頻繁に必要になり, かつGUIに直接依存しないタスクをまとめたnamespace.
  * 以下の要素が外部に公開される.
+ *
  * - stdtask.Select
  * - stdtask.CyclicSelect
  * - stdtask.Scroll
@@ -20,9 +21,11 @@ var stdtask = stdtask || {};
 
 /**
  * indexプロパティを持ち, キー入力に応じて
+ *
  * - indexの増減
  * - this.action(GE, index)の実行
  * - this.cancel(GE, index)の実行
+ *
  * を実行するタスクオブジェクトを実装する.
  *
  * ここで登場したindexプロパティは「複数の選択肢から1つを選ばせるUI」における
@@ -31,6 +34,7 @@ var stdtask = stdtask || {};
  * たとえば, 「矢印キーでindexを変化させてEnterで決定, ESCでキャンセル」という
  * UIを作る場合,
  *
+ * ```
  * class MyUI extends stdtask.Select{
  *     constructor(){
  *         super(選択肢の個数, ["ArrowUp", "ArrowDown"], "Enter", "Escape");
@@ -39,9 +43,11 @@ var stdtask = stdtask || {};
  *     action(GE, index){ 決定時の処理 }
  *     cancel(GE, index){ キャンセル時の処理 }
  * }
+ * ```
  *
  * のようにすればよい. または, Selectを継承するのではなく,
  *
+ * ```
  * class MyUI{
  *     constructor(){
  *         this.select = new stdtask.Select(
@@ -54,6 +60,7 @@ var stdtask = stdtask || {};
  *     action(GE, index){ 決定時の処理 }
  *     cancel(GE, index){ キャンセル時の処理 }
  * }
+ * ```
  *
  * のように委譲してもよい.
  *
@@ -145,8 +152,10 @@ Public.Select = class{
     /**
      * actionやcancelの実行を指定したオブジェクトに委任する.
      * すなわち, 以下の処理を行う.
+     *
      * - other.action(GE, index) を実行するだけの関数を this.action に代入
      * - other.cancel(GE, index) を実行するだけの関数を this.cancel に代入
+     *
      * @param {Object} other - action/cancelの処理を委任されるオブジェクト
      */
     bind(other){
@@ -208,6 +217,7 @@ Public.CyclicSelect = class extends Public.Select{
  * たとえば「optionsの要素のうち一度に表示できるものの個数が最大5個」であるような
  * UIを作りたい場合, 次のようなコードを書く.
  *
+ * ```
  * class MyUI extends stdtask.Scroll{
  *     constructor(options){
  *         const select = new stdtask.Select(
@@ -227,6 +237,7 @@ Public.CyclicSelect = class extends Public.Select{
  *     action(GE, index){ 決定時の処理 }
  *     cancel(GE, index){ キャンセル時の処理 }
  * }
+ * ```
  *
  * 選択肢の個数が表示できる最大数に満たない場合, 普通にSelectを使うのと変わらない.
  * また, SelectではなくCyclicSelectを渡してもよい.
@@ -243,7 +254,7 @@ Public.Scroll = class{
 
     /**
      * 一度に表示できる選択肢の個数がviewCountであるようなインスタンスを作る.
-     * @param {stdtask.Select} selectObj - ラップするSelectオブジェクト
+     * @param {stdtask.Select} selectObj - ラップするSelectオブジェクト (CyclicSelectなどでも可)
      * @param {number} viewCount - 一度に表示できる選択肢の個数
      */
     constructor(selectObj, viewCount){
@@ -278,8 +289,10 @@ Public.Scroll = class{
      * this.scroll と this.offset の値を初期化する.
      *
      * 具体的には次のように決める.
+     *
      * 1. indexの値がviewCount未満なら, scroll = 0, offset = index でよい.
      * 2. そうでないとき, 先に offset = viewCount - 1 を決定してしまい,
+     *
      * それから scroll = index - offset とすればよい.
      */
     initScroll(){
@@ -311,8 +324,10 @@ Public.Scroll = class{
     /**
      * actionやcancelの実行を指定したオブジェクトに委任する.
      * すなわち, 以下の処理を行う.
+     *
      * - other.action(GE, index) を実行するだけの関数を this.action に代入
      * - other.cancel(GE, index) を実行するだけの関数を this.cancel に代入
+     *
      * @param {Object} other - action/cancelの処理を委任されるオブジェクト
      */
     bind(other){
