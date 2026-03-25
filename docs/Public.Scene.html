@@ -53,7 +53,14 @@
         
         </h2>
         
-            <div class="class-description usertext">ゲームにおける１つのモード, または１つのステージを表すクラス.GameEngineからロードして使う.シーンは「スプライトリスト」と「タスクリスト」を持つ.スプライトは draw(GE, ctx) メソッドを持つものの総称であり, 各フレームの描画処理を行う(ここで, GEはGameEngine, ctxは描画に使うコンテクスト).一方, タスクは execute(GE) メソッドを持つものの総称であり, 1フレームごとにタスク処理を行う.これに加えて, Scene自体も draw(GE, ctx) や execute(GE) を持つことができる.これらの機能を組み合わせてゲーム内の処理を実現する.</div>
+            <div class="class-description usertext"><p>ゲームにおける１つのモード, または１つのステージを表すクラス.
+GameEngineからロードして使う.</p>
+<p>シーンは「スプライトリスト」と「タスクリスト」を持つ.
+スプライトは draw(GE, ctx) メソッドを持つものの総称であり, 各フレームの描画処理を行う
+(ここで, GEはGameEngine, ctxは描画に使うコンテクスト).
+一方, タスクは execute(GE) メソッドを持つものの総称であり, 1フレームごとにタスク処理を行う.</p>
+<p>これに加えて, Scene自体も draw(GE, ctx) や execute(GE) を持つことができる.
+これらの機能を組み合わせてゲーム内の処理を実現する.</p></div>
         
     
 </header>
@@ -78,7 +85,18 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>dfnが渡された場合、共通の処理を済ませた後にその内容を自身に代入する.これにより, 派生クラスを作らなくても, dfnの中に追加の定義を書いておけばそれを自身に適用できる.例)let scene = new stdgam.Scene({    onLoad(GE, args){ ...初期化処理... },    draw(GE, ctx){ ,,,描画処理... } }});上の例は次と等価である:let scene = new stdgam.Scene();scene.onLoad = function(GE, args){ ...初期化処理... };scene.draw(GE, ctx) = function{ ...描画処理... };</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>dfnが渡された場合、共通の処理を済ませた後にその内容を自身に代入する.
+これにより, 派生クラスを作らなくても, dfnの中に追加の定義を書いておけば
+それを自身に適用できる.</p>
+<p>例)
+let scene = new stdgam.Scene({
+onLoad(GE, args){ ...初期化処理... },
+draw(GE, ctx){ ,,,描画処理... } }
+});</p>
+<p>上の例は次と等価である:
+let scene = new stdgam.Scene();
+scene.onLoad = function(GE, args){ ...初期化処理... };
+scene.draw(GE, ctx) = function{ ...描画処理... };</p></li></ul></dd>
     
 
     
@@ -174,7 +192,7 @@
 
             
 
-            <td class="description last">シーンがロードされた時に実行される初期化処理 (任意)</td>
+            <td class="description last"><p>シーンがロードされた時に実行される初期化処理 (任意)</p></td>
         </tr>
 
     
@@ -206,7 +224,7 @@
 
             
 
-            <td class="description last">シーン独自の描画処理 (任意)</td>
+            <td class="description last"><p>シーン独自の描画処理 (任意)</p></td>
         </tr>
 
     
@@ -238,7 +256,7 @@
 
             
 
-            <td class="description last">シーン独自のタスク処理 (任意)</td>
+            <td class="description last"><p>シーン独自のタスク処理 (任意)</p></td>
         </tr>
 
     
@@ -300,7 +318,8 @@
 
             
 
-            <td class="description last">このオブジェクトに追加で定義する要素を集めた連想配列.</td>
+            <td class="description last"><p>このオブジェクトに追加で定義する
+要素を集めた連想配列.</p></td>
         </tr>
 
     
@@ -361,7 +380,10 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>スプライトとタスクを同時に登録するショートカット.まず, objがスプライトの条件を満たすならスプライトリストに登録する.次に, objがタスクの条件を満たすならタスクリストに登録する.両方の条件を満たす場合は, 両方のリストに追加される.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>スプライトとタスクを同時に登録するショートカット.
+まず, objがスプライトの条件を満たすならスプライトリストに登録する.
+次に, objがタスクの条件を満たすならタスクリストに登録する.
+両方の条件を満たす場合は, 両方のリストに追加される.</p></li></ul></dd>
     
 
     
@@ -475,7 +497,7 @@
                 </td>
             
 
-            <td class="description last">登録するオブジェクト</td>
+            <td class="description last"><p>登録するオブジェクト</p></td>
         </tr>
 
     
@@ -515,7 +537,7 @@
                 </td>
             
 
-            <td class="description last">trueなら先頭に追加, falseなら末尾に追加</td>
+            <td class="description last"><p>trueなら先頭に追加, falseなら末尾に追加</p></td>
         </tr>
 
     
@@ -555,7 +577,12 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>複数のオブジェクトを登録するためのショートカット.listの要素のうち, スプライトであるものはスプライトリストに,タスクであるものはタスクリストに追加する.第2引数がtrueの場合, 順序を維持したままリストの先頭に追加する.第2引数がfalseの場合, 順序を維持したままリストの末尾に追加する.省略時は末尾に追加する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>複数のオブジェクトを登録するためのショートカット.
+listの要素のうち, スプライトであるものはスプライトリストに,
+タスクであるものはタスクリストに追加する.
+第2引数がtrueの場合, 順序を維持したままリストの先頭に追加する.
+第2引数がfalseの場合, 順序を維持したままリストの末尾に追加する.
+省略時は末尾に追加する.</p></li></ul></dd>
     
 
     
@@ -666,7 +693,7 @@
                 </td>
             
 
-            <td class="description last">追加するオブジェクトの配列</td>
+            <td class="description last"><p>追加するオブジェクトの配列</p></td>
         </tr>
 
     
@@ -706,7 +733,7 @@
                 </td>
             
 
-            <td class="description last">trueなら先頭に追加, falseなら末尾に追加</td>
+            <td class="description last"><p>trueなら先頭に追加, falseなら末尾に追加</p></td>
         </tr>
 
     
@@ -746,7 +773,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>スプライトをスプライトリストに追加する.追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.省略したときは「末尾に」追加する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>スプライトをスプライトリストに追加する.
+追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.
+省略したときは「末尾に」追加する.</p></li></ul></dd>
     
 
     
@@ -857,7 +886,7 @@
                 </td>
             
 
-            <td class="description last">登録するスプライト</td>
+            <td class="description last"><p>登録するスプライト</p></td>
         </tr>
 
     
@@ -897,7 +926,7 @@
                 </td>
             
 
-            <td class="description last">trueなら先頭に追加, falseなら末尾に追加</td>
+            <td class="description last"><p>trueなら先頭に追加, falseなら末尾に追加</p></td>
         </tr>
 
     
@@ -937,7 +966,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>スプライトリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたスプライトをその直後に追加する (順序を保つ).もしtargetが登録されていない場合, リストの末尾に追加する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>スプライトリストの中に登録されているtargetの位置を探し,
+第2引数以降に指定されたスプライトをその直後に追加する (順序を保つ).
+もしtargetが登録されていない場合, リストの末尾に追加する.</p></li></ul></dd>
     
 
     
@@ -1042,7 +1073,7 @@
 
             
 
-            <td class="description last">追加位置の基準となるスプライト</td>
+            <td class="description last"><p>追加位置の基準となるスプライト</p></td>
         </tr>
 
     
@@ -1076,7 +1107,7 @@
 
             
 
-            <td class="description last">追加する1つ以上のスプライト</td>
+            <td class="description last"><p>追加する1つ以上のスプライト</p></td>
         </tr>
 
     
@@ -1116,7 +1147,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>スプライトリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたスプライトをその直前に追加する (順序を保つ).もしtargetが登録されていない場合, リストの先頭に追加する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>スプライトリストの中に登録されているtargetの位置を探し,
+第2引数以降に指定されたスプライトをその直前に追加する (順序を保つ).
+もしtargetが登録されていない場合, リストの先頭に追加する.</p></li></ul></dd>
     
 
     
@@ -1221,7 +1254,7 @@
 
             
 
-            <td class="description last">追加位置の基準となるスプライト</td>
+            <td class="description last"><p>追加位置の基準となるスプライト</p></td>
         </tr>
 
     
@@ -1255,7 +1288,7 @@
 
             
 
-            <td class="description last">追加する1つ以上のスプライト</td>
+            <td class="description last"><p>追加する1つ以上のスプライト</p></td>
         </tr>
 
     
@@ -1295,7 +1328,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>タスクをタスクリストに追加する.追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.省略したときは「末尾に」追加する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>タスクをタスクリストに追加する.
+追加位置は, 第2引数がtrueのとき先頭, falseのとき末尾である.
+省略したときは「末尾に」追加する.</p></li></ul></dd>
     
 
     
@@ -1406,7 +1441,7 @@
                 </td>
             
 
-            <td class="description last">登録するタスク</td>
+            <td class="description last"><p>登録するタスク</p></td>
         </tr>
 
     
@@ -1446,7 +1481,7 @@
                 </td>
             
 
-            <td class="description last">trueなら先頭に追加, falseなら末尾に追加</td>
+            <td class="description last"><p>trueなら先頭に追加, falseなら末尾に追加</p></td>
         </tr>
 
     
@@ -1486,7 +1521,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>タスクリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたタスクをその直後に追加する (順序を保つ).もしtargetが登録されていない場合, リストの末尾に追加する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>タスクリストの中に登録されているtargetの位置を探し,
+第2引数以降に指定されたタスクをその直後に追加する (順序を保つ).
+もしtargetが登録されていない場合, リストの末尾に追加する.</p></li></ul></dd>
     
 
     
@@ -1591,7 +1628,7 @@
 
             
 
-            <td class="description last">追加位置の基準となるタスク</td>
+            <td class="description last"><p>追加位置の基準となるタスク</p></td>
         </tr>
 
     
@@ -1625,7 +1662,7 @@
 
             
 
-            <td class="description last">追加する1つ以上のタスク</td>
+            <td class="description last"><p>追加する1つ以上のタスク</p></td>
         </tr>
 
     
@@ -1665,7 +1702,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>タスクリストの中に登録されているtargetの位置を探し,第2引数以降に指定されたタスクをその直前に追加する (順序を保つ).もしtargetが登録されていない場合, リストの先頭に追加する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>タスクリストの中に登録されているtargetの位置を探し,
+第2引数以降に指定されたタスクをその直前に追加する (順序を保つ).
+もしtargetが登録されていない場合, リストの先頭に追加する.</p></li></ul></dd>
     
 
     
@@ -1770,7 +1809,7 @@
 
             
 
-            <td class="description last">追加位置の基準となるタスク</td>
+            <td class="description last"><p>追加位置の基準となるタスク</p></td>
         </tr>
 
     
@@ -1804,7 +1843,7 @@
 
             
 
-            <td class="description last">追加する1つ以上のタスク</td>
+            <td class="description last"><p>追加する1つ以上のタスク</p></td>
         </tr>
 
     
@@ -1844,7 +1883,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>スプライトとタスクのリストを初期化する.このメソッドを明示的に呼ばない限り, superOnLoadを実行してもスプライトリストやタスクリストは初期化されない.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>スプライトとタスクのリストを初期化する.
+このメソッドを明示的に呼ばない限り, superOnLoadを実行しても
+スプライトリストやタスクリストは初期化されない.</p></li></ul></dd>
     
 
     
@@ -1929,7 +1970,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>このシーンがGEのカレントシーンになったとき呼び出される.まず, GEをプライベートフィールドに保存する.次に, もしthis.onLoad(GE, args)が定義されていればこれを実行する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>このシーンがGEのカレントシーンになったとき呼び出される.
+まず, GEをプライベートフィールドに保存する.
+次に, もしthis.onLoad(GE, args)が定義されていればこれを実行する.</p></li></ul></dd>
     
 
     
@@ -2024,7 +2067,7 @@
 
             
 
-            <td class="description last">このシーンを実行するGameEngine</td>
+            <td class="description last"><p>このシーンを実行するGameEngine</p></td>
         </tr>
 
     
@@ -2048,7 +2091,7 @@
 
             
 
-            <td class="description last">ロード処理のために引き渡す設定リスト</td>
+            <td class="description last"><p>ロード処理のために引き渡す設定リスト</p></td>
         </tr>
 
     
@@ -2088,7 +2131,11 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>登録されているスプライトのdraw(GE, ctx)を順番に実行する.ここでGEはこのゲームのGameEngine, ctxは描画に使うコンテクストである.その後, 「activeが真」または「activeがundefined」のスプライトだけをリストに残して, 他のスプライトはリストから削除する.もしthis.draw(GE, ctx)が定義されている場合, 最後にこれを実行する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>登録されているスプライトのdraw(GE, ctx)を順番に実行する.
+ここでGEはこのゲームのGameEngine, ctxは描画に使うコンテクストである.
+その後, 「activeが真」または「activeがundefined」のスプライトだけを
+リストに残して, 他のスプライトはリストから削除する.</p>
+<p>もしthis.draw(GE, ctx)が定義されている場合, 最後にこれを実行する.</p></li></ul></dd>
     
 
     
@@ -2183,7 +2230,7 @@
 
             
 
-            <td class="description last">描画に使うコンテクスト</td>
+            <td class="description last"><p>描画に使うコンテクスト</p></td>
         </tr>
 
     
@@ -2223,7 +2270,18 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>登録されているタスクのexecute(GE)を順番に実行する.ここでGEはこのゲームのGameEngineである.ただし, あるタスクがfalseを返した場合, それより後のタスクは実行しない.その後, 「activeが真」または「activeがundefined」のタスクだけをリストに残して, 他のタスクはリストから削除する.最後に, もしthis.execute(GE)が定義されている場合, これを実行する.実際には, stdgam.Templatesの機能を実現するために, execute(GE)の実行後,タスクが_traits要素を持つかどうかチェックする.もし存在すれば, その中身の関数も順番に実行する (引数はexecuteと同じ).【注意】execute()の中でタスクの追加・削除を行うと, for文の実行中に配列を変更したのと同じ現象が発生します！　特に、自身よりも前に新しい要素を、追加する場合は, falseを返して後続の処理を止めてください.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>登録されているタスクのexecute(GE)を順番に実行する.
+ここでGEはこのゲームのGameEngineである.
+ただし, あるタスクがfalseを返した場合, それより後のタスクは実行しない.</p>
+<p>その後, 「activeが真」または「activeがundefined」のタスクだけを
+リストに残して, 他のタスクはリストから削除する.
+最後に, もしthis.execute(GE)が定義されている場合, これを実行する.</p>
+<p>実際には, stdgam.Templatesの機能を実現するために, execute(GE)の実行後,
+タスクが_traits要素を持つかどうかチェックする.
+もし存在すれば, その中身の関数も順番に実行する (引数はexecuteと同じ).</p>
+<p>【注意】execute()の中でタスクの追加・削除を行うと, for文の実行中に
+配列を変更したのと同じ現象が発生します！　特に、自身よりも前に新しい要素を、
+追加する場合は, falseを返して後続の処理を止めてください.</p></li></ul></dd>
     
 
     
@@ -2308,7 +2366,10 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの更新処理をこのジェネレータに委任する.具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの
+更新処理をこのジェネレータに委任する.
+具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.
+ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.</p></li></ul></dd>
     
 
     
@@ -2419,7 +2480,7 @@
                 </td>
             
 
-            <td class="description last">ジェネレータ関数の初期化時に渡すGameEngine</td>
+            <td class="description last"><p>ジェネレータ関数の初期化時に渡すGameEngine</p></td>
         </tr>
 
     
@@ -2455,7 +2516,7 @@
                 </td>
             
 
-            <td class="description last">処理を委任するジェネレータ関数</td>
+            <td class="description last"><p>処理を委任するジェネレータ関数</p></td>
         </tr>
 
     
@@ -2495,7 +2556,7 @@
                 </td>
             
 
-            <td class="description last">ジェネレータ関数の初期化時に渡すオプション</td>
+            <td class="description last"><p>ジェネレータ関数の初期化時に渡すオプション</p></td>
         </tr>
 
     
@@ -2540,7 +2601,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:20:49 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:30:30 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

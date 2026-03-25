@@ -53,7 +53,13 @@
         
         </h2>
         
-            <div class="class-description usertext">ゲームの全体的な挙動を管理するクラス.Sceneオブジェクトをロードし, 毎フレームごとに更新処理を実行させることによりゲーム処理を実現する.管理を簡単にするため, 使用するシーンは最初にaddSceneメソッドで登録する.このときに設定したシーン名を使って, どのシーンをロードするか指定する.また, キー入力判定に必要なInputManagerや画像・音声を管理するオブジェクトもまとめて提供する.</div>
+            <div class="class-description usertext"><p>ゲームの全体的な挙動を管理するクラス.
+Sceneオブジェクトをロードし, 毎フレームごとに更新処理を実行させることにより
+ゲーム処理を実現する.</p>
+<p>管理を簡単にするため, 使用するシーンは最初にaddSceneメソッドで登録する.
+このときに設定したシーン名を使って, どのシーンをロードするか指定する.
+また, キー入力判定に必要なInputManagerや画像・音声を管理するオブジェクトも
+まとめて提供する.</p></div>
         
     
 </header>
@@ -78,7 +84,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定されたキャンバスを描画に用いるGameEngineを生成する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定されたキャンバスを描画に用いるGameEngineを生成する.</p></li></ul></dd>
     
 
     
@@ -164,7 +170,7 @@
 
             
 
-            <td class="description last">キー入力の管理をするオブジェクト</td>
+            <td class="description last"><p>キー入力の管理をするオブジェクト</p></td>
         </tr>
 
     
@@ -188,7 +194,7 @@
 
             
 
-            <td class="description last">ZzFXによるSEを管理するオブジェクト</td>
+            <td class="description last"><p>ZzFXによるSEを管理するオブジェクト</p></td>
         </tr>
 
     
@@ -212,7 +218,7 @@
 
             
 
-            <td class="description last">画像を管理するオブジェクト</td>
+            <td class="description last"><p>画像を管理するオブジェクト</p></td>
         </tr>
 
     
@@ -236,7 +242,7 @@
 
             
 
-            <td class="description last">音声を管理するオブジェクト</td>
+            <td class="description last"><p>音声を管理するオブジェクト</p></td>
         </tr>
 
     
@@ -260,7 +266,7 @@
 
             
 
-            <td class="description last">オフスクリーン・キャンバスを管理するオブジェクト</td>
+            <td class="description last"><p>オフスクリーン・キャンバスを管理するオブジェクト</p></td>
         </tr>
 
     
@@ -322,7 +328,7 @@
 
             
 
-            <td class="description last">HTMLのキャンバス要素のID</td>
+            <td class="description last"><p>HTMLのキャンバス要素のID</p></td>
         </tr>
 
     
@@ -383,7 +389,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>nameという名前で指定されたシーンを登録する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>nameという名前で指定されたシーンを登録する.</p></li></ul></dd>
     
 
     
@@ -478,7 +484,7 @@
 
             
 
-            <td class="description last">シーンの登録名</td>
+            <td class="description last"><p>シーンの登録名</p></td>
         </tr>
 
     
@@ -502,7 +508,7 @@
 
             
 
-            <td class="description last">登録するシーン</td>
+            <td class="description last"><p>登録するシーン</p></td>
         </tr>
 
     
@@ -542,7 +548,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>nameという名前で登録されているシーンをカレントシーンとする.第2引数としてオプションリストを指定した場合, これをカレントシーンに伝える.もし該当するシーンがなければ何もしない.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>nameという名前で登録されているシーンをカレントシーンとする.
+第2引数としてオプションリストを指定した場合, これをカレントシーンに伝える.
+もし該当するシーンがなければ何もしない.</p></li></ul></dd>
     
 
     
@@ -653,7 +661,7 @@
                 </td>
             
 
-            <td class="description last">シーンの登録名</td>
+            <td class="description last"><p>シーンの登録名</p></td>
         </tr>
 
     
@@ -693,7 +701,7 @@
                 </td>
             
 
-            <td class="description last">カレントシーンに渡す設定リスト</td>
+            <td class="description last"><p>カレントシーンに渡す設定リスト</p></td>
         </tr>
 
     
@@ -733,7 +741,20 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>画像・音声のロード完了を待ってからcallbackを実行するasync関数.このメソッドを呼び出しても, 呼び出したプロセス自体は停止しない.(既にロードが完了していれば, 即座にcallbackが非同期処理として実行される)JavaScriptでは画像や音声のオブジェクトを作っても即座にロードが完了せず,バックグラウンドで読み込み処理を行う. それらが確実に完了した状態で目的の処理を実行したいときにこのメソッドを使う.例)const GE = new stdgam.GameEngine("myCanvas");GE.images.load("IMAGE_01", "./my_image1.png");GE.images.load("IMAGE_02", "./my_image2.png");GE.ready(() => {   my_paint_operation( pool.get("IMAGE_01") );   my_paint_operation( pool.get("IMAGE_02") );});</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>画像・音声のロード完了を待ってからcallbackを実行するasync関数.
+このメソッドを呼び出しても, 呼び出したプロセス自体は停止しない.
+(既にロードが完了していれば, 即座にcallbackが非同期処理として実行される)</p>
+<p>JavaScriptでは画像や音声のオブジェクトを作っても即座にロードが完了せず,
+バックグラウンドで読み込み処理を行う. それらが確実に完了した状態で
+目的の処理を実行したいときにこのメソッドを使う.</p>
+<p>例)
+const GE = new stdgam.GameEngine(&quot;myCanvas&quot;);
+GE.images.load(&quot;IMAGE_01&quot;, &quot;./my_image1.png&quot;);
+GE.images.load(&quot;IMAGE_02&quot;, &quot;./my_image2.png&quot;);</p>
+<p>GE.ready(() =&gt; {
+my_paint_operation( pool.get(&quot;IMAGE_01&quot;) );
+my_paint_operation( pool.get(&quot;IMAGE_02&quot;) );
+});</p></li></ul></dd>
     
 
     
@@ -828,7 +849,8 @@
 
             
 
-            <td class="description last">ロードが確実に完了した状態で呼び出される関数</td>
+            <td class="description last"><p>ロードが確実に完了した状態で
+呼び出される関数</p></td>
         </tr>
 
     
@@ -868,7 +890,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>ゲームの実行を開始する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>ゲームの実行を開始する.</p></li></ul></dd>
     
 
     
@@ -953,7 +975,14 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>基本的にTimeKeeperから呼ばれる.カレントシーンに1フレーム分の処理を実行させる. 具体的には1. 画面をクリアする.2. カレントシーンのsuperexecuteを呼び出しタスク処理を実行させる.3. その後, カレントシーンのsuperdrawを呼び出し描画処理を実行させる.という手順を行う.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>基本的にTimeKeeperから呼ばれる.
+カレントシーンに1フレーム分の処理を実行させる. 具体的には</p>
+<ol>
+<li>画面をクリアする.</li>
+<li>カレントシーンのsuperexecuteを呼び出しタスク処理を実行させる.</li>
+<li>その後, カレントシーンのsuperdrawを呼び出し描画処理を実行させる.
+という手順を行う.</li>
+</ol></li></ul></dd>
     
 
     
@@ -1043,7 +1072,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:20:49 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:30:30 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

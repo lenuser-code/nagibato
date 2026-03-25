@@ -53,7 +53,20 @@
         
         </h2>
         
-            <div class="class-description usertext">プレイヤーのステータスを保持するクラス.HP, MP, nameに加えて, 以下のステータスを持つ.- id: メインカードとしてのID- suitString: 自身の属性を表す文字列- mark: Suits内におけるsuitStringのインデックス- SG: ソウルジェムの値 (0～100で表現)- mainSkill: メインスキルを表すオブジェクト- mainSkillCount: メインスキルの残り使用可能回数- shield: シールドの残り回数- stun: 行動不能状態の残り時間ただし, これらのステータスもカプセル化されているので,メソッドでアクセスする.</div>
+            <div class="class-description usertext"><p>プレイヤーのステータスを保持するクラス.
+HP, MP, nameに加えて, 以下のステータスを持つ.</p>
+<ul>
+<li>id: メインカードとしてのID</li>
+<li>suitString: 自身の属性を表す文字列</li>
+<li>mark: Suits内におけるsuitStringのインデックス</li>
+<li>SG: ソウルジェムの値 (0～100で表現)</li>
+<li>mainSkill: メインスキルを表すオブジェクト</li>
+<li>mainSkillCount: メインスキルの残り使用可能回数</li>
+<li>shield: シールドの残り回数</li>
+<li>stun: 行動不能状態の残り時間</li>
+</ul>
+<p>ただし, これらのステータスもカプセル化されているので,
+メソッドでアクセスする.</p></div>
         
     
 </header>
@@ -78,7 +91,8 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定されたカードデータを元にしてインスタンスを生成する(カードデータの情報はinit()により取り込まれる. init()も参照のこと).</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定されたカードデータを元にしてインスタンスを生成する
+(カードデータの情報はinit()により取り込まれる. init()も参照のこと).</p></li></ul></dd>
     
 
     
@@ -164,7 +178,7 @@
 
             
 
-            <td class="description last">HPの値を表すMeterオブジェクト</td>
+            <td class="description last"><p>HPの値を表すMeterオブジェクト</p></td>
         </tr>
 
     
@@ -188,7 +202,7 @@
 
             
 
-            <td class="description last">MPの値を表すMeterオブジェクト</td>
+            <td class="description last"><p>MPの値を表すMeterオブジェクト</p></td>
         </tr>
 
     
@@ -212,7 +226,7 @@
 
             
 
-            <td class="description last">SGの値を表すMeterオブジェクト</td>
+            <td class="description last"><p>SGの値を表すMeterオブジェクト</p></td>
         </tr>
 
     
@@ -274,7 +288,7 @@
 
             
 
-            <td class="description last">メインカードのデータを格納した連想配列</td>
+            <td class="description last"><p>メインカードのデータを格納した連想配列</p></td>
         </tr>
 
     
@@ -403,7 +417,7 @@
 
         
 <div class="param-desc">
-    現在のSG
+    <p>現在のSG</p>
 </div>
 
 
@@ -440,7 +454,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定した値をSGに加える. 同時にSGMeterのchangeToメソッドを呼び出す.ただし, 取りうる値の範囲を越えている場合, 最終的に保持される値は0 (最小値) or 100 (最大値) に修正される.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定した値をSGに加える. 同時にSGMeterのchangeToメソッドを呼び出す.
+ただし, 取りうる値の範囲を越えている場合, 最終的に保持される値は
+0 (最小値) or 100 (最大値) に修正される.</p></li></ul></dd>
     
 
     
@@ -551,7 +567,7 @@
                 </td>
             
 
-            <td class="description last">加算する値</td>
+            <td class="description last"><p>加算する値</p></td>
         </tr>
 
     
@@ -591,7 +607,7 @@
                 </td>
             
 
-            <td class="description last">changeToメソッドの引数として与えるフレーム数</td>
+            <td class="description last"><p>changeToメソッドの引数として与えるフレーム数</p></td>
         </tr>
 
     
@@ -631,7 +647,8 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>シールドの残り回数にvを加える.ただし, 結果が負になる場合は 0 にする.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>シールドの残り回数にvを加える.
+ただし, 結果が負になる場合は 0 にする.</p></li></ul></dd>
     
 
     
@@ -726,7 +743,7 @@
 
             
 
-            <td class="description last">加算する値</td>
+            <td class="description last"><p>加算する値</p></td>
         </tr>
 
     
@@ -766,7 +783,8 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>行動不能状態の残り時間にvを加える.ただし, 結果が負になる場合は 0 にする.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>行動不能状態の残り時間にvを加える.
+ただし, 結果が負になる場合は 0 にする.</p></li></ul></dd>
     
 
     
@@ -861,7 +879,7 @@
 
             
 
-            <td class="description last">加算する値</td>
+            <td class="description last"><p>加算する値</p></td>
         </tr>
 
     
@@ -969,7 +987,7 @@
 
         
 <div class="param-desc">
-    メインカードとしてのID
+    <p>メインカードとしてのID</p>
 </div>
 
 
@@ -1006,7 +1024,26 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定されたカードデータを元にこのオブジェクトを初期化する.ここで, カードデータとは1. ROW_CARD_DATAに登録されている要素のいずれか2. または, それらと互換性のある連想配列のことを指す.実際にはすべてのフィールドを参照するわけではなく, optに次の要素が設定されていればよい.- id- character- suit_string- MP- HP- main (メインスキルがある場合)このゲームにおける「プレイヤー」とはMAGICARD BATTLEでの「メインカード」と基本的に同義であるので, チュートリアルなど特殊な状況を除いてはカードデータを参照することになる.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定されたカードデータを元にこのオブジェクトを初期化する.
+ここで, カードデータとは</p>
+<ol>
+<li>ROW_CARD_DATAに登録されている要素のいずれか</li>
+<li>または, それらと互換性のある連想配列
+のことを指す.</li>
+</ol>
+<p>実際にはすべてのフィールドを参照するわけではなく, optに次の要素が
+設定されていればよい.</p>
+<ul>
+<li>id</li>
+<li>character</li>
+<li>suit_string</li>
+<li>MP</li>
+<li>HP</li>
+<li>main (メインスキルがある場合)</li>
+</ul>
+<p>このゲームにおける「プレイヤー」とはMAGICARD BATTLEでの「メインカード」
+と基本的に同義であるので, チュートリアルなど特殊な状況を除いては
+カードデータを参照することになる.</p></li></ul></dd>
     
 
     
@@ -1101,7 +1138,7 @@
 
             
 
-            <td class="description last">メインカードのデータを格納した連想配列</td>
+            <td class="description last"><p>メインカードのデータを格納した連想配列</p></td>
         </tr>
 
     
@@ -1141,7 +1178,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>このオブジェクトの属性が複合属性かどうか判定する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>このオブジェクトの属性が複合属性かどうか判定する.</p></li></ul></dd>
     
 
     
@@ -1212,7 +1249,7 @@
 
         
 <div class="param-desc">
-    複合属性ならtrue, 基本属性ならfalse
+    <p>複合属性ならtrue, 基本属性ならfalse</p>
 </div>
 
 
@@ -1317,7 +1354,7 @@
 
         
 <div class="param-desc">
-    メインスキルの残り使用可能回数
+    <p>メインスキルの残り使用可能回数</p>
 </div>
 
 
@@ -1354,7 +1391,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>このオブジェクトの属性をSuits内におけるインデックスで表した値.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>このオブジェクトの属性をSuits内におけるインデックスで表した値.</p></li></ul></dd>
     
 
     
@@ -1425,7 +1462,7 @@
 
         
 <div class="param-desc">
-    このオブジェクトの属性を表す数字
+    <p>このオブジェクトの属性を表す数字</p>
 </div>
 
 
@@ -1462,7 +1499,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定されたカードデータを読み取り, メインスキルが存在する場合はそのスキルを実現するオブジェクトを生成する (init()も参照のこと).もしメインスキルが存在しない場合はnullを返す.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定されたカードデータを読み取り, メインスキルが存在する場合は
+そのスキルを実現するオブジェクトを生成する (init()も参照のこと).
+もしメインスキルが存在しない場合はnullを返す.</p></li></ul></dd>
     
 
     
@@ -1557,7 +1596,7 @@
 
             
 
-            <td class="description last">カードデータを格納した連想配列</td>
+            <td class="description last"><p>カードデータを格納した連想配列</p></td>
         </tr>
 
     
@@ -1583,7 +1622,8 @@
 
         
 <div class="param-desc">
-    メインスキルがあれば生成されたオブジェクト,存在しない場合はnull
+    <p>メインスキルがあれば生成されたオブジェクト,
+存在しない場合はnull</p>
 </div>
 
 
@@ -1620,7 +1660,8 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>SGの値がcost以上ならば, addSG(-cost, 5)を実行する.そうでない場合は何もしない.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>SGの値がcost以上ならば, addSG(-cost, 5)を実行する.
+そうでない場合は何もしない.</p></li></ul></dd>
     
 
     
@@ -1715,7 +1756,7 @@
 
             
 
-            <td class="description last">SGから減算する値</td>
+            <td class="description last"><p>SGから減算する値</p></td>
         </tr>
 
     
@@ -1741,7 +1782,7 @@
 
         
 <div class="param-desc">
-    SGからcostを減算した場合true, そうでない場合false
+    <p>SGからcostを減算した場合true, そうでない場合false</p>
 </div>
 
 
@@ -1778,7 +1819,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>SGの値を100にする. 同時にSGMeterのchangeToメソッドを呼び出す.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>SGの値を100にする. 同時にSGMeterのchangeToメソッドを呼び出す.</p></li></ul></dd>
     
 
     
@@ -1931,7 +1972,7 @@
 
         
 <div class="param-desc">
-    シールドの残り回数
+    <p>シールドの残り回数</p>
 </div>
 
 
@@ -1968,7 +2009,8 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>メインスキルが使用可能ならば, 残り使用回数 1 減らしてからメインカードを返す.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>メインスキルが使用可能ならば, 残り使用回数 1 減らしてから
+メインカードを返す.</p></li></ul></dd>
     
 
     
@@ -2039,7 +2081,8 @@
 
         
 <div class="param-desc">
-    メインカードが使用可能ならメインカードオブジェクト,使用可能でない場合はnull
+    <p>メインカードが使用可能ならメインカードオブジェクト,
+使用可能でない場合はnull</p>
 </div>
 
 
@@ -2144,7 +2187,7 @@
 
         
 <div class="param-desc">
-    行動不能状態の残り時間
+    <p>行動不能状態の残り時間</p>
 </div>
 
 
@@ -2249,7 +2292,7 @@
 
         
 <div class="param-desc">
-    このオブジェクトの属性を表す文字列
+    <p>このオブジェクトの属性を表す文字列</p>
 </div>
 
 
@@ -2291,7 +2334,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:20:49 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:30:30 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

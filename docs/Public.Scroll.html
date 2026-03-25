@@ -53,7 +53,33 @@
         
         </h2>
         
-            <div class="class-description usertext">指定されたSelectオブジェクトをラップし, スクロール機能を追加するクラス.すなわち, indexの値をscroll + offset (0 <= offset < viewCount) に分解し,かつ, 直前の状態からの遷移が自然になるようにこれらの値を更新する.たとえば「optionsの要素のうち一度に表示できるものの個数が最大5個」であるようなUIを作りたい場合, 次のようなコードを書く.```class MyUI extends stdtask.Scroll{    constructor(options){        const select = new stdtask.Select(            options.length, ["ArrowUp", "ArrowDown"], "Enter", "Escape"        );        super(select, 5);        this.options = options;    }    draw(GE, ctx){        for(let i = 0; i < 5; i++){            const targetIndex = this.scroll + i;            my_paint_operation( this.options[targetIndex] );  // 普通はiも使うはずだが        }    }    action(GE, index){ 決定時の処理 }    cancel(GE, index){ キャンセル時の処理 }}```選択肢の個数が表示できる最大数に満たない場合, 普通にSelectを使うのと変わらない.また, SelectではなくCyclicSelectを渡してもよい.</div>
+            <div class="class-description usertext"><p>指定されたSelectオブジェクトをラップし, スクロール機能を追加するクラス.
+すなわち, indexの値をscroll + offset (0 &lt;= offset &lt; viewCount) に分解し,
+かつ, 直前の状態からの遷移が自然になるようにこれらの値を更新する.</p>
+<p>たとえば「optionsの要素のうち一度に表示できるものの個数が最大5個」であるような
+UIを作りたい場合, 次のようなコードを書く.</p>
+<pre class="prettyprint source"><code>class MyUI extends stdtask.Scroll{
+    constructor(options){
+        const select = new stdtask.Select(
+            options.length, [&quot;ArrowUp&quot;, &quot;ArrowDown&quot;], &quot;Enter&quot;, &quot;Escape&quot;
+        );
+        super(select, 5);
+        this.options = options;
+    }
+
+    draw(GE, ctx){
+        for(let i = 0; i &lt; 5; i++){
+            const targetIndex = this.scroll + i;
+            my_paint_operation( this.options[targetIndex] );  // 普通はiも使うはずだが
+        }
+    }
+
+    action(GE, index){ 決定時の処理 }
+    cancel(GE, index){ キャンセル時の処理 }
+}
+</code></pre>
+<p>選択肢の個数が表示できる最大数に満たない場合, 普通にSelectを使うのと変わらない.
+また, SelectではなくCyclicSelectを渡してもよい.</p></div>
         
     
 </header>
@@ -78,7 +104,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>一度に表示できる選択肢の個数がviewCountであるようなインスタンスを作る.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>一度に表示できる選択肢の個数がviewCountであるようなインスタンスを作る.</p></li></ul></dd>
     
 
     
@@ -164,7 +190,7 @@
 
             
 
-            <td class="description last">現在のスクロール量</td>
+            <td class="description last"><p>現在のスクロール量</p></td>
         </tr>
 
     
@@ -188,7 +214,9 @@
 
             
 
-            <td class="description last">現在の表示区間において選択されている要素が何番目にあるか.より正確には selectObj.index == this.scroll + this.offset を満たす整数である(selectObjはコンストラクタで与えたSelectオブジェクト)</td>
+            <td class="description last"><p>現在の表示区間において選択されている要素が何番目にあるか.
+より正確には selectObj.index == this.scroll + this.offset を満たす整数である
+(selectObjはコンストラクタで与えたSelectオブジェクト)</p></td>
         </tr>
 
     
@@ -212,7 +240,7 @@
 
             
 
-            <td class="description last">(stdgam.Sceneの意味で) このオブジェクトが有効か</td>
+            <td class="description last"><p>(stdgam.Sceneの意味で) このオブジェクトが有効か</p></td>
         </tr>
 
     
@@ -274,7 +302,7 @@
 
             
 
-            <td class="description last">ラップするSelectオブジェクト (CyclicSelectなどでも可)</td>
+            <td class="description last"><p>ラップするSelectオブジェクト (CyclicSelectなどでも可)</p></td>
         </tr>
 
     
@@ -298,7 +326,7 @@
 
             
 
-            <td class="description last">一度に表示できる選択肢の個数</td>
+            <td class="description last"><p>一度に表示できる選択肢の個数</p></td>
         </tr>
 
     
@@ -359,7 +387,8 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>actionKeyとして指定したキーが押されたときに呼び出される.デフォルトでは何もしない.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>actionKeyとして指定したキーが押されたときに呼び出される.
+デフォルトでは何もしない.</p></li></ul></dd>
     
 
     
@@ -454,7 +483,7 @@
 
             
 
-            <td class="description last">タスク処理を実行するために使うGameEngine</td>
+            <td class="description last"><p>タスク処理を実行するために使うGameEngine</p></td>
         </tr>
 
     
@@ -478,7 +507,7 @@
 
             
 
-            <td class="description last">this.indexの値</td>
+            <td class="description last"><p>this.indexの値</p></td>
         </tr>
 
     
@@ -518,7 +547,12 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>actionやcancelの実行を指定したオブジェクトに委任する.すなわち, 以下の処理を行う.- other.action(GE, index) を実行するだけの関数を this.action に代入- other.cancel(GE, index) を実行するだけの関数を this.cancel に代入</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>actionやcancelの実行を指定したオブジェクトに委任する.
+すなわち, 以下の処理を行う.</p>
+<ul>
+<li>other.action(GE, index) を実行するだけの関数を this.action に代入</li>
+<li>other.cancel(GE, index) を実行するだけの関数を this.cancel に代入</li>
+</ul></li></ul></dd>
     
 
     
@@ -613,7 +647,7 @@
 
             
 
-            <td class="description last">action/cancelの処理を委任されるオブジェクト</td>
+            <td class="description last"><p>action/cancelの処理を委任されるオブジェクト</p></td>
         </tr>
 
     
@@ -653,7 +687,8 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>cancelKeyとして指定したキーが押されたときに呼び出される.デフォルトでは何もしない.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>cancelKeyとして指定したキーが押されたときに呼び出される.
+デフォルトでは何もしない.</p></li></ul></dd>
     
 
     
@@ -748,7 +783,7 @@
 
             
 
-            <td class="description last">タスク処理を実行するために使うGameEngine</td>
+            <td class="description last"><p>タスク処理を実行するために使うGameEngine</p></td>
         </tr>
 
     
@@ -772,7 +807,7 @@
 
             
 
-            <td class="description last">this.indexの値</td>
+            <td class="description last"><p>this.indexの値</p></td>
         </tr>
 
     
@@ -812,7 +847,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>1フレーム分のタスク処理を行う.より正確には, ラップされているSelectオブジェクトのexecuteを実行した後,その結果に基づき this.scroll と this.offset を更新する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>1フレーム分のタスク処理を行う.
+より正確には, ラップされているSelectオブジェクトのexecuteを実行した後,
+その結果に基づき this.scroll と this.offset を更新する.</p></li></ul></dd>
     
 
     
@@ -907,7 +944,7 @@
 
             
 
-            <td class="description last">タスク処理に用いるGameEngine</td>
+            <td class="description last"><p>タスク処理に用いるGameEngine</p></td>
         </tr>
 
     
@@ -947,7 +984,14 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>ラップされているSelectオブジェクトのindexの値を元に,this.scroll と this.offset の値を初期化する.具体的には次のように決める.1. indexの値がviewCount未満なら, scroll = 0, offset = index でよい.2. そうでないとき, 先に offset = viewCount - 1 を決定してしまい,それから scroll = index - offset とすればよい.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>ラップされているSelectオブジェクトのindexの値を元に,
+this.scroll と this.offset の値を初期化する.</p>
+<p>具体的には次のように決める.</p>
+<ol>
+<li>indexの値がviewCount未満なら, scroll = 0, offset = index でよい.</li>
+<li>そうでないとき, 先に offset = viewCount - 1 を決定してしまい,</li>
+</ol>
+<p>それから scroll = index - offset とすればよい.</p></li></ul></dd>
     
 
     
@@ -1100,7 +1144,7 @@
 
         
 <div class="param-desc">
-    一度に表示できる選択肢の個数
+    <p>一度に表示できる選択肢の個数</p>
 </div>
 
 
@@ -1142,7 +1186,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:20:49 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:30:30 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

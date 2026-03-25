@@ -134,7 +134,12 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.以下のメソッドを持つ.get(id) : 指定されたカードIDのカードを返すforEach(callback) : すべてのカード x に対して callback(x) を実行するCardAtlasにより生成されたCardオブジェクトはcardAtlasID属性にカードのIDを代入される</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.
+以下のメソッドを持つ.
+get(id) : 指定されたカードIDのカードを返す
+forEach(callback) : すべてのカード x に対して callback(x) を実行する</p>
+<p>CardAtlasにより生成されたCardオブジェクトはcardAtlasID属性に
+カードのIDを代入される</p></li></ul></dd>
     
 
     
@@ -180,7 +185,12 @@
 
 
 <div class="description usertext">
-    RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.以下のメソッドを持つ.get(id) : 指定されたカードIDのカードを返すforEach(callback) : すべてのカード x に対して callback(x) を実行するCardAtlasにより生成されたCardオブジェクトはcardAtlasID属性にカードのIDを代入される
+    <p>RAW_CARD_DATAに格納されているカード情報からカードを生成するオブジェクト.
+以下のメソッドを持つ.
+get(id) : 指定されたカードIDのカードを返す
+forEach(callback) : すべてのカード x に対して callback(x) を実行する</p>
+<p>CardAtlasにより生成されたCardオブジェクトはcardAtlasID属性に
+カードのIDを代入される</p>
 </div>
 
 
@@ -212,7 +222,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>各属性に対して割り当てられたコンボ判定用のマスク.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>各属性に対して割り当てられたコンボ判定用のマスク.</p></li></ul></dd>
     
 
     
@@ -258,7 +268,7 @@
 
 
 <div class="description usertext">
-    各属性に対して割り当てられたコンボ判定用のマスク.
+    <p>各属性に対して割り当てられたコンボ判定用のマスク.</p>
 </div>
 
 
@@ -290,7 +300,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>基本属性をキャラクターのフルネームに変換する連想配列.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>基本属性をキャラクターのフルネームに変換する連想配列.</p></li></ul></dd>
     
 
     
@@ -336,7 +346,7 @@
 
 
 <div class="description usertext">
-    基本属性をキャラクターのフルネームに変換する連想配列.
+    <p>基本属性をキャラクターのフルネームに変換する連想配列.</p>
 </div>
 
 
@@ -368,7 +378,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>敵の特殊攻撃を生成する関数をまとめたもの.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>敵の特殊攻撃を生成する関数をまとめたもの.</p></li></ul></dd>
     
 
     
@@ -414,7 +424,7 @@
 
 
 <div class="description usertext">
-    敵の特殊攻撃を生成する関数をまとめたもの.
+    <p>敵の特殊攻撃を生成する関数をまとめたもの.</p>
 </div>
 
 
@@ -446,7 +456,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>このゲームに登場する敵のデータを登録する連想配列.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>このゲームに登場する敵のデータを登録する連想配列.</p></li></ul></dd>
     
 
     
@@ -492,7 +502,7 @@
 
 
 <div class="description usertext">
-    このゲームに登場する敵のデータを登録する連想配列.
+    <p>このゲームに登場する敵のデータを登録する連想配列.</p>
 </div>
 
 
@@ -524,7 +534,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>localStorageの読み書きを行うオブジェクト.読み書きした情報の保持も行う. そのため, プログラムがlocalStorageを使用しているか否かは, このオブジェクトのisUsed()メソッドで判別できる.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>localStorageの読み書きを行うオブジェクト.
+読み書きした情報の保持も行う. そのため, プログラムがlocalStorageを
+使用しているか否かは, このオブジェクトのisUsed()メソッドで判別できる.</p></li></ul></dd>
     
 
     
@@ -613,7 +625,14 @@
 
             
 
-            <td class="description last">設定情報のうちlocalStorageに保存するものの配列.現在のバージョンでは,1. メインカードのID (string)2, コンボ成立ルールのバージョン (number)3. スキル持ちカードのマーカー設定 (boolean)がこの順番に格納されている. ロードする前, および, localStorageを利用しない設定のときはnull</td>
+            <td class="description last"><p>設定情報のうちlocalStorageに保存するものの配列.
+現在のバージョンでは,</p>
+<ol>
+<li>メインカードのID (string)
+2, コンボ成立ルールのバージョン (number)</li>
+<li>スキル持ちカードのマーカー設定 (boolean)
+がこの順番に格納されている. ロードする前, および, localStorageを利用しない設定のときはnull</li>
+</ol></td>
         </tr>
 
     
@@ -640,7 +659,8 @@
 
             
 
-            <td class="description last">デッキに含まれる各カードのIDを並べた配列.ロードする前, および, localStorageを利用しない設定のときはnull</td>
+            <td class="description last"><p>デッキに含まれる各カードのIDを並べた配列.
+ロードする前, および, localStorageを利用しない設定のときはnull</p></td>
         </tr>
 
     
@@ -653,7 +673,9 @@
 
 
 <div class="description usertext">
-    localStorageの読み書きを行うオブジェクト.読み書きした情報の保持も行う. そのため, プログラムがlocalStorageを使用しているか否かは, このオブジェクトのisUsed()メソッドで判別できる.
+    <p>localStorageの読み書きを行うオブジェクト.
+読み書きした情報の保持も行う. そのため, プログラムがlocalStorageを
+使用しているか否かは, このオブジェクトのisUsed()メソッドで判別できる.</p>
 </div>
 
 
@@ -685,7 +707,10 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>各属性の強化倍率を扱うオブジェクト.一部のスキル (敵スキルを含む) では「特定の属性だけMPが増加」のように属性ごとに影響の違う効果を引き起こすことがある.これを管理するために用意する (複合属性は全部ひとまとめにして扱う).</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>各属性の強化倍率を扱うオブジェクト.
+一部のスキル (敵スキルを含む) では「特定の属性だけMPが増加」のように
+属性ごとに影響の違う効果を引き起こすことがある.
+これを管理するために用意する (複合属性は全部ひとまとめにして扱う).</p></li></ul></dd>
     
 
     
@@ -731,7 +756,10 @@
 
 
 <div class="description usertext">
-    各属性の強化倍率を扱うオブジェクト.一部のスキル (敵スキルを含む) では「特定の属性だけMPが増加」のように属性ごとに影響の違う効果を引き起こすことがある.これを管理するために用意する (複合属性は全部ひとまとめにして扱う).
+    <p>各属性の強化倍率を扱うオブジェクト.
+一部のスキル (敵スキルを含む) では「特定の属性だけMPが増加」のように
+属性ごとに影響の違う効果を引き起こすことがある.
+これを管理するために用意する (複合属性は全部ひとまとめにして扱う).</p>
 </div>
 
 
@@ -763,7 +791,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>プレイヤー側のスキルを生成する関数をまとめたもの.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>プレイヤー側のスキルを生成する関数をまとめたもの.</p></li></ul></dd>
     
 
     
@@ -809,7 +837,7 @@
 
 
 <div class="description usertext">
-    プレイヤー側のスキルを生成する関数をまとめたもの.
+    <p>プレイヤー側のスキルを生成する関数をまとめたもの.</p>
 </div>
 
 
@@ -841,7 +869,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>基本属性を定義するリスト.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>基本属性を定義するリスト.</p></li></ul></dd>
     
 
     
@@ -887,7 +915,7 @@
 
 
 <div class="description usertext">
-    基本属性を定義するリスト.
+    <p>基本属性を定義するリスト.</p>
 </div>
 
 
@@ -919,7 +947,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>基本属性をキャラクターの下の名前に変換する連想配列.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>基本属性をキャラクターの下の名前に変換する連想配列.</p></li></ul></dd>
     
 
     
@@ -965,7 +993,7 @@
 
 
 <div class="description usertext">
-    基本属性をキャラクターの下の名前に変換する連想配列.
+    <p>基本属性をキャラクターの下の名前に変換する連想配列.</p>
 </div>
 
 
@@ -997,7 +1025,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>プログラムで使われている属性を登録するリスト.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>プログラムで使われている属性を登録するリスト.</p></li></ul></dd>
     
 
     
@@ -1043,7 +1071,7 @@
 
 
 <div class="description usertext">
-    プログラムで使われている属性を登録するリスト.
+    <p>プログラムで使われている属性を登録するリスト.</p>
 </div>
 
 
@@ -1075,7 +1103,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>チュートリアルの各項目の情報をまとめた配列.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>チュートリアルの各項目の情報をまとめた配列.</p></li></ul></dd>
     
 
     
@@ -1121,7 +1149,7 @@
 
 
 <div class="description usertext">
-    チュートリアルの各項目の情報をまとめた配列.
+    <p>チュートリアルの各項目の情報をまとめた配列.</p>
 </div>
 
 
@@ -1153,7 +1181,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>タイマー処理を担当するヘルパークラス.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>タイマー処理を担当するヘルパークラス.</p></li></ul></dd>
     
 
     
@@ -1239,7 +1267,7 @@
 
             
 
-            <td class="description last">タイマーイベントを送る対象</td>
+            <td class="description last"><p>タイマーイベントを送る対象</p></td>
         </tr>
 
     
@@ -1263,7 +1291,7 @@
 
             
 
-            <td class="description last">既にタイマーが稼働中か</td>
+            <td class="description last"><p>既にタイマーが稼働中か</p></td>
         </tr>
 
     
@@ -1276,7 +1304,7 @@
 
 
 <div class="description usertext">
-    タイマー処理を担当するヘルパークラス.
+    <p>タイマー処理を担当するヘルパークラス.</p>
 </div>
 
 
@@ -1318,7 +1346,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>MAGICARD BATTLE第1弾のルールに従い, 3枚のカードがコンボの条件を満たしているか判定する(3枚目のカードがスキルを持つかどうかはチェックしない).</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>MAGICARD BATTLE第1弾のルールに従い, 3枚のカードがコンボの条件を
+満たしているか判定する
+(3枚目のカードがスキルを持つかどうかはチェックしない).</p></li></ul></dd>
     
 
     
@@ -1496,7 +1526,7 @@
 
         
 <div class="param-desc">
-    コンボが成立していればtrue, 不成立ならfalse
+    <p>コンボが成立していればtrue, 不成立ならfalse</p>
 </div>
 
 
@@ -1533,7 +1563,9 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>MAGICARD BATTLE第2弾のルールに従い, 3枚のカードがコンボの条件を満たしているか判定する(3枚目のカードがスキルを持つかどうかはチェックしない).</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>MAGICARD BATTLE第2弾のルールに従い, 3枚のカードがコンボの条件を
+満たしているか判定する
+(3枚目のカードがスキルを持つかどうかはチェックしない).</p></li></ul></dd>
     
 
     
@@ -1711,7 +1743,7 @@
 
         
 <div class="param-desc">
-    コンボが成立していればtrue, 不成立ならfalse
+    <p>コンボが成立していればtrue, 不成立ならfalse</p>
 </div>
 
 
@@ -1748,7 +1780,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>バトルが選択されたときに喋る内容を生成する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>バトルが選択されたときに喋る内容を生成する.</p></li></ul></dd>
     
 
     
@@ -1843,7 +1875,7 @@
 
             
 
-            <td class="description last">selectSceneの設定データ</td>
+            <td class="description last"><p>selectSceneの設定データ</p></td>
         </tr>
 
     
@@ -1869,7 +1901,7 @@
 
         
 <div class="param-desc">
-    生成されたオブジェクト
+    <p>生成されたオブジェクト</p>
 </div>
 
 
@@ -1906,7 +1938,10 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>ステータスの等速変化を実現するMeterオブジェクトを作る.あるパラメータがAからBへ変化するとき, モデル内部では一瞬で値がBになるが,GUIではAからBまで一定の時間を掛けて変化する様子を描画したい.この時間変化を表現するために使う.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>ステータスの等速変化を実現するMeterオブジェクトを作る.
+あるパラメータがAからBへ変化するとき, モデル内部では一瞬で値がBになるが,
+GUIではAからBまで一定の時間を掛けて変化する様子を描画したい.
+この時間変化を表現するために使う.</p></li></ul></dd>
     
 
     
@@ -2001,7 +2036,7 @@
 
             
 
-            <td class="description last">初期値</td>
+            <td class="description last"><p>初期値</p></td>
         </tr>
 
     
@@ -2025,7 +2060,7 @@
 
             
 
-            <td class="description last">最大値</td>
+            <td class="description last"><p>最大値</p></td>
         </tr>
 
     
@@ -2049,7 +2084,7 @@
 
             
 
-            <td class="description last">変化に要するフレーム数の既定値</td>
+            <td class="description last"><p>変化に要するフレーム数の既定値</p></td>
         </tr>
 
     
@@ -2075,7 +2110,7 @@
 
         
 <div class="param-desc">
-    生成されたMeterオブジェクト
+    <p>生成されたMeterオブジェクト</p>
 </div>
 
 
@@ -2112,7 +2147,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>バトルの最初にQBが喋る内容を生成する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>バトルの最初にQBが喋る内容を生成する.</p></li></ul></dd>
     
 
     
@@ -2207,7 +2242,7 @@
 
             
 
-            <td class="description last">バトルの設定データ</td>
+            <td class="description last"><p>バトルの設定データ</p></td>
         </tr>
 
     
@@ -2233,7 +2268,7 @@
 
         
 <div class="param-desc">
-    生成されたオブジェクト
+    <p>生成されたオブジェクト</p>
 </div>
 
 
@@ -2273,7 +2308,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>チュートリアルが選択されたときに喋る内容を生成する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>チュートリアルが選択されたときに喋る内容を生成する.</p></li></ul></dd>
     
 
     
@@ -2344,7 +2379,7 @@
 
         
 <div class="param-desc">
-    生成されたオブジェクト
+    <p>生成されたオブジェクト</p>
 </div>
 
 
@@ -2381,7 +2416,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>指定された属性に対応するカード名を生成する.</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>指定された属性に対応するカード名を生成する.</p></li></ul></dd>
     
 
     
@@ -2476,7 +2511,7 @@
 
             
 
-            <td class="description last">属性の値</td>
+            <td class="description last"><p>属性の値</p></td>
         </tr>
 
     
@@ -2502,7 +2537,7 @@
 
         
 <div class="param-desc">
-    生成されたカード名
+    <p>生成されたカード名</p>
 </div>
 
 
@@ -2539,7 +2574,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>複合クラスのためのマスクを計算する</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>複合クラスのためのマスクを計算する</p></li></ul></dd>
     
 
     
@@ -2634,7 +2669,7 @@
 
             
 
-            <td class="description last">各構成要素のPrimitiveSuitsにおけるインデックス</td>
+            <td class="description last"><p>各構成要素のPrimitiveSuitsにおけるインデックス</p></td>
         </tr>
 
     
@@ -2660,7 +2695,7 @@
 
         
 <div class="param-desc">
-    生成されたマスクの値
+    <p>生成されたマスクの値</p>
 </div>
 
 
@@ -2697,7 +2732,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>複合属性の属性名を生成する</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>複合属性の属性名を生成する</p></li></ul></dd>
     
 
     
@@ -2792,7 +2827,7 @@
 
             
 
-            <td class="description last">各構成要素のPrimitiveSuitsにおけるインデックス</td>
+            <td class="description last"><p>各構成要素のPrimitiveSuitsにおけるインデックス</p></td>
         </tr>
 
     
@@ -2818,7 +2853,7 @@
 
         
 <div class="param-desc">
-    生成された属性名
+    <p>生成された属性名</p>
 </div>
 
 
@@ -2857,7 +2892,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>描画処理を行うオブジェクト</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>描画処理を行うオブジェクト</p></li></ul></dd>
     
 
     
@@ -2943,7 +2978,7 @@
 
             
 
-            <td class="description last">1フレーム分の描画処理を行う</td>
+            <td class="description last"><p>1フレーム分の描画処理を行う</p></td>
         </tr>
 
     
@@ -2956,7 +2991,7 @@
 
 
 <div class="description usertext">
-    描画処理を行うオブジェクト
+    <p>描画処理を行うオブジェクト</p>
 </div>
 
 
@@ -2988,7 +3023,7 @@
 <dl class="details">
     
     <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li>1フレームごとにタスク処理を行うオブジェクト</li></ul></dd>
+    <dd class="tag-description"><ul class="dummy"><li><p>1フレームごとにタスク処理を行うオブジェクト</p></li></ul></dd>
     
 
     
@@ -3074,7 +3109,7 @@
 
             
 
-            <td class="description last">1フレーム分のタスク処理を行う</td>
+            <td class="description last"><p>1フレーム分のタスク処理を行う</p></td>
         </tr>
 
     
@@ -3087,7 +3122,7 @@
 
 
 <div class="description usertext">
-    1フレームごとにタスク処理を行うオブジェクト
+    <p>1フレームごとにタスク処理を行うオブジェクト</p>
 </div>
 
 
@@ -3273,7 +3308,7 @@
 
             
 
-            <td class="description last">現在値から第1引数で指定した値まで, 第3引数で指定したフレーム数を掛けてthis.alphaの値を等速変化させる</td>
+            <td class="description last"><p>現在値から第1引数で指定した値まで, 第3引数で指定したフレーム数を掛けてthis.alphaの値を等速変化させる</p></td>
         </tr>
 
     
@@ -3397,7 +3432,7 @@
 
             
 
-            <td class="description last">描画する画像</td>
+            <td class="description last"><p>描画する画像</p></td>
         </tr>
 
     
@@ -3421,7 +3456,7 @@
 
             
 
-            <td class="description last">描画位置のx座標</td>
+            <td class="description last"><p>描画位置のx座標</p></td>
         </tr>
 
     
@@ -3445,7 +3480,7 @@
 
             
 
-            <td class="description last">描画位置のy座標</td>
+            <td class="description last"><p>描画位置のy座標</p></td>
         </tr>
 
     
@@ -3469,7 +3504,7 @@
 
             
 
-            <td class="description last">不透明度</td>
+            <td class="description last"><p>不透明度</p></td>
         </tr>
 
     
@@ -3593,7 +3628,9 @@
 
             
 
-            <td class="description last">指定時間が経過したとき第2引数で指定したコールバック関数を実行する.ここで, コールバック関数の引数は (GE, self) である(GEはタスク処理に用いるGameEngine, selfはこのオブジェクト自身).</td>
+            <td class="description last"><p>指定時間が経過したとき第2引数で指定したコールバック関数を実行する.
+ここで, コールバック関数の引数は (GE, self) である
+(GEはタスク処理に用いるGameEngine, selfはこのオブジェクト自身).</p></td>
         </tr>
 
     
@@ -3617,7 +3654,7 @@
 
             
 
-            <td class="description last">コールバック関数の実行結果がtrueである限り, afterと同じ処理を繰り返す</td>
+            <td class="description last"><p>コールバック関数の実行結果がtrueである限り, afterと同じ処理を繰り返す</p></td>
         </tr>
 
     
@@ -3741,7 +3778,7 @@
 
             
 
-            <td class="description last">this.x, this.yを指定した値に変更する</td>
+            <td class="description last"><p>this.x, this.yを指定した値に変更する</p></td>
         </tr>
 
     
@@ -3765,7 +3802,7 @@
 
             
 
-            <td class="description last">現在位置から第1～第2引数で指定した座標まで, 第3引数で指定したフレーム数を掛けてthis.x, this.yの値を等速変化させる</td>
+            <td class="description last"><p>現在位置から第1～第2引数で指定した座標まで, 第3引数で指定したフレーム数を掛けてthis.x, this.yの値を等速変化させる</p></td>
         </tr>
 
     
@@ -3889,7 +3926,7 @@
 
             
 
-            <td class="description last">表示するテキスト</td>
+            <td class="description last"><p>表示するテキスト</p></td>
         </tr>
 
     
@@ -3913,7 +3950,7 @@
 
             
 
-            <td class="description last">描画位置のx座標</td>
+            <td class="description last"><p>描画位置のx座標</p></td>
         </tr>
 
     
@@ -3937,7 +3974,7 @@
 
             
 
-            <td class="description last">描画位置のy座標</td>
+            <td class="description last"><p>描画位置のy座標</p></td>
         </tr>
 
     
@@ -3961,7 +3998,7 @@
 
             
 
-            <td class="description last">テキストの色</td>
+            <td class="description last"><p>テキストの色</p></td>
         </tr>
 
     
@@ -3985,7 +4022,7 @@
 
             
 
-            <td class="description last">テキストのフォント</td>
+            <td class="description last"><p>テキストのフォント</p></td>
         </tr>
 
     
@@ -4009,7 +4046,7 @@
 
             
 
-            <td class="description last">不透明度</td>
+            <td class="description last"><p>不透明度</p></td>
         </tr>
 
     
@@ -4057,7 +4094,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:20:49 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 03:30:30 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
