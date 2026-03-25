@@ -111,6 +111,7 @@ const getPolysuitMask = function(indices){
  * @type {Object}
  * @prop {number[]} primive - 各基本属性に対するMPの補正量をパーセントで表した値
  * @prop {number} prismatic - 複合属性 ("Ng"を含むもの以外) に対するMPの補正量をパーセントで表した値
+ * @namespace
  */
 const MPBoostBySuit = {
     primitive: PrimitiveSuits.map((e) => 100),

@@ -18,6 +18,7 @@
  * がこの順番に格納されている. ロードする前, および, localStorageを利用しない設定のときはnull
  * @prop {string[]|null} deckInfo - デッキに含まれる各カードのIDを並べた配列.
  * ロードする前, および, localStorageを利用しない設定のときはnull
+ * @namespace
  */
 const LocalStorageInfo = {
 config: null,
