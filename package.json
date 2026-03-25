@@ -4,6 +4,7 @@
   "devDependencies": {
     "jsdoc": "^4.0.0",
     "better-docs": "^2.7.3"
+    "minami": "^1.2.3"
   },
   "scripts": {
     "generate-docs": "jsdoc -c jsdoc.json"
