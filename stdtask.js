@@ -354,7 +354,7 @@ Public.Scroll = class{
  * @class
  * @prop {number} value - そのパラメータの現在値
  * @prop {number} max - パラメータの最大値
- * @prop {number} frames - 等速変化に掛けるフレーム数 (既に実行中のアクションには影響しない)
+ * @prop {number} frames - 等速変化にかけるフレーム数 (既に実行中のアクションには影響しない)
  * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
 Public.Meter = class{
@@ -363,12 +363,23 @@ Public.Meter = class{
     #duration;
     #elapsed;
 
+    /**
+     * 指定された値を初期値・最大値とするインスタンスを生成する.
+     * @param {number} v - パラメータの初期値
+     * @param {numner} max - パラメータの最大値
+     * @param {number} frames - 等速変化にかけるフレーム数 (既に実行中のアクションには影響しない)
+     */
     constructor(v, max, frames){
         this.init(v, max, frames);
     }
 
     /**
-     * 初期化する.
+     * 指定された値を使って初期化する.
+     * もしnewFramesが偽の場合, 現在のframesの値をそのまま保持する.
+     * @param {number} newValue - パラメータの初期値
+     * @param {numner} newMax - パラメータの最大値
+     * @param {number} [frames=null] - 等速変化にかけるフレーム数 (既に実行中のアクションには影響しない).
+     * 偽として判定される値を渡した場合は現在の値を保持する
      */
     init(newValue, newMax, newFrames = null){
         this.value = this.#sv = this.#tv = newValue;
@@ -380,6 +391,9 @@ Public.Meter = class{
 
     /**
      * 目標値への変化を開始する.
+     * @param {number} target - 等速変化の目標値
+     * @param {number} [dur=this.frames] - 等速変化にかけるフレーム数 (既に実行中のアクションには影響しない).
+     * 省略した場合はthis.framesの値をそのまま使う
      */
     changeTo(target, dur = this.frames){
         this.#sv = this.value;
@@ -391,6 +405,7 @@ Public.Meter = class{
 
     /**
      * 1フレーム分のタスク処理を実行する.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
      */
     execute(GE){
         if(this.#elapsed < this.#duration){
