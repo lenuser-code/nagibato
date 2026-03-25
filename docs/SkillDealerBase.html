@@ -85,7 +85,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>SkillDealerBase<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>SkillDealerBase<span class="signature">(healRate, SGHealRate, crisisBonus, appliedCB)</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>プレイヤー側のスキルの実行インターフェース.
 スキルを表すオブジェクトAと, その実行者Bの間の仲介を行う.
@@ -133,7 +133,7 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
         
         <span class="code-name">
             
-                new SkillDealerBase<span class="signature">()</span><span class="type-signature"></span>
+                new SkillDealerBase<span class="signature">(healRate, SGHealRate, crisisBonus, appliedCB)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -149,6 +149,112 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
 
 
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>healRate</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>ターン開始時のHP回復量を最大HPに対するパーセント表示で表した値</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>SGHealRate</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>ターン開始時のSG回復量</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>crisisBonus</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>crisisBoostの効果量を基本MPに対するパーセント表示で表した値</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>appliedCB</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>crisisBoostの効果のうち, 現時点で既に適用済みの効果量</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -189,7 +295,7 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
         <p class="tag-source">
             <a href="card.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line212">line 212</a>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line216">line 216</a>
             </span>
         </p>
     

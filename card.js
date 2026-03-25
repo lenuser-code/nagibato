@@ -109,7 +109,7 @@ const getPolysuitMask = function(indices){
  * 属性ごとに影響の違う効果を引き起こすことがある.
  * これを管理するために用意する (複合属性は全部ひとまとめにして扱う).
  * @type {Object}
- * @prop {number[]} primive - 各基本属性に対するMPの補正量をパーセントで表した値
+ * @prop {number[]} primitive - 各基本属性に対するMPの補正量をパーセントで表した値
  * @prop {number} prismatic - 複合属性 ("Ng"を含むもの以外) に対するMPの補正量をパーセントで表した値
  * @namespace
  */
@@ -208,6 +208,10 @@ const ChainFuncVer2 = function(a, b, c){
  * - *crisisBoostTask(percent)
  *
  * @class
+ * @param healRate - ターン開始時のHP回復量を最大HPに対するパーセント表示で表した値
+ * @param SGHealRate - ターン開始時のSG回復量
+ * @param crisisBonus - crisisBoostの効果量を基本MPに対するパーセント表示で表した値
+ * @param appliedCB - crisisBoostの効果のうち, 現時点で既に適用済みの効果量
  */
 class SkillDealerBase{
     constructor(){
@@ -532,19 +536,42 @@ const PlayerSkill = {
  * - paintBackground(ctx, marks)
  * - paintMark(ctx, pics)
  * - paintCost(ctx, x, y, marks, n)
+ *
  * @class
+ * @param {number} width - カードの横幅
+ * @param {number} height - カードの縦幅
+ * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @param {function(CanvasRenderingContext2D, number[]): void} paintBackground - カードの背景を描画する (サブクラスが実装する)
+ * @param {function(CanvasRenderingContext2D, HTMLImageElement[]): void} paintMarks - カードのマークを描画する (サブクラスが実装する)
+ * @param {function(CanvasRenderingContext2D, number, number, number[], number): void} paintCost - 
+ * 指定された座標にカードの左上端があるものとしてカードのコストを描画する (サブクラスが実装する)
  */
 class Polysuit{
+    /**
+     * 外枠などに使う配色.
+     * @type {string[]}
+     */
     static ccolors = [
         "rgb(204,96,96)", "rgb(17,17,119)", "rgb(96,96,204)",
         "rgb(192,192,0)", "rgb(186,115,87)", "rgb(207,141,154)"
     ];
 
+    /**
+     * カードの地の部分などに使う配色.
+     * @type {string[]}
+     */
     static wcolors = [
         "rgb(238,128,128)", "rgb(119,119,204)", "rgb(192,192,255)",
         "rgb(208,208,0)", "rgb(222,150,122)", "rgb(247,202,203)"
     ];
 
+    /**
+     * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+     * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+     * @param {number} width - カードの横幅
+     * @param {number} height - カードの縦幅
+     */ 
     constructor(images, caches, width, height){
         this.images = images;
         this.caches = caches;
@@ -555,6 +582,18 @@ class Polysuit{
         }
     }
 
+    /**
+     * グラデーションを作成する.
+     * @param {CanvasRenderingContext2D} ctx - 描画処理に用いているコンテクスト
+     * @param {string} c1 - 左上に設定する色
+     * @param {string} c2 - 右下に設定する色
+     * @param {number} [off1=0] - カードの左上の角よりも指定された値だけ外側に
+     * 飛び出した場所を第1色の配置位置とする (x座標, y座標のそれぞれからoff1を引く)
+     * @param {number} [off2=0] - カードの右下の角よりも指定された値だけ外側に
+     * 飛び出した場所を第2色の配置位置とする (x座標, y座標のそれぞれにoff1を足す)
+     * @param {string} [med=null] - 中間色を設定する場合はそのカラーコードを指定する
+     * @returns {CanvasGradient} 作成されたグラデーション
+     */
     gradation(ctx, c1, c2, off1=0, off2=0, med=null){
         const g = ctx.createLinearGradient(-off1, -off1, this.width+off2, this.height+off2);
         g.addColorStop(0, c1);
@@ -563,6 +602,17 @@ class Polysuit{
         return g;
     }
 
+    /**
+     * marksで指定された複合属性のカード画像が既に作成済みならそれを返す.
+     * そうでない場合, サブクラスの
+     * - this.paintBackgroud
+     * - this.paintMark
+     *
+     * を使用してカード画像を作り, これをthis.cachesに登録する.
+     * その後, 生成したカード画像を返す.
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     * @returns {HTMLCanvasElement} その複合属性のカード画像
+     */
     getCache(marks){
         const newName = getPolysuitName(marks);
         if(!this.caches.get(newName)){
@@ -581,8 +631,17 @@ class Polysuit{
 /**
  * 2つのマークを持つカードの画像を生成・管理するためのクラス.
  * @class
+ * @param {number} width - カードの横幅
+ * @param {number} height - カードの縦幅
+ * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  */
 class DuosuitGenerator extends Polysuit{
+    /**
+     * カードの背景を描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     */
     paintBackground(ctx, marks){
         ctx.save();
         const [m1, m2] = marks;
@@ -593,6 +652,11 @@ class DuosuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * カードのマークを描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {HTMLImageElement[]} pics - 含まれる基本属性のマークの画像
+     */
     paintMark(ctx, pics){
         ctx.save();
         const [img1, img2] = pics;
@@ -605,6 +669,18 @@ class DuosuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * 指定された座標にカードの左上端があるものとしてカードのコストを描画する.
+     * 他の描画メソッドとは違い, コストはキャッシュ画像には書き込まず,
+     * PrismaticCardのpaintメソッドから毎フレーム呼び出される (さもなければ
+     * キャッシュする画像の枚数がコストの種類数だけ倍増してしまう).
+     * そのため, 基点となる(x,y)の情報が必要になる.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number} x - カードの配置位置のx座標
+     * @param {number} y - カードの配置位置のy座標
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     * @param {number} n - カードのコスト
+     */
     paintCost(ctx, x, y, marks, n){
         ctx.save();
         const [m1, m2] = marks;
@@ -622,8 +698,17 @@ class DuosuitGenerator extends Polysuit{
 /**
  * 3つのマークを持つカードの画像を生成・管理するためのクラス.
  * @class
+ * @param {number} width - カードの横幅
+ * @param {number} height - カードの縦幅
+ * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  */
 class TriosuitGenerator extends Polysuit{
+    /**
+     * カードの背景を描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     */
     paintBackground(ctx, marks){
         ctx.save();
         const [m1, m2, m3] = marks;
@@ -634,6 +719,11 @@ class TriosuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * カードのマークを描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {HTMLImageElement[]} pics - 含まれる基本属性のマークの画像
+     */
     paintMark(ctx, pics){
         ctx.save();
         const [img1, img2, img3] = pics;
@@ -648,6 +738,18 @@ class TriosuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * 指定された座標にカードの左上端があるものとしてカードのコストを描画する.
+     * 他の描画メソッドとは違い, コストはキャッシュ画像には書き込まず,
+     * PrismaticCardのpaintメソッドから毎フレーム呼び出される (さもなければ
+     * キャッシュする画像の枚数がコストの種類数だけ倍増してしまう).
+     * そのため, 基点となる(x,y)の情報が必要になる.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number} x - カードの配置位置のx座標
+     * @param {number} y - カードの配置位置のy座標
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     * @param {number} n - カードのコスト
+     */
     paintCost(ctx, x, y, marks, n){
         ctx.save();
         const [m1, m2, m3] = marks;
@@ -664,9 +766,18 @@ class TriosuitGenerator extends Polysuit{
 
 /**
  * 4つのマークを持つカードの画像を生成・管理するためのクラス.
+ * @param {number} width - カードの横幅
+ * @param {number} height - カードの縦幅
+ * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  * @class
  */
 class QuartetsuitGenerator extends Polysuit{
+    /**
+     * カードの背景を描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     */
     paintBackground(ctx, marks){
         ctx.save();
         const [m1, m2, m3, m4] = marks;
@@ -677,6 +788,11 @@ class QuartetsuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * カードのマークを描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {HTMLImageElement[]} pics - 含まれる基本属性のマークの画像
+     */
     paintMark(ctx, pics){
         ctx.save();
         const [img1, img2, img3, img4] = pics;
@@ -693,6 +809,18 @@ class QuartetsuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * 指定された座標にカードの左上端があるものとしてカードのコストを描画する.
+     * 他の描画メソッドとは違い, コストはキャッシュ画像には書き込まず,
+     * PrismaticCardのpaintメソッドから毎フレーム呼び出される (さもなければ
+     * キャッシュする画像の枚数がコストの種類数だけ倍増してしまう).
+     * そのため, 基点となる(x,y)の情報が必要になる.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number} x - カードの配置位置のx座標
+     * @param {number} y - カードの配置位置のy座標
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     * @param {number} n - カードのコスト
+     */
     paintCost(ctx, x, y, marks, n){
         ctx.save();
         const [m1, m2, m3, m4] = marks;
@@ -711,8 +839,17 @@ class QuartetsuitGenerator extends Polysuit{
  * 「魔法少女」のカードのうち, なぎさを含まないものについて
  * 画像を生成・管理するためのクラス.
  * @class
+ * @param {number} width - カードの横幅
+ * @param {number} height - カードの縦幅
+ * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  */
 class QuintetsuitGenerator extends Polysuit{
+    /**
+     * カードの背景を描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     */
     paintBackground(ctx, marks){
         ctx.save();
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[1], Polysuit.wcolors[2], 50, 250);
@@ -722,6 +859,11 @@ class QuintetsuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * カードのマークを描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {HTMLImageElement[]} pics - 含まれる基本属性のマークの画像
+     */
     paintMark(ctx, pics){
         ctx.save();
         const [img1, img2, img3, img4, img5] = pics;
@@ -740,6 +882,18 @@ class QuintetsuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * 指定された座標にカードの左上端があるものとしてカードのコストを描画する.
+     * 他の描画メソッドとは違い, コストはキャッシュ画像には書き込まず,
+     * PrismaticCardのpaintメソッドから毎フレーム呼び出される (さもなければ
+     * キャッシュする画像の枚数がコストの種類数だけ倍増してしまう).
+     * そのため, 基点となる(x,y)の情報が必要になる.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number} x - カードの配置位置のx座標
+     * @param {number} y - カードの配置位置のy座標
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     * @param {number} n - カードのコスト
+     */
     paintCost(ctx, x, y, marks, n){
         ctx.save();
         ctx.strokeStyle = Polysuit.ccolors[5];
@@ -752,7 +906,17 @@ class QuintetsuitGenerator extends Polysuit{
         ctx.restore();
     }
 
-    // 必ず [0, 1, 2, 3, 4] で固定する
+    /**
+     * 魔法少女5人組のカード画像が既に作成済みならそれを返す.
+     * そうでない場合, カード画像を生成してthis.cacheに登録する.
+     * その後, 生成したカード画像を返す.
+     *
+     * Quintetの場合, marksとして何が渡された場合でも
+     * 必ずmarksを [0, 1, 2, 3, 4] に置き換えて作業を行う (並び順が違うだけの
+     * 画像を無駄に増やさないため).
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     * @returns {HTMLCanvasElement} その複合属性のカード画像
+     */
     getCache(marks){
         marks = [0, 1, 2, 3, 4];
         const newName = getPolysuitName(marks);
@@ -772,8 +936,17 @@ class QuintetsuitGenerator extends Polysuit{
 /**
  * なぎさを含む「魔法少女」のカードの画像を生成・管理するためのクラス.
  * @class
+ * @param {number} width - カードの横幅
+ * @param {number} height - カードの縦幅
+ * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  */
 class SestetsuitGenerator extends Polysuit{
+    /**
+     * カードの背景を描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     */
     paintBackground(ctx, marks){
         ctx.save();
         ctx.fillStyle = this.gradation(ctx, Polysuit.wcolors[1], Polysuit.wcolors[2], 50, 250);
@@ -783,6 +956,11 @@ class SestetsuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * カードのマークを描画する.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {HTMLImageElement[]} pics - 含まれる基本属性のマークの画像
+     */
     paintMark(ctx, pics){
         ctx.save();
         const [img1, img2, img3, img4, img5, img6] = pics;
@@ -803,6 +981,18 @@ class SestetsuitGenerator extends Polysuit{
         ctx.restore();
     }
 
+    /**
+     * 指定された座標にカードの左上端があるものとしてカードのコストを描画する.
+     * 他の描画メソッドとは違い, コストはキャッシュ画像には書き込まず,
+     * PrismaticCardのpaintメソッドから毎フレーム呼び出される (さもなければ
+     * キャッシュする画像の枚数がコストの種類数だけ倍増してしまう).
+     * そのため, 基点となる(x,y)の情報が必要になる.
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     * @param {number} x - カードの配置位置のx座標
+     * @param {number} y - カードの配置位置のy座標
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     * @param {number} n - カードのコスト
+     */
     paintCost(ctx, x, y, marks, n){
         ctx.save();
         ctx.strokeStyle = Polysuit.ccolors[5];
@@ -815,7 +1005,17 @@ class SestetsuitGenerator extends Polysuit{
         ctx.restore();
     }
 
-    // 必ず [0, 1, 2, 3, 4, 5] で固定する
+    /**
+     * 魔法少女5人組のカード画像が既に作成済みならそれを返す.
+     * そうでない場合, カード画像を生成してthis.cacheに登録する.
+     * その後, 生成したカード画像を返す.
+     *
+     * Sestetの場合, marksとして何が渡された場合でも
+     * 必ずmarksを [0, 1, 2, 3, 4, 5] に置き換えて作業を行う (並び順が違うだけの
+     * 画像を無駄に増やさないため).
+     * @param {number[]} marks - 含まれる基本属性をSuitsにおけるインデックスで指定したリスト
+     * @returns {HTMLCanvasElement} その複合属性のカード画像
+     */
     getCache(marks){
         marks = [0, 1, 2, 3, 4, 5];
         const newName = getPolysuitName(marks);
@@ -836,22 +1036,67 @@ class SestetsuitGenerator extends Polysuit{
 // (c) カードを表すクラスの実装
 
 /**
- * 基本属性を持つカードのクラス.
- * インスタンスの生成を行う前にCardクラスの初期化を実行しないといけない。.
- * 具体的には Card.init(GE, width, height) を最初に実行する.
+ * 基本属性を持つカードのクラス. 最初に Card.init(GE, width, height) を
+ * 実行してからインスタンスの生成を行う.
+ *
+ * 各インスタンスは次のプロパティを持つ.
+ * - mark
+ * - value
+ * - MP
+ * - skill (任意)
+ * - CardAtlassId (任意)
+ *
+ * (1) mark は, このカードの属性をSuitsにおけるインデックスで表した数値である.
+ * 便宜上, このクラスのコメントでは「マーク数値」と略す.
+ * mark の取りうる値は 0 ～ (PrimitiveSuits.length-1) の範囲の整数である.
+ *
+ * (2) value はカードの「コスト」を表す. 範囲チェック・整数チェックは行わないが,
+ * 0 ～ 10 の範囲の整数であることを想定して扱われる.
+ * (整数でないときの挙動は保証しない！)
+ *
+ * ただし, value == 0 のカードは「カードが存在しない」状態を表すインスタンスとして
+ * 扱われる. たとえば, paintメソッドで何も描画されない.
+ *
+ * (3) MP はこのカードの基本攻撃力を表す. 実際はこの値を直接使うことは滅多に無く,
+ * MPBoostBySuitの補正を施した値を getMP() メソッドで計算して使う.
+ *
+ * 以上の3要素はどんなインスタンスも必ず定義されている.
+ * これに対し, 他の2つは定義されている場合も未定義の場合も両方ある.
+ *
+ * (4) skill はこのカードの持つスキルを表す.
+ * 原則として PlayerSkill に属するいずれかの生成関数で作成されたオブジェクトを持つ.
+ *
+ * (5) CardAtlassID はcardlist.jsにおけるこのカードのIDである.
+ * CardAtlasに登録されているカードには自動的に付与される.
  * @class
+ * @prop {number} mark - このカードのマーク数値
+ * @prop {number} value - このカードのコスト
  */
 class Card{
-    // スキル持ちカードのマーカーを表示するか？
-    // このフラグはPrismaticCardからも参照される
+    /**
+     * スキル持ちカードのマーカーを表示する場合true, 表示しないときfalse.
+     * このフラグはPrismaticCardからも参照される
+     * @type {boolean}
+     */
     static MarkerFlag = true;
 
+    /**
+     * Cardクラスを初期化する.
+     * 具体的には, "CARDIMAGES"で登録されている画像をGE.imagesから読み込み,
+     * stdgam.ImageCutterで分割する. 以降, これをカードの描画に用いる.
+     * @param {stdgam.GameEngine} GE - 画像のロードに用いるGameEngine
+     * @param {number} width - カードの横幅
+     * @param {number} height - カードの縦幅
+     */
     static init(GE, width, height){
         this.IC = new ImageCutter(GE.images.get("CARDIMAGES"), width, height);
         this.width = width;
         this.height = height;
     }
 
+    /**
+     * カードの整列に用いる比較関数.
+     */
     static compare = function(c1, c2){
         if(c1.mark != c2.mark){
             return c1.mark - c2.mark;
@@ -859,6 +1104,12 @@ class Card{
         return c1.value - c2.value;
     }
 
+    /**
+     * 指定されたマーク数値, コスト, MPを持つカードを生成する.
+     * @param {number} [mark] - このカードのマーク数値
+     * @param {number} [n=0] - このカードのコスト
+     * @param {?number} [mp=null] - このカードのMP. 省略時は n*20 で代用する
+     */
     constructor(mark = 0, n = 0, mp = null){
         this.mark = mark;
         this.mask = ChainMask[mark];
@@ -866,10 +1117,22 @@ class Card{
         this.MP = mp || n * 20;
     }
 
+    /**
+     * MPBoostBySuitの補正を適用した後のMPを計算する.
+     * @returns {number} 計算結果
+     */
     getMP(){
         return Math.floor(this.MP * MPBoostBySuit.get(this.mark));
     }
 
+    /**
+     * 指定された座標を左上端としてこのカードを描画する.
+     * ただし, コストが 0 のカードは何も描画しない.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画処理に用いるコンテクスト
+     * @param {number} x - 描画位置のx座標
+     * @param {number} y - 描画位置のy座標
+     */
     paint(GE, ctx, x, y){
         Card.IC.paint(ctx, x, y, this.value, this.mark);
         if(this.skill && Card.MarkerFlag){

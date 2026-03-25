@@ -85,7 +85,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>DuosuitGenerator<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>DuosuitGenerator<span class="signature">(width, height, images, caches)</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>2つのマークを持つカードの画像を生成・管理するためのクラス.</p></div>
         
@@ -111,7 +111,7 @@
         
         <span class="code-name">
             
-                new DuosuitGenerator<span class="signature">()</span><span class="type-signature"></span>
+                new DuosuitGenerator<span class="signature">(width, height, images, caches)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -127,6 +127,132 @@
 
 
 
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>width</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>カードの横幅</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>height</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>カードの縦幅</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>images</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.ImagePool.html">stdgam.ImagePool</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>必要な画像を読み込むために使うImagePool</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>caches</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.CachePool.html">stdgam.CachePool</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>生成した画像を登録するために使うCachePool</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -167,7 +293,7 @@
         <p class="tag-source">
             <a href="card.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line585">line 585</a>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line639">line 639</a>
             </span>
         </p>
     
@@ -215,6 +341,611 @@
 
     
 
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="paintBackground">
+        <a class="href-link" href="#paintBackground">#</a>
+        
+        <span class="code-name">
+            
+                paintBackground<span class="signature">(ctx, marks)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>カードの背景を描画する.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>ctx</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">CanvasRenderingContext2D</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>描画に使うコンテクスト</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>marks</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;number></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>含まれる基本属性をSuitsにおけるインデックスで指定したリスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line645">line 645</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="paintCost">
+        <a class="href-link" href="#paintCost">#</a>
+        
+        <span class="code-name">
+            
+                paintCost<span class="signature">(ctx, x, y, marks, n)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>指定された座標にカードの左上端があるものとしてカードのコストを描画する.
+他の描画メソッドとは違い, コストはキャッシュ画像には書き込まず,
+PrismaticCardのpaintメソッドから毎フレーム呼び出される (さもなければ
+キャッシュする画像の枚数がコストの種類数だけ倍増してしまう).
+そのため, 基点となる(x,y)の情報が必要になる.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>ctx</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">CanvasRenderingContext2D</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>描画に使うコンテクスト</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>x</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>カードの配置位置のx座標</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>y</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>カードの配置位置のy座標</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>marks</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;number></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>含まれる基本属性をSuitsにおけるインデックスで指定したリスト</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>n</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>カードのコスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line684">line 684</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="paintMark">
+        <a class="href-link" href="#paintMark">#</a>
+        
+        <span class="code-name">
+            
+                paintMark<span class="signature">(ctx, pics)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>カードのマークを描画する.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>ctx</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">CanvasRenderingContext2D</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>描画に使うコンテクスト</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>pics</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;HTMLImageElement></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>含まれる基本属性のマークの画像</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="card.js.html" class="button">View Source</a>
+            <span>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line660">line 660</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
     
 
     
