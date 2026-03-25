@@ -210,7 +210,7 @@ Public.Scene = class {
      * 第2引数がtrueの場合, 順序を維持したままリストの先頭に追加する.
      * 第2引数がfalseの場合, 順序を維持したままリストの末尾に追加する.
      * 省略時は末尾に追加する.
-     * @param {(Sprite|Task)[]} list - 追加するオブジェクトの配列
+     * @param {Array<Sprite|Task>} list - 追加するオブジェクトの配列
      * @param {boolean} [first=false] - trueなら先頭に追加, falseなら末尾に追加
      */
     addSequence(list, first = false) {
