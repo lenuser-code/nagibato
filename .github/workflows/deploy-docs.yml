@@ -13,18 +13,22 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/checkout@v4
+        # ここが checkout になっていました。setup-node に修正します。
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # Node.js 20の警告が出ているので、2026年現在のLTSである 22 に上げます
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
 
       - name: Generate Documentation
+        # jsdoc.json がリポジトリにあることが前提です
         run: npx jsdoc -c jsdoc.json
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        # バージョンを v3 から最新の v4 に更新しておきます
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs  # jsdoc.jsonで指定した出力先
