@@ -1,44 +1,84 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
-    <meta charset="utf-8">
-    <title>config.js - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> config.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
 </head>
-<body>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
 
-<label for="nav-trigger" class="overlay"></label>
 
-<nav >
-    
-    
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a><ul class='methods'><li data-type='method'><a href="BasicStatus.html#HP">HP</a></li><li data-type='method'><a href="BasicStatus.html#MP">MP</a></li><li data-type='method'><a href="BasicStatus.html#addHP">addHP</a></li><li data-type='method'><a href="BasicStatus.html#addMP">addMP</a></li><li data-type='method'><a href="BasicStatus.html#init">init</a></li><li data-type='method'><a href="BasicStatus.html#name">name</a></li><li data-type='method'><a href="BasicStatus.html#percentHP">percentHP</a></li><li data-type='method'><a href="BasicStatus.html#percentMP">percentMP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateHP">retentionRateHP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateMP">retentionRateMP</a></li></ul></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a><ul class='methods'><li data-type='method'><a href="Enemy.html#antiskillContains">antiskillContains</a></li><li data-type='method'><a href="Enemy.html#init">init</a></li></ul></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method'><a href="Player.html#SG">SG</a></li><li data-type='method'><a href="Player.html#addSG">addSG</a></li><li data-type='method'><a href="Player.html#addShield">addShield</a></li><li data-type='method'><a href="Player.html#addStun">addStun</a></li><li data-type='method'><a href="Player.html#id">id</a></li><li data-type='method'><a href="Player.html#init">init</a></li><li data-type='method'><a href="Player.html#isPrismatic">isPrismatic</a></li><li data-type='method'><a href="Player.html#mainSkillCount">mainSkillCount</a></li><li data-type='method'><a href="Player.html#mark">mark</a></li><li data-type='method'><a href="Player.html#parseMainSkill">parseMainSkill</a></li><li data-type='method'><a href="Player.html#payCost">payCost</a></li><li data-type='method'><a href="Player.html#resetSG">resetSG</a></li><li data-type='method'><a href="Player.html#shield">shield</a></li><li data-type='method'><a href="Player.html#shiftMainSkill">shiftMainSkill</a></li><li data-type='method'><a href="Player.html#stun">stun</a></li><li data-type='method'><a href="Player.html#suitString">suitString</a></li></ul></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="QBLecture.html">QBLecture</a><ul class='methods'><li data-type='method'><a href="QBLecture.html#activate">activate</a></li><li data-type='method'><a href="QBLecture.html#chart">chart</a></li><li data-type='method'><a href="QBLecture.html#draw">draw</a></li><li data-type='method'><a href="QBLecture.html#execute">execute</a></li><li data-type='method'><a href="QBLecture.html#talk">talk</a></li></ul></li><li><a href="QBTalk.html">QBTalk</a><ul class='methods'><li data-type='method'><a href="QBTalk.html#activate">activate</a></li><li data-type='method'><a href="QBTalk.html#chart">chart</a></li><li data-type='method'><a href="QBTalk.html#draw">draw</a></li><li data-type='method'><a href="QBTalk.html#execute">execute</a></li></ul></li><li><a href="QBTelop.html">QBTelop</a><ul class='methods'><li data-type='method'><a href="QBTelop.html#activate">activate</a></li><li data-type='method'><a href="QBTelop.html#chart">chart</a></li><li data-type='method'><a href="QBTelop.html#draw">draw</a></li><li data-type='method'><a href="QBTelop.html#execute">execute</a></li></ul></li><li><a href="QBYesNo.html">QBYesNo</a><ul class='methods'><li data-type='method'><a href="QBYesNo.html#activate">activate</a></li><li data-type='method'><a href="QBYesNo.html#chart">chart</a></li><li data-type='method'><a href="QBYesNo.html#draw">draw</a></li><li data-type='method'><a href="QBYesNo.html#execute">execute</a></li><li data-type='method'><a href="QBYesNo.html#waitForAnswer">waitForAnswer</a></li></ul></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li><li><a href="stdgam.CachePool.html">CachePool</a><ul class='methods'><li data-type='method'><a href="stdgam.CachePool.html#createCache">createCache</a></li><li data-type='method'><a href="stdgam.CachePool.html#get">get</a></li></ul></li><li><a href="stdgam.GameEngine.html">GameEngine</a><ul class='methods'><li data-type='method'><a href="stdgam.GameEngine.html#addScene">addScene</a></li><li data-type='method'><a href="stdgam.GameEngine.html#changeScene">changeScene</a></li><li data-type='method'><a href="stdgam.GameEngine.html#ready">ready</a></li><li data-type='method'><a href="stdgam.GameEngine.html#run">run</a></li><li data-type='method'><a href="stdgam.GameEngine.html#update">update</a></li></ul></li><li><a href="stdgam.ImageCutter.html">ImageCutter</a><ul class='methods'><li data-type='method'><a href="stdgam.ImageCutter.html#paint">paint</a></li></ul></li><li><a href="stdgam.ImagePool.html">ImagePool</a><ul class='methods'><li data-type='method'><a href="stdgam.ImagePool.html#get">get</a></li><li data-type='method'><a href="stdgam.ImagePool.html#load">load</a></li><li data-type='method'><a href="stdgam.ImagePool.html#ready">ready</a></li></ul></li><li><a href="stdgam.SEPool.html">SEPool</a><ul class='methods'><li data-type='method'><a href="stdgam.SEPool.html#play">play</a></li><li data-type='method'><a href="stdgam.SEPool.html#register">register</a></li></ul></li><li><a href="stdgam.Scene.html">Scene</a><ul class='methods'><li data-type='method'><a href="stdgam.Scene.html#add">add</a></li><li data-type='method'><a href="stdgam.Scene.html#addSequence">addSequence</a></li><li data-type='method'><a href="stdgam.Scene.html#addSprite">addSprite</a></li><li data-type='method'><a href="stdgam.Scene.html#addSpriteAfter">addSpriteAfter</a></li><li data-type='method'><a href="stdgam.Scene.html#addSpriteBefore">addSpriteBefore</a></li><li data-type='method'><a href="stdgam.Scene.html#addTask">addTask</a></li><li data-type='method'><a href="stdgam.Scene.html#addTaskAfter">addTaskAfter</a></li><li data-type='method'><a href="stdgam.Scene.html#addTaskBefore">addTaskBefore</a></li><li data-type='method'><a href="stdgam.Scene.html#init">init</a></li><li data-type='method'><a href="stdgam.Scene.html#superOnLoad">superOnLoad</a></li><li data-type='method'><a href="stdgam.Scene.html#superdraw">superdraw</a></li><li data-type='method'><a href="stdgam.Scene.html#superexecute">superexecute</a></li><li data-type='method'><a href="stdgam.Scene.html#useCoroutine">useCoroutine</a></li></ul></li><li><a href="stdgam.SoundPool.html">SoundPool</a><ul class='methods'><li data-type='method'><a href="stdgam.SoundPool.html#load">load</a></li><li data-type='method'><a href="stdgam.SoundPool.html#play">play</a></li><li data-type='method'><a href="stdgam.SoundPool.html#ready">ready</a></li><li data-type='method'><a href="stdgam.SoundPool.html#stop">stop</a></li></ul></li><li><a href="stdtask.CyclicSelect.html">CyclicSelect</a><ul class='methods'><li data-type='method'><a href="stdtask.CyclicSelect.html#addMod">addMod</a></li><li data-type='method'><a href="stdtask.CyclicSelect.html#move">move</a></li></ul></li><li><a href="stdtask.Meter.html">Meter</a><ul class='methods'><li data-type='method'><a href="stdtask.Meter.html#changeTo">changeTo</a></li><li data-type='method'><a href="stdtask.Meter.html#execute">execute</a></li><li data-type='method'><a href="stdtask.Meter.html#init">init</a></li></ul></li><li><a href="stdtask.Scroll.html">Scroll</a><ul class='methods'><li data-type='method'><a href="stdtask.Scroll.html#action">action</a></li><li data-type='method'><a href="stdtask.Scroll.html#bind">bind</a></li><li data-type='method'><a href="stdtask.Scroll.html#cancel">cancel</a></li><li data-type='method'><a href="stdtask.Scroll.html#execute">execute</a></li><li data-type='method'><a href="stdtask.Scroll.html#initScroll">initScroll</a></li><li data-type='method'><a href="stdtask.Scroll.html#viewCount">viewCount</a></li></ul></li><li><a href="stdtask.Select.html">Select</a><ul class='methods'><li data-type='method'><a href="stdtask.Select.html#action">action</a></li><li data-type='method'><a href="stdtask.Select.html#bind">bind</a></li><li data-type='method'><a href="stdtask.Select.html#cancel">cancel</a></li><li data-type='method'><a href="stdtask.Select.html#execute">execute</a></li><li data-type='method'><a href="stdtask.Select.html#move">move</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdgam.html">stdgam</a></li><li><a href="stdgam.Templates.html">Templates</a><ul class='methods'><li data-type='method'><a href="stdgam.Templates.html#._initTraits">_initTraits</a></li><li data-type='method'><a href="stdgam.Templates.html#.call">call</a></li><li data-type='method'><a href="stdgam.Templates.html#.custom">custom</a></li><li data-type='method'><a href="stdgam.Templates.html#.fader">fader</a></li><li data-type='method'><a href="stdgam.Templates.html#.finite">finite</a></li><li data-type='method'><a href="stdgam.Templates.html#.ftext">ftext</a></li><li data-type='method'><a href="stdgam.Templates.html#.image">image</a></li><li data-type='method'><a href="stdgam.Templates.html#.pause">pause</a></li><li data-type='method'><a href="stdgam.Templates.html#.scheduler">scheduler</a></li><li data-type='method'><a href="stdgam.Templates.html#.slider">slider</a></li><li data-type='method'><a href="stdgam.Templates.html#.text">text</a></li></ul></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li></ul>
-    
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">config.js</h1>
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
     
 
-    
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdgam.html">stdgam</a></li><li><a href="stdgam.Templates.html">Templates</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li><li><a href="stdgam.CachePool.html">CachePool</a></li><li><a href="stdgam.GameEngine.html">GameEngine</a></li><li><a href="stdgam.ImageCutter.html">ImageCutter</a></li><li><a href="stdgam.ImagePool.html">ImagePool</a></li><li><a href="stdgam.SEPool.html">SEPool</a></li><li><a href="stdgam.Scene.html">Scene</a></li><li><a href="stdgam.SoundPool.html">SoundPool</a></li><li><a href="stdtask.CyclicSelect.html">CyclicSelect</a></li><li><a href="stdtask.Meter.html">Meter</a></li><li><a href="stdtask.Scroll.html">Scroll</a></li><li><a href="stdtask.Select.html">Select</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>config.js</h1>
+                </header>
+                
 
 
 
@@ -635,20 +675,25 @@ cancel(GE, n){
 
 
 
-    
-    
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 04:43:49 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
 
 
 </body>

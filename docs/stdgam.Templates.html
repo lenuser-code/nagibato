@@ -1,44 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
-    <meta charset="utf-8">
-    <title>Templates - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Templates</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
 </head>
-<body>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
 
-<label for="nav-trigger" class="overlay"></label>
 
-<nav >
-    
-    
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a><ul class='methods'><li data-type='method'><a href="BasicStatus.html#HP">HP</a></li><li data-type='method'><a href="BasicStatus.html#MP">MP</a></li><li data-type='method'><a href="BasicStatus.html#addHP">addHP</a></li><li data-type='method'><a href="BasicStatus.html#addMP">addMP</a></li><li data-type='method'><a href="BasicStatus.html#init">init</a></li><li data-type='method'><a href="BasicStatus.html#name">name</a></li><li data-type='method'><a href="BasicStatus.html#percentHP">percentHP</a></li><li data-type='method'><a href="BasicStatus.html#percentMP">percentMP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateHP">retentionRateHP</a></li><li data-type='method'><a href="BasicStatus.html#retentionRateMP">retentionRateMP</a></li></ul></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a><ul class='methods'><li data-type='method'><a href="Enemy.html#antiskillContains">antiskillContains</a></li><li data-type='method'><a href="Enemy.html#init">init</a></li></ul></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a><ul class='methods'><li data-type='method'><a href="Player.html#SG">SG</a></li><li data-type='method'><a href="Player.html#addSG">addSG</a></li><li data-type='method'><a href="Player.html#addShield">addShield</a></li><li data-type='method'><a href="Player.html#addStun">addStun</a></li><li data-type='method'><a href="Player.html#id">id</a></li><li data-type='method'><a href="Player.html#init">init</a></li><li data-type='method'><a href="Player.html#isPrismatic">isPrismatic</a></li><li data-type='method'><a href="Player.html#mainSkillCount">mainSkillCount</a></li><li data-type='method'><a href="Player.html#mark">mark</a></li><li data-type='method'><a href="Player.html#parseMainSkill">parseMainSkill</a></li><li data-type='method'><a href="Player.html#payCost">payCost</a></li><li data-type='method'><a href="Player.html#resetSG">resetSG</a></li><li data-type='method'><a href="Player.html#shield">shield</a></li><li data-type='method'><a href="Player.html#shiftMainSkill">shiftMainSkill</a></li><li data-type='method'><a href="Player.html#stun">stun</a></li><li data-type='method'><a href="Player.html#suitString">suitString</a></li></ul></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="QBLecture.html">QBLecture</a><ul class='methods'><li data-type='method'><a href="QBLecture.html#activate">activate</a></li><li data-type='method'><a href="QBLecture.html#chart">chart</a></li><li data-type='method'><a href="QBLecture.html#draw">draw</a></li><li data-type='method'><a href="QBLecture.html#execute">execute</a></li><li data-type='method'><a href="QBLecture.html#talk">talk</a></li></ul></li><li><a href="QBTalk.html">QBTalk</a><ul class='methods'><li data-type='method'><a href="QBTalk.html#activate">activate</a></li><li data-type='method'><a href="QBTalk.html#chart">chart</a></li><li data-type='method'><a href="QBTalk.html#draw">draw</a></li><li data-type='method'><a href="QBTalk.html#execute">execute</a></li></ul></li><li><a href="QBTelop.html">QBTelop</a><ul class='methods'><li data-type='method'><a href="QBTelop.html#activate">activate</a></li><li data-type='method'><a href="QBTelop.html#chart">chart</a></li><li data-type='method'><a href="QBTelop.html#draw">draw</a></li><li data-type='method'><a href="QBTelop.html#execute">execute</a></li></ul></li><li><a href="QBYesNo.html">QBYesNo</a><ul class='methods'><li data-type='method'><a href="QBYesNo.html#activate">activate</a></li><li data-type='method'><a href="QBYesNo.html#chart">chart</a></li><li data-type='method'><a href="QBYesNo.html#draw">draw</a></li><li data-type='method'><a href="QBYesNo.html#execute">execute</a></li><li data-type='method'><a href="QBYesNo.html#waitForAnswer">waitForAnswer</a></li></ul></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li><li><a href="stdgam.CachePool.html">CachePool</a><ul class='methods'><li data-type='method'><a href="stdgam.CachePool.html#createCache">createCache</a></li><li data-type='method'><a href="stdgam.CachePool.html#get">get</a></li></ul></li><li><a href="stdgam.GameEngine.html">GameEngine</a><ul class='methods'><li data-type='method'><a href="stdgam.GameEngine.html#addScene">addScene</a></li><li data-type='method'><a href="stdgam.GameEngine.html#changeScene">changeScene</a></li><li data-type='method'><a href="stdgam.GameEngine.html#ready">ready</a></li><li data-type='method'><a href="stdgam.GameEngine.html#run">run</a></li><li data-type='method'><a href="stdgam.GameEngine.html#update">update</a></li></ul></li><li><a href="stdgam.ImageCutter.html">ImageCutter</a><ul class='methods'><li data-type='method'><a href="stdgam.ImageCutter.html#paint">paint</a></li></ul></li><li><a href="stdgam.ImagePool.html">ImagePool</a><ul class='methods'><li data-type='method'><a href="stdgam.ImagePool.html#get">get</a></li><li data-type='method'><a href="stdgam.ImagePool.html#load">load</a></li><li data-type='method'><a href="stdgam.ImagePool.html#ready">ready</a></li></ul></li><li><a href="stdgam.SEPool.html">SEPool</a><ul class='methods'><li data-type='method'><a href="stdgam.SEPool.html#play">play</a></li><li data-type='method'><a href="stdgam.SEPool.html#register">register</a></li></ul></li><li><a href="stdgam.Scene.html">Scene</a><ul class='methods'><li data-type='method'><a href="stdgam.Scene.html#add">add</a></li><li data-type='method'><a href="stdgam.Scene.html#addSequence">addSequence</a></li><li data-type='method'><a href="stdgam.Scene.html#addSprite">addSprite</a></li><li data-type='method'><a href="stdgam.Scene.html#addSpriteAfter">addSpriteAfter</a></li><li data-type='method'><a href="stdgam.Scene.html#addSpriteBefore">addSpriteBefore</a></li><li data-type='method'><a href="stdgam.Scene.html#addTask">addTask</a></li><li data-type='method'><a href="stdgam.Scene.html#addTaskAfter">addTaskAfter</a></li><li data-type='method'><a href="stdgam.Scene.html#addTaskBefore">addTaskBefore</a></li><li data-type='method'><a href="stdgam.Scene.html#init">init</a></li><li data-type='method'><a href="stdgam.Scene.html#superOnLoad">superOnLoad</a></li><li data-type='method'><a href="stdgam.Scene.html#superdraw">superdraw</a></li><li data-type='method'><a href="stdgam.Scene.html#superexecute">superexecute</a></li><li data-type='method'><a href="stdgam.Scene.html#useCoroutine">useCoroutine</a></li></ul></li><li><a href="stdgam.SoundPool.html">SoundPool</a><ul class='methods'><li data-type='method'><a href="stdgam.SoundPool.html#load">load</a></li><li data-type='method'><a href="stdgam.SoundPool.html#play">play</a></li><li data-type='method'><a href="stdgam.SoundPool.html#ready">ready</a></li><li data-type='method'><a href="stdgam.SoundPool.html#stop">stop</a></li></ul></li><li><a href="stdtask.CyclicSelect.html">CyclicSelect</a><ul class='methods'><li data-type='method'><a href="stdtask.CyclicSelect.html#addMod">addMod</a></li><li data-type='method'><a href="stdtask.CyclicSelect.html#move">move</a></li></ul></li><li><a href="stdtask.Meter.html">Meter</a><ul class='methods'><li data-type='method'><a href="stdtask.Meter.html#changeTo">changeTo</a></li><li data-type='method'><a href="stdtask.Meter.html#execute">execute</a></li><li data-type='method'><a href="stdtask.Meter.html#init">init</a></li></ul></li><li><a href="stdtask.Scroll.html">Scroll</a><ul class='methods'><li data-type='method'><a href="stdtask.Scroll.html#action">action</a></li><li data-type='method'><a href="stdtask.Scroll.html#bind">bind</a></li><li data-type='method'><a href="stdtask.Scroll.html#cancel">cancel</a></li><li data-type='method'><a href="stdtask.Scroll.html#execute">execute</a></li><li data-type='method'><a href="stdtask.Scroll.html#initScroll">initScroll</a></li><li data-type='method'><a href="stdtask.Scroll.html#viewCount">viewCount</a></li></ul></li><li><a href="stdtask.Select.html">Select</a><ul class='methods'><li data-type='method'><a href="stdtask.Select.html#action">action</a></li><li data-type='method'><a href="stdtask.Select.html#bind">bind</a></li><li data-type='method'><a href="stdtask.Select.html#cancel">cancel</a></li><li data-type='method'><a href="stdtask.Select.html#execute">execute</a></li><li data-type='method'><a href="stdtask.Select.html#move">move</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdgam.html">stdgam</a></li><li><a href="stdgam.Templates.html">Templates</a><ul class='methods'><li data-type='method'><a href="stdgam.Templates.html#._initTraits">_initTraits</a></li><li data-type='method'><a href="stdgam.Templates.html#.call">call</a></li><li data-type='method'><a href="stdgam.Templates.html#.custom">custom</a></li><li data-type='method'><a href="stdgam.Templates.html#.fader">fader</a></li><li data-type='method'><a href="stdgam.Templates.html#.finite">finite</a></li><li data-type='method'><a href="stdgam.Templates.html#.ftext">ftext</a></li><li data-type='method'><a href="stdgam.Templates.html#.image">image</a></li><li data-type='method'><a href="stdgam.Templates.html#.pause">pause</a></li><li data-type='method'><a href="stdgam.Templates.html#.scheduler">scheduler</a></li><li data-type='method'><a href="stdgam.Templates.html#.slider">slider</a></li><li data-type='method'><a href="stdgam.Templates.html#.text">text</a></li></ul></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li></ul>
-    
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">Templates</h1>
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
     
 
-    
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="battle.html">battle</a></li><li><a href="edit.html">edit</a></li><li><a href="stdgam.html">stdgam</a></li><li><a href="stdgam.Templates.html">Templates</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li><li><a href="stdgam.CachePool.html">CachePool</a></li><li><a href="stdgam.GameEngine.html">GameEngine</a></li><li><a href="stdgam.ImageCutter.html">ImageCutter</a></li><li><a href="stdgam.ImagePool.html">ImagePool</a></li><li><a href="stdgam.SEPool.html">SEPool</a></li><li><a href="stdgam.Scene.html">Scene</a></li><li><a href="stdgam.SoundPool.html">SoundPool</a></li><li><a href="stdtask.CyclicSelect.html">CyclicSelect</a></li><li><a href="stdtask.Meter.html">Meter</a></li><li><a href="stdtask.Scroll.html">Scroll</a></li><li><a href="stdtask.Select.html">Select</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardAtlas">CardAtlas</a></li><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#LocalStorageInfo">LocalStorageInfo</a></li><li><a href="global.html#MPBoostBySuit">MPBoostBySuit</a></li><li><a href="global.html#PlayerSkill">PlayerSkill</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Namespace</p>
+                    <h1>Templates</h1>
+                </header>
+                
 
 
 
@@ -48,36 +86,16 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>
-        
-        
-            Namespace
-        
-        </h2>
+            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>Templates</h2>
         
     
 </header>
 
 <article>
+    <div class="container-overview">
     
-        <div class="container-overview">
         
-            
-
-
-    
-
-    <h4 class="name" id="Templates">Templates</h4>
-
-    
-
-
-
-
-<dl class="details">
-    
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>頻繁に必要になる定型のオブジェクトを作成するためのテンプレート群.
+            <div class="description"><p>頻繁に必要になる定型のオブジェクトを作成するためのテンプレート群.
 基礎的なオブジェクトを生成する「ジェネレータ」と,
 生成済みのオブジェクトに機能を付与する「デコレータ」を提供する.</p>
 <p>使用例:</p>
@@ -111,17 +129,13 @@
 <li>scheduler: 指定した時間が経過した後に実行する処理を予約できる</li>
 <li>slider: slideToにより自動的に平行移動させることができる</li>
 <li>fader: fadeToによりアルファを自動的に変化させることができる</li>
-</ul></li></ul></dd>
-    
+</ul></div>
+        
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line959">line 959</a>
-    </li></ul></dd>
-    
+        
 
-    
+
+<dl class="details">
 
     
 
@@ -146,43 +160,29 @@
     
 
     
+    
 
     
 
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line959">line 959</a>
+            </span>
+        </p>
     
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         
-        </div>
+    
+    </div>
+    
+    
+
     
 
     
@@ -190,203 +190,109 @@
     
 
     
-    
-    
-
-     
 
     
 
     
 
     
-        <h3 class="subsection-title">Methods</h3>
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
 
+
+    
+    <h4 class="name" id="._initTraits">
+        <a class="href-link" href="#._initTraits">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                _initTraits<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span>
+            
+        </span>
+    </h4>
     
 
-    <h4 class="name" id="._initTraits"><span class="type-signature type-signature-static">(static) </span>_initTraits<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span></h4>
-
     
-
-
-
-
-<dl class="details">
     
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>デコレータの機能を実現するために使うヘルパー関数.
+    <div class="description">
+        <p>デコレータの機能を実現するために使うヘルパー関数.
 objに _traits 要素が定義されていなければ _traits に空リストをセットする.
 さらに, もし execute(GE) メソッドがなければ, obj.execute に
-true を返すだけの空の関数をセットする.</p></li></ul></dd>
+true を返すだけの空の関数をセットする.</p>
+    </div>
     
 
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1113">line 1113</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>obj</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">T</span>
-
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>対象のオブジェクト</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>obj</code></td>
+  
 
-
-
-
-
-
-
-
-
-
-
-
+  <td class="type">
+  
+      
+<code class="param-type">T</code>
 
 
+  
+  </td>
 
-<h5 class="h5-returns">Returns:</h5>
+  
+
+  
+
+  <td class="description last"><p>対象のオブジェクト</p></td>
+</tr>
+
 
         
-<div class="param-desc">
-    <p>objを返す</p>
+        </tbody>
+    </table>
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">T</span>
-
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".call"><span class="type-signature type-signature-static">(static) </span>call<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="global.html#Task">Task</a>}</span></h4>
-
-    
 
 
 
 
 <dl class="details">
-    
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>指定された関数を1回実行した後, 自動的に消滅するオブジェクト.</p></li></ul></dd>
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1093">line 1093</a>
-    </li></ul></dd>
-    
 
     
 
@@ -411,11 +317,19 @@ true を返すだけの空の関数をセットする.</p></li></ul></dd>
     
 
     
-
     
 
     
 
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1113">line 1113</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -431,500 +345,550 @@ true を返すだけの空の関数をセットする.</p></li></ul></dd>
 
 
 
-    <h5 class="h5-parameters">Parameters:</h5>
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    <div class='param-desc column is-7'><p>objを返す</p></div>
     
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>実行する関数</p></td>
-        </tr>
-
     
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5 class="h5-returns">Returns:</h5>
-
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    <p>生成されたオブジェクト</p>
+<code class="param-type">T</code>
+
+
+    </div>
+    
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#Task">Task</a></span>
+                
+        </div>
+    </div>
 
 
 
-    </dd>
-</dl>
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
+    <h4 class="name" id=".call">
+        <a class="href-link" href="#.call">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                call<span class="signature">(callback)</span><span class="type-signature"> &rarr; {<a href="global.html#Task">Task</a>}</span>
+            
+        </span>
+    </h4>
     
 
-    <h4 class="name" id=".custom"><span class="type-signature type-signature-static">(static) </span>custom<span class="signature">(contents, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Template_image}</span></h4>
-
     
+    
+    <div class="description">
+        <p>指定された関数を1回実行した後, 自動的に消滅するオブジェクト.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>callback</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">function</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>実行する関数</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
 
 
 
 
 <dl class="details">
+
     
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>paint(GE, ctx, x, y)を持つオブジェクトを受け取り,
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1093">line 1093</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたオブジェクト</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#Task">Task</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".custom">
+        <a class="href-link" href="#.custom">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                custom<span class="signature">(contents, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Template_image}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>paint(GE, ctx, x, y)を持つオブジェクトを受け取り,
 それを描画するオブジェクトを生成する.
 ここで, GEはstdgam.GameEngine, ctxは描画に使うコンテクストを表す.</p>
 <p>文字列でも画像でもないオブジェクトをTemplatesの枠組みで使いたいとき,
 customでラップして用いる.</p>
-<p>オプションリストを使って x, y, alppha を指定することもできる.</p></li></ul></dd>
+<p>オプションリストを使って x, y, alppha を指定することもできる.</p>
+    </div>
     
 
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1057">line 1057</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>contents</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
+            <th>Type</th>
 
             
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
+            <th>Attributes</th>
             
 
             
-                <td class="default">
-                
-                </td>
+            <th>Default</th>
             
 
-            <td class="description last"><p>実際に描画を行うオブジェクト</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object.&lt;string, *></span>
-
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>contents</code></td>
+  
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>{}</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>オプションリスト</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
 
 
+  
+  </td>
 
+  
+      <td class="attributes">
+      
 
+      
 
+      
+      </td>
+  
 
+  
+      <td class="default">
+      
+      </td>
+  
 
+  <td class="description last"><p>実際に描画を行うオブジェクト</p></td>
+</tr>
 
-
-
-
-
-
-
-
-
-<h5 class="h5-returns">Returns:</h5>
 
         
-<div class="param-desc">
-    <p>生成されたオブジェクト</p>
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opt</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object.&lt;string, *></code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          {}
+      
+      </td>
+  
+
+  <td class="description last"><p>オプションリスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Template_image</span>
-
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".fader"><span class="type-signature type-signature-static">(static) </span>fader<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span></h4>
-
-    
 
 
 
 
 <dl class="details">
+
     
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>objに fadeTo(alpha, frames) を付与する.</p>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1057">line 1057</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたオブジェクト</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Template_image</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".fader">
+        <a class="href-link" href="#.fader">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                fader<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>objに fadeTo(alpha, frames) を付与する.</p>
 <ul>
 <li>fadeTo: 現在位置からalphaまでthis.alphaの値を変化させる</li>
-</ul></li></ul></dd>
+</ul>
+    </div>
     
 
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1223">line 1223</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>obj</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">T</span>
-
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>対象のオブジェクト</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>obj</code></td>
+  
 
-
-
-
-
-
-
-
-
-
-
-
+  <td class="type">
+  
+      
+<code class="param-type">T</code>
 
 
+  
+  </td>
 
-<h5 class="h5-returns">Returns:</h5>
+  
+
+  
+
+  <td class="description last"><p>対象のオブジェクト</p></td>
+</tr>
+
 
         
-<div class="param-desc">
-    <p>objを返す</p>
+        </tbody>
+    </table>
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">T</span>
-
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".finite"><span class="type-signature type-signature-static">(static) </span>finite<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span></h4>
-
-    
 
 
 
 
 <dl class="details">
-    
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>指定されたフレーム数が経過すると自動で消滅するようにする.</p></li></ul></dd>
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1126">line 1126</a>
-    </li></ul></dd>
-    
 
     
 
@@ -949,11 +913,19 @@ customでラップして用いる.</p>
     
 
     
-
     
 
     
 
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1223">line 1223</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -969,417 +941,449 @@ customでラップして用いる.</p>
 
 
 
-    <h5 class="h5-parameters">Parameters:</h5>
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    <div class='param-desc column is-7'><p>objを返す</p></div>
     
-
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">T</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>対象のオブジェクト</p></td>
-        </tr>
-
     
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5 class="h5-returns">Returns:</h5>
-
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    <p>objを返す</p>
+<code class="param-type">T</code>
+
+
+    </div>
+    
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">T</span>
+                
+        </div>
+    </div>
 
 
 
-    </dd>
-</dl>
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
+    <h4 class="name" id=".finite">
+        <a class="href-link" href="#.finite">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                finite<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span>
+            
+        </span>
+    </h4>
     
 
-    <h4 class="name" id=".ftext"><span class="type-signature type-signature-static">(static) </span>ftext<span class="signature">(format, target, key, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#Template_ftext">Template_ftext</a>}</span></h4>
-
     
+    
+    <div class="description">
+        <p>指定されたフレーム数が経過すると自動で消滅するようにする.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>obj</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">T</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>対象のオブジェクト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
 
 
 
 
 <dl class="details">
+
     
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>formatに含まれる &quot;${}&quot; という文字列を全部 target[key] に置き換えて
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1126">line 1126</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>objを返す</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">T</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".ftext">
+        <a class="href-link" href="#.ftext">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                ftext<span class="signature">(format, target, key, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#Template_ftext">Template_ftext</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>formatに含まれる &quot;${}&quot; という文字列を全部 target[key] に置き換えて
 得られるテキストを表示するオブジェクト.
 もしtargetが偽の場合は, このオブジェクト自身をターゲットとする.</p>
 <p>自動的にテキストが更新されること以外はtextと同じ挙動をする.
-オプションリストの扱いなども共通である.</p></li></ul></dd>
+オプションリストの扱いなども共通である.</p>
+    </div>
     
 
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1009">line 1009</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>format</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
+            <th>Type</th>
 
             
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
+            <th>Attributes</th>
             
 
             
-                <td class="default">
-                
-                </td>
+            <th>Default</th>
             
 
-            <td class="description last"><p>雛形となる文字列</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
+        <tbody>
+        
 
-        <tr>
             
-                <td class="name"><code>target</code></td>
-            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>format</code></td>
+  
 
-            <td class="type">
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>雛形となる文字列</p></td>
+</tr>
+
+
+        
+
             
-                
-<span class="param-type">Object</span>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>target</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
 |
 
-<span class="param-type">null</span>
+<code class="param-type">null</code>
 |
 
-<span class="param-type">false</span>
+<code class="param-type">false</code>
 
 
+  
+  </td>
 
-            
-            </td>
+  
+      <td class="attributes">
+      
 
-            
-                <td class="attributes">
-                
+      
 
-                
+      
+      </td>
+  
 
-                
-                </td>
-            
+  
+      <td class="default">
+      
+      </td>
+  
 
-            
-                <td class="default">
-                
-                </td>
-            
+  <td class="description last"><p>観察対象</p></td>
+</tr>
 
-            <td class="description last"><p>観察対象</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>key</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>取得するプロパティの名前</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object.&lt;string, *></span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>{}</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>オプションリスト</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5 class="h5-returns">Returns:</h5>
 
         
-<div class="param-desc">
-    <p>生成されたオブジェクト</p>
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>key</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>取得するプロパティの名前</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opt</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object.&lt;string, *></code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          {}
+      
+      </td>
+  
+
+  <td class="description last"><p>オプションリスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#Template_ftext">Template_ftext</a></span>
-
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".image"><span class="type-signature type-signature-static">(static) </span>image<span class="signature">(img, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Template_image}</span></h4>
-
-    
 
 
 
 
 <dl class="details">
-    
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>画像の描画を行うオブジェクト.
-オプションリストを使って x, y, alpha を指定できる.</p></li></ul></dd>
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1032">line 1032</a>
-    </li></ul></dd>
-    
 
     
 
@@ -1404,11 +1408,19 @@ customでラップして用いる.</p>
     
 
     
-
     
 
     
 
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1009">line 1009</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1424,177 +1436,189 @@ customでラップして用いる.</p>
 
 
 
-    <h5 class="h5-parameters">Parameters:</h5>
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    <div class='param-desc column is-7'><p>生成されたオブジェクト</p></div>
     
-
-        <tr>
-            
-                <td class="name"><code>img</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">HTMLImageElement</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>表示する画像</p></td>
-        </tr>
-
     
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object.&lt;string, *></span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>{}</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>オプションリスト</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5 class="h5-returns">Returns:</h5>
-
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    <p>生成されたオブジェクト</p>
+<code class="param-type"><a href="global.html#Template_ftext">Template_ftext</a></code>
+
+
+    </div>
+    
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Template_image</span>
+                
+        </div>
+    </div>
 
 
 
-    </dd>
-</dl>
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
+    <h4 class="name" id=".image">
+        <a class="href-link" href="#.image">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                image<span class="signature">(img, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Template_image}</span>
+            
+        </span>
+    </h4>
     
 
-    <h4 class="name" id=".pause"><span class="type-signature type-signature-static">(static) </span>pause<span class="signature">(frames)</span><span class="type-signature"> &rarr; {<a href="global.html#Task">Task</a>}</span></h4>
-
     
+    
+    <div class="description">
+        <p>画像の描画を行うオブジェクト.
+オプションリストを使って x, y, alpha を指定できる.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+            <th>Attributes</th>
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>img</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">HTMLImageElement</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>表示する画像</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opt</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object.&lt;string, *></code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          {}
+      
+      </td>
+  
+
+  <td class="description last"><p>オプションリスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
 
 
 
 
 <dl class="details">
-    
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>指定されたフレーム数の間 「return false;」を実行し続けるオブジェクト.
-もし引数として負の数が与えられた場合はこの処理を無限に実行し続ける.</p></li></ul></dd>
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1079">line 1079</a>
-    </li></ul></dd>
-    
 
     
 
@@ -1619,11 +1643,19 @@ customでラップして用いる.</p>
     
 
     
-
     
 
     
 
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1032">line 1032</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1639,638 +1671,820 @@ customでラップして用いる.</p>
 
 
 
-    <h5 class="h5-parameters">Parameters:</h5>
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    <div class='param-desc column is-7'><p>生成されたオブジェクト</p></div>
     
-
-        <tr>
-            
-                <td class="name"><code>frames</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>動作を続けるフレーム数. 負の数の場合は無限に実行し続ける.</p></td>
-        </tr>
-
     
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5 class="h5-returns">Returns:</h5>
-
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    <p>生成されたオブジェクト</p>
+<code class="param-type">Template_image</code>
+
+
+    </div>
+    
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#Task">Task</a></span>
+                
+        </div>
+    </div>
 
 
 
-    </dd>
-</dl>
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
+    <h4 class="name" id=".pause">
+        <a class="href-link" href="#.pause">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                pause<span class="signature">(frames)</span><span class="type-signature"> &rarr; {<a href="global.html#Task">Task</a>}</span>
+            
+        </span>
+    </h4>
     
 
-    <h4 class="name" id=".scheduler"><span class="type-signature type-signature-static">(static) </span>scheduler<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span></h4>
-
     
+    
+    <div class="description">
+        <p>指定されたフレーム数の間 「return false;」を実行し続けるオブジェクト.
+もし引数として負の数が与えられた場合はこの処理を無限に実行し続ける.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>frames</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>動作を続けるフレーム数. 負の数の場合は無限に実行し続ける.</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
 
 
 
 
 <dl class="details">
+
     
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>objに after(frames, callback) と loop(frames, callback) を付与する.</p>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1079">line 1079</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたオブジェクト</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#Task">Task</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".scheduler">
+        <a class="href-link" href="#.scheduler">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                scheduler<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>objに after(frames, callback) と loop(frames, callback) を付与する.</p>
 <ul>
 <li>after: 指定時間が経過したときcallbackを実行する</li>
 <li>loop: callbackの実行結果がtrueである限りafterと同じ処理を繰り返す</li>
 </ul>
 <p>ここで, callbackの受け取る引数は (GE, self) である.
-GEはタスク処理を実行しているGameEngine, selfはobj自身である.</p></li></ul></dd>
+GEはタスク処理を実行しているGameEngine, selfはobj自身である.</p>
+    </div>
     
 
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1147">line 1147</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>obj</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">T</span>
-
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>対象のオブジェクト</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>obj</code></td>
+  
 
-
-
-
-
-
-
-
-
-
-
-
+  <td class="type">
+  
+      
+<code class="param-type">T</code>
 
 
+  
+  </td>
 
-<h5 class="h5-returns">Returns:</h5>
+  
+
+  
+
+  <td class="description last"><p>対象のオブジェクト</p></td>
+</tr>
+
 
         
-<div class="param-desc">
-    <p>objを返す</p>
+        </tbody>
+    </table>
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">T</span>
-
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".slider"><span class="type-signature type-signature-static">(static) </span>slider<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span></h4>
-
-    
 
 
 
 
 <dl class="details">
+
     
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>objに moveTo(x, y) と slideTo(x, y, frames) を付与する.
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1147">line 1147</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>objを返す</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">T</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".slider">
+        <a class="href-link" href="#.slider">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                slider<span class="signature">(obj)</span><span class="type-signature"> &rarr; {T}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>objに moveTo(x, y) と slideTo(x, y, frames) を付与する.
 moveTo: this.x, this.yを指定した値に変更する.
-slideTo: 現在位置から(x,y)までthis.x, this.yの値を等速変化させる.</p></li></ul></dd>
+slideTo: 現在位置から(x,y)までthis.x, this.yの値を等速変化させる.</p>
+    </div>
     
 
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1186">line 1186</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>obj</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">T</span>
-
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"><p>対象のオブジェクト</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>obj</code></td>
+  
 
-
-
-
-
-
-
-
-
-
-
-
+  <td class="type">
+  
+      
+<code class="param-type">T</code>
 
 
+  
+  </td>
 
-<h5 class="h5-returns">Returns:</h5>
+  
+
+  
+
+  <td class="description last"><p>対象のオブジェクト</p></td>
+</tr>
+
 
         
-<div class="param-desc">
-    <p>objを返す</p>
+        </tbody>
+    </table>
 </div>
 
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">T</span>
-
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".text"><span class="type-signature type-signature-static">(static) </span>text<span class="signature">(str, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Template_text}</span></h4>
-
-    
 
 
 
 
 <dl class="details">
+
     
-    <dt class="tag-description">Description:</dt>
-    <dd class="tag-description"><ul class="dummy"><li><p>テキストの描画を行うオブジェクト.
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1186">line 1186</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>objを返す</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">T</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".text">
+        <a class="href-link" href="#.text">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                text<span class="signature">(str, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Template_text}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>テキストの描画を行うオブジェクト.
 オプションリストを使って x, y, color, font, alpha を指定できる.
 これらに加えて, CanvasRenderingContext2Dに対して指定可能な他の属性も
-optで渡すことができる.</p></li></ul></dd>
+optで渡すことができる.</p>
+    </div>
     
 
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line971">line 971</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5 class="h5-parameters">Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>str</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
+            <th>Type</th>
 
             
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
+            <th>Attributes</th>
             
 
             
-                <td class="default">
-                
-                </td>
+            <th>Default</th>
             
 
-            <td class="description last"><p>表示する文字列</p></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object.&lt;string, *></span>
-
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>str</code></td>
+  
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>{}</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>オプションリスト</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
 
+  
+  </td>
 
+  
+      <td class="attributes">
+      
 
+      
 
+      
+      </td>
+  
 
+  
+      <td class="default">
+      
+      </td>
+  
 
+  <td class="description last"><p>表示する文字列</p></td>
+</tr>
 
-
-
-
-
-
-
-
-
-<h5 class="h5-returns">Returns:</h5>
 
         
-<div class="param-desc">
-    <p>生成されたオブジェクト</p>
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>opt</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object.&lt;string, *></code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          {}
+      
+      </td>
+  
+
+  <td class="description last"><p>オプションリスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
 </div>
 
 
 
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Template_text</span>
 
 
-
-    </dd>
-</dl>
+<dl class="details">
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line971">line 971</a>
+            </span>
+        </p>
+    
+</dl>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたオブジェクト</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
+<code class="param-type">Template_text</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+            </div>
+        </div>
     
 
     
@@ -2283,20 +2497,25 @@ optで渡すことができる.</p></li></ul></dd>
 
 
 
-    
-    
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 25 2026 04:43:49 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
 
 
 </body>
