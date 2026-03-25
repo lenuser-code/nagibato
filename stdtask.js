@@ -117,6 +117,7 @@ stdtask.Select = class{
      * @returns 次のいずれかの条件を満たすとき false を返す
      * 1. 自分より後ろのタスク処理をブロックする設定の場合
      * 2. このフレームにおいてthis.action や this.cancel を実行した場合
+     *
      * そうでないとき true を返す
      */
     execute(GE){
