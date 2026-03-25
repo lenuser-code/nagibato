@@ -5,6 +5,10 @@ on:
     branches:
       - main  # mainブランチに更新があったら実行
 
+# ここを追加！GitHub Actionsの裏側を最新環境(Node 24)で動かすおまじない
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,21 +17,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        # ここが checkout になっていました。setup-node に修正します。
         uses: actions/setup-node@v4
         with:
-          # Node.js 20の警告が出ているので、2026年現在のLTSである 22 に上げます
-          node-version: '22'
+          node-version: '22'  # 私たちのJSDoc生成用は安定版の22でOK
 
       - name: Install dependencies
         run: npm install
 
       - name: Generate Documentation
-        # jsdoc.json がリポジトリにあることが前提です
         run: npx jsdoc -c jsdoc.json
 
       - name: Deploy to GitHub Pages
-        # バージョンを v3 から最新の v4 に更新しておきます
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
