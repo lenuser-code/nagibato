@@ -34,6 +34,7 @@ jobs:
           mkdir release
           # ゲームの実行に必要なファイル（HTML, JSなど）を release にコピー
           cp *.js *.html release/ 2>/dev/null || true
+          cp -r image release/ 2>/dev/null || true
           # 生成された docs フォルダも release の中に入れる
           cp -r docs release/
 
