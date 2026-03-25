@@ -390,12 +390,15 @@ let InputManager = class {
 /**
  * タイマー処理を担当するヘルパークラス.
  * @class
- * @constant {number} fps - このゲームで目標とするフレームレート
  * @prop {stdgam.GameEngine} owner - タイマーイベントを送る対象
  * @prop {boolean} isRunning - 既にタイマーが稼働中か
  */
 let TimeKeeper = class {
-    static fps = 60; // ターゲットfps
+    /**
+     * このゲームで目標とするフレームレート
+     * @type {number}
+     */
+    static fps = 60;
 
     constructor(owner){
         this.owner = owner;
