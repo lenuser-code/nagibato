@@ -4,7 +4,6 @@
         "exclude": ["node_modules"]
     },
     "opts": {
-        "readme": "./README.md",  // これを追加
         "destination": "./docs",
         "recurse": true,
         "template": "node_modules/docdash"
