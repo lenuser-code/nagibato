@@ -67,15 +67,19 @@ Public.Scene = class {
      * それを自身に適用できる.
      *
      * 例)
+     * ```
      * let scene = new stdgam.Scene({
      *     onLoad(GE, args){ ...初期化処理... },
      *     draw(GE, ctx){ ,,,描画処理... } }
      * });
+     * ```
      *
      * 上の例は次と等価である:
+     * ```
      * let scene = new stdgam.Scene();
      * scene.onLoad = function(GE, args){ ...初期化処理... };
      * scene.draw(GE, ctx) = function{ ...描画処理... };
+     * ```
      *
      * @param {Object.<string,*>} dfn - このオブジェクトに追加で定義する
      * 要素を集めた連想配列.
@@ -525,6 +529,7 @@ Public.GameEngine = class {
      * 目的の処理を実行したいときにこのメソッドを使う.
      *
      * 例)
+     * ```
      * const GE = new stdgam.GameEngine("myCanvas");
      * GE.images.load("IMAGE_01", "./my_image1.png");
      * GE.images.load("IMAGE_02", "./my_image2.png");
@@ -533,6 +538,7 @@ Public.GameEngine = class {
      *    my_paint_operation( pool.get("IMAGE_01") );
      *    my_paint_operation( pool.get("IMAGE_02") );
      * });
+     * ```
      *
      * @param {function(): void} callback - ロードが確実に完了した状態で
      * 呼び出される関数
@@ -651,11 +657,13 @@ Public.ImagePool = class {
      * そのため, 返却値は画像のロード待ちを行なっているPromiseオブジェクトである.
      *
      * 例)
+     * ```
      * const pool = new stdgam.ImagePool();
      * const promise = pool.load("IMAGE_01", "./my_image1.png");
      * promise.then((v) => {
      *     my_paint_operation( pool.get("IMAGE_01") );
      * });
+     * ```
      *
      * 普通はこのPromiseオブジェクトを直接使うのではなく, readyメソッドを利用する
      * (readyメソッドの例を参照のこと).
@@ -683,6 +691,7 @@ Public.ImagePool = class {
      * 通常は次のようなコードを書く.
      *
      * 例)
+     * ```
      * const pool = new stdgam.ImagePool();
      * pool.load("IMAGE_01", "./my_image1.png");
      * pool.load("IMAGE_02", "./my_image2.png");
@@ -691,6 +700,7 @@ Public.ImagePool = class {
      *    my_paint_operation( pool.get("IMAGE_01") );
      *    my_paint_operation( pool.get("IMAGE_02") );
      * });
+     * ```
      *
      * ただし, GameEngineオブジェクトがデフォルトで所持するImagePoolに関しては,
      * GameEngineのreadyメソッドによりロード待ちを行うほうが好ましい.
@@ -735,11 +745,13 @@ Public.SoundPool = class {
      * そのため, 返却値は音声のロード待ちを行なっているPromiseオブジェクトである.
      *
      * 例)
+     * ```
      * const pool = new stdgam.SoundPool();
      * const promise = pool.load("BGM_01", "./my_bgm.wav");
      * promise.then((v) => {
      *     pool.play("BGM_01");
      * });
+     * ```
      *
      * 普通はこのPromiseオブジェクトを直接使うのではなく, readyメソッドを利用する
      * (readyメソッドの例を参照のこと).
@@ -767,6 +779,7 @@ Public.SoundPool = class {
      * 通常は次のようなコードを書く.
      *
      * 例)
+     * ```
      * const pool = new stdgam.SoundPool();
      * pool.load("BGM_01", "./bgm_01.wav");
      * pool.load("BGM_02", "./bgm_02.wav");
@@ -774,6 +787,7 @@ Public.SoundPool = class {
      * pool.ready().then((v) => {
      *    my_operation_with_sounds(pool);
      * });
+     * ```
      *
      * ただし, GameEngineオブジェクトがデフォルトで所持するSoundPoolに関しては,
      * GameEngineのreadyメソッドによりロード待ちを行うほうが好ましい.
@@ -907,12 +921,14 @@ Public.SEPool = class {
  * 生成済みのオブジェクトに機能を付与する「デコレータ」を提供する.
  *
  * 使用例:
+ * ```
  *     T = stdgam.Templates;
  *     obj = T.slider(
  *         T.finite( T.text("MESSAGE", {font: "20px Serif"}), 120 ),
  *         x1, y1
  *     );
  *     obj.slideTo(x2, y2, 120);
+ * ```
  *
  * デコレータは対象のオブジェクトを直接変更し, 特定の機能を付与する.
  * これはある種のコードスニペットであり, 他の機能との独立性は

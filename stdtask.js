@@ -21,11 +21,9 @@ var stdtask = stdtask || {};
 
 /**
  * indexプロパティを持ち, キー入力に応じて
- *
  * - indexの増減
  * - this.action(GE, index)の実行
  * - this.cancel(GE, index)の実行
- *
  * を実行するタスクオブジェクトを実装する.
  *
  * ここで登場したindexプロパティは「複数の選択肢から1つを選ばせるUI」における
@@ -152,10 +150,8 @@ Public.Select = class{
     /**
      * actionやcancelの実行を指定したオブジェクトに委任する.
      * すなわち, 以下の処理を行う.
-     *
      * - other.action(GE, index) を実行するだけの関数を this.action に代入
      * - other.cancel(GE, index) を実行するだけの関数を this.cancel に代入
-     *
      * @param {Object} other - action/cancelの処理を委任されるオブジェクト
      */
     bind(other){
@@ -324,10 +320,8 @@ Public.Scroll = class{
     /**
      * actionやcancelの実行を指定したオブジェクトに委任する.
      * すなわち, 以下の処理を行う.
-     *
      * - other.action(GE, index) を実行するだけの関数を this.action に代入
      * - other.cancel(GE, index) を実行するだけの関数を this.cancel に代入
-     *
      * @param {Object} other - action/cancelの処理を委任されるオブジェクト
      */
     bind(other){
