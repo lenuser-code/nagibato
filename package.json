@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "devDependencies": {
     "jsdoc": "^4.0.0",
-    "better-docs": "^2.7.3"
+    "better-docs": "^2.7.3",
     "minami": "^1.2.3"
   },
   "scripts": {
