@@ -150,6 +150,7 @@ class BasicStatus{
  * @prop {stdtask.Meter} HPMeter - HPの値を表すMeterオブジェクト
  * @prop {stdtask.Meter} MPMeter - MPの値を表すMeterオブジェクト
  * @prop {stdtask.Meter} SGMeter - SGの値を表すMeterオブジェクト
+ * @extends BasicStatus
  */
 class Player extends BasicStatus{
     #id;
@@ -343,6 +344,7 @@ class Player extends BasicStatus{
  * @class
  * @prop {stdtask.Meter} HPMeter - HPの値を表すMeterオブジェクト
  * @prop {stdtask.Meter} MPMeter - MPの値を表すMeterオブジェクト
+ * @extends BasicStatus
  */
 class Enemy extends BasicStatus{
     #antiskill;

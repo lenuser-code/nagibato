@@ -183,6 +183,7 @@ stdtask.Select = class{
  * @class
  * @prop {number} index - このオブジェクトが管理するパラメータ
  * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
+ * @extends stdtask.Select
  */
 stdtask.CyclicSelect = class extends stdtask.Select{
     /**
