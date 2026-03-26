@@ -744,7 +744,7 @@ shakeEnemy(){
 
 /**
  * テキスト描画に用いるオプションをまとめたもの.
- * @type {Object.<string, Object{string, *}>}
+ * @type {Object.<string, Object.<string, *>>}
  */
 textOpt: {
     time: { font: "27px Sans-Serif", textAlign: "center" },
