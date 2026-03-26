@@ -231,10 +231,19 @@ class SkillDealerBase{
         this.appliedCB = 0;
     }
 
+    /**
+     * 指定されたフレーム数だけyield trueを繰り返すジェネレータを生成する.
+     * framesが0以下の場合は何もしない.
+     * @param {number} frames - 待機するフレーム数
+     */
     *wait(frames){
         while(frames-- > 0) yield true;
     }
 
+    /**
+     * プレイヤー側アップキープの処理を実行するジェネレータを生成する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     */
     *upkeep(GE){
         // healが実行されない場合, crisisBoostのHPチェックを自分で実行
         if(this.healRate > 0) yield* this.heal(this.healRate);
@@ -244,10 +253,19 @@ class SkillDealerBase{
         if(this.SGHealRate > 0) yield* this.SGHeal(this.SGHealRate);
     }
 
+    /**
+     * SkillDealerBase/EnemyActionDealerBaseの作業中に
+     * プレイヤーのHPが変化したとき呼び出されるジェネレータ関数.
+     */
     *playerChanged(){
         yield *this.crisisBoostTask(this.crisisBonus);
     }
 
+    /**
+     * 指定されたスキルの効果を実行するジェネレータを生成する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {PlayerSkill_skill} skill - 実行するスキル
+     */
     *deal(GE, skill){
         yield* skill.effect(this);
     }
@@ -1631,7 +1649,7 @@ class Pool{
  * - forEach(callback) : すべてのカード x に対して callback(x) を実行する
  *
  * CardAtlasにより生成されたオブジェクトはcardAtlasID属性に
- * カードのIDを代入される
+ * カードのIDを代入される.
  * @namespace
  */
 const CardAtlas = {
