@@ -825,6 +825,18 @@ stdgam.SoundPool = class {
             ad.currentTime = 0; // 巻き戻し
         }
     }
+
+    /**
+     * 登録されているすべての音声の再生を停止する.
+     * 再生中でなければ何もしない.
+     */
+    stopAll() {
+        for(const key of Object.keys(this.#pool)){
+            const ad = this.#pool[key];
+            ad.pause();
+            ad.currentTime = 0; // 巻き戻し
+        }
+    }
 }
 
 /**
