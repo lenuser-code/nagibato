@@ -311,7 +311,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
  * @param {number} y - 配置する位置のy座標
  * @param {string} key - どのキー入力に反応するか指定する
  * @param {string} label - ボタンに書かれる文字
- * @return {Object} 生成されたコンポーネント
+ * @return {Sprite} 生成されたコンポーネント
  */
 let createPhysicalButton = function(x, y, key, label) {
     return {
@@ -357,7 +357,7 @@ let createPhysicalButton = function(x, y, key, label) {
  * @param {number} y - 配置する位置のy座標
  * @param {number} len - バーの長さ
  * @param {flag} [reversed=false] - trueなら左端を基点に, falseなら右端を基点にする.
- * @return {Object} 生成されたコンポーネント
+ * @return {Sprite} 生成されたコンポーネント
  */
 let createMeterView = function(caption, target, x, y, len, reversed = false){
     return {
@@ -393,7 +393,7 @@ let createMeterView = function(caption, target, x, y, len, reversed = false){
  * @param {Deck} target - 観察対象のDeckオブジェクト
  * @param {number} x - 配置する位置のx座標
  * @param {number} y - 配置する位置のy座標
- * @return {Object} 生成されたコンポーネント
+ * @return {Sprite} 生成されたコンポーネント
  */
 let createDeckView = function(target, x, y){
     return {
@@ -421,7 +421,7 @@ let createDeckView = function(target, x, y){
  * @param {number} maxTimeCount - 制限時間の初期値
  * @param {number} x - 配置する位置のx座標
  * @param {number} y - 配置する位置のy座標
- * @return {Object} 生成されたコンポーネント
+ * @return {Sprite} 生成されたコンポーネント
  */
 let createTimeCount = function(maxTimeCount, x, y){
     const obj = T.scheduler(
@@ -447,7 +447,7 @@ let createTimeCount = function(maxTimeCount, x, y){
 /**
  * プレイヤーの行動選択時に表示するダイアログを生成する.
  * 入力受付はmainSceneで行う.
- * @returns {Object} 生成されたコンポーネント
+ * @returns {Sprite} 生成されたコンポーネント
  */
 let createAttackDialog = function(){
     const img = GE.caches.get("DIALOG");
@@ -470,7 +470,7 @@ let createAttackDialog = function(){
 /**
  * スキルの内容を表示するダイアログを生成する.
  * @param {Object} skill - 表示するスキル
- * @returns {Object} 生成されたコンポーネント
+ * @returns {Sprite} 生成されたコンポーネント
  */
 let createSkillDialog = function(skill){
     const img = GE.caches.get("DIALOG");
@@ -562,7 +562,6 @@ let bindEnemy = function(scene, enemy, x, y){
     scene.add(HPView);
     scene.add(MPView);
 
-    // shaker_test
     scene.eShaker = new Shaker(4, 2, 3);
     scene.eShaker.add(nameView, HPView, MPView, HPMeterView);
 }
@@ -574,46 +573,80 @@ let bindEnemy = function(scene, enemy, x, y){
  * 登録されたオブジェクト達を一括で振動させるために使うクラス.
  * ターゲットの x 属性を直接変化させるので注意.
  * @class
+ * @prop active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
 let Shaker = class{
+    #speed;
+    #v0;
+    #v;
+    #acc;
+    #a;
+    #dir;
+    #count;
+    #n;
+    #target;
+    #backup;
+
+    /**
+     * 指定された値を既定値とするインスタンスを生成する.
+     * @param {number} speed - 振動の初期速度の既定値
+     * @param {number} acc - 加速度の既定値
+     * @param {number} count - 振動の回数 (半周期を1回とする) の既定値
+     */
     constructor(speed, acc, count){
-        this.speed = speed;
-        this.acc = acc;
-        this.count = count;
-        this.target = [];
+        this.#speed = speed;
+        this.#acc = acc;
+        this.#count = count;
+        this.#target = [];
     }
 
-    add(...obj){
-        this.target.push(...obj);
+    /**
+     * 指定されたオブジェクトを対象に追加する.
+     * ただし, 重複チェックは行わない.
+     * @param {...Object} objs - 追加するオブジェクト
+     */
+    add(...objs){
+        this.#target.push(...objs);
     }
 
+    /**
+     * 指定された設定で振動処理を初期化する.
+     * もし省略されたりnullを与えられた要素は既定値を使う.
+     * @param {number} [speed=null] - 振動の初期速度
+     * @param {number} [acc=null] - 加速度
+     * @param {number} [count=null] - 振動の回数 (半周期を1回とする) 
+     */
     activate(speed = null, acc = null, count = null){
-        this.backup = this.target.map((e) => e.x);
-        this.dir = 1;
-        this.v0 = this.v = speed || this.speed;
-        this.a = acc ? -acc : -this.acc;
-        this.n = count || this.count;
+        this.#backup = this.#target.map((e) => e.x);
+        this.#dir = 1;
+        this.#v0 = this.#v = speed || this.#speed;
+        this.#a = acc ? -acc : -this.#acc;
+        this.#n = count || this.#count;
         this.active = true;
     }
 
+    /**
+     * 1フレーム分のタスク処理を実行する.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     */
     execute(GE){
-        if(this.n <= 0){
+        if(this.#n <= 0){
             this.active = false;
-            for(let i = 0; i < this.target.length; i++){
-                this.target[i].x = this.backup[i];
+            for(let i = 0; i < this.#target.length; i++){
+                this.#target[i].x = this.#backup[i];
             }
             return true;
         }
 
-        for(const obj of this.target){
-            obj.x += this.v;
+        for(const obj of this.#target){
+            obj.x += this.#v;
         }
 
-        this.v += this.a;
-        if(this.v0 + this.v * this.dir <= 0){
-            this.dir *= -1;
-            this.a *= -1;
-            this.n--;
+        this.#v += this.#a;
+        if(this.#v0 + this.#v * this.#dir <= 0){
+            this.#dir *= -1;
+            this.#a *= -1;
+            this.#n--;
         }
 
         return true;
@@ -833,6 +866,7 @@ class HandManager{
     /**
      * デッキから1枚カードを引き、「そのカードを適切な位置に移動した後,
      * n番目の手札にセットする」という操作を実行するタスクオブジェクトを生成する.
+     * nは0から数え始める.
      * @param {number} n - 何番目の手札にセットするか指定する
      * @returns {Task} カードの移動と手札セットを実行するタスクオブジェクト
      */
@@ -845,6 +879,7 @@ class HandManager{
     /**
      * 「n番目の手札を適切な位置に移動した後, poolに出す」という操作を実行する
      * タスクオブジェクトを生成する. 同時にn番目の手札を空にする.
+     * nは0から数え始める.
      * @param {number} n - 何番目の手札をpoolに出すか指定する
      * @returns {Task} カードの移動とpoolへ出す処理を実行するタスクオブジェクト
      */
@@ -889,18 +924,18 @@ class HandManager{
  * @namespace
  * @prop {Object.<string,*>} position - 位置情報を抽出したもの
  * @prop {Object.<string, Object.<string, *>>} textOpt - テキスト描画に用いるオプションをまとめたもの
+ * @prop {Deck} sideboard - サイドボードを格納しているDeckオブジェクト
+ * @prop {Object.<string, *>} backupArgs - オプションリストのバックアップ
  * @prop {number} maxTimeCount - 各ターンの制限時間の秒数
  * @prop {number} turn - 現在のターン数
- * @prop {Deck} sideboard - サイドボードを格納しているDeckオブジェクト
  * @prop {Player} player - バトルしているプレイヤーキャラクター
  * @prop {Enemy} enemy - バトルしている敵キャラクター
+ * @prop {Shaker} pShaker - プレイヤー側UIのためのShaker
+ * @prop {Shaker} eShaker - 敵側UIのためのShaker
  * @prop {PoolManager} poolManager - Poolの管理に使用するPoolManager
  * @prop {HandManager} handManager - 手札とデッキの管理に使用するHandManager
  * @prop {SkillDealerBase} SD - プレイヤースキルの実行を担当するオブジェクト
  * @prop {EnemyActionDealerBase} EAD - 敵スキルの実行を担当するオブジェクト
- * @prop {Shaker} pShaker - プレイヤー側UIのためのShaker
- * @prop {Shaker} eShaker - 敵側UIのためのShaker
- * @prop {Object.<string, *>} backupArgs - オプションリストのバックアップ
  */
 battle.mainScene = new stdgam.Scene({
 /**
@@ -935,6 +970,7 @@ textOpt: {
 
 /**
  * プレイヤー側のUIを振動させる.
+ * @memberof battle.mainScene
  */
 shakePlayer(){
     if(this.pShaker.active) return;
@@ -944,6 +980,7 @@ shakePlayer(){
 
 /**
  * 敵側のUIを振動させる.
+ * @memberof battle.mainScene
  */
 shakeEnemy(){
     if(this.eShaker.active) return;
@@ -964,6 +1001,7 @@ shakeEnemy(){
  * @param {stdgam.GameEngine} GE - 使用するGameEngine
  * @returns {number} 押されたキーがあればそのうち一番優先されるキーのインデックス.
  * そうでなければ-1
+ * @memberof battle.mainScene
  */
 checkInput(GE){
     const codes = ["KeyA", "KeyS", "KeyD"];
@@ -973,6 +1011,7 @@ checkInput(GE){
 /**
  * 残り体力に基づく勝敗判定を行う.
  * @returns {boolean} プレイヤーが勝利していればtrue, そうでなければfalse
+ * @memberof battle.mainScene
  */
 judgement(){
     if(this.enemy.HP() == 0) return true;
@@ -983,6 +1022,7 @@ judgement(){
 /**
  * このシーンの構成要素を初期化する.
  * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+ * @memberof battle.mainScene
  */
 initComponents(args){
     this.position.init();
@@ -1006,6 +1046,7 @@ initComponents(args){
  * ロード時に渡されたオプションリストのバックアップをとる.
  * ただし, このbackupは稀に改変される可能性がある.
  * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+ * @memberof battle.mainScene
  */
 backupOptions(args){
     this.backupArgs = {...args};
@@ -1021,6 +1062,7 @@ backupOptions(args){
  * シーンがロードされた時に実行される初期化処理.
  * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
  * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+ * @memberof battle.mainScene
  */
 onLoad(GE, args){
     MPBoostBySuit.init();
