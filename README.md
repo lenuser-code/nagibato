@@ -6,6 +6,7 @@ a tiny simulator of "MAGICARD BATTLE"
 
 ## ファイル構造 ([docs](https://lenuser-code.github.io/nagibato/docs/))
 * [nagibato.html](https://lenuser-code.github.io/nagibato/nagibato.html) - ゲームを実行するHTMLファイル
+* nagibato.js - メイン部分
 * stdgam.js - いわゆるゲームエンジン部分
 * stdtask.js - 頻出するタスクは抽出してここに置くつもり
 * card.js - カードに関連するオブジェクトの実装 (プレイヤー側スキルも含む)
