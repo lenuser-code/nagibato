@@ -987,9 +987,9 @@ phase2_body(GE, i){
         yield* this.SD.wait(60);
     }
     if(n == 2){
-        while(this.pool.skills.length > 0){
+        while(this.pool.skills.skillCount() > 0){
             yield* this.SD.wait(20);
-            const skill = this.pool.skills.shift();
+            const skill = this.pool.shiftSkill();
             this.add( createSkillDialog(skill) );
             yield* this.SD.wait(130);
             yield* this.SD.deal(GE, skill);
