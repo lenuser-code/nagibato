@@ -660,6 +660,7 @@ class Polysuit{
  * @prop {number} height - カードの縦幅
  * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
  * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @extends Polysuit
  */
 class DuosuitGenerator extends Polysuit{
     /**
@@ -727,6 +728,7 @@ class DuosuitGenerator extends Polysuit{
  * @prop {number} height - カードの縦幅
  * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
  * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @extends Polysuit
  */
 class TriosuitGenerator extends Polysuit{
     /**
@@ -796,6 +798,7 @@ class TriosuitGenerator extends Polysuit{
  * @prop {number} height - カードの縦幅
  * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
  * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @extends Polysuit
  */
 class QuartetsuitGenerator extends Polysuit{
     /**
@@ -868,6 +871,7 @@ class QuartetsuitGenerator extends Polysuit{
  * @prop {number} height - カードの縦幅
  * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
  * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @extends Polysuit
  */
 class QuintetsuitGenerator extends Polysuit{
     /**
@@ -965,6 +969,7 @@ class QuintetsuitGenerator extends Polysuit{
  * @prop {number} height - カードの縦幅
  * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
  * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @extends Polysuit
  */
 class SestetsuitGenerator extends Polysuit{
     /**

@@ -941,6 +941,7 @@ battle.mainScene = new stdgam.Scene({
 /**
  * 位置情報を抽出したもの.
  * @type {Object.<string,*>}
+ * @memberof battle.mainScene
  */
 position: {
     x: 160,  y: 0,
@@ -959,6 +960,7 @@ position: {
 /**
  * テキスト描画に用いるオプションをまとめたもの.
  * @type {Object.<string, Object.<string, *>>}
+ * @memberof battle.mainScene
  */
 textOpt: {
     time: { font: "27px Sans-Serif", textAlign: "center" },
