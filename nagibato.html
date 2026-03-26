@@ -97,14 +97,21 @@ GE.caches.createCache("DIALOG", 1000, 700, (ctx) => {
 /**
  * タイトル画面からバトルへ移行する際, 途中に挟む仲介役のシーン.
  * 逆に, バトルから戻って来るときもこのシーンを経由する.
+ * @namespace
+ * @prop step
+ * @prop args
+ * @prop deck
+ * @prop sideboard
  * @type {stdgam.Scene}
  */
 const intermediateScene = new Scene({
     step: 0,
-    constructor(){
+    ensure(GE){
         this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+        this.ensure = () => {};
     },
     onLoad(GE, args){
+        this.ensure(GE);
         if(this.step == 0 || args.tutorial){
             this.args = args;
             this.deck = args.deck;
@@ -140,6 +147,17 @@ const intermediateScene = new Scene({
 /**
  * バトル・チュートリアルの選択に使うダイアログを実装するクラス.
  * @class
+ * @prop menu
+ * @prop callback
+ * @prop rowCount
+ * @prop select
+ * @prop x
+ * @prop y
+ * @prop step
+ * @prop padY
+ * @prop width
+ * @prop height
+ * @extends stdtask.Scroll
  */
 class SelectWindow extends stdtask.Scroll{
     constructor(menu, callback, rowCount, x, y, w, h){
@@ -206,6 +224,13 @@ class SelectWindow extends stdtask.Scroll{
 /**
  * Shelflikeに格納される個々のアイテムを実装するクラス.
  * @class
+ * @prop text
+ * @prop x
+ * @prop y
+ * @prop width
+ * @prop height
+ * @prop selected
+ * @prop action
  */
 class Booklike{
     static boxColors = [ "rgb(239,228,176)", "rgb(195,195,195)"];
@@ -243,6 +268,13 @@ class Booklike{
 /**
  * タイトル画面のメインメニューを実装するクラス.
  * @class
+ * @prop owner
+ * @prop x
+ * @prop y
+ * @prop width
+ * @prop height
+ * @prop books
+ * @extends stdtask.CyclicSelect
  */
 class Shelflike extends stdtask.CyclicSelect{
     static boxColor = "rgb(30,30,30)";
@@ -288,7 +320,11 @@ class Shelflike extends stdtask.CyclicSelect{
 
 /**
  * タイトル画面を実装するSceneオブジェクト.
- * @type {stdgam.Scene}
+ * @namespace
+ * @prop yesno
+ * @prop setting
+ * @prop books
+ * @prop shelf
  */
 const selectScene = new Scene({
 
@@ -455,7 +491,9 @@ onLoad(GE, args){
 
 /**
  * ロード画面.
- * @type {stdgam.Scene}
+ * @namespace
+ * @prop message
+ * @prop flag
  */
 const bootstrap = new Scene({
     onLoad(GE, args){
