@@ -102,14 +102,26 @@ GE.caches.createCache("DIALOG", 1000, 700, (ctx) => {
  * @prop args
  * @prop deck
  * @prop sideboard
- * @augments stdgam.Scene
  */
 const intermediateScene = new Scene({
     step: 0,
+
+    /**
+     * 最初の1回だけ実行する初期化処理.
+     * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+     * @memberof intermediateScene
+     */
     ensure(GE){
         this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
         this.ensure = () => {};
     },
+
+    /**
+     * シーンがロードされた時に実行される初期化処理.
+     * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+     * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+     * @memberof intermediateScene
+     */
     onLoad(GE, args){
         this.ensure(GE);
         if(this.step == 0 || args.tutorial){
@@ -465,6 +477,12 @@ initData(){
     };
 },
 
+/**
+ * シーンがロードされた時に実行される初期化処理.
+ * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+ * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+ * @memberof selectScene
+ */
 onLoad(GE, args){
     if(!this.setting) this.initData();
     if(this.shelf) return;
@@ -496,6 +514,12 @@ onLoad(GE, args){
  * @prop flag
  */
 const bootstrap = new Scene({
+    /**
+     * シーンがロードされた時に実行される初期化処理.
+     * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+     * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+     * @memberof intermediateScene
+     */
     onLoad(GE, args){
         this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
         this.message = new QBTalk("セ～ガ～♪", 30);
@@ -503,6 +527,11 @@ const bootstrap = new Scene({
         this.flag = false;
         GE.ready(() => { this.flag = true; });
     },
+
+    /**
+     * 1フレーム分のタスク処理を実行する.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     */
     execute(GE){
         if(this.flag && !this.message.active){
             Card.init(GE, 90, 120);
