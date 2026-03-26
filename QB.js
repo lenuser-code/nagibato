@@ -83,7 +83,6 @@ class QBTalk{
 
     /**
      * このオブジェクトの状態変化を担当するジェネレータを生成する.
-     * @yields {boolean} 常にtrueを返す
      */
     *chart(){
         let i;
@@ -165,7 +164,6 @@ class QBTelop{
 
     /**
      * このオブジェクトの状態変化を担当するジェネレータを生成する.
-     * @yields {boolean} 常にtrueを返す
      */
     *chart(){
         let i;
@@ -261,7 +259,6 @@ class QBYesNo{
 
     /**
      * このオブジェクトの状態変化を担当するジェネレータを生成する.
-     * @yields {boolean} 常にfalseを返す
      */
     *chart(){
         let i;
@@ -273,7 +270,6 @@ class QBYesNo{
     /**
      * キー入力待ちの状態を実装するジェネレータを生成する.
      * chartから呼び出される.
-     * @yields {boolean} 常にfalseを返す
      */
     *waitForAnswer(){
         let f = true;
@@ -380,7 +376,6 @@ class QBLecture{
 
     /**
      * このオブジェクトの状態変化を担当するジェネレータを生成する.
-     * @yields {boolean} 常にtrueを返す
      */
     *chart(){
         let i;
@@ -392,7 +387,6 @@ class QBLecture{
     /**
      * キー入力待ちとページ送りを繰り返すジェネレータを生成する.
      * chartから呼び出される.
-     * @yields {boolean} 常にtrueを返す
      */
     *talk(){
         while(this.#nextPage()){

@@ -72,8 +72,7 @@ let SkillDealer = class extends SkillDealerBase{
     }
 
     *chargeUp(percent){
-        this.owner.poolView.frames = 45;
-        this.owner.pool.addChargeBonus(percent);
+        this.owner.poolManager.chargeUp(percent);
         GE.se.play("chargeUp");
         yield* this.wait(60);
     }
@@ -103,9 +102,8 @@ let SkillDealer = class extends SkillDealerBase{
             }
         }
 
-        const prev = this.owner.pool.chargedMP();
-        this.owner.pool.recalculate();
-        if(f || prev != this.owner.pool.chagedMP) GE.se.play("chargeUp");
+        const changed = this.owner.poolManager.recalculate();
+        if(f || changed) GE.se.play("chargeUp");
         yield* this.wait(60);
     }
 
@@ -298,7 +296,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 }
 
 
-// #2. プライベート関数
+// #2. プライベート関数・プライベートクラス
 
 // (a) コンポーネントを生成する関数
 
@@ -414,64 +412,6 @@ let createDeckView = function(target, x, y){
                 this.target.watch(i).paint(GE, ctx, x, this.y);
             }
             ctx.restore();
-        }
-    };
-}
-
-/**
- * Poolの状態を表示するコンポーネントを生成する.
- * @param {Pool} target - 観察対象のPoolオブジェクト
- * @param {number} x - 配置する位置のx座標
- * @param {number} y - 配置する位置のy座標
- * @return {Object} 生成されたコンポーネント
- */
-let createPoolView = function(target, x, y){
-    const chainFont = {
-        font: "bold 24px Sans-Serif", color: "#ffff55",
-        //lineWidth: 0.5, lineJoin: "round"
-    };
-    const step = 15;
-
-    return {
-        target: target, x: x, y: y, active: true,
-        meter: createMeter(0, 9999, 10),
-        history: 0, frames: 10,
-        addr(){
-            return {x: this.x + this.target.size() * step, y: this.y};
-        },
-        createChainEffect(GE){
-            const x = this.x + this.target.size() * step - 15;
-            const text = T.text("COMBO!", chainFont);
-            const sp = T.slider(T.finite(text, 20), x, this.y-15);
-            sp.slideTo(x, this.y-20, 15);
-            return sp;
-        },
-        draw(GE, ctx){
-            let i;
-            ctx.save();
-            for(i = 0; i < this.target.size(); i++){
-                const x = this.x + i * step;
-                this.target.watch(i).paint(GE, ctx, x, this.y);
-            }
-            if(!this.showOnlyCards){
-                ctx.fillStyle = "white";
-                ctx.font = "24px Sans-Serif";
-                ctx.fillText(`MP: ${this.meter.value}`, this.x, this.y + Card.height + 30);
-                if(this.target.skillCount() > 0){
-                    ctx.fillText(`スキル×${this.target.skillCount()}`,
-                                 this.x + 135, this.y + Card.height + 30);
-                }
-            }
-            ctx.restore();
-        },
-        execute(GE){
-            if(this.history != this.target.chargedMP()){
-                this.history = this.target.chargedMP();
-                this.meter.changeTo(this.target.chargedMP(), this.frames);
-            }
-            if(this.frames > 10) this.frames = 10;
-            this.meter.execute(GE);
-            return true;
         }
     };
 }
@@ -700,6 +640,165 @@ let delivery = function(card, addr1, addr2, callback){
     return obj;
 }
 
+/**
+ * Poolの管理を行うオブジェクト.
+ * @prop {number} x - 配置する位置のx座標
+ * @prop {number} y - 配置する位置のy座標
+ * @prop {boolean} showOnlyCard - trueならカードだけを表示する
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
+ */
+class PoolManager{
+    #owner;
+    #pool;
+    #meter;
+    #step = 15;
+    #chainFont = { font: "bold 24px Sans-Serif", color: "#ffff55" };
+    #damageFont = { color: "orange", font: "bold 36px Sans-Serif" };
+    #statusFont = { font: "24px Sans-Serif", color: "white" };
+
+    #addChainEffect(){
+        const x = this.x + this.#pool.size() * this.#step - 15;
+        const text = T.text("COMBO!", this.#chainFont);
+        const spr = T.slider(T.finite(text, 20), x, this.y-15);
+        spr.slideTo(x, this.y-20, 15);
+        this.#owner.add(spr);
+    }
+
+    #addAttackEffect(dmg){
+        const text = T.text(`${dmg} pts`, this.#damageFont);
+        const obj = T.fader(T.slider(T.finite(text, 60), this.x, this.y+50), 0);
+        obj.slideTo(this.x, this.y+40, 2);
+        obj.fadeTo(1, 2);
+        this.#owner.add(obj);
+    }
+
+    /**
+     * 指定された設定でインスタンスを生成する.
+     * @param {stdgam.Scene} owner - このオブジェクトを使用するシーン
+     * @param {number} version - Poolに渡す引数
+     * @param {number} x - 配置する位置のx座標
+     * @param {number} y - 配置する位置のy座標
+     */
+    constructor(owner, version, x, y){
+        this.#owner = owner;
+        this.#pool = new Pool(version);
+        this.#meter = new stdtask.Meter(0, 9999, 10);
+        owner.add(this.#meter);
+        this.x = x;
+        this.y = y;
+        this.showOnlyCards = false;
+        this.active = true;
+    }
+
+    /** @returns {number[]} deliveryに用いる座標.*/
+    addr(){
+        return {x: this.x + this.#pool.size() * this.#step, y: this.y};
+    }
+
+    /**
+     * チャージボーナスの加算処理を行う.
+     * @param {number} percent - 加算するチャージボーナス
+     */
+    chargeUp(percent){
+        this.#pool.addChargeBonus(percent);
+        this.#meter.changeTo(this.#pool.chargedMP(), 45);
+    }
+
+    /**
+     * 指定されたカードを場に出す処理を行う.
+     * @param {Cardlike} card - 場に出すカード
+     */
+    putCard(card){
+        this.#pool.push(card);
+        this.#meter.changeTo(this.#pool.chargedMP());
+        if(this.#pool.hyped()){
+            this.#addChainEffect();
+        }
+    }
+
+    /**
+     * MPBoostBySuitの変更時に, MPの再計算処理を行う.
+     * @param {boolean} MPに変化があった場合true, そうでなければfalse
+     */
+    recalculate(){
+        const tmp = this.#pool.chargedMP();
+        this.#pool.recalculate();
+        return (this.#pool.chargedMP() != tmp);
+    }
+
+    /**
+     * 追加スキャンの処理を行う.
+     * param {Cardlike} card - 追加スキャンするカード
+     */
+    extraScan(card){
+        this.#pool.extraScan(card);
+        this.#meter.changeTo(this.#pool.chargedMP());
+        if(this.#pool.hyped()){
+            this.#owner.add(this.#addChainEffect());
+        }
+    }
+
+    /**
+     * チャージMPの選択肢補正を0.5にする.
+     */
+    halveMP(){
+        this.#pool.setCorrectionFlag(true);
+        this.#meter.changeTo(this.#pool.chargedMP(), 45);
+    }
+
+    /**
+     * チャージMPをplayerMPに加算した値を返す. このとき同時にチャージMPを0にする.			
+     * @param {number} playerMP - プレイヤーのMP
+     * @returns playerMPにチャージMPを加算した値
+     */
+    consumeMP(playerMP){
+        const MP = this.#pool.chargedMP() + playerMP;
+        this.#addAttackEffect(MP);
+        this.#pool.init();
+        this.#meter.changeTo(this.#pool.chargedMP(), 60);
+        return MP;
+    }
+
+    /**
+     * スキル発動処理を行うジェネレータを生成する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     */
+    *invokeSkills(GE){
+        while(this.#pool.skillCount() > 0){
+            yield* this.#owner.SD.wait(20);
+            const skill = this.#pool.shiftSkill();
+            this.#owner.add( createSkillDialog(skill) );
+            yield* this.#owner.SD.wait(130);
+            yield* this.#owner.SD.deal(GE, skill);
+        }
+    }
+
+    /**
+     * 現在の状態を描画する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に用いるコンテクスト
+     */
+    draw(GE, ctx){
+        ctx.save();
+        for(let i = 0; i < this.#pool.size(); i++){
+            const x = this.x + i * this.#step;
+            this.#pool.watch(i).paint(GE, ctx, x, this.y);
+        }
+        if(!this.showOnlyCards){
+            ctx.font = this.#statusFont.font;
+            ctx.fillStyle = this.#statusFont.color;
+            ctx.fillText(`MP: ${this.#meter.value}`, this.x, this.y + Card.height + 30);
+            if(this.#pool.skillCount() > 0){
+                ctx.fillText(
+                    `スキル×${this.#pool.skillCount()}`,
+                    this.x + 135, this.y + Card.height + 30
+                );
+            }
+        }
+        ctx.restore();
+    }
+}
+
 
 // #3. mainSceneの実装
 
@@ -710,18 +809,17 @@ let delivery = function(card, addr1, addr2, callback){
  * @prop {number} x - シーン描画の基準点のx座標
  * @prop {number} y - シーン描画の基準点のy座標
  * @prop {number} maxTimeCount - 各ターンの制限時間の秒数
+ * @prop {number} turn - 現在のターン数
  * @prop {Player} player - バトルしているプレイヤーキャラクター
  * @prop {Enemy} enemy - バトルしている敵キャラクター
  * @prop {Deck} deck - 使用しているDeckオブジェクト
  * @prop {Deck} sideboard - サイドボードを格納しているDeckオブジェクト
- * @prop {Pool} pool - 使用しているPoolオブジェクト
  * @prop {Sprite[]} hand - 手札を格納する配列
- * @prop {number} turn - 現在のターン数
+ * @prop {Pool} poolManager - 使用しているPoolManager
  * @prop {SkillDealerBase} SD - プレイヤースキルの実行を管理するオブジェクト
  * @prop {EnemyActionDealerBase} EAD - 敵スキルの実行を管理するオブジェクト
  * @prop {Shaker} pShaker - プレイヤー側UIのためのShaker
  * @prop {Shaker} eShaker - 敵側UIのためのShaker
- * @prop {PoolView} poolView - poolを表示するオブジェクト
  * @prop {DeckView} deckView - deckを表示するオブジェクト
  * @prop {(QBTalk|QBLecture)} openingQB - オープニング会話を表示するオブジェクト
  * @prop {boolean} busy - phase2においてまだ完了していないタスク処理があるか表す
@@ -771,9 +869,10 @@ textOpt: {
  * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
  */
 initComponents(args){
+    this.init();
     this.deck = args.deck;
     this.sideboard = args.sideboard;
-    this.pool = new Pool(args.chainRule != 2 ? 1 : 2);
+    this.poolManager = new PoolManager(this, (args.chainRule != 2 ? 1 : 2), this.x+70, this.y+150);
     this.busy = false;
     this.turn = 0;
     this.maxTimeCount = 5;
@@ -785,10 +884,8 @@ initComponents(args){
     this.player = new Player(args.playerData);
     this.enemy = new Enemy(args.enemyData || EnemyData["キュゥべえ"], args.playerData.suit_string);
     this.EAD.init( args.enemyData ? args.enemyData.actions : []);
-
-    this.poolView = createPoolView(this.pool, this.x+70, this.y+150);
     this.deckView = createDeckView(this.deck, this.x+440, this.y+350);
-    this.init();
+
 },
 
 /**
@@ -855,7 +952,7 @@ onLoad(GE, args){
     bindEnemy(this, this.enemy, this.x+50, this.y+60);
     this.openingQB = createOpeningQB(args);
 
-    this.add(this.poolView);
+    this.add(this.poolManager);
     this.addSprite(this.deckView);
     this.useCoroutine(GE, this.chart);
 },
@@ -954,7 +1051,7 @@ onLoad(GE, args){
         if(card){
             GE.se.play("heal");
             //this.sideboard.remove(card);  // 同じカードを複数回スキャンできる
-            this.pool.extraScan(card);
+            this.poolManager.extraScan(card);
             yield* this.SD.wait(60);
         }
     }
@@ -988,12 +1085,9 @@ phase2_body(GE, i){
         return;
     }
 
-    this.add( delivery(this.hand[i].contents, this.hand[i], this.poolView.addr(),
+    this.add( delivery(this.hand[i].contents, this.hand[i], this.poolManager.addr(),
         (card) => {
-            this.pool.push(card);
-            if(this.pool.hyped()){
-                 this.add(this.poolView.createChainEffect(GE));
-            }
+            this.poolManager.putCard(card);
             this.busy = false;
         }
     ));
@@ -1026,40 +1120,24 @@ phase2_body(GE, i){
     dialog.active = false;
     stop.active = false;
     yield* this.attackPhase_choice(n);
-
-    const pts = this.pool.chargedMP() + this.player.MP();
     yield* this.SD.wait(60);
-    this.poolView.frames = 60;
-    this.pool.init();
-    const obj = T.fader(T.slider(T.finite(
-        T.text(`${pts} pts`, this.textOpt.points),
-        60), this.poolView.x, this.poolView.y+50), 0);
-    obj.slideTo(this.poolView.x, this.poolView.y+40, 2);
-    obj.fadeTo(1, 2);
-    this.add(obj);
 
+    const damage = this.poolManager.consumeMP(this.	player.MP());
     GE.se.play("hit0");  // 試しにSEを入れてみる
-    this.enemy.addHP(-pts);
+    this.enemy.addHP(-damage);
     this.shakeEnemy();  // shake_test
     yield* this.SD.wait(110);
 },
 *attackPhase_choice(n){
     if(n == 1){
         yield* this.SD.wait(30);
-        this.poolView.frames = 45;
-        this.pool.setCorrectionFlag(true);
+        this.poolManager.halveMP();
         GE.se.play("powerup");
         this.player.resetSG();
         yield* this.SD.wait(60);
     }
     if(n == 2){
-        while(this.pool.skillCount() > 0){
-            yield* this.SD.wait(20);
-            const skill = this.pool.shiftSkill();
-            this.add( createSkillDialog(skill) );
-            yield* this.SD.wait(130);
-            yield* this.SD.deal(GE, skill);
-        }
+        yield* this.poolManager.invokeSkills(GE);
     }
 },
 
@@ -1088,7 +1166,7 @@ phase2_body(GE, i){
     this.addTask(T.call((GE) => { GE.se.play("battleFinished"); } ), true );
     this.addTask(obj, true);
     this.addTask(T.pause(20), true);
-    this.poolView.showOnlyCards = true;
+    this.poolManager.showOnlyCards = true;
 
     yield* this.SD.wait(20);
     let blinky = T.text("Press any button", {x: 500, y: 580, textAlign: "center", ...this.textOpt.score});
