@@ -776,7 +776,7 @@ class PoolManager{
     /**
      * 現在の状態を描画する.
      * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
-     * @param {(CanvasRenderingContext2D} ctx - 描画に用いるコンテクスト
+     * @param {CanvasRenderingContext2D} ctx - 描画に用いるコンテクスト
      */
     draw(GE, ctx){
         ctx.save();
