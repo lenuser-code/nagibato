@@ -12,7 +12,7 @@
  * @namespace
  */
 var battle = battle || {};
-(function(Public){
+(function(battle){
 
 // #1. SkillDealerBase, EnemyDealerBaseの派生クラス
 
@@ -594,7 +594,7 @@ let bindPlayer = function(scene, player, x, y){
  * (1) Enemyが持つ各種のMeterオブジェクトをSceneのタスクリストに登録する.
  * (2) Enemyの状態を観察・表示するコンポーネントを生成し, Sceneに追加する.
  * @param {stdgam.Scene} scene - この操作を実行されるSceneオブジェクト
- * @param {Player} enemy - 登録されるEnemyオブジェクト
+ * @param {Enemy} enemy - 登録されるEnemyオブジェクト
  * @param {number} x - 配置作業の基点のx座標
  * @param {number} y - 配置作業の基点のy座標
  */
@@ -694,18 +694,43 @@ let delivery = function(card, addr1, addr2, callback){
 /**
  * バトルを実行するSceneオブジェクト.
  * @type {stdgam.Scene}
+ * @namespace
+ * @prop {number} x - シーン描画の基準点のx座標
+ * @prop {number} y - シーン描画の基準点のy座標
+ * @prop {number} maxTimeCount - 各ターンの制限時間の秒数
+ * @prop {Player} player - バトルしているプレイヤーキャラクター
+ * @prop {Enemy} enemy - バトルしている敵キャラクター
+ * @prop {Deck} deck - 使用しているDeckオブジェクト
+ * @prop {Deck} sideboard - サイドボードを格納しているDeckオブジェクト
+ * @prop {Pool} pool - 使用しているPoolオブジェクト
+ * @prop {Sprite[]} hand - 手札を格納する配列
+ * @prop {number} turn - 現在のターン数
+ * @prop {SkillDealerBase} SD - プレイヤースキルの実行を管理するオブジェクト
+ * @prop {EnemyActionDealerBase} EAD - 敵スキルの実行を管理するオブジェクト
+ * @prop {Shaker} pShaker - プレイヤー側UIのためのShaker
+ * @prop {Shaker} eShaker - 敵側UIのためのShaker
+ * @prop {PoolView} poolView - poolを表示するオブジェクト
+ * @prop {DeckView} deckView - deckを表示するオブジェクト
+ * @prop {(QBTalk|QBLecture)} openingQB - オープニング会話を表示するオブジェクト
+ * @prop {boolean} busy - phase2においてまだ完了していないタスク処理があるか表す
+ * @prop {Object.<string, *>} backupArgs - オプションリストのバックアップ
  */
-Public.mainScene = new stdgam.Scene({
+battle.mainScene = new stdgam.Scene({
 x: 160,
 y: 0,
 
-// shaker_test
+/**
+ * プレイヤー側のUIを振動させる.
+ */
 shakePlayer(){
     if(this.pShaker.active) return;
     this.pShaker.activate();
     this.addTask(this.pShaker);
 },
 
+/**
+ * 敵側のUIを振動させる.
+ */
 shakeEnemy(){
     if(this.eShaker.active) return;
     if(this.enemy.retentionRateHP() > 0.5){
@@ -717,6 +742,10 @@ shakeEnemy(){
     this.addTask(this.eShaker);
 },
 
+/**
+ * テキスト描画に用いるオプションをまとめたもの.
+ * @type {Object.<string, Object{string, *}>}
+ */
 textOpt: {
     time: { font: "27px Sans-Serif", textAlign: "center" },
     score: { font: "27px Sans-Serif" },
@@ -725,6 +754,10 @@ textOpt: {
     clear: { color: "yellow", font: "bold 100px Serif", textAlign: "center" }
 },
 
+/**
+ * このシーンの構成要素を初期化する.
+ * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+ */
 initComponents(args){
     this.deck = args.deck;
     this.sideboard = args.sideboard;
@@ -746,19 +779,35 @@ initComponents(args){
     this.init();
 },
 
+/**
+ * A, S, Dのキーが押されたか確認し, 該当するのキーがあれば
+ * そのうち一番優先順序の高いキーのインデックスを返す.
+ * 優先順序は上記の並び順の通りであり, インデックスはAを0番目とした数字である.
+ * どれも押されていなかったときは-1を返す.
+ * @param {stdgam.GameEngine} GE - 使用するGameEngine
+ * @returns {number} 押されたキーがあればそのうち一番優先されるキーのインデックス.
+ * そうでなければ-1
+ */
 checkInput(GE){
     const codes = ["KeyA", "KeyS", "KeyD"];
-    return codes.findIndex((e) => GE.input.isJustPressed(e));
+    return GE.input.checkInput(codes)[1];
 },
 
+/**
+ * 残り体力に基づく勝敗判定を行う.
+ * @returns {boolean} プレイヤーが勝利していればtrue, そうでなければfalse
+ */
 judgement(){
     if(this.enemy.HP() == 0) return true;
     if(this.player.HP() == 0) return false;
     return (this.player.retentionRateHP() >= this.enemy.retentionRateHP());
 },
 
-// backupと言っているのにそれを改変してくる時間遡行者もいるけど・・・
-// 実はシャルロッテも敵データを改変するので注意
+/**
+ * ロード時に渡されたオプションリストのバックアップをとる.
+ * ただし, このbackupは改変される可能性がある.
+ * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+ */
 backupOptions(args){
     this.backupArgs = {
         deck: args.deck.clone(),  // 未使用時に戻すため
@@ -769,6 +818,11 @@ backupOptions(args){
     };
 },
 
+/**
+ * シーンがロードされた時に実行される初期化処理.
+ * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+ * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+ */
 onLoad(GE, args){
     MPBoostBySuit.init();
     this.backupOptions(args);
