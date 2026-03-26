@@ -209,6 +209,18 @@ let SkillDealer = class extends SkillDealerBase{
     }
 
     *timeWarp(){
+        this.owner.player.addHP(this.owner.player.percentHP(100));
+        this.owner.player.addSG(100);
+        this.owner.turn = 1;
+        yield* this.wait(60);
+        this.owner.add(T.finite(
+            T.text(`Turn ${this.owner.turn}`, {x: 500, y: 180, ...this.owner.textOpt.turn}),
+            90));
+        yield* this.wait(90);
+    }
+
+    // 本当に1ターン目に戻す場合
+    *realTimeWarp(){
         this.owner.backupArgs.playerData.main = null;
         this.owner.init();  // !?
         this.owner.GE.changeScene("main", this.owner.backupArgs);  // !?
