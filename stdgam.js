@@ -300,12 +300,11 @@ stdgam.Scene = class {
 // #2. GameEngineの実装
 
 /**
- * キー入力を管理するヘルパークラス.
- * クラス定義自体は公開されないが, インスタンスはGameEngineのinput要素に格納され
- * 外部からも利用される.
+ * キー入力を管理するクラス.
+ * GameEngineのinput要素に格納され, キー入力の管理に利用される.
  * @class
  */
-let InputManager = class {
+stdgam.InputManager = class {
     #currentKeys;
     #previousKeys;
 
@@ -464,7 +463,7 @@ stdgam.GameEngine = class {
         this.#scenes = {};
         this.#currentScene = null;
 
-        this.input = new InputManager();
+        this.input = new stdgam.InputManager();
         this.#timer = new TimeKeeper(this);
         this.se = new stdgam.SEPool();
         this.images = new stdgam.ImagePool();

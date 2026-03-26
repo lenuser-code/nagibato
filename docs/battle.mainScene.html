@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> ImageCutter</title>
+  <title> mainScene</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,8 +73,8 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>ImageCutter</h1>
+                    <p>Namespace</p>
+                    <h1>mainScene</h1>
                 </header>
                 
 
@@ -85,12 +85,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>ImageCutter<span class="signature">(img, width, height)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description"><p>イメージを指定された幅・高さに基づいて分割するクラス.
-より正確に言うと, 実際に分割した画像を生成するのではなく,
-単に「設定に基づいて元画像の適切な一部分を描画する」機能を持つだけである.</p></div>
+        <h2>
+            <span class="ancestors"><a href="battle.html">battle</a>.</span>mainScene</h2>
         
     
 </header>
@@ -99,46 +95,17 @@
     <div class="container-overview">
     
         
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="ImageCutter">
-        <a class="href-link" href="#ImageCutter">#</a>
+            <div class="description"><p>バトルを実行するSceneオブジェクト.</p></div>
         
-        <span class="code-name">
-            
-                new ImageCutter<span class="signature">(img, width, height)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
 
-    
-    
-    <div class="description">
-        <p>指定された画像を横width, 縦heightのブロックに等分割して扱う.</p>
-    </div>
-    
+        
 
 
+    <h5 class="subsection-title">Properties:</h5>
 
-
-
-
-
-
-
-    <h5>Parameters:</h5>
     
 <div class="table-container">
-    <table class="params table">
+    <table class="props table">
         <thead>
         <tr>
             
@@ -157,86 +124,449 @@
 
         <tbody>
         
-
             
 <tr class="deep-level-0">
-  
-      <td class="name"><code>img</code></td>
-  
+    
+        <td class="name"><code>x</code></td>
+    
 
-  <td class="type">
-  
-      
-<code class="param-type">HTMLImageElement</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>分割対象となる画像</p></td>
-</tr>
-
-
+    <td class="type">
+    
         
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>width</code></td>
-  
-
-  <td class="type">
-  
-      
 <code class="param-type">number</code>
 
 
-  
-  </td>
+    
+    </td>
 
-  
+    
 
-  
+    
 
-  <td class="description last"><p>ブロック1個分の幅</p></td>
+    <td class="description last"><p>シーン描画の基準点のx座標</p></td>
 </tr>
 
-
         
-
             
 <tr class="deep-level-0">
-  
-      <td class="name"><code>height</code></td>
-  
+    
+        <td class="name"><code>y</code></td>
+    
 
-  <td class="type">
-  
-      
+    <td class="type">
+    
+        
 <code class="param-type">number</code>
 
 
-  
-  </td>
+    
+    </td>
 
-  
+    
 
-  
+    
 
-  <td class="description last"><p>ブロック1個分の高さ</p></td>
+    <td class="description last"><p>シーン描画の基準点のy座標</p></td>
 </tr>
 
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>maxTimeCount</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>各ターンの制限時間の秒数</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>player</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="Player.html">Player</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>バトルしているプレイヤーキャラクター</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>enemy</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="Enemy.html">Enemy</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>バトルしている敵キャラクター</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>deck</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="Deck.html">Deck</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>使用しているDeckオブジェクト</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>sideboard</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="Deck.html">Deck</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>サイドボードを格納しているDeckオブジェクト</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>pool</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="Pool.html">Pool</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>使用しているPoolオブジェクト</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>hand</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Array.&lt;<a href="global.html#Sprite">Sprite</a>></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>手札を格納する配列</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>turn</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>現在のターン数</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SD</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="SkillDealerBase.html">SkillDealerBase</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>プレイヤースキルの実行を管理するオブジェクト</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>EAD</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>敵スキルの実行を管理するオブジェクト</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>pShaker</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Shaker</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>プレイヤー側UIのためのShaker</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>eShaker</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Shaker</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>敵側UIのためのShaker</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>poolView</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">PoolView</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>poolを表示するオブジェクト</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>deckView</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">DeckView</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>deckを表示するオブジェクト</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>openingQB</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="QBTalk.html">QBTalk</a></code>
+|
+
+<code class="param-type"><a href="QBLecture.html">QBLecture</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>オープニング会話を表示するオブジェクト</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>busy</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>phase2においてまだ完了していないタスク処理があるか表す</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>backupArgs</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Object.&lt;string, *></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>オプションリストのバックアップ</p></td>
+</tr>
 
         
         </tbody>
     </table>
 </div>
-
-
 
 
 
@@ -273,38 +603,15 @@
 
     
         <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
+            <a href="battle.js.html" class="button">View Source</a>
             <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line565">line 565</a>
+                <a href="battle.js.html">battle.js</a>, <a href="battle.js.html#line718">line 718</a>
             </span>
         </p>
     
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
         
     
     </div>
@@ -323,262 +630,6 @@
 
     
 
-    
-        <div class='vertical-section'>
-            <h1>Methods</h1>
-            <div class="members">
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="paint">
-        <a class="href-link" href="#paint">#</a>
-        
-        <span class="code-name">
-            
-                paint<span class="signature">(ctx, x, y, a, b)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>分割した画像のうち上からa番目, 左からb番目の部分を描画する.
-ただし, a, bは0から数え始めるものとする.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>ctx</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">CanvasRenderingContext2D</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>描画に使うコンテクスト</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>x</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>描画位置のx座標</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>y</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>描画位置のy座標</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>a</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>分割のうち, 上から何番目を使うか (0から数え始める)</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>b</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>分割のうち, 左から何番目を使うか (0から数え始める)</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line591">line 591</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-            </div>
-        </div>
     
 
     
