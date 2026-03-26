@@ -445,8 +445,8 @@ let createPoolView = function(target, x, y){
                 ctx.fillStyle = "white";
                 ctx.font = "24px Sans-Serif";
                 ctx.fillText(`MP: ${this.meter.value}`, this.x, this.y + Card.height + 30);
-                if(this.target.skills.length > 0){
-                    ctx.fillText(`スキル×${this.target.skills.length}`,
+                if(this.target.skillCount() > 0){
+                    ctx.fillText(`スキル×${this.target.skillCount()}`,
                                  this.x + 135, this.y + Card.height + 30);
                 }
             }
