@@ -805,7 +805,7 @@ class PoolManager{
 
     /**
      * MPBoostBySuitの変更時に, MPの再計算処理を行う.
-     * @param {boolean} MPに変化があった場合true, そうでなければfalse
+     * @returns {boolean} MPに変化があった場合true, そうでなければfalse
      */
     recalculate(){
         const tmp = this.#pool.chargedMP();
@@ -902,7 +902,7 @@ class PoolManager{
  * @prop {Deck} deck - 使用しているDeckオブジェクト
  * @prop {Deck} sideboard - サイドボードを格納しているDeckオブジェクト
  * @prop {Sprite[]} hand - 手札を格納する配列
- * @prop {Pool} poolManager - 使用しているPoolManager
+ * @prop {PoolManager} poolManager - 使用しているPoolManager
  * @prop {SkillDealerBase} SD - プレイヤースキルの実行を管理するオブジェクト
  * @prop {EnemyActionDealerBase} EAD - 敵スキルの実行を管理するオブジェクト
  * @prop {Shaker} pShaker - プレイヤー側UIのためのShaker
