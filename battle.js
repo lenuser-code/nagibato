@@ -536,7 +536,6 @@ let bindPlayer = function(scene, player, x, y){
     };
     scene.add(shieldView);
 
-    // shaker_test
     scene.pShaker = new Shaker(4, 2, 3);
     scene.pShaker.add(nameView, HPMeterView, HPView, MPView, shieldView, SGMeterView);
 }
@@ -622,25 +621,6 @@ let Shaker = class{
 }
 
 /**
- * ある場所から他の場所までカードが移動する様子を描画した後, 指定された処理を
- * 実行するオブジェクトを生成する.
- * @param {Card} card - 対象となるカード
- * @param {{x: number, y: number}} addr1 - 移動開始時の位置
- * @param {{x: number, y: number}} addr2 - 移動終了時の位置
- * @param {function} callback - 移動終了時に実行する関数. cardを引数として受け取る.
- * @returns {Object} 生成されたオブジェクト
- */
-let delivery = function(card, addr1, addr2, callback){
-    const obj = T.scheduler( T.slider(T.custom(card), addr1.x, addr1.y) );
-    obj.slideTo(addr2.x, addr2.y, 18);
-    obj.after(18, (GE, obj) => {
-        callback(card);
-        obj.active = false;
-    });
-    return obj;
-}
-
-/**
  * Poolの管理を行うオブジェクト.
  * @prop {number} x - 配置する位置のx座標
  * @prop {number} y - 配置する位置のy座標
@@ -690,7 +670,7 @@ class PoolManager{
         this.active = true;
     }
 
-    /** @returns {number[]} deliveryに用いる座標.*/
+    /** @returns {number[]} 次のカードを配置する座標.*/
     addr(){
         return {x: this.x + this.#pool.size() * this.#step, y: this.y};
     }
@@ -734,7 +714,7 @@ class PoolManager{
         this.#pool.extraScan(card);
         this.#meter.changeTo(this.#pool.chargedMP());
         if(this.#pool.hyped()){
-            this.#owner.add(this.#addChainEffect());
+            this.#addChainEffect();
         }
     }
 
@@ -799,6 +779,78 @@ class PoolManager{
     }
 }
 
+/**
+ * @prop {boolean} busy
+ */
+class HandManager{
+    #owner;
+    #deck;
+    #hand;
+    #poolManager;
+    #deckpos;
+
+    constructor(owner, deck, poolManager){
+        this.#owner = owner;
+        this.#deck = deck;
+        this.#hand = [];
+        this.#poolManager = poolManager;
+        this.#deckpos = { x: owner.position.deck[0], y: owner.position.deck[1] };
+        this.busy = false;
+
+        for(let i = 0; i < 3; i++){
+            const [tx, ty] = owner.position.hand(i);
+            const obj = T.custom(Card.NullCard, { x: tx, y: ty });
+            this.#hand.push(obj);
+            owner.add(obj);
+        }
+    }
+
+    allCardsSpent(){
+        return this.#deck.size() == 0 && this.#hand.every((e) => e.contents.value == 0);
+    }
+
+    cost(i){
+        return this.#hand[i].contents.value;
+    }
+
+    drawCard(i){
+        return this.#delivery(this.#deck.shift(), this.#deckpos, this.#hand[i],
+            (card) => { this.#hand[i].contents = card; }
+        );
+    }
+
+    playCard(i){
+        const card = this.#hand[i].contents;
+        this.#hand[i].contents = Card.NullCard;
+        this.busy = true;
+        return this.#delivery(card, this.#hand[i], this.#poolManager.addr(),
+            (card) => {
+                this.#poolManager.putCard(card);
+                this.busy = false;
+            }
+        );
+    }
+
+    /**
+     * ある場所から他の場所までカードが移動する様子を描画した後, 指定された処理を
+     * 実行するオブジェクトを生成する.
+     * @param {Card} card - 対象となるカード
+     * @param {{x: number, y: number}} addr1 - 移動開始時の位置
+     * @param {{x: number, y: number}} addr2 - 移動終了時の位置
+     * @param {function} callback - 移動終了時に実行する関数. cardを引数として受け取る.
+     * @returns {Object} 生成されたオブジェクト
+     */
+    #delivery = function(card, addr1, addr2, callback){
+        const obj = T.scheduler( T.slider(T.custom(card), addr1.x, addr1.y) );
+        obj.slideTo(addr2.x, addr2.y, 18);
+        obj.after(18, (GE, obj) => {
+            callback(card);
+            obj.active = false;
+        });
+        return obj;
+    }
+}
+
 
 // #3. mainSceneの実装
 
@@ -806,28 +858,50 @@ class PoolManager{
  * バトルを実行するSceneオブジェクト.
  * @type {stdgam.Scene}
  * @namespace
- * @prop {number} x - シーン描画の基準点のx座標
- * @prop {number} y - シーン描画の基準点のy座標
+ * @prop {Object.<string,*>} position - 位置情報を抽出したもの
  * @prop {number} maxTimeCount - 各ターンの制限時間の秒数
  * @prop {number} turn - 現在のターン数
+ * @prop {Deck} sideboard - サイドボードを格納しているDeckオブジェクト
  * @prop {Player} player - バトルしているプレイヤーキャラクター
  * @prop {Enemy} enemy - バトルしている敵キャラクター
- * @prop {Deck} deck - 使用しているDeckオブジェクト
- * @prop {Deck} sideboard - サイドボードを格納しているDeckオブジェクト
- * @prop {Sprite[]} hand - 手札を格納する配列
- * @prop {PoolManager} poolManager - 使用しているPoolManager
+ * @prop {PoolManager} poolManager - 使用するPoolManager
+ * @prop {HandManager} handManager - 使用するHandManager
  * @prop {SkillDealerBase} SD - プレイヤースキルの実行を管理するオブジェクト
  * @prop {EnemyActionDealerBase} EAD - 敵スキルの実行を管理するオブジェクト
  * @prop {Shaker} pShaker - プレイヤー側UIのためのShaker
  * @prop {Shaker} eShaker - 敵側UIのためのShaker
- * @prop {DeckView} deckView - deckを表示するオブジェクト
- * @prop {(QBTalk|QBLecture)} openingQB - オープニング会話を表示するオブジェクト
- * @prop {boolean} busy - phase2においてまだ完了していないタスク処理があるか表す
  * @prop {Object.<string, *>} backupArgs - オプションリストのバックアップ
  */
 battle.mainScene = new stdgam.Scene({
-x: 160,
-y: 0,
+/**
+ * 位置情報を抽出したもの.
+ * @type {Object.<string,*>}
+ */
+position: {
+    x: 160,  y: 0,
+    rel(dx, dy){ return [this.x + dx, this.y + dy]; },
+    init(){
+        this.deck = this.rel(440, 350);
+        this.pool = this.rel(70, 150);
+        this.timer = this.rel(-70, 120);
+        this.player = this.rel(-120, 550);
+        this.enemy = this.rel(50, 60);
+        this.hand = (i) => this.rel(100+i*(5+Card.width), 350);
+        this.button = (i) => this.rel(100+i*(5+Card.width)+Card.width/2, 500);
+    }
+},
+
+/**
+ * テキスト描画に用いるオプションをまとめたもの.
+ * @type {Object.<string, Object.<string, *>>}
+ */
+textOpt: {
+    time: { font: "27px Sans-Serif", textAlign: "center" },
+    score: { font: "27px Sans-Serif" },
+    turn: { font: "80px Serif", textAlign: "center" },
+    points: { color: "orange", font: "bold 36px Sans-Serif" },
+    clear: { color: "yellow", font: "bold 100px Serif", textAlign: "center" }
+},
 
 /**
  * プレイヤー側のUIを振動させる.
@@ -850,42 +924,6 @@ shakeEnemy(){
         this.eShaker.activate(6, 2, 3);
     }
     this.addTask(this.eShaker);
-},
-
-/**
- * テキスト描画に用いるオプションをまとめたもの.
- * @type {Object.<string, Object.<string, *>>}
- */
-textOpt: {
-    time: { font: "27px Sans-Serif", textAlign: "center" },
-    score: { font: "27px Sans-Serif" },
-    turn: { font: "80px Serif", textAlign: "center" },
-    points: { color: "orange", font: "bold 36px Sans-Serif" },
-    clear: { color: "yellow", font: "bold 100px Serif", textAlign: "center" }
-},
-
-/**
- * このシーンの構成要素を初期化する.
- * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
- */
-initComponents(args){
-    this.init();
-    this.deck = args.deck;
-    this.sideboard = args.sideboard;
-    this.poolManager = new PoolManager(this, (args.chainRule != 2 ? 1 : 2), this.x+70, this.y+150);
-    this.busy = false;
-    this.turn = 0;
-    this.maxTimeCount = 5;
-
-    this.hand = [];
-    this.SD = new SkillDealer(this);
-    this.EAD = new EnemyActionDealer(this);
-
-    this.player = new Player(args.playerData);
-    this.enemy = new Enemy(args.enemyData || EnemyData["キュゥべえ"], args.playerData.suit_string);
-    this.EAD.init( args.enemyData ? args.enemyData.actions : []);
-    this.deckView = createDeckView(this.deck, this.x+440, this.y+350);
-
 },
 
 /**
@@ -913,18 +951,40 @@ judgement(){
 },
 
 /**
+ * このシーンの構成要素を初期化する.
+ * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+ */
+initComponents(args){
+    this.position.init();
+    this.sideboard = args.sideboard;
+    
+    const version = args.chainRule != 2 ? 1 : 2;
+    this.poolManager = new PoolManager(this, version, ...this.position.pool);
+    this.handManager = new HandManager(this, args.deck, this.poolManager);
+    this.turn = 0;
+    this.maxTimeCount = 5;
+
+    this.SD = new SkillDealer(this);
+    this.EAD = new EnemyActionDealer(this);
+
+    this.player = new Player(args.playerData);
+    this.enemy = new Enemy(args.enemyData || EnemyData["キュゥべえ"], args.playerData.suit_string);
+    this.EAD.init( args.enemyData ? args.enemyData.actions : []);
+},
+
+/**
  * ロード時に渡されたオプションリストのバックアップをとる.
- * ただし, このbackupは改変される可能性がある.
+ * ただし, このbackupは稀に改変される可能性がある.
  * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
  */
 backupOptions(args){
-    this.backupArgs = {
-        deck: args.deck.clone(),  // 未使用時に戻すため
-        sideboard: args.sideboard.clone(),
-        playerData: {...args.playerData},  // timeWarp時に改変されるので
-        enemyData: (args.enemyData ? {...args.enemyData} : null),
-        chainRule: args.chainRule
-    };
+    this.backupArgs = {...args};
+
+    // 一部のデータはディープコピーをとる
+    this.backupArgs.deck = args.deck.clone();
+    this.backupArgs.sideboard = args.sideboard.clone();
+    this.backupArgs.playerData = {...args.playerData};
+    this.backupArgs.enemyData = (args.enemyData ? {...args.enemyData} : null);
 },
 
 /**
@@ -934,26 +994,26 @@ backupOptions(args){
  */
 onLoad(GE, args){
     MPBoostBySuit.init();
-    this.backupOptions(args);
-    this.initComponents(args);
+    this.init();
     this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
     this.add(T.image(GE.caches.get("CARDMAT"), {x: 0, y: 0}));
+
+    this.backupOptions(args);
+    this.initComponents(args);
 
     const btnLabels = ["A", "S", "D"];
     const btnKeys = ["KeyA", "KeyS", "KeyD"];
     for (let i = 0; i < 3; i++) {
         // 手札のカードの中心（Card.width/2）に合わせる
-        const bx = this.x+100 + i * (5 + Card.width) + Card.width / 2;
-        const by = this.y+500; // 手札（y=300）の下
+        const [bx, by] = this.position.button(i);
         this.add(createPhysicalButton(bx, by, btnKeys[i], btnLabels[i]));
     }
 
-    bindPlayer(this, this.player, this.x-120, this.y+550);
-    bindEnemy(this, this.enemy, this.x+50, this.y+60);
-    this.openingQB = createOpeningQB(args);
+    bindPlayer(this, this.player, ...this.position.player);
+    bindEnemy(this, this.enemy, ...this.position.enemy);
 
     this.add(this.poolManager);
-    this.addSprite(this.deckView);
+    this.addSprite(createDeckView(args.deck, ...this.position.deck));
     this.useCoroutine(GE, this.chart);
 },
 
@@ -961,50 +1021,49 @@ onLoad(GE, args){
     yield* this.SD.wait(10);
     yield* this.firstDeal(GE, this);
     while(this.turn <= 4 && this.player.HP() > 0){
+        // アップキープの処理
         yield* this.phase1(GE, this);
         yield* this.SD.upkeep(GE);
         yield* this.EAD.upkeep(GE);
         if(this.player.HP() <= 0 || this.enemy.HP() <= 0) break;
 
+        // メインスキル
         yield* this.mainSkill(GE, this);
         if(this.player.HP() <= 0 || this.enemy.HP() <= 0) break;
 
-        // 追加スキャンの処理
+        // 追加スキャン
         yield* this.extraScan(GE, this);
         if(this.player.HP() <= 0 || this.enemy.HP() <= 0) break;
 
+        // 敵スキル
         yield* this.EAD.specialAction(GE);
         if(this.player.HP() <= 0 || this.enemy.HP() <= 0) break;
 
+        // メイン
         yield* this.phase2(GE, this);
         yield* this.waitWhileBusy(GE, this);
         yield* this.attackPhase(GE, this);
         if(this.player.HP() <= 0 || this.enemy.HP() <= 0) break;
-
         yield* this.defencePhase(GE, this);
     }
     yield* this.ending(GE, this);
 },
 
 *firstDeal(GE, self){
-    this.addSprite(this.openingQB);
-    this.addTask(this.openingQB, true);
+    const openingQB = createOpeningQB(this.backupArgs);
+    this.addSprite(openingQB);
+    this.addTask(openingQB, true);
 
     for(let i = 0; i < 3; i++){
-        this.hand.push(T.custom(new Card(), { x: this.x+100+i*(5+Card.width), y: this.y+350 }));
-        this.add(this.hand[i]);
-
         const obj = T.pause(60);
-        const d = delivery(this.deck.shift(), this.deckView, this.hand[i],
-            (card) => { this.hand[i].contents = card; }
-        );
+        const d = this.handManager.drawCard(i);
         this.addTaskAfter(this.openingQB, obj);
         this.addTask(d, true);
         this.addSprite(d, false);
         while(obj.active) yield true;
     }
 
-    while(this.openingQB.active) yield true;
+    while(openingQB.active) yield true;
 },
 
 *phase1(GE, self){
@@ -1032,8 +1091,7 @@ onLoad(GE, args){
 },
 
 *extraScan(GE, self){
-    if(this.deck.size() > 0 || this.sideboard.size() == 0) return;
-    if(!this.hand.every((e) => e.contents.value == 0)) return;
+    if(!this.handManager.allCardsSpent() || this.sideboard.size() == 0) return;
     const yesno = new QBYesNo("追加スキャンを行うかい？\nA → YES    S → No", 20);
     this.addSprite(yesno);
     this.addTask(yesno, true);
@@ -1050,7 +1108,6 @@ onLoad(GE, args){
         const card = dialog.result;
         if(card){
             GE.se.play("heal");
-            //this.sideboard.remove(card);  // 同じカードを複数回スキャンできる
             this.poolManager.extraScan(card);
             yield* this.SD.wait(60);
         }
@@ -1062,44 +1119,36 @@ onLoad(GE, args){
 
     if(this.player.stun() > 0){
         this.add(new QBTalk("行動を封じられて動けない！", 100));
-        this.add(T.finite(T.text("STUN!", {x: this.x-110, y: this.y+60, font: "32px Sans-Serif"}), 120));
+        const [x, y] = this.position.rel(-110, 60);
+        this.add(T.finite(T.text("STUN!", {x: x, y: y, font: "32px Sans-Serif"}), 120));
         yield* this.SD.wait(120);
         return;
     }
 
-    const timer = createTimeCount(this.maxTimeCount, this.x-70, this.y+120);
+    const timer = createTimeCount(this.maxTimeCount, ...this.position.timer);
+    const [tx, ty] = this.position.rel(-70, 50);
     this.add(timer);
-    this.add(T.finite(T.text("TIME", {x: this.x-70, y: this.y+50, ...this.textOpt.time}), 300));
+    this.add(T.finite(T.text("TIME", {x: tx, y: ty, ...this.textOpt.time}), 300));
 
     while(timer.active){
         const i = this.checkInput(GE);
-        if(i >= 0 && !this.busy && this.hand[i].contents.value != 0){
+        if(i >= 0 && !this.handManager.busy && this.handManager.cost(i) != 0){
             this.phase2_body(GE, i);
         }
         yield true;
     }
 },
 phase2_body(GE, i){
-    if(!this.player.payCost(this.hand[i].contents.value)){
+    if(!this.player.payCost(this.handManager.cost(i))){
         this.add(new QBTelop("ソウルジェムが濁っているよ"));
         return;
     }
-
-    this.add( delivery(this.hand[i].contents, this.hand[i], this.poolManager.addr(),
-        (card) => {
-            this.poolManager.putCard(card);
-            this.busy = false;
-        }
-    ));
-    this.add( delivery(this.deck.shift(), this.deckView.addr(), this.hand[i],
-        (card) => { this.hand[i].contents = card; }
-    ));
-    this.hand[i].contents = new Card(0);
-    this.busy = true;
+    this.add( this.handManager.playCard(i) );
+    this.add( this.handManager.drawCard(i) );
 },
 
 *waitWhileBusy(GE, self){
-    while(this.busy) yield true;
+    while(this.handManager.busy) yield true;
     yield* this.SD.wait(60);
 },
 
