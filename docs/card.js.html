@@ -93,10 +93,18 @@
  */
 
 
+/**
+ * @typedef {(Card|PrismaticCard)} Cardlike
+ * @prop {number} mark - このカードの属性をSuits内のインデックスで表した値 (マーク数値)
+ * @prop {number} value - このカードのコスト
+ * @prop {PlayerSkill_skill} [skill] - このカードが持つスキル
+ * @prop {string} [cardAtlasID] - cardlist.jsにおけるこのカードのID
+ */
+
 // #1. 属性の定義・実装
 
 /*
- * カードは「属性」と「数字」を持つ.
+ * カードは「属性」と「コスト」を持つ.
  * このうち, 属性はさらに「基本属性」と「複合属性」に分かれる.
  *
  * 基本属性は PrimitiveSuits で定義される.
@@ -105,13 +113,15 @@
  * 以下, 「属性の値」とはこれらの文字列のこととする.
  *
  * 現実には, 属性の値そのものを直接扱うことは少なく, 多くは「 Suits 内における
- * その属性のインデックス」を利用する. ただし, ファイル名の生成や
- * ImagePool などで使う文字列キーの生成では属性の値自体を直接使う.
+ * その属性のインデックス」を利用する (しばしば「マーク数値」と略す).
+ * ただし, ファイル名の生成やImagePool などで使う文字列キーの生成では
+ * 属性の値自体を直接使う.
  *
  * また, コンボの判定に使うデータを ChainMask に格納する.
  * 複合属性が Suits に追加されるとき ChainMask にも適切な値が追加される.
  * これらの値を使ってコンボの判定を行う関数が ChainFunc に設定される.
  */
+
 
 // (a) 属性
 
@@ -237,9 +247,9 @@ const MPBoostBySuit = {
  * MAGICARD BATTLE第1弾のルールに従い, 3枚のカードがコンボの条件を
  * 満たしているか判定する
  * (3枚目のカードがスキルを持つかどうかはチェックしない).
- * @param {(Card|PrismaticCard)} a
- * @param {(Card|PrismaticCard)} b
- * @param {(Card|PrismaticCard)} c
+ * @param {Cardlike} a
+ * @param {Cardlike} b
+ * @param {Cardlike} c
  * @returns {boolean} コンボが成立していればtrue, 不成立ならfalse
  */
 const ChainFunc = function(a, b, c){
@@ -250,9 +260,9 @@ const ChainFunc = function(a, b, c){
  * MAGICARD BATTLE第2弾のルールに従い, 3枚のカードがコンボの条件を
  * 満たしているか判定する
  * (3枚目のカードがスキルを持つかどうかはチェックしない).
- * @param {(Card|PrismaticCard)} a
- * @param {(Card|PrismaticCard)} b
- * @param {(Card|PrismaticCard)} c
+ * @param {Cardlike} a
+ * @param {Cardlike} b
+ * @param {Cardlike} c
  * @returns {boolean} コンボが成立していればtrue, 不成立ならfalse
  */
 const ChainFuncVer2 = function(a, b, c){
@@ -295,10 +305,10 @@ const ChainFuncVer2 = function(a, b, c){
  * - *crisisBoostTask(percent)
  *
  * @class
- * @param healRate - ターン開始時のHP回復量を最大HPに対するパーセント表示で表した値
- * @param SGHealRate - ターン開始時のSG回復量
- * @param crisisBonus - crisisBoostの効果量を基本MPに対するパーセント表示で表した値
- * @param appliedCB - crisisBoostの効果のうち, 現時点で既に適用済みの効果量
+ * @prop healRate - ターン開始時のHP回復量を最大HPに対するパーセント表示で表した値
+ * @prop SGHealRate - ターン開始時のSG回復量
+ * @prop crisisBonus - crisisBoostの効果量を基本MPに対するパーセント表示で表した値
+ * @prop appliedCB - crisisBoostの効果のうち, 現時点で既に適用済みの効果量
  */
 class SkillDealerBase{
     constructor(){
@@ -625,13 +635,10 @@ const PlayerSkill = {
  * - paintCost(ctx, x, y, marks, n)
  *
  * @class
- * @param {number} width - カードの横幅
- * @param {number} height - カードの縦幅
- * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
- * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
- * @param {function(CanvasRenderingContext2D, number[]): void} paintBackground - カードの背景を描画する (サブクラスが実装する)
- * @param {function(CanvasRenderingContext2D, HTMLImageElement[]): void} paintMarks - カードのマークを描画する (サブクラスが実装する)
- * @param {function(CanvasRenderingContext2D, number, number, number[], number): void} paintCost - 
+ * @prop {number} width - カードの横幅
+ * @prop {number} height - カードの縦幅
+ * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  * 指定された座標にカードの左上端があるものとしてカードのコストを描画する (サブクラスが実装する)
  */
 class Polysuit{
@@ -718,10 +725,10 @@ class Polysuit{
 /**
  * 2つのマークを持つカードの画像を生成・管理するためのクラス.
  * @class
- * @param {number} width - カードの横幅
- * @param {number} height - カードの縦幅
- * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
- * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @prop {number} width - カードの横幅
+ * @prop {number} height - カードの縦幅
+ * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  */
 class DuosuitGenerator extends Polysuit{
     /**
@@ -785,10 +792,10 @@ class DuosuitGenerator extends Polysuit{
 /**
  * 3つのマークを持つカードの画像を生成・管理するためのクラス.
  * @class
- * @param {number} width - カードの横幅
- * @param {number} height - カードの縦幅
- * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
- * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @prop {number} width - カードの横幅
+ * @prop {number} height - カードの縦幅
+ * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  */
 class TriosuitGenerator extends Polysuit{
     /**
@@ -853,11 +860,11 @@ class TriosuitGenerator extends Polysuit{
 
 /**
  * 4つのマークを持つカードの画像を生成・管理するためのクラス.
- * @param {number} width - カードの横幅
- * @param {number} height - カードの縦幅
- * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
- * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  * @class
+ * @prop {number} width - カードの横幅
+ * @prop {number} height - カードの縦幅
+ * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  */
 class QuartetsuitGenerator extends Polysuit{
     /**
@@ -926,10 +933,10 @@ class QuartetsuitGenerator extends Polysuit{
  * 「魔法少女」のカードのうち, なぎさを含まないものについて
  * 画像を生成・管理するためのクラス.
  * @class
- * @param {number} width - カードの横幅
- * @param {number} height - カードの縦幅
- * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
- * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @prop {number} width - カードの横幅
+ * @prop {number} height - カードの縦幅
+ * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  */
 class QuintetsuitGenerator extends Polysuit{
     /**
@@ -1023,10 +1030,10 @@ class QuintetsuitGenerator extends Polysuit{
 /**
  * なぎさを含む「魔法少女」のカードの画像を生成・管理するためのクラス.
  * @class
- * @param {number} width - カードの横幅
- * @param {number} height - カードの縦幅
- * @param {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
- * @param {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
+ * @prop {number} width - カードの横幅
+ * @prop {number} height - カードの縦幅
+ * @prop {stdgam.ImagePool} images - 必要な画像を読み込むために使うImagePool
+ * @prop {stdgam.CachePool} caches - 生成した画像を登録するために使うCachePool
  */
 class SestetsuitGenerator extends Polysuit{
     /**
@@ -1159,7 +1166,7 @@ class SestetsuitGenerator extends Polysuit{
  * @prop {number} mark - このカードのマーク数値
  * @prop {number} value - このカードのコスト
  * @prop {PlayerSkill_skill} [skill] - このカードが持つスキル
- * @prop {string} [CardAtlasID] - cardlist.jsにおけるこのカードのID
+ * @prop {string} [cardAtlasID] - cardlist.jsにおけるこのカードのID
  */
 class Card{
     /**
@@ -1168,6 +1175,13 @@ class Card{
      * @type {boolean}
      */
     static MarkerFlag = true;
+
+    /**
+     * 該当するカードが存在しないことを表すオブジェクト.
+     * コストが0なのでpaint()で何も描画されない
+     * @type {Card}
+     */
+    static NullCard = Object.freeze(new Card(0, 0));
 
     /**
      * Cardクラスを初期化する.
@@ -1185,6 +1199,11 @@ class Card{
 
     /**
      * カードの整列に用いる比較関数.
+     * もしマーク数値が違えばマーク数値の大小を比較する.
+     * そうでないとき, コストの大小を比較する.
+     * @param {Cardlike} c1 - 1個目のオブジェクト
+     * @param {Cardlike} c2 - 2個目のオブジェクト
+     * @returns {number} 比較結果を表す数字
      */
     static compare = function(c1, c2){
         if(c1.mark != c2.mark){
@@ -1254,7 +1273,7 @@ class Card{
  * @prop {number} mark - このカードのマーク数値
  * @prop {number} value - このカードのコスト
  * @prop {PlayerSkill_skill} [skill] - このカードが持つスキル
- * @prop {string} [CardAtlasID] - cardlist.jsにおけるこのカードのID
+ * @prop {string} [cardAtlasID] - cardlist.jsにおけるこのカードのID
  */
 class PrismaticCard{
     /**
@@ -1356,19 +1375,12 @@ class PrismaticCard{
  * @class
  */
 class CardSet{
-    /**
-     * watch()メソッドなどにおいて該当する要素が存在しないときに
-     * 返されるオブジェクト. コストが0なのでpaint()で何も描画されない
-     * @type {Card}
-     */
-    static NullCard = new Card(0, 0);
-
     #cards;
 
     /**
      * cardsと同じ要素を持つインスタンスを生成する.
      * shallow copyをとるので, このインスタンスを変更してもcardsには影響しない.
-     * @param {Card[]} cards - 使用するカードを並べた配列
+     * @param {Cardlike[]} cards - 使用するカードを並べた配列
      */
     constructor(cards){
         this.init(cards);
@@ -1377,7 +1389,7 @@ class CardSet{
     /**
      * cardsと同じ要素を持つように初期化する.
      * shallow copyをとるので, このインスタンスを変更してもcardsには影響しない.
-     * @param {Card[]} cards - 使用するカードを並べた配列
+     * @param {Cardlike[]} cards - 使用するカードを並べた配列
      */
     init(cards){
         this.#cards = [...cards];
@@ -1391,7 +1403,7 @@ class CardSet{
 
     /**
      * このCardSetに含まれるカードを並べた配列を新しく生成する.
-     * @returns {Card[]} 生成された配列
+     * @returns {Cardlike[]} 生成された配列
      */
     cards(){
         return [...this.#cards];
@@ -1399,7 +1411,7 @@ class CardSet{
 
     /**
      * cardがこのCardSetに含まれているか判定する.
-     * @param {Card} card - 調べるカード
+     * @param {Cardlike} card - 調べるカード
      * @returns {boolean} 含まれているときtrue, そうでないときfalse
      */
     includes(card){
@@ -1408,17 +1420,17 @@ class CardSet{
 
     /**
      * 前からn番目のカードを返す (nは0から数え始める).
-     * もし該当するカードが無ければ CardSet.NullCardを返す.
-     * @returns {Card} n番目のカード. 該当するカードが無ければCard.NullCard
+     * もし該当するカードが無ければCard.NullCardを返す.
+     * @returns {Cardlike} n番目のカード. 該当するカードが無ければCard.NullCard
      */
     watch(n){
         if(n &lt; this.#cards.length) return this.#cards[n];
-        return CardSet.NullCard;
+        return Card.NullCard;
     }
 
     /**
      * cardをこのCardSetに追加する. もし既にCardSetの中に存在する場合は何もしない.
-     * @param {Card} card - 追加するカード
+     * @param {Cardlike} card - 追加するカード
      */
     push(card){
         if(!this.#cards.includes(card)) this.#cards.push(card);
@@ -1427,13 +1439,13 @@ class CardSet{
 
     /**
      * 前からn番目の要素をこのCardSetから削除し, そのカードを返す
-     * (nは0から数え始める). もし該当するカードが無ければ CardSet.NullCardを返す.
+     * (nは0から数え始める). もし該当するカードが無ければCard.NullCardを返す.
      * @param {number} n - 抜き出すカードのインデックス
-     * @returns {Card} 抜き出されたカード. 該当するカードが無ければCard.NullCard
+     * @returns {Cardlike} 抜き出されたカード. 該当するカードが無ければCard.NullCard
      */
     slice(n){
         const card = this.watch(n);
-        if(card !== CardSet.NullCard) this.#cards.splice(n, 1);
+        if(card !== Card.NullCard) this.#cards.splice(n, 1);
         return card;
     }
 }
@@ -1450,7 +1462,7 @@ class Deck{
      * cardsに格納されているカード達をそのままの並び順で使って
      * インスタンスを生成する. shallow copyをとるので, このインスタンスを
      * 変更してもcardsには影響しない.
-     * @param {Card[]} cards - 使用するカードを並べた配列
+     * @param {Cardlike[]} cards - 使用するカードを並べた配列
      */
     constructor(cards){
         this.#cards = [...cards];
@@ -1467,7 +1479,7 @@ class Deck{
 
     /**
      * このデッキに含まれるカードを並べた配列を新しく生成する.
-     * @returns {Card[]} 生成された配列
+     * @returns {Cardlike[]} 生成された配列
      */
     cards(){
         return [...this.#cards];
@@ -1485,13 +1497,12 @@ class Deck{
 
     /**
      * このデッキの一番最初のカードを削除して, そのカードを返す.
-     * もし該当するカードが無ければ, コストが0のカードを返す
-     * (現在の仕様では「コストが0」という以外の特徴は規定されていない).
-     * @returns {Card} 取り除かれたカード. 該当するカードが無ければコストが0のカード
+     * もし該当するカードが無ければ, Card.NullCardを返す
+     * @returns {Cardlike} 取り除かれたカード. 該当するカードが無ければCard.NullCard
      */
     shift(){
         if(this.isEmpty()){
-            return new Card();
+            return Card.NullCard;
         }
         const card = this.#cards[0];
         this.#cards.splice(0, 1);
@@ -1501,7 +1512,7 @@ class Deck{
     /**
      * このデッキから指定されたカードを取り除く.
      * もし複数の箇所に含まれるなら, それらをすべて削除する.
-     * @param {Card} card - 削除するカード
+     * @param {Cardlike} card - 削除するカード
      */
     remove(card){
         this.#cards = this.#cards.filter((e) => e !== card);
@@ -1509,13 +1520,12 @@ class Deck{
 
     /**
      * 前からn番目のカードを返す (nは0から数え始める).
-     * もし該当するカードが無ければ, コストが0のカードを返す
-     * (現在の仕様では「コストが0」という以外の特徴は規定されていない).
-     * @returns {Card} n番目のカード. 該当するカードが無ければコストが0のカード
+     * もし該当するカードが無ければ, Card.NullCardを返す
+     * @returns {Cardlike} n番目のカード. 該当するカードが無ければCard.NullCard
      */
     watch(i){
         if(this.#cards.length &lt;= i){
-            return new Card(0, 0);
+            return Card.NullCard;
         }
         return this.#cards[i];
     }
@@ -1547,7 +1557,6 @@ class Deck{
  * 3. チャージMP = Math.floor( Math.floor(ベースMP * チャージボーナス) *  選択肢補正)
  *
  * @class
- * @prop skills  length, shift
  */
 class Pool{
     #cards;
@@ -1555,6 +1564,7 @@ class Pool{
     #chargeBonus;
     #correctionFlag;
     #hyped;
+    #skills;
     #ChainFunc;
 
     /**
@@ -1570,6 +1580,11 @@ class Pool{
     /** @returns {number} 場に出されているカードの枚数 */
     size(){
         return this.#cards.length;
+    }
+
+    /** @returns {number} 保持されているスキルの個数 */
+    skillCount(){
+        return this.#skills.length;
     }
 
     /**
@@ -1604,7 +1619,7 @@ class Pool{
 
     /**
      * fが真ならば選択肢補正を0.5にする. 一方, fが偽ならば選択肢補正を1にする.
-     * @param {boolean} SG回復が選択された場合はtrue, 他の選択肢が選ばれた場合はfalseを指定する
+     * @param {boolean} f - SG回復が選択された場合はtrue, 他の選択肢が選ばれた場合はfalseを指定する
      */
     setCorrectionFlag(f){
         this.#correctionFlag = f;
@@ -1616,6 +1631,15 @@ class Pool{
      */
     hyped(){
         return this.#hyped;
+    }
+
+    /**
+     * 保持されているスキルのうち一番最初のものを削除し, これを返す.
+     * 該当するスキルがなければ何もせずにundefinedを返す.
+     * @returns {PlayerSkill_skill} 取り出されたスキル. 存在しなければundefined
+     */
+    shiftSkill(){
+        return this.#skills.shift();
     }
 
     /**
@@ -1637,7 +1661,7 @@ class Pool{
      * このときhypeの値も更新する.
      *
      * ただし, コスト0のカードの場合は何もしない.
-     * @param {Card} card - 場に出すカード
+     * @param {Cardlike} card - 場に出すカード
      */
     push(card){
         if(card.value == 0) return;
@@ -1654,13 +1678,12 @@ class Pool{
 
     /**
      * 前からn番目のカードを返す (nは0から数え始める).
-     * もし該当するカードが無ければ, コストが0のカードを返す
-     * (現在の仕様では「コストが0」という以外の特徴は規定されていない).
-     * @returns {Card} n番目のカード. 該当するカードが無ければコストが0のカード
+     * もし該当するカードが無ければ, Card.NullCardを返す
+     * @returns {Cardlike} n番目のカード. 該当するカードが無ければCard.NullCard
      */
     watch(n){
         if(this.#cards.length &lt;= n){
-            return new Card(0, 0);
+            return Card.NullCard;
         }
         return this.#cards[n];
     }
@@ -1668,7 +1691,7 @@ class Pool{
     /**
      * 追加スキャンの処理を行う.
      * 基本的にはpush(card)と同じだが, この場合は無条件でコンボ成立扱いになる.
-     * @param {Card} card - 追加スキャンで読み込んだカード
+     * @param {Cardlike} card - 追加スキャンで読み込んだカード
      */
     extraScan(card){
         if(card.value == 0) return;
@@ -1694,11 +1717,18 @@ class Pool{
  * - get(id) : 指定されたカードIDのカードを返す
  * - forEach(callback) : すべてのカード x に対して callback(x) を実行する
  *
- * CardAtlasにより生成されたCardオブジェクトはcardAtlasID属性に
+ * CardAtlasにより生成されたオブジェクトはcardAtlasID属性に
  * カードのIDを代入される
  * @namespace
  */
 const CardAtlas = {
+    /**
+     * cardlist.jsにおけるsuit_stringをパースし, 含まれる属性のリストを返す.
+     * 各属性は「Suitsにおけるその属性のインデックス」で表す.
+     * もし未知の短縮名が含まれる場合は「なぎさ」として扱う.
+     * @param {string} ss - パース対象の文字列
+     * @returns {number[]} 含まれる属性のリスト. 各属性はSuitsにおけるインデックスで表す
+     */
     parseSuitString(ss){
         if(ss == "Quintet") return [0, 1, 2, 3, 4];  // 5人の魔法少女
         if(ss == "Sestet") return [0, 1, 2, 3, 4, 5];  // 6人の魔法少女
@@ -1710,6 +1740,12 @@ const CardAtlas = {
         });
     },
 
+    /**
+     * cardlist.jsのnagibato_codeに基づいて, cardにスキルを設定する.
+     * もしsubが偽ならば何もしない.
+     * @param {Cardlike} card - 操作対象のカード
+     * @param {Object.&lt;string,*>} sub - サブスキルの設定を格納する連想配列
+     */
     setSkill(card, sub){
         if(!sub) return;
         const info = sub.nagibato_code;
@@ -1718,6 +1754,9 @@ const CardAtlas = {
         card.skill = fn(...info.slice(1));
     },
 
+    /**
+     * RAW_CARD_DATAの情報に基づいて初期化する.
+     */
     init(){
         if(!RAW_CARD_DATA) throw new Error("'cardlist.js' が読み込まれていません");
         const _data = {};
@@ -1742,6 +1781,22 @@ const CardAtlas = {
         this.forEach = (callback) => {
             for(const key in _data){ callback(_data[key]); }
         };
+    },
+
+    /**
+     * 指定されたIDのカードオブジェクトを返す.
+     * @param {string} id - カードのID
+     */
+    get(id){
+        throw new Error("CardAtlas: 初期化前にgetが呼び出されました");
+    },
+
+    /**
+     * すべてのカード x に対して callback(x) を実行する.
+     * @param {function(Cardlike): void} callback - コールバック関数
+     */
+    forEach(callback){
+        throw new Error("CardAtlas: 初期化前にforEachが呼び出されました");
     }
 };
 </code></pre>

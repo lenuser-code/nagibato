@@ -85,7 +85,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Polysuit<span class="signature">(width, height, images, caches, paintBackground, paintMarks, paintCost)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Polysuit<span class="signature">(images, caches, width, height)</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>複合属性のカードを描画するクラスの土台を提供する.
 サブクラスは次のメソッドを実装する.</p>
@@ -117,7 +117,7 @@
         
         <span class="code-name">
             
-                new Polysuit<span class="signature">(width, height, images, caches, paintBackground, paintMarks, paintCost)</span><span class="type-signature"></span>
+                new Polysuit<span class="signature">(images, caches, width, height)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -155,56 +155,6 @@
         </thead>
 
         <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>width</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>カードの横幅</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>height</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>カードの縦幅</p></td>
-</tr>
-
-
         
 
             
@@ -260,13 +210,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>paintBackground</code></td>
+      <td class="name"><code>width</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">function</code>
+<code class="param-type">number</code>
 
 
   
@@ -276,7 +226,7 @@
 
   
 
-  <td class="description last"><p>カードの背景を描画する (サブクラスが実装する)</p></td>
+  <td class="description last"><p>カードの横幅</p></td>
 </tr>
 
 
@@ -285,13 +235,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>paintMarks</code></td>
+      <td class="name"><code>height</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">function</code>
+<code class="param-type">number</code>
 
 
   
@@ -301,32 +251,7 @@
 
   
 
-  <td class="description last"><p>カードのマークを描画する (サブクラスが実装する)</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>paintCost</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">function</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>指定された座標にカードの左上端があるものとしてカードのコストを描画する (サブクラスが実装する)</p></td>
+  <td class="description last"><p>カードの縦幅</p></td>
 </tr>
 
 
@@ -336,6 +261,128 @@
 </div>
 
 
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>width</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>カードの横幅</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>height</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>カードの縦幅</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>images</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="stdgam.ImagePool.html">stdgam.ImagePool</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>必要な画像を読み込むために使うImagePool</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>caches</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type"><a href="stdgam.CachePool.html">stdgam.CachePool</a></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>生成した画像を登録するために使うCachePool
+指定された座標にカードの左上端があるものとしてカードのコストを描画する (サブクラスが実装する)</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -374,7 +421,7 @@
         <p class="tag-source">
             <a href="card.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line550">line 550</a>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line557">line 557</a>
             </span>
         </p>
     
@@ -490,7 +537,7 @@
         <p class="tag-source">
             <a href="card.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line555">line 555</a>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line562">line 562</a>
             </span>
         </p>
     
@@ -567,7 +614,7 @@
         <p class="tag-source">
             <a href="card.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line564">line 564</a>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line571">line 571</a>
             </span>
         </p>
     
@@ -715,7 +762,7 @@
         <p class="tag-source">
             <a href="card.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line616">line 616</a>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line623">line 623</a>
             </span>
         </p>
     
@@ -1103,7 +1150,7 @@
         <p class="tag-source">
             <a href="card.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line597">line 597</a>
+                <a href="card.js.html">card.js</a>, <a href="card.js.html#line604">line 604</a>
             </span>
         </p>
     
