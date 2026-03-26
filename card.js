@@ -1486,7 +1486,7 @@ class Pool{
      */
     constructor(version = 1){
         this.init();
-        this.skills = [];
+        this.#skills = [];
         this.#ChainFunc = (version == 1 ? ChainFunc : ChainFuncVer2);
     }
 
@@ -1585,7 +1585,7 @@ class Pool{
                       && this.#ChainFunc(this.#cards[len-3], this.#cards[len-2], card)
                       && card.skill);
         if(this.#hyped){
-            this.skills.push(card.skill);
+            this.#skills.push(card.skill);
         }
     }
 
@@ -1611,7 +1611,7 @@ class Pool{
         this.push(card);
         if(card.skill){
             this.#hyped = true;  // 追加スキャンは無条件でスキルが発動
-            this.skills.push(card.skill);
+            this.#skills.push(card.skill);
         }
     }
 }
