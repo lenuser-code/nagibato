@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> nagibato.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="CardAtlas.html">CardAtlas</a></li><li><a href="LocalStorageInfo.html">LocalStorageInfo</a></li><li><a href="MPBoostBySuit.html">MPBoostBySuit</a></li><li><a href="PlayerSkill.html">PlayerSkill</a></li><li><a href="battle.html">battle</a></li><li><a href="battle.mainScene.html">mainScene</a></li><li><a href="bootstrap.html">bootstrap</a></li><li><a href="edit.html">edit</a></li><li><a href="intermediateScene.html">intermediateScene</a></li><li><a href="selectScene.html">selectScene</a></li><li><a href="stdgam.html">stdgam</a></li><li><a href="stdgam.Templates.html">Templates</a></li><li><a href="stdtask.html">stdtask</a></li></ul><h3>Classes</h3><ul><li><a href="BasicStatus.html">BasicStatus</a></li><li><a href="Booklike.html">Booklike</a></li><li><a href="Card.html">Card</a></li><li><a href="CardSet.html">CardSet</a></li><li><a href="Deck.html">Deck</a></li><li><a href="DuosuitGenerator.html">DuosuitGenerator</a></li><li><a href="Enemy.html">Enemy</a></li><li><a href="EnemyActionDealerBase.html">EnemyActionDealerBase</a></li><li><a href="HandManager.html">HandManager</a></li><li><a href="Player.html">Player</a></li><li><a href="Polysuit.html">Polysuit</a></li><li><a href="Pool.html">Pool</a></li><li><a href="PoolManager.html">PoolManager</a></li><li><a href="PrismaticCard.html">PrismaticCard</a></li><li><a href="Public.SideboardDialog.html">SideboardDialog</a></li><li><a href="QBLecture.html">QBLecture</a></li><li><a href="QBTalk.html">QBTalk</a></li><li><a href="QBTelop.html">QBTelop</a></li><li><a href="QBYesNo.html">QBYesNo</a></li><li><a href="QuartetsuitGenerator.html">QuartetsuitGenerator</a></li><li><a href="QuintetsuitGenerator.html">QuintetsuitGenerator</a></li><li><a href="SelectWindow.html">SelectWindow</a></li><li><a href="SestetsuitGenerator.html">SestetsuitGenerator</a></li><li><a href="Shelflike.html">Shelflike</a></li><li><a href="SkillDealerBase.html">SkillDealerBase</a></li><li><a href="TriosuitGenerator.html">TriosuitGenerator</a></li><li><a href="stdgam.CachePool.html">CachePool</a></li><li><a href="stdgam.GameEngine.html">GameEngine</a></li><li><a href="stdgam.ImageCutter.html">ImageCutter</a></li><li><a href="stdgam.ImagePool.html">ImagePool</a></li><li><a href="stdgam.InputManager.html">InputManager</a></li><li><a href="stdgam.SEPool.html">SEPool</a></li><li><a href="stdgam.Scene.html">Scene</a></li><li><a href="stdgam.SoundPool.html">SoundPool</a></li><li><a href="stdtask.CyclicSelect.html">CyclicSelect</a></li><li><a href="stdtask.Meter.html">Meter</a></li><li><a href="stdtask.Scroll.html">Scroll</a></li><li><a href="stdtask.Select.html">Select</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ChainFunc">ChainFunc</a></li><li><a href="global.html#ChainFuncVer2">ChainFuncVer2</a></li><li><a href="global.html#ChainMask">ChainMask</a></li><li><a href="global.html#CharacterNames">CharacterNames</a></li><li><a href="global.html#EnemyAction">EnemyAction</a></li><li><a href="global.html#EnemyData">EnemyData</a></li><li><a href="global.html#GE">GE</a></li><li><a href="global.html#PrimitiveSuits">PrimitiveSuits</a></li><li><a href="global.html#ShortCharacterNames">ShortCharacterNames</a></li><li><a href="global.html#Suits">Suits</a></li><li><a href="global.html#T">T</a></li><li><a href="global.html#TutorialInfo">TutorialInfo</a></li><li><a href="global.html#createConfirmatingQB_BeforeBattle">createConfirmatingQB_BeforeBattle</a></li><li><a href="global.html#createMeter">createMeter</a></li><li><a href="global.html#createOpeningQB">createOpeningQB</a></li><li><a href="global.html#createTutorialQB">createTutorialQB</a></li><li><a href="global.html#execute">execute</a></li><li><a href="global.html#getCharacterName">getCharacterName</a></li><li><a href="global.html#getPolysuitMask">getPolysuitMask</a></li><li><a href="global.html#getPolysuitName">getPolysuitName</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>nagibato.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>﻿
+// #1. GameEngineの生成, stdgamに関連する定数の定義
+
+/**
+ * stdgamから必要な要素をインポートしてきたもの.
+ * - GameEngine: {Class} ゲームのメインエンジンを実装するクラス
+ * - Scene: {Class} シーンを表すクラス
+ * - ImageCutter: {Class} 画像を分割して扱うためのクラス
+ * - Templates: {Object.&lt;string, function>} 定番のオブジェクトを作るためのテンプレート群
+ */
+const { GameEngine, Scene, ImageCutter, Templates } = stdgam;
+
+/**
+ * このプログラムで使うGameEngineオブジェクト.
+ * @type {stdgam.GameEngine}
+ */
+const GE = new GameEngine("gameCanvas");
+
+/**
+ * stdgam.Templatesの略称.
+ * @type {Object.&lt;string, function>}
+ */
+const T = Templates;
+
+
+// #2. 画像や音声の準備
+
+/*
+ * プログラムで使う画像や音声をまとめて登録しておく.
+ */
+
+GE.images.load("CARDIMAGES", "./image/cardimages.png");
+
+GE.se.register("tick", [0.8,0,1025,.01,.005, 0.05 , 0 ,1.2,1, 10 ,50,.1,.01,1,1,.1,,.6,.01,.01]);
+GE.se.register("powerup", [1,0,580,.08,.23,.12,0,2.1,0,0,-72,.06,.07,0,0,0,.12,.54,.24,.01,0]);
+GE.se.register("heal", [.7,0,334,.01,.12,.08,1,1.1,-13,0,388,.19,0,0,0,0,.14,.85,.26,0,123]);
+GE.se.register("battleFinished", [1,0,482,.01,.07,.06,0,1.3,4,0,100,0,.02,0,4,0,.01,.65,.01,0,0]);
+GE.se.register("optionSelected", [0.7,0,530,.01,.08,.15,1,.5,-9,-110,0,0,0,0,0,0,.1,.9,.04,0,0]);
+GE.se.register("hit0", [1,0,426,.02,.16,.15,1,4,-5,6,0,0,0,1.4,0,.4,.01,.88,.1,0,0]);
+GE.se.register("hit1", [1,0,426,.02,.16,.15,1,4,-5,6,0,0,.01,1.4,0,.4,.01,.88,.1,0,0]);
+GE.se.register("powerup", [0.7,0,126,.01,.22,.3,1,.5,-4,0,0,0,0,0,0,0,.15,.6,.24,0,0]);
+GE.se.register("chargeUp", [0.3,0,220,.09,.19,.34,0,3,8,300,50,0,.02,0,13,.1,0,.61,.16,.17,0]);
+
+GE.caches.createCache("BACKGROUND", 1000, 700, (ctx) => {
+    ctx.save();
+    ctx.fillStyle = "#002753";
+    ctx.fillRect(0, 0, 1000, 700);
+    ctx.restore();
+});
+GE.caches.createCache("CARDMAT", 1000, 700, (ctx) => {
+    ctx.save();
+    ctx.fillStyle = "#502020";
+    ctx.fillRect(230, 340, 340, 190);
+    ctx.fillStyle = "#604040";
+    ctx.fillRect(233, 343, 334, 184);
+    ctx.restore();
+});
+GE.caches.createCache("DIALOG", 1000, 700, (ctx) => {
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle = "black";
+    ctx.fillRect(25, 25, 950, 650);
+    ctx.restore();
+});
+
+
+// #3. タイトル画面の実装
+
+// (a) intermediateSceneの定義
+
+/**
+ * タイトル画面からバトルへ移行する際, 途中に挟む仲介役のシーン.
+ * 逆に, バトルから戻って来るときもこのシーンを経由する.
+ * @namespace
+ * @prop step
+ * @prop args
+ * @prop deck
+ * @prop sideboard
+ */
+const intermediateScene = new Scene({
+    step: 0,
+
+    /**
+     * 最初の1回だけ実行する初期化処理.
+     * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+     * @memberof intermediateScene
+     */
+    ensure(GE){
+        this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+        this.ensure = () => {};
+    },
+
+    /**
+     * シーンがロードされた時に実行される初期化処理.
+     * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+     * @param {Object.&lt;string, *>} args - このシーンに渡されたオプションリスト
+     * @memberof intermediateScene
+     */
+    onLoad(GE, args){
+        this.ensure(GE);
+        if(this.step == 0 || args.tutorial){
+            this.args = args;
+            this.deck = args.deck;
+            this.sideboard = args.sideboard;
+            if(args.tutorial) this.step = 1;
+        }
+
+        if(this.step == 0){
+            const practiceData = {...args};
+            practiceData.enemyData = null;
+            practiceData.deck = this.deck.clone();
+            practiceData.sideboard = this.sideboard.clone();
+            this.step++;
+            GE.changeScene("main", practiceData);
+        }
+        else if(this.step == 1){
+            const mainData = {...this.args};
+            mainData.deck = this.deck.clone();
+            mainData.sideboard = this.sideboard.clone();
+            this.step++;
+            GE.changeScene("main", mainData);
+        }
+        else{
+            this.step = 0;
+            GE.changeScene("select");
+        }
+    }
+});
+
+
+// (b) タイトル画面のUIの構成要素
+
+/**
+ * バトル・チュートリアルの選択に使うダイアログを実装するクラス.
+ * @class
+ * @prop menu
+ * @prop callback
+ * @prop rowCount
+ * @prop select
+ * @prop x
+ * @prop y
+ * @prop step
+ * @prop padY
+ * @prop width
+ * @prop height
+ * @extends stdtask.Scroll
+ */
+class SelectWindow extends stdtask.Scroll{
+    constructor(menu, callback, rowCount, x, y, w, h){
+        const select = new stdtask.Select(
+            menu.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
+        );
+        super(select, rowCount);
+
+        this.menu = menu;
+        this.callback = callback;
+        this.rowCount = rowCount;
+        this.select = select;
+
+        this.x = x;
+        this.y = y;
+        this.step = 60;
+        this.padY = 40 + (h - this.step * rowCount) / 2;
+        this.width = w;
+        this.height = h;
+    }
+
+    draw(GE, ctx){
+        ctx.save();
+        ctx.fillStyle = "rgb(0,0,0,0.5)";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        ctx.font = "42px monospace";
+        ctx.fillStyle = "white";
+        const m = ctx.measureText("→_");
+        const ax = this.x + 30;
+        const ay = this.y + this.padY + this.offset*this.step;
+        const aw = m.width;
+        ctx.fillText("→", ax, ay);
+
+        for(let i = 0; i &lt; this.rowCount; i++){
+            const n = this.scroll + i;
+            if(n &lt; this.menu.length){
+                ctx.fillText(this.menu[n], ax+aw, this.y+this.padY+this.step*i);
+            }
+            else break;
+        }
+        if(this.scroll > 0){
+            ctx.font = "20px Sans-Serif";
+            ctx.textAlign = "center";
+            ctx.fillText("▲", this.x + this.width/2, this.y + this.padY-this.step);
+        }
+        if(this.rowCount &lt; this.menu.length &amp;&amp; this.scroll &lt; this.menu.length-this.rowCount){
+            ctx.font = "20px Sans-Serif";
+            ctx.textAlign = "center";
+            ctx.fillText("▼", this.x + this.width/2, this.y+this.padY+this.step*(this.rowCount-1)+40);
+        }
+        ctx.restore();
+    }
+
+    action(GE, n){
+        this.callback(n);
+    }
+
+    cancel(GE, n){
+        this.active = false;
+    }
+}
+
+/**
+ * Shelflikeに格納される個々のアイテムを実装するクラス.
+ * @class
+ * @prop text
+ * @prop x
+ * @prop y
+ * @prop width
+ * @prop height
+ * @prop selected
+ * @prop action
+ */
+class Booklike{
+    static boxColors = [ "rgb(239,228,176)", "rgb(195,195,195)"];
+    static textColors = [ "rgb(255,100,0)", "gray" ];
+    static borderColor = "rgb(0,20,40)";
+
+    constructor(text, x, y, w, h, action = null){
+        this.text = text;
+        this.action = action;
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
+    }
+
+    open(GE, scene){
+        if(this.action) this.action(GE, scene, this);
+    }
+
+    draw(GE, ctx){
+        ctx.save();
+        const x = this.selected ? this.x - this.width*0.2 : this.x;
+        ctx.fillStyle = Booklike.borderColor;
+        ctx.fillRect(x, this.y, this.width, this.height);
+        ctx.fillStyle = Booklike.boxColors[this.selected ? 0 : 1];
+        ctx.fillRect(x+5, this.y+5, this.width-10, this.height-10);
+
+        ctx.font = this.selected ? "bold 32px Serif" : "32px Serif";
+        ctx.fillStyle = Booklike.textColors[this.selected ? 0 : 1];
+        ctx.fillText(this.text, x+20, this.y+40);
+        ctx.restore();
+    }
+}
+
+/**
+ * タイトル画面のメインメニューを実装するクラス.
+ * @class
+ * @prop owner
+ * @prop x
+ * @prop y
+ * @prop width
+ * @prop height
+ * @prop books
+ * @extends stdtask.CyclicSelect
+ */
+class Shelflike extends stdtask.CyclicSelect{
+    static boxColor = "rgb(30,30,30)";
+    static borderColor = "rgb(10,10,10)";
+
+    constructor(owner, books, x, y, w, h){
+        super(books.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 12, false);
+        this.owner = owner;
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
+        this.books = books;
+        books[0].selected = true;
+    }
+
+    draw(GE, ctx){
+        ctx.save();
+        ctx.fillStyle = Shelflike.borderColor;
+        ctx.fillRect(this.x-5, this.y-5, this.width+10, this.height*this.books.length+10);
+        ctx.fillStyle = Shelflike.boxColor;
+        ctx.fillRect(this.x, this.y, this.width, this.height*this.books.length);
+        ctx.restore();
+    }
+
+    execute(GE){
+        const prev = this.index;
+        const f = super.execute(GE);
+        if(this.index != prev){
+            this.books[prev].selected = false;
+            this.books[this.index].selected = true;
+        }
+        return f;
+    }
+
+    action(GE, index){
+        this.books[this.index].open(GE, this.owner);
+    }
+}
+
+
+// (c) selectSceneの実装
+
+/**
+ * タイトル画面を実装するSceneオブジェクト.
+ * @namespace
+ * @prop yesno
+ * @prop setting
+ * @prop books
+ * @prop shelf
+ */
+const selectScene = new Scene({
+
+// バトル開始前の処理
+*confirmationBattle(GE, opt){
+    this.yesno = createConfirmatingQB_BeforeBattle(this.setting);
+    this.addSprite(this.yesno);
+    this.addTask(this.yesno, true);
+    while(this.yesno.active) yield true;
+
+    const ans = this.yesno.result;
+    if(!ans) return;
+
+    const deckObj = new Deck(this.setting.deckSet.cards());
+    const sideboardObj = new Deck(RAW_CARD_DATA.map((e) => CardAtlas.get(e.id)));
+    const mainCard = CardAtlas.get(this.setting.mainCardData.id);
+    deckObj.remove(mainCard);
+    sideboardObj.remove(mainCard);
+    deckObj.shuffle();
+
+    opt2 = {
+        deck: deckObj, sideboard: sideboardObj,
+        playerData: this.setting.mainCardData,
+        chainRule: this.setting.chainRule, ...opt
+    };
+    GE.changeScene("intermediate", opt2);
+},
+battleSelected(GE, opt){
+    this.useCoroutine(GE, this.confirmationBattle, opt);
+},
+
+// チュートリアル開始前の処理
+*confirmationTutorial(GE, opt){
+    this.yesno = createTutorialQB(this.setting);
+    this.addSprite(this.yesno);
+    this.addTask(this.yesno, true);
+    while(this.yesno.active) yield true;
+
+    const ans = this.yesno.result;
+    if(!ans) return;
+
+    GE.changeScene("intermediate", opt);
+},
+tutorialSelected(GE, opt){
+    this.useCoroutine(GE, this.confirmationTutorial, opt);
+},
+
+actions:  [
+    function(GE, scene, book){
+        const menu = [];
+        const values = [];
+        for(let data of TutorialInfo){
+            const usedCards = data.cardIDs.map((id) => CardAtlas.get(id) || data.extraCard);
+            let sideboardCards = [];
+            if(data.extraScan){
+                sideboardCards = RAW_CARD_DATA.map((e) => CardAtlas.get(e.id));
+            }
+            menu.push(data.caption);
+            values.push({
+                deck: new Deck(usedCards), sideboard: new Deck(sideboardCards),
+                playerData: data.playerData, enemyData: data.enemyData,
+                chainRule: data.chainRule, tutorial: data.tutorial
+            });
+        }
+        const op = (i) => {
+            scene.tutorialSelected(GE, values[i]);
+        };
+        const sw = new SelectWindow(menu, op, 6, 50, 180, 700, 450);
+        scene.addSprite(sw);
+        scene.addTask(sw, true);
+    },
+    function(GE, scene, book){
+        const menu = [
+            "ゲルトルート", "イザベル", "ギーゼラ", "シャルロッテ",
+            "パトリシア", "エルザマリア", "H.N.エリー", "ロベルタ",
+            "オクタヴィア", "ワルプルギスの夜", "ナイトメア", "ホムリリー"
+        ];
+        const values = menu.map((name) => { return {enemyData: EnemyData[name]}; });
+        const op = (i) => {
+            scene.battleSelected(GE, values[i]);
+        };
+        const sw = new SelectWindow(menu, op, 6, 50, 180, 700, 450);
+        scene.addSprite(sw);
+        scene.addTask(sw, true);
+    },
+    function(GE, scene, book){
+        const opt = {set1: scene.setting.deckSet, set2: scene.setting.sideboardSet};
+        GE.se.play("optionSelected");
+        GE.changeScene("edit", opt);
+    },
+    function(GE, scene, book){
+        GE.se.play("optionSelected");
+        GE.changeScene("config", scene.setting);
+    },
+    function(GE, scene, book){
+        GE.se.play("optionSelected");
+        GE.changeScene("config2", scene.setting);
+    }
+],
+
+initShelf(){
+    this.books = [
+        new Booklike("チュートリアル",  600, 260, 360, 60, this.actions[0]),
+        new Booklike("魔女を選んでバトル",  600, 320, 360, 60, this.actions[1]),
+        new Booklike("デッキ編集", 600, 380, 360, 60, this.actions[2]),
+        new Booklike("設定", 600, 440, 360, 60, this.actions[3]),
+        new Booklike("特殊設定", 600, 500, 360, 60, this.actions[4])
+    ];
+    this.shelf = new Shelflike(this, this.books, 600, 260, 360, 60);
+},
+
+initData(){
+    CardAtlas.init();
+    const usedCards = [];
+    const sideboardCards = [];
+
+    let configData = [ "2-039", 1, true ];
+    if(LocalStorageInfo.isUsed()){
+        const IDs = LocalStorageInfo.deckInfo;
+        CardAtlas.forEach((card) => {
+            if(IDs.includes(card.cardAtlasID)) usedCards.push(card);
+            else sideboardCards.push(card);
+        });
+        configData = LocalStorageInfo.config;
+        Card.MarkerFlag = LocalStorageInfo.config[2] ?? true;
+    }
+    else{
+        CardAtlas.forEach((card) => {
+            if(card.value &lt; 8 || (card.mark > 5 &amp;&amp; card.value &lt; 10)) sideboardCards.push(card);
+            else usedCards.push(card);
+        });
+    };
+    this.setting = {
+        deckSet: new CardSet(usedCards),
+        sideboardSet: new CardSet(sideboardCards),
+        mainCardData: {...RAW_CARD_DATA.find((e) => e.id == configData[0])},
+        chainRule: configData[1]
+    };
+},
+
+/**
+ * シーンがロードされた時に実行される初期化処理.
+ * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+ * @param {Object.&lt;string, *>} args - このシーンに渡されたオプションリスト
+ * @memberof selectScene
+ */
+onLoad(GE, args){
+    if(!this.setting) this.initData();
+    if(this.shelf) return;
+    this.initShelf();
+    this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+    this.add(T.text("MAGICARD BATTLE", {x: 50, y:130, color: "white", font: "60px monospace"}));
+    this.add(T.text("シミュレータ", {x: 520, y:130, color: "white", font: "30px monospace"}));
+    this.add(T.text("A : 決定,  S : キャンセル,  矢印キー : 移動", {x: 50, y:650, color: "white", font: "30px monospace"}));
+
+    this.add(this.shelf);
+    for(const book of this.books){
+        this.add(book);
+    }
+}
+
+});
+
+
+// #4. ゲームの開始
+
+/*
+ * 以上の準備のもとで次を実行する
+ */
+
+/**
+ * ロード画面.
+ * @namespace
+ * @prop message
+ * @prop flag
+ */
+const bootstrap = new Scene({
+    /**
+     * シーンがロードされた時に実行される初期化処理.
+     * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+     * @param {Object.&lt;string, *>} args - このシーンに渡されたオプションリスト
+     * @memberof intermediateScene
+     */
+    onLoad(GE, args){
+        this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+        this.message = new QBTalk("セ～ガ～♪", 30);
+        this.add(this.message);
+        this.flag = false;
+        GE.ready(() => { this.flag = true; });
+    },
+
+    /**
+     * 1フレーム分のタスク処理を実行する.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     */
+    execute(GE){
+        if(this.flag &amp;&amp; !this.message.active){
+            Card.init(GE, 90, 120);
+            GE.addScene("select", selectScene);
+            GE.addScene("edit", edit.editScene);
+            GE.addScene("config", config.configScene);
+            GE.addScene("config2", config.configScene2);
+            GE.addScene("intermediate", intermediateScene);
+            GE.addScene("main", battle.mainScene);
+            GE.changeScene("select");
+        }
+    }
+});
+
+var exitflag = false;
+
+try{
+    LocalStorageInfo.init();
+} catch(e) {
+    window.alert(e.message);
+    const text = "通常はデータを一度消去しなければいけません。消去してよろしいですか？（消去せずに動作停止する場合は「いいえ」を選択してください）";
+    if(window.confirm(text)){
+        LocalStorageInfo.removeStorage(true);
+    }
+    else{
+        exitflag = true;
+    }
+}
+
+if(!exitflag){   // ----------(*)
+    PrismaticCard.init(GE, 90, 120);
+    GE.addScene("bootstrap", bootstrap);
+    GE.changeScene("bootstrap");
+    GE.run();
+}  // ----------(*)
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

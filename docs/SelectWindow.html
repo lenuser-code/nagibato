@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> CyclicSelect</title>
+  <title> SelectWindow</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>CyclicSelect</h1>
+                    <h1>SelectWindow</h1>
                 </header>
                 
 
@@ -85,11 +85,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="stdtask.html">stdtask</a>.</span>CyclicSelect<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>SelectWindow<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>indexをこれ以上減らせないときは取りうる最大値に,
-逆にindexをこれ以上増やせないときは 0 にワープするようSelectを改変したもの.</p></div>
+            <div class="class-description"><p>バトル・チュートリアルの選択に使うダイアログを実装するクラス.</p></div>
         
     
 </header>
@@ -108,12 +106,12 @@
 
 
     
-    <h4 class="name" id="CyclicSelect">
-        <a class="href-link" href="#CyclicSelect">#</a>
+    <h4 class="name" id="SelectWindow">
+        <a class="href-link" href="#SelectWindow">#</a>
         
         <span class="code-name">
             
-                new CyclicSelect<span class="signature">()</span><span class="type-signature"></span>
+                new SelectWindow<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -160,15 +158,10 @@
             
 <tr class="deep-level-0">
     
-        <td class="name"><code>index</code></td>
+        <td class="name"><code>menu</code></td>
     
 
     <td class="type">
-    
-        
-<code class="param-type">number</code>
-
-
     
     </td>
 
@@ -176,22 +169,17 @@
 
     
 
-    <td class="description last"><p>このオブジェクトが管理するパラメータ</p></td>
+    <td class="description last"></td>
 </tr>
 
         
             
 <tr class="deep-level-0">
     
-        <td class="name"><code>active</code></td>
+        <td class="name"><code>callback</code></td>
     
 
     <td class="type">
-    
-        
-<code class="param-type">boolean</code>
-
-
     
     </td>
 
@@ -199,7 +187,151 @@
 
     
 
-    <td class="description last"><p>(stdgam.Sceneの意味で) このオブジェクトが有効か</p></td>
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>rowCount</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>select</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>x</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>y</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>step</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>padY</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>width</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>height</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
 </tr>
 
         
@@ -242,9 +374,9 @@
 
     
         <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
+            <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line188">line 188</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line148">line 148</a>
             </span>
         </p>
     
@@ -285,7 +417,7 @@
 
 
     <ul>
-        <li><a href="stdtask.Select.html">stdtask.Select</a></li>
+        <li><a href="stdtask.Scroll.html">stdtask.Scroll</a></li>
     </ul>
 
 
@@ -426,9 +558,11 @@
     
 
     
-    <dt class="inherited-from">Inherited From:</dt>
-    <dd class="inherited-from"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#action">stdtask.Select#action</a>
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.Scroll.html#action">stdtask.Scroll#action</a>
     </li></ul></dd>
     
 
@@ -447,8 +581,6 @@
     
 
     
-
-    
     
 
     
@@ -459,7 +591,7 @@
         <p class="tag-source">
             <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line169">line 169</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line340">line 340</a>
             </span>
         </p>
     
@@ -481,229 +613,6 @@
 
 
 
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="addMod">
-        <a class="href-link" href="#addMod">#</a>
-        
-        <span class="code-name">
-            
-                addMod<span class="signature">(a, b, m)</span><span class="type-signature"> &rarr; {number}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>(a + b) の値を m で割った余りを返す. ゼロ除算のチェックなどはしない.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>a</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>b</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>m</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line196">line 196</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>(a + b) % m の値</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">number</code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
 
 
 
@@ -807,12 +716,12 @@
     
 
     
-    <dt class="inherited-from">Inherited From:</dt>
-    <dd class="inherited-from"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#bind">stdtask.Select#bind</a>
-    </li></ul></dd>
-    
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.Scroll.html#bind">stdtask.Scroll#bind</a>
+    </li></ul></dd>
     
 
     
@@ -840,7 +749,7 @@
         <p class="tag-source">
             <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line158">line 158</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line329">line 329</a>
             </span>
         </p>
     
@@ -986,12 +895,12 @@
     
 
     
-    <dt class="inherited-from">Inherited From:</dt>
-    <dd class="inherited-from"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#cancel">stdtask.Select#cancel</a>
-    </li></ul></dd>
-    
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.Scroll.html#cancel">stdtask.Scroll#cancel</a>
+    </li></ul></dd>
     
 
     
@@ -1019,7 +928,7 @@
         <p class="tag-source">
             <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line177">line 177</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line348">line 348</a>
             </span>
         </p>
     
@@ -1065,14 +974,9 @@
     
     
     <div class="description">
-        <p>1フレーム分のタスク処理を実行する.
-具体的には, キー入力に応じてthis.indexを増減させたり
-this.action/this.cancel を実行したりする.</p>
-<p>【注意】this.action/this.canelを実行したフレームでは, modalの設定と
-無関係に必ず false を返す. なぜならば, もしこれら処理の中で
-タスクリストの変更が発生した場合「forループの途中で中身を変更する」のと
-同じ状況が生じるためである.
-後続のタスク処理をブロックすることで安全にループを抜けることができる.</p>
+        <p>1フレーム分のタスク処理を行う.
+より正確には, ラップされているSelectオブジェクトのexecuteを実行した後,
+その結果に基づき this.scroll と this.offset を更新する.</p>
     </div>
     
 
@@ -1146,12 +1050,12 @@ this.action/this.cancel を実行したりする.</p>
     
 
     
-    <dt class="inherited-from">Inherited From:</dt>
-    <dd class="inherited-from"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#execute">stdtask.Select#execute</a>
-    </li></ul></dd>
-    
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.Scroll.html#execute">stdtask.Scroll#execute</a>
+    </li></ul></dd>
     
 
     
@@ -1179,7 +1083,214 @@ this.action/this.cancel を実行したりする.</p>
         <p class="tag-source">
             <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line123">line 123</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line279">line 279</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="initScroll">
+        <a class="href-link" href="#initScroll">#</a>
+        
+        <span class="code-name">
+            
+                initScroll<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>ラップされているSelectオブジェクトのindexの値を元に,
+this.scroll と this.offset の値を初期化する.</p>
+<p>具体的には次のように決める.</p>
+<ol>
+<li>indexの値がviewCount未満なら, scroll = 0, offset = index でよい.</li>
+<li>そうでないとき, 先に offset = viewCount - 1 を決定してしまい,</li>
+</ol>
+<p>それから scroll = index - offset とすればよい.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.Scroll.html#initScroll">stdtask.Scroll#initScroll</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdtask.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line296">line 296</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="viewCount">
+        <a class="href-link" href="#viewCount">#</a>
+        
+        <span class="code-name">
+            
+                viewCount<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.Scroll.html#viewCount">stdtask.Scroll#viewCount</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdtask.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line269">line 269</a>
             </span>
         </p>
     
@@ -1210,123 +1321,22 @@ this.action/this.cancel を実行したりする.</p>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>次のいずれかの条件を満たすとき false を返す</p>
-<ol>
-<li>自分より後ろのタスク処理をブロックする設定の場合</li>
-<li>このフレームにおいてthis.action や this.cancel を実行した場合</li>
-</ol>
-<p>そうでないとき true を返す</p></div>
+    <div class='param-desc column is-7'><p>一度に表示できる選択肢の個数</p></div>
     
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">number</code>
+
+
+    </div>
     
 </div>
 
                 
         </div>
     </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="move">
-        <a class="href-link" href="#move">#</a>
-        
-        <span class="code-name">
-            
-                move<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>k == 0 のときはthis.indexを1減らし, k == 1 のときはthis.indexを1増やす.
-ただし, 結果が0未満になるときは「選択肢の個数-1」に変更し,
-逆に結果が「選択肢の個数以上」になるときは0にする.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#move">stdtask.Select#move</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line205">line 205</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

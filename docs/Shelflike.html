@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> CyclicSelect</title>
+  <title> Shelflike</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>CyclicSelect</h1>
+                    <h1>Shelflike</h1>
                 </header>
                 
 
@@ -85,11 +85,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="stdtask.html">stdtask</a>.</span>CyclicSelect<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Shelflike<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>indexをこれ以上減らせないときは取りうる最大値に,
-逆にindexをこれ以上増やせないときは 0 にワープするようSelectを改変したもの.</p></div>
+            <div class="class-description"><p>タイトル画面のメインメニューを実装するクラス.</p></div>
         
     
 </header>
@@ -108,12 +106,12 @@
 
 
     
-    <h4 class="name" id="CyclicSelect">
-        <a class="href-link" href="#CyclicSelect">#</a>
+    <h4 class="name" id="Shelflike">
+        <a class="href-link" href="#Shelflike">#</a>
         
         <span class="code-name">
             
-                new CyclicSelect<span class="signature">()</span><span class="type-signature"></span>
+                new Shelflike<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -160,15 +158,10 @@
             
 <tr class="deep-level-0">
     
-        <td class="name"><code>index</code></td>
+        <td class="name"><code>owner</code></td>
     
 
     <td class="type">
-    
-        
-<code class="param-type">number</code>
-
-
     
     </td>
 
@@ -176,22 +169,17 @@
 
     
 
-    <td class="description last"><p>このオブジェクトが管理するパラメータ</p></td>
+    <td class="description last"></td>
 </tr>
 
         
             
 <tr class="deep-level-0">
     
-        <td class="name"><code>active</code></td>
+        <td class="name"><code>x</code></td>
     
 
     <td class="type">
-    
-        
-<code class="param-type">boolean</code>
-
-
     
     </td>
 
@@ -199,7 +187,79 @@
 
     
 
-    <td class="description last"><p>(stdgam.Sceneの意味で) このオブジェクトが有効か</p></td>
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>y</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>width</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>height</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>books</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
 </tr>
 
         
@@ -242,9 +302,9 @@
 
     
         <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
+            <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line188">line 188</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line265">line 265</a>
             </span>
         </p>
     
@@ -285,7 +345,7 @@
 
 
     <ul>
-        <li><a href="stdtask.Select.html">stdtask.Select</a></li>
+        <li><a href="stdtask.CyclicSelect.html">stdtask.CyclicSelect</a></li>
     </ul>
 
 
@@ -426,12 +486,12 @@
     
 
     
-    <dt class="inherited-from">Inherited From:</dt>
-    <dd class="inherited-from"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#action">stdtask.Select#action</a>
-    </li></ul></dd>
-    
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.CyclicSelect.html#action">stdtask.CyclicSelect#action</a>
+    </li></ul></dd>
     
 
     
@@ -631,6 +691,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.CyclicSelect.html#addMod">stdtask.CyclicSelect#addMod</a>
+    </li></ul></dd>
+    
 
     
 
@@ -807,12 +872,12 @@
     
 
     
-    <dt class="inherited-from">Inherited From:</dt>
-    <dd class="inherited-from"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#bind">stdtask.Select#bind</a>
-    </li></ul></dd>
-    
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.CyclicSelect.html#bind">stdtask.CyclicSelect#bind</a>
+    </li></ul></dd>
     
 
     
@@ -986,12 +1051,12 @@
     
 
     
-    <dt class="inherited-from">Inherited From:</dt>
-    <dd class="inherited-from"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#cancel">stdtask.Select#cancel</a>
-    </li></ul></dd>
-    
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.CyclicSelect.html#cancel">stdtask.CyclicSelect#cancel</a>
+    </li></ul></dd>
     
 
     
@@ -1146,12 +1211,12 @@ this.action/this.cancel を実行したりする.</p>
     
 
     
-    <dt class="inherited-from">Inherited From:</dt>
-    <dd class="inherited-from"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#execute">stdtask.Select#execute</a>
-    </li></ul></dd>
-    
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="stdtask.CyclicSelect.html#execute">stdtask.CyclicSelect#execute</a>
+    </li></ul></dd>
     
 
     
@@ -1276,7 +1341,7 @@ this.action/this.cancel を実行したりする.</p>
     
     <dt class="tag-overrides">Overrides:</dt>
     <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="stdtask.Select.html#move">stdtask.Select#move</a>
+        <a href="stdtask.CyclicSelect.html#move">stdtask.CyclicSelect#move</a>
     </li></ul></dd>
     
 

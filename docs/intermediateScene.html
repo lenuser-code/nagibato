@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> SkillDealerBase</title>
+  <title> intermediateScene</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,8 +73,8 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>SkillDealerBase</h1>
+                    <p>Namespace</p>
+                    <h1>intermediateScene</h1>
                 </header>
                 
 
@@ -85,31 +85,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>SkillDealerBase<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description"><p>プレイヤー側のスキルの実行インターフェース.
-スキルを表すオブジェクトAと, その実行者Bの間の仲介を行う.
-Aはこのクラスが提供する機能を利用してスキルを実行する.
-Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
-<p>SkillDealerBase自体は各スキル効果の具体的な処理方法を知らない.
-具体的な処理内容はサブクラスで実装する.</p>
-<ul>
-<li>enemyHP()</li>
-<li>*addHP(percent)</li>
-<li>*addMP(percent)</li>
-<li>*addSG(percent)</li>
-<li>*addHPSG(percent)</li>
-<li>*addShield(n)</li>
-<li>*chargeUp(percent)</li>
-<li>*reduceEnemyMP(percent)</li>
-<li>*suitSpecificBoost(str, mark, percent)</li>
-<li>*damage(percent)</li>
-<li>*extendTime(n)</li>
-<li>*timeWarp()</li>
-<li>*heal(percent)</li>
-<li>*SGHeal(percent)</li>
-<li>*crisisBoostTask(percent)</li>
-</ul></div>
+        <h2>intermediateScene</h2>
         
     
 </header>
@@ -118,40 +94,11 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
     <div class="container-overview">
     
         
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="SkillDealerBase">
-        <a class="href-link" href="#SkillDealerBase">#</a>
+            <div class="description"><p>タイトル画面からバトルへ移行する際, 途中に挟む仲介役のシーン.
+逆に, バトルから戻って来るときもこのシーンを経由する.</p></div>
         
-        <span class="code-name">
-            
-                new SkillDealerBase<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
 
-    
-    
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
     <h5 class="subsection-title">Properties:</h5>
@@ -180,7 +127,7 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
             
 <tr class="deep-level-0">
     
-        <td class="name"><code>healRate</code></td>
+        <td class="name"><code>step</code></td>
     
 
     <td class="type">
@@ -191,14 +138,14 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
     
 
-    <td class="description last"><p>ターン開始時のHP回復量を最大HPに対するパーセント表示で表した値</p></td>
+    <td class="description last"></td>
 </tr>
 
         
             
 <tr class="deep-level-0">
     
-        <td class="name"><code>SGHealRate</code></td>
+        <td class="name"><code>args</code></td>
     
 
     <td class="type">
@@ -209,14 +156,14 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
     
 
-    <td class="description last"><p>ターン開始時のSG回復量</p></td>
+    <td class="description last"></td>
 </tr>
 
         
             
 <tr class="deep-level-0">
     
-        <td class="name"><code>crisisBonus</code></td>
+        <td class="name"><code>deck</code></td>
     
 
     <td class="type">
@@ -227,14 +174,14 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
     
 
-    <td class="description last"><p>crisisBoostの効果量を基本MPに対するパーセント表示で表した値</p></td>
+    <td class="description last"></td>
 </tr>
 
         
             
 <tr class="deep-level-0">
     
-        <td class="name"><code>appliedCB</code></td>
+        <td class="name"><code>sideboard</code></td>
     
 
     <td class="type">
@@ -245,7 +192,7 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
     
 
-    <td class="description last"><p>crisisBoostの効果のうち, 現時点で既に適用済みの効果量</p></td>
+    <td class="description last"></td>
 </tr>
 
         
@@ -288,38 +235,15 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
     
         <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
+            <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line226">line 226</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line80">line 80</a>
             </span>
         </p>
     
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
         
     
     </div>
@@ -347,16 +271,16 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
 
     
-    <h4 class="name" id="deal">
-        <a class="href-link" href="#deal">#</a>
+    <h4 class="name" id=".ensure">
+        <a class="href-link" href="#.ensure">#</a>
         
             
-                <span class='tag'>generator</span>
+                <span class='tag'>static</span>
             
         
         <span class="code-name">
             
-                deal<span class="signature">(GE, skill)</span><span class="type-signature"></span>
+                ensure<span class="signature">(GE)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -365,7 +289,7 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
     
     
     <div class="description">
-        <p>指定されたスキルの効果を実行するジェネレータを生成する.</p>
+        <p>最初の1回だけ実行する初期化処理.</p>
     </div>
     
 
@@ -419,32 +343,7 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
   
 
-  <td class="description last"><p>この処理に用いるGameEngine</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>skill</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#PlayerSkill_skill">PlayerSkill_skill</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>実行するスキル</p></td>
+  <td class="description last"><p>このシーンをロードしたGameEngine</p></td>
 </tr>
 
 
@@ -490,9 +389,9 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
     
         <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
+            <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line269">line 269</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line88">line 88</a>
             </span>
         </p>
     
@@ -524,16 +423,16 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
 
     
-    <h4 class="name" id="playerChanged">
-        <a class="href-link" href="#playerChanged">#</a>
+    <h4 class="name" id=".onLoad">
+        <a class="href-link" href="#.onLoad">#</a>
         
             
-                <span class='tag'>generator</span>
+                <span class='tag'>static</span>
             
         
         <span class="code-name">
             
-                playerChanged<span class="signature">()</span><span class="type-signature"></span>
+                onLoad<span class="signature">(GE, args)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -542,109 +441,7 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
     
     
     <div class="description">
-        <p>SkillDealerBase/EnemyActionDealerBaseの作業中に
-プレイヤーのHPが変化したとき呼び出されるジェネレータ関数.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line260">line 260</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="upkeep">
-        <a class="href-link" href="#upkeep">#</a>
-        
-            
-                <span class='tag'>generator</span>
-            
-        
-        <span class="code-name">
-            
-                upkeep<span class="signature">(GE)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>プレイヤー側アップキープの処理を実行するジェネレータを生成する.</p>
+        <p>シーンがロードされた時に実行される初期化処理.</p>
     </div>
     
 
@@ -698,150 +495,22 @@ Bはこのクラスの *upkeep や *deal によりAの実行を依頼する.</p>
 
   
 
-  <td class="description last"><p>この処理に用いるGameEngine</p></td>
+  <td class="description last"><p>このシーンをロードしたGameEngine</p></td>
 </tr>
 
 
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line247">line 247</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="wait">
-        <a class="href-link" href="#wait">#</a>
-        
-            
-                <span class='tag'>generator</span>
-            
-        
-        <span class="code-name">
-            
-                wait<span class="signature">(frames)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>指定されたフレーム数だけyield trueを繰り返すジェネレータを生成する.
-framesが0以下の場合は何もしない.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
         
 
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>frames</code></td>
+      <td class="name"><code>args</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">number</code>
+<code class="param-type">Object.&lt;string, *></code>
 
 
   
@@ -851,7 +520,7 @@ framesが0以下の場合は何もしない.</p>
 
   
 
-  <td class="description last"><p>待機するフレーム数</p></td>
+  <td class="description last"><p>このシーンに渡されたオプションリスト</p></td>
 </tr>
 
 
@@ -897,9 +566,9 @@ framesが0以下の場合は何もしない.</p>
 
     
         <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
+            <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line239">line 239</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line497">line 497</a>
             </span>
         </p>
     
