@@ -85,7 +85,11 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>HandManager<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>HandManager<span class="signature">(owner, deck, poolManager)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>手札とデッキの管理を行うオブジェクト.
+手札やデッキをカプセル化しつつ必要な情報を外部に提供する.
+加えて, 「デッキからカードを引く」「手札を場に出す」という処理の実装を担当する.</p></div>
         
     
 </header>
@@ -109,7 +113,7 @@
         
         <span class="code-name">
             
-                new HandManager<span class="signature">()</span><span class="type-signature"></span>
+                new HandManager<span class="signature">(owner, deck, poolManager)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -117,6 +121,10 @@
 
     
     
+    <div class="description">
+        <p>ownerの手札・デッキを管理するインスタンスを生成する.</p>
+    </div>
+    
 
 
 
@@ -125,6 +133,107 @@
 
 
 
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>owner</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.Scene.html">stdgam.Scene</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>このオブジェクトを所有するシーン</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>deck</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Deck.html">Deck</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>使用するDeckオブジェクト</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>poolManager</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="PoolManager.html">PoolManager</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>このシーンのPoolを管理しているPoolManager</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -172,7 +281,7 @@
 
     
 
-    <td class="description last"></td>
+    <td class="description last"><p>手札からpoolへカードが移動中ならばtrue, そうでなければfalse</p></td>
 </tr>
 
         
@@ -217,7 +326,7 @@
         <p class="tag-source">
             <a href="battle.js.html" class="button">View Source</a>
             <span>
-                <a href="battle.js.html">battle.js</a>, <a href="battle.js.html#line785">line 785</a>
+                <a href="battle.js.html">battle.js</a>, <a href="battle.js.html#line788">line 788</a>
             </span>
         </p>
     
@@ -265,6 +374,623 @@
 
     
 
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="allCardsSpent">
+        <a class="href-link" href="#allCardsSpent">#</a>
+        
+        <span class="code-name">
+            
+                allCardsSpent<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>すべてのカードを使い切ったか調べる.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="battle.js.html" class="button">View Source</a>
+            <span>
+                <a href="battle.js.html">battle.js</a>, <a href="battle.js.html#line821">line 821</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>手札もデッキも空のときtrue, そうでないときfalse</p></div>
+    
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="cost">
+        <a class="href-link" href="#cost">#</a>
+        
+        <span class="code-name">
+            
+                cost<span class="signature">(n)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>n番目の手札のコストを返す. nは0から数え始める.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>n</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>確認したい手札のインデックス</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="battle.js.html" class="button">View Source</a>
+            <span>
+                <a href="battle.js.html">battle.js</a>, <a href="battle.js.html#line829">line 829</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="drawCard">
+        <a class="href-link" href="#drawCard">#</a>
+        
+        <span class="code-name">
+            
+                drawCard<span class="signature">(n)</span><span class="type-signature"> &rarr; {<a href="global.html#Task">Task</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>デッキから1枚カードを引き、「そのカードを適切な位置に移動した後,
+n番目の手札にセットする」という操作を実行するタスクオブジェクトを生成する.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>n</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>何番目の手札にセットするか指定する</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="battle.js.html" class="button">View Source</a>
+            <span>
+                <a href="battle.js.html">battle.js</a>, <a href="battle.js.html#line839">line 839</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>カードの移動と手札セットを実行するタスクオブジェクト</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#Task">Task</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="playCard">
+        <a class="href-link" href="#playCard">#</a>
+        
+        <span class="code-name">
+            
+                playCard<span class="signature">(n)</span><span class="type-signature"> &rarr; {<a href="global.html#Task">Task</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>「n番目の手札を適切な位置に移動した後, poolに出す」という操作を実行する
+タスクオブジェクトを生成する. 同時にn番目の手札を空にする.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>n</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>何番目の手札をpoolに出すか指定する</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="battle.js.html" class="button">View Source</a>
+            <span>
+                <a href="battle.js.html">battle.js</a>, <a href="battle.js.html#line851">line 851</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>カードの移動とpoolへ出す処理を実行するタスクオブジェクト</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#Task">Task</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+            </div>
+        </div>
     
 
     

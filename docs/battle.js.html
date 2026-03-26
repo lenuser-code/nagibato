@@ -867,7 +867,10 @@ class PoolManager{
 }
 
 /**
- * @prop {boolean} busy
+ * 手札とデッキの管理を行うオブジェクト.
+ * 手札やデッキをカプセル化しつつ必要な情報を外部に提供する.
+ * 加えて, 「デッキからカードを引く」「手札を場に出す」という処理の実装を担当する.
+ * @prop {boolean} busy - 手札からpoolへカードが移動中ならばtrue, そうでなければfalse
  */
 class HandManager{
     #owner;
@@ -876,6 +879,12 @@ class HandManager{
     #poolManager;
     #deckpos;
 
+    /**
+     * ownerの手札・デッキを管理するインスタンスを生成する.
+     * @param {stdgam.Scene} owner - このオブジェクトを所有するシーン
+     * @param {Deck} deck - 使用するDeckオブジェクト
+     * @param {PoolManager} poolManager - このシーンのPoolを管理しているPoolManager
+     */
     constructor(owner, deck, poolManager){
         this.#owner = owner;
         this.#deck = deck;
@@ -892,20 +901,40 @@ class HandManager{
         }
     }
 
+    /**
+     * すべてのカードを使い切ったか調べる.
+     * @returns 手札もデッキも空のときtrue, そうでないときfalse
+     */
     allCardsSpent(){
         return this.#deck.size() == 0 &amp;&amp; this.#hand.every((e) => e.contents.value == 0);
     }
 
-    cost(i){
-        return this.#hand[i].contents.value;
+    /**
+     * n番目の手札のコストを返す. nは0から数え始める.
+     * @param {number} n - 確認したい手札のインデックス
+     */
+    cost(n){
+        return this.#hand[n].contents.value;
     }
 
-    drawCard(i){
-        return this.#delivery(this.#deck.shift(), this.#deckpos, this.#hand[i],
-            (card) => { this.#hand[i].contents = card; }
+    /**
+     * デッキから1枚カードを引き、「そのカードを適切な位置に移動した後,
+     * n番目の手札にセットする」という操作を実行するタスクオブジェクトを生成する.
+     * @param {number} n - 何番目の手札にセットするか指定する
+     * @returns {Task} カードの移動と手札セットを実行するタスクオブジェクト
+     */
+    drawCard(n){
+        return this.#delivery(this.#deck.shift(), this.#deckpos, this.#hand[n],
+            (card) => { this.#hand[n].contents = card; }
         );
     }
 
+    /**
+     * 「n番目の手札を適切な位置に移動した後, poolに出す」という操作を実行する
+     * タスクオブジェクトを生成する. 同時にn番目の手札を空にする.
+     * @param {number} n - 何番目の手札をpoolに出すか指定する
+     * @returns {Task} カードの移動とpoolへ出す処理を実行するタスクオブジェクト
+     */
     playCard(i){
         const card = this.#hand[i].contents;
         this.#hand[i].contents = Card.NullCard;
@@ -946,15 +975,16 @@ class HandManager{
  * @type {stdgam.Scene}
  * @namespace
  * @prop {Object.&lt;string,*>} position - 位置情報を抽出したもの
+ * @prop {Object.&lt;string, Object.&lt;string, *>>} textOpt - テキスト描画に用いるオプションをまとめたもの
  * @prop {number} maxTimeCount - 各ターンの制限時間の秒数
  * @prop {number} turn - 現在のターン数
  * @prop {Deck} sideboard - サイドボードを格納しているDeckオブジェクト
  * @prop {Player} player - バトルしているプレイヤーキャラクター
  * @prop {Enemy} enemy - バトルしている敵キャラクター
- * @prop {PoolManager} poolManager - 使用するPoolManager
- * @prop {HandManager} handManager - 使用するHandManager
- * @prop {SkillDealerBase} SD - プレイヤースキルの実行を管理するオブジェクト
- * @prop {EnemyActionDealerBase} EAD - 敵スキルの実行を管理するオブジェクト
+ * @prop {PoolManager} poolManager - Poolの管理に使用するPoolManager
+ * @prop {HandManager} handManager - 手札とデッキの管理に使用するHandManager
+ * @prop {SkillDealerBase} SD - プレイヤースキルの実行を担当するオブジェクト
+ * @prop {EnemyActionDealerBase} EAD - 敵スキルの実行を担当するオブジェクト
  * @prop {Shaker} pShaker - プレイヤー側UIのためのShaker
  * @prop {Shaker} eShaker - 敵側UIのためのShaker
  * @prop {Object.&lt;string, *>} backupArgs - オプションリストのバックアップ
@@ -1014,7 +1044,7 @@ shakeEnemy(){
 },
 
 /**
- * A, S, Dのキーが押されたか確認し, 該当するのキーがあれば
+ * A, S, Dのキーが押されたか確認し, 該当するキーがあれば
  * そのうち一番優先順序の高いキーのインデックスを返す.
  * 優先順序は上記の並び順の通りであり, インデックスはAを0番目とした数字である.
  * どれも押されていなかったときは-1を返す.
@@ -1255,7 +1285,7 @@ phase2_body(GE, i){
     }
     dialog.active = false;
     stop.active = false;
-    yield* this.attackPhase_choice(n);
+    yield* this.attackPhase_choice(GE, n);
     yield* this.SD.wait(60);
 
     const damage = this.poolManager.consumeMP(this.	player.MP());
@@ -1264,7 +1294,7 @@ phase2_body(GE, i){
     this.shakeEnemy();  // shake_test
     yield* this.SD.wait(110);
 },
-*attackPhase_choice(n){
+*attackPhase_choice(GE, n){
     if(n == 1){
         yield* this.SD.wait(30);
         this.poolManager.halveMP();
