@@ -619,6 +619,8 @@ stdgam.CachePool = class {
      * もしdrawFnが与えられた場合, キャンバスを生成したあと, このキャンバスの
      * コンテクストを引数として drawFn(ctx) を実行する.
      * @param {string} name - 作られたキャンバスの登録名
+     * @param {number} width - キャンバスの横幅
+     * @param {number} height - キャンバスの縦幅
      * @param {function(CanvasRenderingContext2D): void} [drawFn=(ctx)=>{}] -
      * 作られたキャンバスに対してすぐに作業をしたい場合はコールバック関数を指定する.
      * ここで, コールバック関数の引数は生成されたキャンバスのコンテクストである.
