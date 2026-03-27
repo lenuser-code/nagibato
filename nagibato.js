@@ -43,7 +43,10 @@ GE.se.register("chargeUp", [0.3,0,220,.09,.19,.34,0,3,8,300,50,0,.02,0,13,.1,0,.
 
 GE.caches.createCache("BACKGROUND", 1000, 700, (ctx) => {
     ctx.save();
-    ctx.fillStyle = "#002753";
+    const grad = ctx.createLinearGradient(0, 0, 0, 1000);
+    grad.addColorStop(0, "#002753"); 
+    grad.addColorStop(1, "#001839"); // 下端（影）
+    ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 1000, 700);
     ctx.restore();
 });
@@ -60,6 +63,32 @@ GE.caches.createCache("DIALOG", 1000, 700, (ctx) => {
     ctx.globalAlpha = 0.5;
     ctx.fillStyle = "black";
     ctx.fillRect(25, 25, 950, 650);
+    ctx.restore();
+});
+GE.caches.createCache("BOOKLIKE_0", 360, 60, (ctx) => {
+    const w = 360, h = 60, r = 5;
+    ctx.save();
+    ctx.fillStyle = "rgb(239,228,176)";
+    ctx.fillRect(0, 0, 360, 60);
+
+    ctx.shadowColor = "rgb(255,255,76)";
+    ctx.shadowBlur = 10;
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 5;
+    ctx.strokeRect(-2, -2, w + 4, h + 4); // 少し外側を叩く
+    ctx.restore();
+});
+GE.caches.createCache("BOOKLIKE_1", 360, 60, (ctx) => {
+    const w = 360, h = 60, r = 5;
+    ctx.save();
+    ctx.fillStyle = "rgb(195,195,195)";
+    ctx.fillRect(0, 0, 360, 60);
+
+    ctx.shadowColor = "rgb(125,125,125)";
+    ctx.shadowBlur = 10;
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 5;
+    ctx.strokeRect(-2, -2, w + 4, h + 4); // 少し外側を叩く
     ctx.restore();
 });
 
@@ -223,13 +252,11 @@ class Booklike{
     static textColors = [ "rgb(255,100,0)", "gray" ];
     static borderColor = "rgb(0,20,40)";
 
-    constructor(text, x, y, w, h, action = null){
+    constructor(text, x, y, action = null){
         this.text = text;
         this.action = action;
         this.x = x;
         this.y = y;
-        this.width = w;
-        this.height = h;
     }
 
     open(GE, scene){
@@ -238,11 +265,11 @@ class Booklike{
 
     draw(GE, ctx){
         ctx.save();
-        const x = this.selected ? this.x - this.width*0.2 : this.x;
-        ctx.fillStyle = Booklike.borderColor;
-        ctx.fillRect(x, this.y, this.width, this.height);
-        ctx.fillStyle = Booklike.boxColors[this.selected ? 0 : 1];
-        ctx.fillRect(x+5, this.y+5, this.width-10, this.height-10);
+        const n = this.selected ? 0 : 1;
+        const x = this.selected ? this.x - 360*0.2 : this.x;
+
+        const img = GE.caches.get(`BOOKLIKE_${n}`);
+        ctx.drawImage(img, x, this.y);
 
         ctx.font = this.selected ? "bold 32px Serif" : "32px Serif";
         ctx.fillStyle = Booklike.textColors[this.selected ? 0 : 1];
@@ -413,11 +440,11 @@ actions:  [
 
 initShelf(){
     this.books = [
-        new Booklike("チュートリアル",  600, 260, 360, 60, this.actions[0]),
-        new Booklike("魔女を選んでバトル",  600, 320, 360, 60, this.actions[1]),
-        new Booklike("デッキ編集", 600, 380, 360, 60, this.actions[2]),
-        new Booklike("設定", 600, 440, 360, 60, this.actions[3]),
-        new Booklike("特殊設定", 600, 500, 360, 60, this.actions[4])
+        new Booklike("チュートリアル",  600, 260, this.actions[0]),
+        new Booklike("魔女を選んでバトル",  600, 320,this.actions[1]),
+        new Booklike("デッキ編集", 600, 380, this.actions[2]),
+        new Booklike("設定", 600, 440, this.actions[3]),
+        new Booklike("特殊設定", 600, 500, this.actions[4])
     ];
     this.shelf = new Shelflike(this, this.books, 600, 260, 360, 60);
 },
