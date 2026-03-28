@@ -140,6 +140,11 @@ GE.caches.createCache("BACKGROUND", 1000, 700, (ctx) => {
 GE.caches.createCache("CARDMAT", 1000, 700, (ctx) => {
     ctx.save();
     ctx.fillStyle = "#502020";
+    ctx.fillRect(200, 120, 400, 190);
+    ctx.fillStyle = "#604040";
+    ctx.fillRect(203, 123, 394, 184);
+
+    ctx.fillStyle = "#502020";
     ctx.fillRect(230, 340, 340, 190);
     ctx.fillStyle = "#604040";
     ctx.fillRect(233, 343, 334, 184);
@@ -576,8 +581,8 @@ onLoad(GE, args){
     if(this.shelf) return;
     this.initShelf();
     this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
-    this.add(T.text("MAGICARD BATTLE", {x: 50, y:130, color: "white", font: "60px monospace"}));
-    this.add(T.text("シミュレータ", {x: 520, y:130, color: "white", font: "30px monospace"}));
+    this.add(T.text("MAGICARD BATTLE", {x: 50, y:130, color: "white", font: "60px monospace", shadowBlur: 10, shadowColor: "rgb(255,255,255,0.2)", shadowOffsetY: 3}));
+    this.add(T.text("シミュレータ", {x: 520, y:130, color: "white", font: "30px monospace", shadowBlur: 10, shadowColor: "rgb(255,255,255,0.2)", shadowOffsetY: 3}));
     this.add(T.text("A : 決定,  S : キャンセル,  矢印キー : 移動", {x: 50, y:650, color: "white", font: "30px monospace"}));
 
     this.add(this.shelf);
@@ -597,6 +602,9 @@ onLoad(GE, args){
 
 /**
  * ロード画面.
+ * 画像のロードを完了してからじゃないとゲームを開始できないので,
+ * ここでロード待ちをする. もし将来タイトル画面で音声を使いたい場合は,
+ * キー入力待ちも一緒に済ませてしまうとよい.
  * @namespace
  * @prop message
  * @prop flag
