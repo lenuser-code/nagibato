@@ -4,7 +4,7 @@
     ],
     "source": {
         "include": ["stdgam.js", "stdtask.js", "card.js", "model.js", "enemy.js", "QB.js", "edit.js", "config.js", "battle.js",
-            "storage.js", "nagibato.js", "nagibato.html"],
+            "storage.js", "nagibato.js", "cardlist.js"],
         "exclude": ["node_modules"]
     },
     "markdown": {
