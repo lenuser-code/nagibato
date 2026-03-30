@@ -174,6 +174,95 @@ class QBTelop{
 }
 
 /**
+ * 横からスライドインしてくる会話ダイアログのクラス.
+ * @class
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
+ */
+class QBSlideIn{
+    #a;
+    #_x;
+    #_y;
+    #step;
+    #marginX;
+    #frames;
+    #lines;
+    #iter;
+
+    /**
+     * 指定されたメッセージを表示するインスタンスを作る.
+     * メッセージは "\n" で区切ることにより改行させることができる.
+     * @param {string} msg - 表示するメッセージ
+     * @param {number} marginX - 開始時・終了時にテキストの中心が画面端からどの程度はみ出すか指定する
+     * @param {number} [frames=120] - 完全に登場してから消え始めるまでの持続時間
+     */
+    constructor(msg, marginX, frames = 120){
+        this.#step = 60;
+        this.activate(msg, marginX, frames);
+    }
+
+    /**
+     * このオブジェクトを初期化する.
+     * 一度使い終わったオブジェクトを再利用するときに用いる.
+     * @param {string} msg - 表示するメッセージ
+     * @param {number} marginX - 開始時・終了時にテキストの中心が画面端からどの程度はみ出すか指定する
+     * @param {number} [frames=120] - 完全に登場してから消え始めるまでの持続時間
+     */
+    activate(msg, marginX, frames = 120){
+        this.#marginX = marginX;
+        this.#frames = frames;
+        this.#lines = msg.split("\n");
+        this.#_x = 1000 + marginX;
+        this.#_y = 350 - this.#lines.length * this.#step / 2;
+        this.#a = (500 + marginX) / 20;
+        this.#iter = this.chart.call(this, this);
+        this.active = true;
+    }
+
+    /**
+     * 経過フレーム数に基づき, テキストを描画する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に用いるコンテクスト
+     */
+    draw(GE, ctx){
+        ctx.save();
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "rgb(0,0,0,0.5)"
+        ctx.lineWidth = 8;
+        ctx.font = "50px Sans-Serif";
+        ctx.textAlign = "center";
+        for(let i = 0; i < this.#lines.length; i++){
+            const p = ctx.measureText(this.#lines[i]).fontBoundingBoxAscent;
+            const y = this.#_y + p + i * this.#step;
+            ctx.strokeText(this.#lines[i], this.#_x, y);
+            ctx.fillText(this.#lines[i], this.#_x, y);
+        }
+        ctx.restore();
+    }
+
+    /**
+     * 1フレーム分のタスク処理を行う.
+     * 具体的には, this.chart に記されたプランに基づき自身を変化させる.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     * @returns {boolean} 常にtrueを返す
+     */
+    execute(GE){
+        const result = this.#iter.next();
+        if(result.done) this.active = false;
+        return true;
+    }
+
+    /**
+     * このオブジェクトの状態変化を担当するジェネレータを生成する.
+     */
+    *chart(){
+        let i;
+        for(i = 0; i < 20; i++){ this.#_x -= this.#a; yield true; }
+        for(i = 0; i < this.#frames; i++) yield true;
+        for(i = 0; i < 20; i++){ this.#_x -= this.#a; yield true; }
+    }
+}
+
+/**
  * ユーザーに入力を要求する会話ダイアログのクラス.
  * 見た目はQBTalkと同じだが, ユーザーがAまたはSのキーを押すまで消えない.
  * また, Aを押した場合はtrue, Sを押した場合はfalseをresult要素に保存する.
@@ -671,6 +760,25 @@ const TutorialInfo = [
         "さらに、このとき出したカードがスキルを持っていた場合、\n無条件でそのスキルを発動できるよ。",
         "このゲームにも本当は追加スキャンの機能が実装されている。\n有効なカードを探して使ってみよう。",
         "ちなみに、本家MAGICARD BATTLEではデッキ枚数を\n３０枚以下にすることができない。\nできたら強すぎるからね。"
+        ]
+    },
+    {
+        caption: "キュゥべえチャンス", chainRule: 1, QBChance: true,
+        playerData: RAW_CARD_DATA.find((e) => e.id == "2-040"),
+        enemyData: { name: "使い魔６", affinity: { }, HP: 8200, MP: 7000, actions: [] },
+        cardIDs: [
+            "1-020", "3-011", "2-009", "1-013", "3-010", "1-028", "1-024", "3-034",
+            "1-025", "2-035", "2-011", "2-010", "3-020", "2-020", "3-017", "1-018",
+            "1-034"
+        ],
+        tutorial: [
+        "やあ、前回は追加スキャンを説明したね。",
+        "実はこれ以外にも、本番のバトルでのみ利用できる\nお助け機能があるんだ。",
+        "それが「キュゥべえチャンス」だよ。",
+        "２ターン目の開始時、僕が少しだけ手助けをしてあげる。\n「HP回復」「MPアップ」「敵にダメージ」の中から\nランダムに選ばれた効果が発動するよ。",
+        "本家MAGICARD BATTLEでは先にミニゲームをクリアする\n必要があったけど、ほぼ失敗しないし時間が掛かるので\n今回は省略されている。",
+        "だから、何もしなくても自動的に発動するよ。",
+        "また、これは第３弾で追加された要素なので\nもし望むなら特殊設定でOFFにすることもできるよ。\n旧バージョンの仕様で遊びたいときは言ってね。"
         ]
     },
     {

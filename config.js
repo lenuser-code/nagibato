@@ -382,7 +382,7 @@ Public.SideboardDialog = class extends DialogBase{
  */
 Public.configScene = new stdgam.Scene({
 saveConfig(){
-    LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag);
+    LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag, this.setting.QBChance);
 },
 
 displayObject: {
@@ -517,7 +517,7 @@ cancel(GE, n){
  */
 Public.configScene2 = new stdgam.Scene({
 saveConfig(){
-    LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag);
+    LocalStorageInfo.saveConfig(this.setting.mainCardData.id, this.setting.chainRule, Card.MarkerFlag, this.setting.QBChance);
 },
 
 operations: [
@@ -535,6 +535,22 @@ operations: [
         if(LocalStorageInfo.isUsed()){
             opt.scene.saveConfig();
         }
+    },
+
+    function*(GE, opt){
+        const dialog = new SimpleChoice(
+            opt.scene, "キュゥべえチャンスのON/OFFを選択してください",
+            ["ON", "OFF"],
+            this.setting.QBChance ? 0 : 1, 200, 140, 600, 420
+        );
+        opt.scene.addSprite(dialog);
+        opt.scene.addTask(dialog, true);
+        while(dialog.active) yield true;
+
+        this.setting.QBChance = (dialog.result == 0);
+        if(LocalStorageInfo.isUsed()){
+            opt.scene.saveConfig();
+        }
     }
 ],
 
@@ -543,6 +559,7 @@ onLoad(GE, setting){
     this.deck = setting.deckSet.cards();  // localStorageを使うとき, すぐに保存するため必要
 
     this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
+
     this.add(T.text("スキル持ちカードのマーカー表示", {x: 90, y:90, font: "32px Sans-Serif"}));
     let tmp = T.text("現在の設定：  ", {x: 160, y:133, font: "24px Sans-Serif"});
     tmp.execute = (GE) => {
@@ -551,7 +568,15 @@ onLoad(GE, setting){
     };
     this.add(tmp);
 
-    this.itemY = [ 90 ];
+    this.add(T.text("キュゥべえチャンスのON/OFF", {x: 90, y:270, font: "32px Sans-Serif"}));
+    let tmp2 = T.text("現在の設定：  ", {x: 160, y:313, font: "24px Sans-Serif"});
+    tmp2.execute = (GE) => {
+        tmp2.text = this.setting.QBChance ? "現在の設定：　ON" : "現在の設定：　OFF";
+        return true;
+    };
+    this.add(tmp2);
+
+    this.itemY = [ 90, 270 ];
     this.select = new stdtask.CyclicSelect(
         this.itemY.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
     );
