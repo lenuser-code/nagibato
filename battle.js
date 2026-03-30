@@ -226,6 +226,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 
     *common(action){
         yield* this.wait(20);
+        GE.se.play("enemyAction");
         this.owner.add( createSkillDialog(action) );
         yield* this.wait(130);
     }
@@ -779,6 +780,7 @@ class PoolManager{
     *invokeSkills(GE){
         while(this.#pool.skillCount() > 0){
             yield* this.#owner.SD.wait(20);
+            GE.se.play("skill");
             const skill = this.#pool.shiftSkill();
             this.#owner.add( createSkillDialog(skill) );
             yield* this.#owner.SD.wait(130);
@@ -1183,6 +1185,7 @@ onLoad(GE, args){
     if(yesno.result){
         const mainSkill =  this.player.shiftMainSkill();
         yield* this.SD.wait(20);
+        GE.se.play("skill");
         this.add( createSkillDialog(mainSkill) );
         yield* this.SD.wait(130);
         yield* this.SD.deal(GE, mainSkill);
@@ -1301,6 +1304,7 @@ phase2_body(GE, i){
 
 *defencePhase(GE, self){
     if(this.player.shield() > 0){
+        GE.se.play("shield");
         this.add(new QBTalk("スキルのおかげで敵の攻撃を防げたみたいだ。", 100));
         this.player.addShield(-1);
         yield* this.SD.wait(50);
