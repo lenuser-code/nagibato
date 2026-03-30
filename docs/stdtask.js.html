@@ -479,6 +479,24 @@ stdtask.Meter = class{
     }
 
     /**
+     * 等速変化の実行中かどうか調べる.
+     * @returns {boolean} 変化中ならtrue
+     */
+    isChainging(){
+        return (this.#duration != this.#elapsed);
+    }
+
+    /**
+     * 等速変化の実行中の場合, それを開始する直前の値を返す.
+     * そうでないとき, 単に現在値を返す.
+     * @returns 等速変化中はそれを開始する直前の値, そうでないとき現在の値
+     */
+    startingPoint(){
+        if(this.#duration != this.#elapsed) return this.#sv;
+        else return this.value;
+    }
+
+    /**
      * 目標値への変化を開始する.
      * @param {number} target - 等速変化の目標値
      * @param {number} [dur=this.frames] - 等速変化にかけるフレーム数 (既に実行中のアクションには影響しない).

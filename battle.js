@@ -353,7 +353,7 @@ let createPhysicalButton = function(x, y, key, label) {
  * createMeter()で作られるMeterオブジェクトの値をバーで表示する
  * コンポーネントを生成する.
  * @param {string} caption - 表示する値の説明
- * @param {Object} target - 観察対象のMeterオブジェクト
+ * @param {Meter} target - 観察対象のMeterオブジェクト
  * @param {number} x - 配置する位置のx座標
  * @param {number} y - 配置する位置のy座標
  * @param {number} len - バーの長さ
@@ -369,6 +369,14 @@ let createMeterView = function(caption, target, x, y, len, reversed = false){
             ctx.fillRect(this.x-2,this.y-2, len+4, 24);
             ctx.fillStyle = "rgba(50,50,50,1)";
             ctx.fillRect(this.x, this.y, len, 20);
+
+            const sv = target.startingPoint();
+            if(sv > target.value){
+                const svWidth = len * sv / target.max;
+                const x = reversed ? (this.x + len - svWidth) : this.x;
+                ctx.fillStyle = "rgb(250,50,0,0.5)";
+                ctx.fillRect(x, this.y, svWidth, 20);
+            }
 
             const width = len * target.value / target.max;
             const x = reversed ? (this.x + len - width) : this.x;
