@@ -23,7 +23,7 @@ a tiny simulator of "MAGICARD BATTLE"
 * [battle.js](https://github.com/lenuser-code/nagibato/blob/main/battle.js) - バトル画面
 * [storage.js](https://github.com/lenuser-code/nagibato/blob/main/storage.js) - localStorageに関する機能の実装
 
-ちなみに全カードデータはEverNoteにてJSONファイルとして公開しています：
+ちなみに全カードデータはEverNoteでJSONファイルとして公開しています（各フィールドの説明付き）：
 https://lite.evernote.com/note/2f492959-5c8b-85a8-cab4-281cfebac469
 
 ## Acknowledgement
