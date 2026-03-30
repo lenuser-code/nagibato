@@ -20,3 +20,9 @@ a tiny simulator of "MAGICARD BATTLE"
 
 ## Acknowledgement
 This simulator uses ZzFX (https://github.com/KilledByAPixel/ZzFX). I would like to express my gratitude to the ZzFX project and its community.
+
+<br>
+<pre>
+2026 @lenuser
+</pre>
+---
