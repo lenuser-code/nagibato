@@ -366,7 +366,8 @@ const selectScene = new Scene({
     opt2 = {
         deck: deckObj, sideboard: sideboardObj,
         playerData: this.setting.mainCardData,
-        chainRule: this.setting.chainRule, ...opt
+        chainRule: this.setting.chainRule,
+        QBChance: this.setting.QBChance,  ...opt
     };
     GE.changeScene("intermediate", opt2);
 },
@@ -404,7 +405,8 @@ actions:  [
             values.push({
                 deck: new Deck(usedCards), sideboard: new Deck(sideboardCards),
                 playerData: data.playerData, enemyData: data.enemyData,
-                chainRule: data.chainRule, tutorial: data.tutorial
+                chainRule: data.chainRule, QBChance: data.QBChance, 
+                tutorial: data.tutorial
             });
         }
         const op = (i) => {
@@ -479,7 +481,8 @@ initData(){
         deckSet: new CardSet(usedCards),
         sideboardSet: new CardSet(sideboardCards),
         mainCardData: {...RAW_CARD_DATA.find((e) => e.id == configData[0])},
-        chainRule: configData[1]
+        chainRule: configData[1],
+        QBChance: configData[3] ?? true
     };
 },
 

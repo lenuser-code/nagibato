@@ -809,11 +809,13 @@ stdgam.SoundPool = class {
      * 指定した名前で登録されている音声を再生する (存在しなければ何もしない).
      * 既に再生中の場合, 最初に巻き戻して再生し直す.
      * @param {string} name - 再生する音声の登録名
+     * @param {boolean} [loop=false] - ループ再生をするか
      */
-    play(name) {
+    play(name, loop=false) {
         const ad = this.#pool[name];
         if (ad) {
             ad.currentTime = 0; // 巻き戻し
+            ad.loop = loop;
             ad.play().catch(e => console.warn("再生に失敗:", e));
         }
     }

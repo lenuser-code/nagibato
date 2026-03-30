@@ -433,7 +433,7 @@ let createTimeCount = function(maxTimeCount, x, y){
         GE.se.play("tick");
         obj.loop(60, (GE, obj) => {
             GE.se.play("tick");
-            if(obj.currentCount == 1 || GE.input.isDown("Space")) {
+            if(obj.currentCount == 1) {
                 obj.active = false;
                 return false;
             }
@@ -928,6 +928,7 @@ class HandManager{
  * @prop {Object.<string, *>} backupArgs - オプションリストのバックアップ
  * @prop {number} maxTimeCount - 各ターンの制限時間の秒数
  * @prop {number} turn - 現在のターン数
+ * @prop {number} QBChance - QBチャンスの残り回数
  * @prop {Player} player - バトルしているプレイヤーキャラクター
  * @prop {Enemy} enemy - バトルしている敵キャラクター
  * @prop {Shaker} pShaker - プレイヤー側UIのためのShaker
@@ -966,6 +967,7 @@ textOpt: {
     time: { font: "27px Sans-Serif", textAlign: "center" },
     score: { font: "27px Sans-Serif" },
     turn: { font: "80px Serif", textAlign: "center" },
+    acceptTurnEnd: { font: "27px Sans-Serif", textAlign: "right"},
     points: { color: "orange", font: "bold 36px Sans-Serif" },
     clear: { color: "yellow", font: "bold 100px Serif", textAlign: "center" }
 },
@@ -1034,6 +1036,7 @@ initComponents(args){
     this.poolManager = new PoolManager(this, version, ...this.position.pool);
     this.handManager = new HandManager(this, args.deck, this.poolManager);
     this.turn = 0;
+    this.QBChance = (args.QBChance ? 1 : 0);
     this.maxTimeCount = 5;
 
     this.SD = new SkillDealer(this);
@@ -1101,6 +1104,9 @@ onLoad(GE, args){
         yield* this.EAD.upkeep(GE);
         if(this.player.HP() <= 0 || this.enemy.HP() <= 0) break;
 
+        // QBチャンス
+        if(this.turn == 2 && this.QBChance > 0) yield* this.QBChanceProcess(GE, this);
+
         // メインスキル
         yield* this.mainSkill(GE, this);
         if(this.player.HP() <= 0 || this.enemy.HP() <= 0) break;
@@ -1146,6 +1152,25 @@ onLoad(GE, args){
         T.text(`Turn ${this.turn}`, {x: 500, y: 180, ...this.textOpt.turn}),
         90));
     yield* this.SD.wait(90);
+},
+
+*QBChanceProcess(GE, self){
+    const QB = new QBSlideIn("キュゥべえチャンス", 200, 20);
+    this.addSprite(QB);
+    this.addTask(QB, true);
+
+    const effects = [
+        [this.player, "addHP", this.player.percentHP(5), "powerup"],
+        [this.player, "addMP", this.player.percentMP(5), "powerup"],
+        [this.enemy, "addHP", -this.player.percentMP(10), "hit0"]
+    ];
+    yield* this.SD.wait(20);
+    const op = effects[Math.floor(Math.random() * effects.length)];
+    op[0][op[1]](op[2]);
+    GE.se.play(op[3]);
+
+    this.QBChance--;
+    while(QB.active) yield true;
 },
 
 *mainSkill(GE, self){
@@ -1204,21 +1229,31 @@ onLoad(GE, args){
     this.add(timer);
     this.add(T.finite(T.text("TIME", {x: tx, y: ty, ...this.textOpt.time}), 300));
 
-    while(timer.active){
-        const i = this.checkInput(GE);
-        if(i >= 0 && !this.handManager.busy && this.handManager.cost(i) != 0){
-            this.phase2_body(GE, i);
+    const acceptTurnEnd = T.finite(T.text(
+        "Space：ターン終了", {x: 950, y: 650, ...this.textOpt.acceptTurnEnd}), 300);
+    acceptTurnEnd.execute = function(GE){
+        if(GE.input.isJustPressed("Space")){
+            timer.active = false;
+            this.active = false;
         }
+        return true;
+    };
+    this.add(acceptTurnEnd);
+
+    while(timer.active){
+        this.phase2_body(GE, this.checkInput(GE));
         yield true;
     }
 },
 phase2_body(GE, i){
-    if(!this.player.payCost(this.handManager.cost(i))){
-        this.add(new QBTelop("ソウルジェムが濁っているよ"));
-        return;
+    if(i >= 0 && !this.handManager.busy && this.handManager.cost(i) != 0){
+        if(!this.player.payCost(this.handManager.cost(i))){
+            this.add(new QBTelop("ソウルジェムが濁っているよ"));
+            return;
+        }
+        this.add( this.handManager.playCard(i) );
+        this.add( this.handManager.drawCard(i) );
     }
-    this.add( this.handManager.playCard(i) );
-    this.add( this.handManager.drawCard(i) );
 },
 
 *waitWhileBusy(GE, self){

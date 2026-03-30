@@ -15,6 +15,7 @@
  * 1. メインカードのID (string)
  * 2, コンボ成立ルールのバージョン (number)
  * 3. スキル持ちカードのマーカー設定 (boolean)
+ * 4. QBチャンスの設定 (boolean)s
  *
  * がこの順番に格納されている. ロードする前, および, localStorageを利用しない設定のときはnull
  * @prop {string[]|null} deckInfo - デッキに含まれる各カードのIDを並べた配列.
@@ -88,14 +89,15 @@ removeStorage(alreadyConfirmed){
  * 1. メインカードのID (string)
  * 2, コンボ成立ルールのバージョン (number)
  * 3. スキル持ちカードのマーカー設定 (boolean)
+ * 4. QBチャンスの設定 (boolean)s
  *
  * が保存の対象である.
  * @param {string} mainCardID - メインカードのID
  * @param {number} chainRuleVersion - コンボ成立ルールのバージョン
  * @param {boolean} skillMarkerFlag - スキル持ちカードのマーカー設定
  */
-saveConfig: function(mainCardID, chainRuleVersion, skillMarkerFlag){
-    const data = [mainCardID, chainRuleVersion, skillMarkerFlag];
+saveConfig: function(mainCardID, chainRuleVersion, skillMarkerFlag, QBChanceFlag){
+    const data = [mainCardID, chainRuleVersion, skillMarkerFlag, QBChanceFlag];
     const json = JSON.stringify(data);
     localStorage.setItem("nagibato_config_data", json);
     this.config = data;
