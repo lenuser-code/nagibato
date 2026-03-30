@@ -12,6 +12,7 @@ a tiny simulator of "MAGICARD BATTLE"
 * [nagibato.js](https://lenuser-code.github.io/nagibato/docs/nagibato.js.html) - メイン部分
 * [stdgam.js](https://lenuser-code.github.io/nagibato/docs/stdgam.js.html) - いわゆるゲームエンジン部分
 * [stdtask.js](https://lenuser-code.github.io/nagibato/docs/stdtask.js.html) - 頻出するタスクは抽出してここに置くつもり
+* [cardlist.js](https://lenuser-code.github.io/nagibato/docs/cardlist.js.html) - 全カードデータ（実質的にはJSONファイル）
 * [card.js](https://lenuser-code.github.io/nagibato/docs/card.js.html) - カードに関連するオブジェクトの実装 (プレイヤー側スキルも含む)
 * [enemy.js](https://lenuser-code.github.io/nagibato/docs/enemy.js.html) - 敵スキルの実装, および敵ステータスの管理
 * [model.js](https://lenuser-code.github.io/nagibato/docs/model.js.html) - プレイヤーおよび敵を表すクラスを実装
