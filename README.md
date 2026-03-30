@@ -7,7 +7,8 @@ a tiny simulator of "MAGICARD BATTLE"
 <span style="color:red; font-weight:bold">☆ GitHub Pagesで試遊できます！　→</span>　https://lenuser-code.github.io/nagibato/nagibato.html
 
 
-## ファイル構造 ([docs](https://lenuser-code.github.io/nagibato/docs/))
+## ファイル構造
+クラス・メソッド一覧は[docs](https://lenuser-code.github.io/nagibato/docs/)を御覧ください。
 * [nagibato.html](https://github.com/lenuser-code/nagibato/blob/main/nagibato.html) - ゲームを実行するHTMLファイル
 * [nagibato.js](https://github.com/lenuser-code/nagibato/blob/main/nagibato.js) - メイン部分
 * [stdgam.js](https://github.com/lenuser-code/nagibato/blob/main/stdgam.js) - いわゆるゲームエンジン部分
