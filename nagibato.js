@@ -116,13 +116,14 @@ GE.caches.createCache("BOOKLIKE_1", 360, 60, (ctx) => {
  * タイトル画面からバトルへ移行する際, 途中に挟む仲介役のシーン.
  * 逆に, バトルから戻って来るときもこのシーンを経由する.
  * @namespace
- * @prop step
- * @prop args
- * @prop deck
- * @prop sideboard
+ * @prop {number} state - このシーンの状態遷移を管理する数字
+ * @prop {Object.<string,*>} args - このシーンに渡されたオプションリスト
+ * @prop {Deck} deck - 一番最近のバトルで使用したデッキ. これ自体ではなく複製したものをバトルで使う.
+ * @prop {Deck} sideboard - 一番最近のバトルで使用したサイドボード. これ自体ではなく複製したものをバトルで使う.
+ * @extends stdgam.Scene
  */
 const intermediateScene = new Scene({
-    step: 0,
+    state: 0,
 
     /**
      * 最初の1回だけ実行する初期化処理.
@@ -142,30 +143,30 @@ const intermediateScene = new Scene({
      */
     onLoad(GE, args){
         this.ensure(GE);
-        if(this.step == 0 || args.tutorial){
+        if(this.state == 0 || args.tutorial){
             this.args = args;
-            this.deck = args.deck;
-            this.sideboard = args.sideboard;
-            if(args.tutorial) this.step = 1;
+            this.deck = args.deck.clone();
+            this.sideboard = args.sideboard.clone();
+            if(args.tutorial) this.state = 1;
         }
 
-        if(this.step == 0){
+        if(this.state == 0){
             const practiceData = {...args};
             practiceData.enemyData = null;
             practiceData.deck = this.deck.clone();
             practiceData.sideboard = this.sideboard.clone();
-            this.step++;
+            this.state++;
             GE.changeScene("main", practiceData);
         }
-        else if(this.step == 1){
+        else if(this.state == 1){
             const mainData = {...this.args};
             mainData.deck = this.deck.clone();
             mainData.sideboard = this.sideboard.clone();
-            this.step++;
+            this.state++;
             GE.changeScene("main", mainData);
         }
         else{
-            this.step = 0;
+            this.state = 0;
             GE.changeScene("select");
         }
     }
@@ -177,19 +178,28 @@ const intermediateScene = new Scene({
 /**
  * バトル・チュートリアルの選択に使うダイアログを実装するクラス.
  * @class
- * @prop menu
- * @prop callback
- * @prop rowCount
- * @prop select
+ * @prop {string[]} menu - 各項目の表示テキストをリストにしたものs
  * @prop x
  * @prop y
- * @prop step
- * @prop padY
- * @prop width
- * @prop height
+ *
  * @extends stdtask.Scroll
+ * @prop {number} scroll - 現在のスクロール量
+ * @prop {number} offset - 現在の表示区間において選択されている要素が何番目にあるか.
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
 class SelectWindow extends stdtask.Scroll{
+    #callback;
+    #rowCount;
+    #width;
+    #height;
+    #step;  // 隣接する2行のy座標の差
+    #padY;  // y方向のパディングの量
+
+    /**
+     * @param {function(number): void} callback - 項目が選択されたときに呼び出される関数.
+     * 引数として選択された項目のインデックスを受け取る
+     * @param {number} rowCount - 一度に表示できる最大項目数
+     */
     constructor(menu, callback, rowCount, x, y, w, h){
         const select = new stdtask.Select(
             menu.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 10
@@ -197,53 +207,52 @@ class SelectWindow extends stdtask.Scroll{
         super(select, rowCount);
 
         this.menu = menu;
-        this.callback = callback;
-        this.rowCount = rowCount;
-        this.select = select;
+        this.#callback = callback;
+        this.#rowCount = rowCount;
 
         this.x = x;
         this.y = y;
-        this.step = 60;
-        this.padY = 40 + (h - this.step * rowCount) / 2;
-        this.width = w;
-        this.height = h;
+        this.#step = 60;
+        this.#padY = 40 + (h - this.#step * rowCount) / 2;
+        this.#width = w;
+        this.#height = h;
     }
 
     draw(GE, ctx){
         ctx.save();
         ctx.fillStyle = "rgb(0,0,0,0.5)";
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.fillRect(this.x, this.y, this.#width, this.#height);
 
         ctx.font = "42px monospace";
         ctx.fillStyle = "white";
         const m = ctx.measureText("→_");
         const ax = this.x + 30;
-        const ay = this.y + this.padY + this.offset*this.step;
+        const ay = this.y + this.#padY + this.offset*this.#step;
         const aw = m.width;
         ctx.fillText("→", ax, ay);
 
-        for(let i = 0; i < this.rowCount; i++){
+        for(let i = 0; i < this.#rowCount; i++){
             const n = this.scroll + i;
             if(n < this.menu.length){
-                ctx.fillText(this.menu[n], ax+aw, this.y+this.padY+this.step*i);
+                ctx.fillText(this.menu[n], ax+aw, this.y+this.#padY+this.#step*i);
             }
             else break;
         }
         if(this.scroll > 0){
             ctx.font = "20px Sans-Serif";
             ctx.textAlign = "center";
-            ctx.fillText("▲", this.x + this.width/2, this.y + this.padY-this.step);
+            ctx.fillText("▲", this.x + this.#width/2, this.y + this.#padY-this.#step);
         }
-        if(this.rowCount < this.menu.length && this.scroll < this.menu.length-this.rowCount){
+        if(this.#rowCount < this.menu.length && this.scroll < this.menu.length-this.#rowCount){
             ctx.font = "20px Sans-Serif";
             ctx.textAlign = "center";
-            ctx.fillText("▼", this.x + this.width/2, this.y+this.padY+this.step*(this.rowCount-1)+40);
+            ctx.fillText("▼", this.x + this.#width/2, this.y+this.#padY+this.#step*(this.#rowCount-1)+40);
         }
         ctx.restore();
     }
 
     action(GE, n){
-        this.callback(n);
+        this.#callback(n);
     }
 
     cancel(GE, n){
