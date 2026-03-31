@@ -1145,9 +1145,8 @@ stdgam.Templates = {
      * objに _traits 要素が定義されていなければ _traits に空リストをセットする. 
      * さらに, もし execute(GE) メソッドがなければ, obj.execute に
      * true を返すだけの空の関数をセットする.
-     * @template T
-     * @param {T} obj - 対象のオブジェクト
-     * @returns {T} objを返す
+     * @param {Object} obj - 対象のオブジェクト
+     * @returns {Object} objを返す
      */
     _initTraits: (obj) => {
         if (!obj._traits) obj._traits = [];
@@ -1158,9 +1157,8 @@ stdgam.Templates = {
 
     /**
      * 指定されたフレーム数が経過すると自動で消滅するようにする.
-     * @template T
-     * @param {T} obj - 対象のオブジェクト
-     * @returns {T} objを返す
+     * @param {Object} obj - 対象のオブジェクト
+     * @returns {Object} objを返す
      */
     finite: function(obj, frames) {
         this._initTraits(obj);
@@ -1179,9 +1177,8 @@ stdgam.Templates = {
      *
      * ここで, callbackの受け取る引数は (GE, self) である.
      * GEはタスク処理を実行しているGameEngine, selfはobj自身である.
-     * @template T
-     * @param {T} obj - 対象のオブジェクト
-     * @returns {T} objを返す
+     * @param {Object} obj - 対象のオブジェクト
+     * @returns {Object} objを返す
      */
     scheduler: function(obj) {
         this._initTraits(obj);
@@ -1218,9 +1215,8 @@ stdgam.Templates = {
      * objに moveTo(x, y) と slideTo(x, y, frames) を付与する.
      * moveTo: this.x, this.yを指定した値に変更する.
      * slideTo: 現在位置から(x,y)までthis.x, this.yの値を等速変化させる.
-     * @template T
-     * @param {T} obj - 対象のオブジェクト
-     * @returns {T} objを返す
+     * @param {Object} obj - 対象のオブジェクト
+     * @returns {Object} objを返す
      */
     slider: function(obj, x, y) {
         this._initTraits(obj);
@@ -1255,9 +1251,8 @@ stdgam.Templates = {
     /**
      * objに fadeTo(alpha, frames) を付与する.
      * - fadeTo: 現在位置からalphaまでthis.alphaの値を変化させる
-     * @template T
-     * @param {T} obj - 対象のオブジェクト
-     * @returns {T} objを返す
+     * @param {Object} obj - 対象のオブジェクト
+     * @returns {Object} objを返す
      */
     fader: function(obj, alpha) {
         this._initTraits(obj);
