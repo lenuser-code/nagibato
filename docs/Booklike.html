@@ -119,6 +119,10 @@
 
     
     
+    <div class="description">
+        <p>指定された設定でインスタンスを作る.</p>
+    </div>
+    
 
 
 
@@ -163,13 +167,18 @@
 
     <td class="type">
     
+        
+<code class="param-type">string</code>
+
+
+    
     </td>
 
     
 
     
 
-    <td class="description last"></td>
+    <td class="description last"><p>表示するテキスト</p></td>
 </tr>
 
         
@@ -181,13 +190,18 @@
 
     <td class="type">
     
+        
+<code class="param-type">number</code>
+
+
+    
     </td>
 
     
 
     
 
-    <td class="description last"></td>
+    <td class="description last"><p>表示位置のx座標</p></td>
 </tr>
 
         
@@ -199,23 +213,10 @@
 
     <td class="type">
     
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
         
-            
-<tr class="deep-level-0">
-    
-        <td class="name"><code>width</code></td>
-    
+<code class="param-type">number</code>
 
-    <td class="type">
+
     
     </td>
 
@@ -223,25 +224,7 @@
 
     
 
-    <td class="description last"></td>
-</tr>
-
-        
-            
-<tr class="deep-level-0">
-    
-        <td class="name"><code>height</code></td>
-    
-
-    <td class="type">
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
+    <td class="description last"><p>表示位置のy座標</p></td>
 </tr>
 
         
@@ -253,13 +236,18 @@
 
     <td class="type">
     
+        
+<code class="param-type">boolean</code>
+
+
+    
     </td>
 
     
 
     
 
-    <td class="description last"></td>
+    <td class="description last"><p>この項目が選択中ならばtrue, そうでなければfalse</p></td>
 </tr>
 
         
@@ -271,13 +259,18 @@
 
     <td class="type">
     
+        
+<code class="param-type">function</code>
+
+
+    
     </td>
 
     
 
     
 
-    <td class="description last"></td>
+    <td class="description last"><p>この項目が選択されたときに呼び出される関数</p></td>
 </tr>
 
         
@@ -322,7 +315,7 @@
         <p class="tag-source">
             <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line274">line 274</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line283">line 283</a>
             </span>
         </p>
     
@@ -370,6 +363,360 @@
 
     
 
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="draw">
+        <a class="href-link" href="#draw">#</a>
+        
+        <span class="code-name">
+            
+                draw<span class="signature">(GE, ctx)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>描画処理を行う.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>GE</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.GameEngine.html">stdgam.GameEngine</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>この処理に用いるGameEngine</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>ctx</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">CanvasRenderingContext2D</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>描画に使うコンテクスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="nagibato.js.html" class="button">View Source</a>
+            <span>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line318">line 318</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="open">
+        <a class="href-link" href="#open">#</a>
+        
+        <span class="code-name">
+            
+                open<span class="signature">(GE, scene)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>この項目が選択決定されたときに呼び出される.
+this.actionが設定されていればこれを実行し, そうでなければ何もしない.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>GE</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.GameEngine.html">stdgam.GameEngine</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>この処理に用いるGameEngine</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>scene</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.Scene.html">stdgam.Scene</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>操作対象のScene</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="nagibato.js.html" class="button">View Source</a>
+            <span>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line309">line 309</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
     
 
     

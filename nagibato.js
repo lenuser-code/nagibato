@@ -179,13 +179,9 @@ const intermediateScene = new Scene({
  * バトル・チュートリアルの選択に使うダイアログを実装するクラス.
  * @class
  * @prop {string[]} menu - 各項目の表示テキストをリストにしたものs
- * @prop x
- * @prop y
- *
+ * @prop {number} x - 表示位置のx座標
+ * @prop {number} y - 表示位置のy座標
  * @extends stdtask.Scroll
- * @prop {number} scroll - 現在のスクロール量
- * @prop {number} offset - 現在の表示区間において選択されている要素が何番目にあるか.
- * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
 class SelectWindow extends stdtask.Scroll{
     #callback;
@@ -218,6 +214,11 @@ class SelectWindow extends stdtask.Scroll{
         this.#height = h;
     }
 
+    /**
+     * 描画処理を行う.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     */
     draw(GE, ctx){
         ctx.save();
         ctx.fillStyle = "rgb(0,0,0,0.5)";
@@ -251,10 +252,20 @@ class SelectWindow extends stdtask.Scroll{
         ctx.restore();
     }
 
+    /**
+     * 項目が選択決定されたときの処理を実行する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {number} n - 選択中の項目のインデックス
+     */
     action(GE, n){
         this.#callback(n);
     }
 
+    /**
+     * 選択がキャンセルされたときの処理を実行する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {number} n - 選択中の項目のインデックス
+     */
     cancel(GE, n){
         this.active = false;
     }
@@ -263,19 +274,25 @@ class SelectWindow extends stdtask.Scroll{
 /**
  * Shelflikeに格納される個々のアイテムを実装するクラス.
  * @class
- * @prop text
- * @prop x
- * @prop y
- * @prop width
- * @prop height
- * @prop selected
- * @prop action
+ * @prop {string} text - 表示するテキスト
+ * @prop {number} x - 表示位置のx座標
+ * @prop {number} y - 表示位置のy座標
+ * @prop {boolean} selected - この項目が選択中ならばtrue, そうでなければfalse
+ * @prop {function(stdgam.GameEngine, stdgam.Scene, Booklike): void} action - この項目が選択されたときに呼び出される関数
  */
 class Booklike{
     static boxColors = [ "rgb(239,228,176)", "rgb(195,195,195)"];
     static textColors = [ "rgb(255,100,0)", "gray" ];
     static borderColor = "rgb(0,20,40)";
 
+    /**
+     * 指定された設定でインスタンスを作る.
+     * @prop {string} text - 表示するテキスト
+     * @prop {number} x - 表示位置のx座標
+     * @prop {number} y - 表示位置のy座標
+     * @prop {function(stdgam.GameEngine, stdgam.Scene, Booklike): void} action -
+     * この項目が選択されたときに呼び出される関数
+     */
     constructor(text, x, y, action = null){
         this.text = text;
         this.action = action;
@@ -283,10 +300,21 @@ class Booklike{
         this.y = y;
     }
 
+    /**
+     * この項目が選択決定されたときに呼び出される.
+     * this.actionが設定されていればこれを実行し, そうでなければ何もしない.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {stdgam.Scene} scene - 操作対象のScene
+     */
     open(GE, scene){
         if(this.action) this.action(GE, scene, this);
     }
 
+    /**
+     * 描画処理を行う.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     */
     draw(GE, ctx){
         ctx.save();
         const n = this.selected ? 0 : 1;
@@ -306,37 +334,56 @@ class Booklike{
  * タイトル画面のメインメニューを実装するクラス.
  * @class
  * @prop owner
- * @prop x
- * @prop y
- * @prop width
- * @prop height
+ * @prop {number} x - 表示位置のx座標
+ * @prop {number} y - 表示位置のy座標
  * @prop books
  * @extends stdtask.CyclicSelect
  */
 class Shelflike extends stdtask.CyclicSelect{
+    #width;
+    #height;
+
     static boxColor = "rgb(30,30,30)";
     static borderColor = "rgb(10,10,10)";
 
+    /**
+     * booksを項目とするインスタンスを生成する.
+     * @param {stdgam.Scene} owner - このオブジェクトを所有するシーンオブジェクト
+     * @param {Booklike[]} books - 項目として使うBooklikeオブジェクトの配列
+     * @param {number} x - 表示位置のx座標
+     * @param {number} y - 表示位置のy座標
+     * @param {number} w - 表示する横幅
+     * @param {number} h - 表示する縦幅
+     */
     constructor(owner, books, x, y, w, h){
         super(books.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS", 0, 12, false);
         this.owner = owner;
         this.x = x;
         this.y = y;
-        this.width = w;
-        this.height = h;
+        this.#width = w;
+        this.#height = h;
         this.books = books;
         books[0].selected = true;
     }
 
+    /**
+     * 描画処理を行う.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     */
     draw(GE, ctx){
         ctx.save();
         ctx.fillStyle = Shelflike.borderColor;
-        ctx.fillRect(this.x-5, this.y-5, this.width+10, this.height*this.books.length+10);
+        ctx.fillRect(this.x-5, this.y-5, this.#width+10, this.#height*this.books.length+10);
         ctx.fillStyle = Shelflike.boxColor;
-        ctx.fillRect(this.x, this.y, this.width, this.height*this.books.length);
+        ctx.fillRect(this.x, this.y, this.#width, this.#height*this.books.length);
         ctx.restore();
     }
 
+    /**
+     * 1フレーム分のタスク処理を実行する.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     */
     execute(GE){
         const prev = this.index;
         const f = super.execute(GE);
@@ -347,6 +394,11 @@ class Shelflike extends stdtask.CyclicSelect{
         return f;
     }
 
+    /**
+     * 項目が選択決定されたときの処理を実行する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {number} n - 選択中の項目のインデックス
+     */
     action(GE, index){
         this.books[this.index].open(GE, this.owner);
     }

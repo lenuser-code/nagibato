@@ -85,7 +85,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Shelflike<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Shelflike<span class="signature">(owner, books, x, y, w, h)</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>タイトル画面のメインメニューを実装するクラス.</p></div>
         
@@ -111,7 +111,7 @@
         
         <span class="code-name">
             
-                new Shelflike<span class="signature">()</span><span class="type-signature"></span>
+                new Shelflike<span class="signature">(owner, books, x, y, w, h)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -119,6 +119,10 @@
 
     
     
+    <div class="description">
+        <p>booksを項目とするインスタンスを生成する.</p>
+    </div>
+    
 
 
 
@@ -127,6 +131,182 @@
 
 
 
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>owner</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.Scene.html">stdgam.Scene</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>このオブジェクトを所有するシーンオブジェクト</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>books</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;<a href="Booklike.html">Booklike</a>></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>項目として使うBooklikeオブジェクトの配列</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>x</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>表示位置のx座標</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>y</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>表示位置のy座標</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>w</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>表示する横幅</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>h</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>表示する縦幅</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -181,13 +361,18 @@
 
     <td class="type">
     
+        
+<code class="param-type">number</code>
+
+
+    
     </td>
 
     
 
     
 
-    <td class="description last"></td>
+    <td class="description last"><p>表示位置のx座標</p></td>
 </tr>
 
         
@@ -199,23 +384,10 @@
 
     <td class="type">
     
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
         
-            
-<tr class="deep-level-0">
-    
-        <td class="name"><code>width</code></td>
-    
+<code class="param-type">number</code>
 
-    <td class="type">
+
     
     </td>
 
@@ -223,25 +395,7 @@
 
     
 
-    <td class="description last"></td>
-</tr>
-
-        
-            
-<tr class="deep-level-0">
-    
-        <td class="name"><code>height</code></td>
-    
-
-    <td class="type">
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
+    <td class="description last"><p>表示位置のy座標</p></td>
 </tr>
 
         
@@ -304,7 +458,7 @@
         <p class="tag-source">
             <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line316">line 316</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line342">line 342</a>
             </span>
         </p>
     
@@ -377,7 +531,7 @@
         
         <span class="code-name">
             
-                action<span class="signature">(GE, index)</span><span class="type-signature"></span>
+                action<span class="signature">(GE, n)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -386,8 +540,7 @@
     
     
     <div class="description">
-        <p>actionKeyとして指定したキーが押されたときに呼び出される.
-デフォルトでは何もしない.</p>
+        <p>項目が選択決定されたときの処理を実行する.</p>
     </div>
     
 
@@ -441,7 +594,7 @@
 
   
 
-  <td class="description last"><p>タスク処理を実行するために使うGameEngine</p></td>
+  <td class="description last"><p>この処理に用いるGameEngine</p></td>
 </tr>
 
 
@@ -450,7 +603,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>index</code></td>
+      <td class="name"><code>n</code></td>
   
 
   <td class="type">
@@ -466,7 +619,7 @@
 
   
 
-  <td class="description last"><p>this.indexの値</p></td>
+  <td class="description last"><p>選択中の項目のインデックス</p></td>
 </tr>
 
 
@@ -517,9 +670,9 @@
 
     
         <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
+            <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line169">line 169</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line402">line 402</a>
             </span>
         </p>
     
@@ -1116,12 +1269,12 @@
 
 
     
-    <h4 class="name" id="execute">
-        <a class="href-link" href="#execute">#</a>
+    <h4 class="name" id="draw">
+        <a class="href-link" href="#draw">#</a>
         
         <span class="code-name">
             
-                execute<span class="signature">(GE)</span><span class="type-signature"></span>
+                draw<span class="signature">(GE, ctx)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -1130,14 +1283,7 @@
     
     
     <div class="description">
-        <p>1フレーム分のタスク処理を実行する.
-具体的には, キー入力に応じてthis.indexを増減させたり
-this.action/this.cancel を実行したりする.</p>
-<p>【注意】this.action/this.canelを実行したフレームでは, modalの設定と
-無関係に必ず false を返す. なぜならば, もしこれら処理の中で
-タスクリストの変更が発生した場合「forループの途中で中身を変更する」のと
-同じ状況が生じるためである.
-後続のタスク処理をブロックすることで安全にループを抜けることができる.</p>
+        <p>描画処理を行う.</p>
     </div>
     
 
@@ -1191,7 +1337,180 @@ this.action/this.cancel を実行したりする.</p>
 
   
 
-  <td class="description last"><p>タスク処理に用いるGameEngine</p></td>
+  <td class="description last"><p>この処理に用いるGameEngine</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>ctx</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">CanvasRenderingContext2D</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>描画に使うコンテクスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="nagibato.js.html" class="button">View Source</a>
+            <span>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line374">line 374</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="execute">
+        <a class="href-link" href="#execute">#</a>
+        
+        <span class="code-name">
+            
+                execute<span class="signature">(GE)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>1フレーム分のタスク処理を実行する.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>GE</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.GameEngine.html">stdgam.GameEngine</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>このタスク処理に用いるGameEngine</p></td>
 </tr>
 
 
@@ -1242,9 +1561,9 @@ this.action/this.cancel を実行したりする.</p>
 
     
         <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
+            <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line123">line 123</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line387">line 387</a>
             </span>
         </p>
     
@@ -1266,28 +1585,6 @@ this.action/this.cancel を実行したりする.</p>
 
 
 
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>次のいずれかの条件を満たすとき false を返す</p>
-<ol>
-<li>自分より後ろのタスク処理をブロックする設定の場合</li>
-<li>このフレームにおいてthis.action や this.cancel を実行した場合</li>
-</ol>
-<p>そうでないとき true を返す</p></div>
-    
-    
-</div>
-
-                
-        </div>
-    </div>
 
 
 

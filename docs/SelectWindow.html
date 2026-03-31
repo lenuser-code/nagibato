@@ -263,13 +263,18 @@
 
     <td class="type">
     
+        
+<code class="param-type">number</code>
+
+
+    
     </td>
 
     
 
     
 
-    <td class="description last"></td>
+    <td class="description last"><p>表示位置のx座標</p></td>
 </tr>
 
         
@@ -281,24 +286,6 @@
 
     <td class="type">
     
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-        
-            
-<tr class="deep-level-0">
-    
-        <td class="name"><code>scroll</code></td>
-    
-
-    <td class="type">
-    
         
 <code class="param-type">number</code>
 
@@ -310,53 +297,7 @@
 
     
 
-    <td class="description last"><p>現在のスクロール量</p></td>
-</tr>
-
-        
-            
-<tr class="deep-level-0">
-    
-        <td class="name"><code>offset</code></td>
-    
-
-    <td class="type">
-    
-        
-<code class="param-type">number</code>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>現在の表示区間において選択されている要素が何番目にあるか.</p></td>
-</tr>
-
-        
-            
-<tr class="deep-level-0">
-    
-        <td class="name"><code>active</code></td>
-    
-
-    <td class="type">
-    
-        
-<code class="param-type">boolean</code>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>(stdgam.Sceneの意味で) このオブジェクトが有効か</p></td>
+    <td class="description last"><p>表示位置のy座標</p></td>
 </tr>
 
         
@@ -401,7 +342,7 @@
         <p class="tag-source">
             <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line190">line 190</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line186">line 186</a>
             </span>
         </p>
     
@@ -474,7 +415,7 @@
         
         <span class="code-name">
             
-                action<span class="signature">(GE, index)</span><span class="type-signature"></span>
+                action<span class="signature">(GE, n)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -483,8 +424,7 @@
     
     
     <div class="description">
-        <p>actionKeyとして指定したキーが押されたときに呼び出される.
-デフォルトでは何もしない.</p>
+        <p>項目が選択決定されたときの処理を実行する.</p>
     </div>
     
 
@@ -538,7 +478,7 @@
 
   
 
-  <td class="description last"><p>タスク処理を実行するために使うGameEngine</p></td>
+  <td class="description last"><p>この処理に用いるGameEngine</p></td>
 </tr>
 
 
@@ -547,7 +487,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>index</code></td>
+      <td class="name"><code>n</code></td>
   
 
   <td class="type">
@@ -563,7 +503,7 @@
 
   
 
-  <td class="description last"><p>this.indexの値</p></td>
+  <td class="description last"><p>選択中の項目のインデックス</p></td>
 </tr>
 
 
@@ -614,9 +554,9 @@
 
     
         <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
+            <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line340">line 340</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line260">line 260</a>
             </span>
         </p>
     
@@ -811,7 +751,7 @@
         
         <span class="code-name">
             
-                cancel<span class="signature">(GE, index)</span><span class="type-signature"></span>
+                cancel<span class="signature">(GE, n)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -820,8 +760,7 @@
     
     
     <div class="description">
-        <p>cancelKeyとして指定したキーが押されたときに呼び出される.
-デフォルトでは何もしない.</p>
+        <p>選択がキャンセルされたときの処理を実行する.</p>
     </div>
     
 
@@ -875,7 +814,7 @@
 
   
 
-  <td class="description last"><p>タスク処理を実行するために使うGameEngine</p></td>
+  <td class="description last"><p>この処理に用いるGameEngine</p></td>
 </tr>
 
 
@@ -884,7 +823,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>index</code></td>
+      <td class="name"><code>n</code></td>
   
 
   <td class="type">
@@ -900,7 +839,7 @@
 
   
 
-  <td class="description last"><p>this.indexの値</p></td>
+  <td class="description last"><p>選択中の項目のインデックス</p></td>
 </tr>
 
 
@@ -951,9 +890,182 @@
 
     
         <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
+            <a href="nagibato.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line348">line 348</a>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line269">line 269</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="draw">
+        <a class="href-link" href="#draw">#</a>
+        
+        <span class="code-name">
+            
+                draw<span class="signature">(GE, ctx)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>描画処理を行う.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>GE</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.GameEngine.html">stdgam.GameEngine</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>この処理に用いるGameEngine</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>ctx</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">CanvasRenderingContext2D</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>描画に使うコンテクスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="nagibato.js.html" class="button">View Source</a>
+            <span>
+                <a href="nagibato.js.html">nagibato.js</a>, <a href="nagibato.js.html#line222">line 222</a>
             </span>
         </p>
     
