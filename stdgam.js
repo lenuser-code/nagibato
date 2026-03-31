@@ -374,7 +374,7 @@ stdgam.InputManager = class {
      * @param {boolean} busyFlag - trueならばisJustPressedによる判定だけを行う.
      * falseならば一部のキー (codes2の要素) についてisDownで判定を代用する.
      * @returns {Array<?string|number>} 条件を満たすキーが見つかったとき, そのキーコードと,
-     * code1またはcode2におけるインデックスの組を返す.
+     * codes1またはcodes2におけるインデックスの組を返す.
      */
     checkInput(codes1, codes2 = null, busyFlag = true){
         let i = codes1.findIndex((e) => this.isJustPressed(e));
@@ -402,6 +402,9 @@ let TimeKeeper = class {
      */
     static fps = 60;
 
+    /**
+     * @param {stdgam.GameEngine} owner - タイマーイベントを送る対象
+     */
     constructor(owner){
         this.owner = owner;
         this.isRunning = false;
@@ -417,12 +420,12 @@ let TimeKeeper = class {
         if(this.isRunning) return;
         this.isRunning = true;
 
-        const interval = 1000 / TimeKeeper.fps; // 1フレームあたりのミリ秒（約16.6ms）
+        const interval = 1000 / TimeKeeper.fps; // 1フレームあたりのミリ秒 (約16.6ms)
         let lastTime = performance.now();
 
         const loop = (currentTime) => {
            const elapsed = currentTime - lastTime;
-           // 指定した間隔（16.6ms）以上が経過したかチェック
+           // 指定した間隔 (16.6ms) 以上が経過したかチェック
            if (elapsed >= interval) {
                lastTime = currentTime - (elapsed % interval);
                this.owner.update();
@@ -610,6 +613,9 @@ stdgam.ImageCutter = class {
 stdgam.CachePool = class {
     #pool;
 
+    /**
+     * 空のインスタンスを作る.
+     */
     constructor(){
         this.#pool = {};
     }
@@ -653,6 +659,9 @@ stdgam.ImagePool = class {
     #pool;
     #promises;
 
+    /**
+     * 空のインスタンスを作る.
+     */
     constructor(){
         this.#pool = {};
         this.#promises = []; // ロード状態を追跡するリスト
@@ -741,6 +750,9 @@ stdgam.SoundPool = class {
     #pool;
     #promises;
 
+    /**
+     * 空のインスタンスを作る.
+     */
     constructor() {
         this.#pool = {};
         this.#promises = [];
@@ -829,7 +841,6 @@ stdgam.SoundPool = class {
         const ad = this.#pool[name];
         if (ad) {
             ad.pause();
-            ad.currentTime = 0; // 巻き戻し
         }
     }
 
@@ -841,7 +852,6 @@ stdgam.SoundPool = class {
         for(const key of Object.keys(this.#pool)){
             const ad = this.#pool[key];
             ad.pause();
-            ad.currentTime = 0; // 巻き戻し
         }
     }
 }
@@ -855,6 +865,9 @@ stdgam.SoundPool = class {
 stdgam.SEPool = class {
     #pool;
 
+    /**
+     * 空のインスタンスを作る.
+     */
     constructor() {
         this.#pool = {};
     }
@@ -903,12 +916,20 @@ stdgam.SEPool = class {
  */
 
 /**
- * @typedef {Templates_text} Template_ftext
+ * @typedef {Templates_text} Templates_ftext
  */
 
 /**
  * @typedef {Sprite} Templates_image
  * @prop {HTMLImageElement} image - 描画する画像
+ * @prop {number} x - 描画位置のx座標
+ * @prop {number} y - 描画位置のy座標
+ * @prop {number} alpha - 不透明度
+ */
+
+/**
+ * @typedef {Sprite} Templates_custom
+ * @prop {Object} contents - paint(GE, ctx, x, y)を持つオブジェクト
  * @prop {number} x - 描画位置のx座標
  * @prop {number} y - 描画位置のy座標
  * @prop {number} alpha - 不透明度
@@ -953,8 +974,8 @@ stdgam.SEPool = class {
  * ```
  *
  * デコレータは対象のオブジェクトを直接変更し, 特定の機能を付与する.
- * これはある種のコードスニペットであり, 他の機能との独立性は
- * 保証されないが, stdgam.Templatesで提供する機能同士を組み合わせる分には
+ * これはある種のコードスニペットであり, 他の機能との独立性は保証されないが, 
+ * stdgam.Templatesで提供する機能同士を組み合わせる分には
  * 内部実装を特に意識しないで済むように構成している.
  *
  * 1. ジェネレータ
@@ -984,7 +1005,7 @@ stdgam.Templates = {
      * optで渡すことができる.
      * @param {string} str - 表示する文字列
      * @param {Object.<string,*>} [opt={}] - オプションリスト
-     * @returns {Template_text} 生成されたオブジェクト
+     * @returns {Templates_text} 生成されたオブジェクト
      */
     text: (str, opt = {}) => {
         const obj = {
@@ -1022,7 +1043,7 @@ stdgam.Templates = {
      * @param {Object|null|false} target - 観察対象
      * @param {string} key - 取得するプロパティの名前
      * @param {Object.<string,*>} [opt={}] - オプションリスト
-     * @returns {Template_ftext} 生成されたオブジェクト
+     * @returns {Templates_ftext} 生成されたオブジェクト
      */
     ftext: (format, target, key, opt = {}) => {
         const obj = stdgam.Templates.text("", opt);
@@ -1045,7 +1066,7 @@ stdgam.Templates = {
      * オプションリストを使って x, y, alpha を指定できる.
      * @param {HTMLImageElement} img - 表示する画像
      * @param {Object.<string,*>} [opt={}] - オプションリスト
-     * @returns {Template_image} 生成されたオブジェクト
+     * @returns {Templates_image} 生成されたオブジェクト
      */
     image: (img, opt = {}) => ({
         image: img, active: true,
@@ -1070,7 +1091,7 @@ stdgam.Templates = {
      * オプションリストを使って x, y, alppha を指定することもできる.
      * @param {Object} contents - 実際に描画を行うオブジェクト
      * @param {Object.<string,*>} [opt={}] - オプションリスト
-     * @returns {Template_image} 生成されたオブジェクト
+     * @returns {Templates_custom} 生成されたオブジェクト
      */
     custom: (contents, opt = {}) => ({
         contents: contents, active: true,
