@@ -801,7 +801,7 @@ const TutorialInfo = [
     },
     {
         caption: "メインスキル", chainRule: 1,
-        playerData: RAW_CARD_DATA.find((e) => e.id == "1-007"),
+        playerData: RAW_CARD_DATA.find((e) => e.id == "2-008"),
         enemyData: EnemyData["ホムリリー"],
         cardIDs: [
             "1-001", "1-007", "3-034", "1-027", "3-039", "3-007", "1-060", "2-006", "1-025",
