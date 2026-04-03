@@ -12,7 +12,7 @@
  * @namespace
  */
 var edit = edit || {};
-(function(Public){
+(function(edit){
 
 // #1. カードを展示するコンポーネント
 
@@ -35,15 +35,9 @@ let CardCapture = class{
 
     checkInput(GE){
         if(this.busy > 0) this.busy--;
-
-        const codes = ["ArrowLeft", "ArrowRight", "KeyA", "KeyS"];
-        const i = codes.findIndex((e) => GE.input.isJustPressed(e));
-        if(i >= 0) return i;
-
-        if(this.busy == 0){
-            const codes = ["ArrowLeft", "ArrowRight"];
-            return codes.findIndex((e) => GE.input.isDown(e));
-        }
+        const codes1 = ["ArrowLeft", "ArrowRight", "KeyA", "KeyS"];
+        const codes2 = ["ArrowLeft", "ArrowRight"];
+        return GE.input.checkInput(codes1, codes2, this.busy);
     }
 
     selectedIndex(){
@@ -76,7 +70,7 @@ let CardCapture = class{
     }
 
     execute(GE){
-        const k = this.checkInput(GE);
+        const k = this.checkInput(GE)[1];
         if(k == 0){
             if(this.c > 0) this.c--;
             else if(this.scroll > 0) this.scroll--;
@@ -213,15 +207,9 @@ let CardCapture2D = class{
 
     checkInput(GE){
         if(this.busy > 0) this.busy--;
-
-        const codes = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "KeyA", "KeyS"];
-        const i = codes.findIndex((e) => GE.input.isJustPressed(e));
-        if(i >= 0) return i;
-
-        if(this.busy == 0){
-            const codes = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
-            return codes.findIndex((e) => GE.input.isDown(e));
-        }
+        const codes1 = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "KeyA", "KeyS"];
+        const codes2 = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+        return GE.input.checkInput(codes1, codes2, this.busy);
     }
 
     selectedIndex(){
@@ -265,7 +253,7 @@ let CardCapture2D = class{
     }
 
     execute(GE){
-        const k = this.checkInput(GE);
+        const k = this.checkInput(GE)[1];
         if(k == 0){
             if(this.r > 0) this.r--;
             else if(this.scroll > 0) this.scroll--;
@@ -488,23 +476,49 @@ const displayObject = {
  * 具体的には "カードを増やす" と "カードを減らす" からなるメニューを表示し,
  * ユーザーの入力に応じてデッキ編集作業を実行する.
  * @class
+ * @prop {string[]} menu
+ * @prop {number} x
+ * @prop {number} y
+ * @prop {number} width;
+ * @prop {number} height;
+ * @extends stdtask.Select
  */
-let MenuDialog = class{
-    // optで指定できるもの: padding, step, font
+let MenuDialog = class extends stdtask.CyclicSelect{
+    #padding;
+    #step;
+    #font;
+
+    /**
+     * 指定された位置にメニューを表示するインスタンスを生成する.
+     * オプションリストを与えることにより, 以下の要素を指定することも可能.
+     * - padding: 内側の余白 (縦・横共通)
+     * - step: テキストを描画するときのy座標をいくつずつ増やすか
+     * - font: テキストのフォント
+     *
+     * @param {string[]} menu
+     * @param {number} x - 左上隅のx座標
+     * @param {number} y - 左上隅のy座標
+     * @param {number} innerWidth - 内側の横幅
+     * @param {number} innerHeight - 内側の縦幅
+     * @param {Object.<string,*>} [opt={}] - オプションリスト
+     */
     constructor(menu, x, y, innerWidth, innerHeight, opt = {}){
+        super(menu.length, ["ArrowUp", "ArrowDown"], "KeyA", "KeyS");
         this.menu = menu;
-        this.index = 0;
         this.x = x;
         this.y = y;
-        this.padding = opt.padding || 20;
-        this.step = opt.step || 40;
-        this.font = opt.font || "22px Sans-Serif";
-        this.width = innerWidth + this.padding * 2;
-        this.height = innerHeight + this.padding * 2;
-        this.busy = 0;
-        this.active = true;
+        this.#padding = opt.padding || 20;
+        this.#step = opt.step || 40;
+        this.#font = opt.font || "22px Sans-Serif";
+        this.width = innerWidth + this.#padding * 2;
+        this.height = innerHeight + this.#padding * 2;
     }
 
+    /**
+     * 描画処理を行う.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     */
     draw(GE, ctx){
         ctx.save();
         ctx.strokeStyle = "rgb(0,20,70,0.5)";
@@ -514,55 +528,41 @@ let MenuDialog = class{
         ctx.fillStyle = "rgba(0,0,0,0.5)";
         ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.fillStyle = "white";
-        ctx.font = this.font;
+        ctx.font = this.#font;
 
         const m = ctx.measureText("→_");
-        const ax = this.x + this.padding;
-        const ay = this.y + this.padding + m.fontBoundingBoxAscent + this.step*this.index;
+        const ax = this.x + this.#padding;
+        const ay = this.y + this.#padding + m.fontBoundingBoxAscent + this.#step*this.index;
         const aw = m.width;
         ctx.fillText("→", ax, ay);
 
         const px = ax + aw;
-        const py = this.y + this.padding + m.fontBoundingBoxAscent;
+        const py = this.y + this.#padding + m.fontBoundingBoxAscent;
         for(let i = 0; i < this.menu.length; i++){
-            ctx.fillText(this.menu[i], px, py + this.step*i);
+            ctx.fillText(this.menu[i], px, py + this.#step*i);
         }
         ctx.restore();
     }
 
-    checkInput(GE){
-        if(this.busy > 0) this.busy--;
-
-        const codes = ["ArrowUp", "ArrowDown", "KeyA", "KeyS"];
-        const i = codes.findIndex((e) => GE.input.isJustPressed(e));
-        if(i >= 0) return i;
-
-        if(this.busy == 0){
-            const codes = ["ArrowUp", "ArrowDown"];
-            return codes.findIndex((e) => GE.input.isDown(e));
-        }
-    }
-
+    /**
+     * 1フレーム分のタスク処理を実行する.
+     * 基本的に親クラスのexecute()を呼び出すだけだが,
+     * indexが変化したときの処理を自前で実行している (将来的にはSelectを直すべきかも).
+     * @param {stdgam.GameEngine} GE - タスク処理に用いるGameEngine
+     */
     execute(GE){
-        const i = this.checkInput(GE);
-        if(i == 0){
-            this.index = (this.index + this.menu.length - 1) % this.menu.length;
-            this.onChange(GE, this.index);
-            this.busy = 10;
-        }
-        if(i == 1){
-            this.index = (this.index + 1) % this.menu.length;
-            this.onChange(GE, this.index);
-            this.busy = 10;
-        }
-        if(i == 2){ this.action(GE, this.index); this.busy = 10; }
-        if(i == 3){ this.cancel(GE, this.index); this.busy = 10; }
+        const tmp = this.index;
+        super.execute(GE);
+        if(this.index != tmp) this.onChange(GE, this.index);
         return false;
     }
 
+    /**
+     * indexが変化したときに呼び出される (サブクラスで上書きする).
+     * @param {stdgam.GameEngine} GE - タスク処理を実行するために使うGameEngine
+     * @param {number} index - this.indexの値
+     */
     onChange(GE, n){ }
-    action(GE, n){ }
-    cancel(GE, n){ }
 }
 
 /**
@@ -603,9 +603,21 @@ let createBaseMenu = function(owner, panels){
 
 /**
  * デッキ編集画面を実装するSceneオブジェクト.
- * @type {stdgam.Scene}
+ * @namespace
+ * @prop {CardSet} used
+ * @prop {CardSet} notUsed
+ * @prop {Prism[]} prisms
+ * @prop {CardPanel2D} panel1
+ * @prop {CardPanel} panel2
+ * @prop {MenuDialog} menu
  */
-Public.editScene = new stdgam.Scene({
+edit.editScene = new stdgam.Scene({
+/**
+ * シーンがロードされた時に実行される初期化処理.
+ * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
+ * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
+ * @memberof edit.editScene
+ */
 onLoad(GE, args){
     this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
     this.used = args.set1;
@@ -622,6 +634,12 @@ onLoad(GE, args){
     this.addTask(this.menu, true);
 },
 
+/**
+ * CardPanel or CardPanel2Dを通じてカードが選択されたときの処理.
+ * @param {(CardPanel|CardPanel2D)} panel - 呼び出し元
+ * @param {Card} card 選択されたカード
+ * @memberof edit.editScene
+ */
 cardPicked(panel, card){
     const i = this.menu.index;
     if(panel == this.panel1) this.prisms[1].subsets[i].push(card);
