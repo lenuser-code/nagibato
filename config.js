@@ -234,7 +234,7 @@ let LocalStorageDialog = class extends DialogBase{
         ctx.save();
         ctx.font = DialogBase.font;
         ctx.fillStyle = DialogBase.color;
-        ctx.fillText("localStorageを使用しますか？", this.x + 50, this.y + 70);
+        ctx.fillText("設定を保存するためにlocalStorageを使用しますか？", this.x + 50, this.y + 70);
 
         ctx.fillStyle = "orange";
         ctx.fillText("【注意】「使用しない」を選択した場合、", this.x + 45, this.y + 110);
