@@ -106,77 +106,64 @@ var edit = edit || {};
 /**
  * CardPanelで利用するカーソルを実装するクラス.
  * @class
+ * @prop {number} x
+ * @prop {number} y
+ * @extends stdtask.Scroll
  */
-let CardCapture = class{
+let CardCapture = class extends stdtask.Scroll{
+    #owner;
+    #colCount;
+    #descPainter;
+
+    /**
+     * @param {CardPanel} owner
+     * @param {number} colCount;
+     * @param {number} x
+     * @param {number} y
+     * @param {function(CanvasRenderingContext2D, Card):void} dp
+     */
     constructor(owner, colCount, x, y, dp){
-        this.owner = owner;
-        this.colCount = colCount;
+        const select = new stdtask.Select(
+            owner.cardCount(), ["ArrowLeft", "ArrowRight"], "KeyA", "KeyS"
+        );
+        super(select, colCount);
+
+        this.#owner = owner;
+        this.#colCount = colCount;
         this.x = x;
         this.y = y;
-        this.scroll = 0;
-        this.c = 0;
-        this.busy = 0;
-        this.descPainter = dp;
-        this.active = true;
-    }
-
-    checkInput(GE){
-        if(this.busy > 0) this.busy--;
-        const codes1 = ["ArrowLeft", "ArrowRight", "KeyA", "KeyS"];
-        const codes2 = ["ArrowLeft", "ArrowRight"];
-        return GE.input.checkInput(codes1, codes2, this.busy);
+        this.#descPainter = dp;
     }
 
     selectedIndex(){
-        return this.scroll + this.c;
-    }
-
-    recalculatePosition(){
-        while(this.selectedIndex() >= this.owner.cardCount()){
-            if(this.c > 0) this.c--;
-            else this.scroll--;
-        }
+        return this.scroll + this.offset;
     }
 
     draw(GE, ctx){
-        if(this.active){
+        if(this.active &amp;&amp; this.#owner.cardCount() > 0){
             ctx.save();
-            const x = this.x - 10 + this.c*Card.width*1.3;
+            const x = this.x - 10 + this.offset * Card.width * 1.3;
             const y = this.y - 10;
             ctx.strokeStyle = "rgba(255,130,130,0.6)";
             ctx.lineWidth = 10;
             ctx.strokeRect(x, y, Card.width + 20, Card.height + 20);
             ctx.fillStyle = "white";
 
-            if(this.descPainter){
-                const card = this.owner.watch(this.selectedIndex());
-                this.descPainter.paint(ctx, card);
+            if(this.#descPainter){
+                const card = this.#owner.watch(this.selectedIndex());
+                this.#descPainter.paint(ctx, card);
             }
             ctx.restore();
         }
     }
 
-    execute(GE){
-        const k = this.checkInput(GE)[1];
-        if(k == 0){
-            if(this.c > 0) this.c--;
-            else if(this.scroll > 0) this.scroll--;
-            this.busy = 10;
-        }
-        if(k == 1){
-            if(this.selectedIndex() &lt; this.owner.cardCount() - 1){
-                if(this.c &lt; this.colCount-1) this.c++;
-                else this.scroll++;
-                this.busy = 10;
-            }
-        }
-        if(k == 2){
-            this.owner.action();
-        }
-        if(k == 3){
-            this.owner.cancel();
-        }
-        return false;
+    action(GE, n){
+        this.#owner.action();
+        this.resize(this.#owner.cardCount());
+    }
+
+    cancel(GE, n){
+        this.#owner.cancel();
     }
 }
 
@@ -186,86 +173,92 @@ let CardCapture = class{
  * 対象のCardSetの内容を動的に監視するので, カードの追加・削除は
  * 単にCardSet自体を編集すればよい.
  * @class
+ * @prop {number} x
+ * @prop {number} y
+ * @prop {boolean} showAlways
+ * @prop {boolean} active
  */
 let CardPanel = class{
+    #owner;
+    #deckSet;
+    #colCount;
+    #capture;
+
     constructor(owner, deckSet, colCount, x, y, showAlways = true){
-        this.owner = owner;
-        this.deckSet = deckSet;
-        this.colCount = colCount;
+        this.#owner = owner;
+        this.#deckSet = deckSet;
+        this.#colCount = colCount;
         this.x = x;
         this.y = y;
-        this.capture = false;
+        this.#capture = null;
         this.showAlways = showAlways;
         this.active = true;
     }
 
     cardCount(){
-        return this.deckSet.size();
+        return this.#deckSet.size();
     }
 
     watch(index){
-        return this.deckSet.watch(index);
+        return this.#deckSet.watch(index);
     }
 
     isCaptureMode(){
-        return !(!this.capture);
+        return !(!this.#capture);
     }
 
     changeDeck(deckSet){
         if(!this.isCaptureMode()){
-            this.deckSet = deckSet;
+            this.#deckSet = deckSet;
         }
     }
 
     beginCaptureMode(dp){
-        if(this.deckSet.size() == 0 || this.capture){
+        if(this.#deckSet.size() == 0 || this.#capture){
             return false;
         }
         else{
-            this.capture = new CardCapture(this, this.colCount, this.x, this.y, dp);
-            this.owner.addSprite(this.capture);
-            this.owner.addTask(this.capture, true);
+            this.#capture = new CardCapture(this, this.#colCount, this.x, this.y, dp);
+            this.#owner.addSprite(this.#capture);
+            this.#owner.addTask(this.#capture, true);
             return true;
         }
     }
 
     action(){
-        const index = this.capture.selectedIndex();
-        const card = this.deckSet.slice(index);
-        this.owner.cardPicked(this, card);
-        if(this.deckSet.size() == 0){
+        const index = this.#capture.selectedIndex();
+        const card = this.#deckSet.slice(index);
+        this.#owner.cardPicked(this, card);
+        if(this.#deckSet.size() == 0){
             this.cancel();
-        }
-        else{
-            this.capture.recalculatePosition();
         }
     }
 
     cancel(){
-        this.capture.active = false;
-        this.capture = null;
+        this.#capture.active = false;
+        this.#capture = null;
     }
 
     draw(GE, ctx){
         if(!this.showAlways &amp;&amp; !this.isCaptureMode()) return;
         ctx.save();
-        const w = Card.width*this.colCount*1.3-Card.width*0.3+40;
+        const w = Card.width*this.#colCount*1.3-Card.width*0.3+40;
         ctx.strokeStyle = "rgb(0,20,70,0.5)";
         ctx.lineWidth = 5;
         ctx.strokeRect(this.x-20, this.y-20, w, Card.height+40);
         ctx.fillStyle = "rgba(0,0,0,0.5)";
         ctx.fillRect(this.x-20, this.y-20, w, Card.height+40);
-        const scroll = this.capture ? this.capture.scroll : 0;
-        if(this.deckSet.size() == 0){
+        const scroll = this.#capture ? this.#capture.scroll : 0;
+        if(this.#deckSet.size() == 0){
             ctx.fillStyle = "white";
             ctx.font = "27px Sans-Serif";
             ctx.fillText("カードがありません", this.x, this.y + 20);
         }
         else{
-            for(let i = 0; i &lt; this.colCount; i++){
+            for(let i = 0; i &lt; this.#colCount; i++){
                 const x = this.x + i*Card.width*1.3;
                 const y = this.y;
-                const card = this.deckSet.watch(scroll + i);
+                const card = this.#deckSet.watch(scroll + i);
                 card.paint(GE, ctx, x, y);
             }
         }
@@ -276,49 +269,98 @@ let CardPanel = class{
 /**
  * CardPanel2Dで利用するカーソルを実装するクラス.
  * @class
+ * @prop {number} x
+ * @prop {number} y
+ * @prop {number} scroll
+ * @prop {number} r
+ * @prop {number} c
+ * @prop {boolean} active
  */
-let CardCapture2D = class{
+let CardCapture2D = class {
+    #select;
+    #owner;
+    #itemCount;
+    #rowCount;
+    #colCount;
+    #busy;
+    #descPainter;
+
+    /**
+     * @param {CardPanel2D} owner
+     * @param {number} rowCount;
+     * @param {number} colCount;
+     * @param {number} x
+     * @param {number} y
+     * @param {function(CanvasRenderingContext2D, Card):void} dp
+     */
     constructor(owner, rowCount, colCount, x, y, dp){
-        this.owner = owner;
-        this.rowCount = rowCount;
-        this.colCount = colCount;
+        this.#select = new stdtask.Select(owner.cardCount(), ["", ""], "", "");
+        this.#owner = owner;
+        this.#itemCount = owner.cardCount();
+        this.#rowCount = rowCount;
+        this.#colCount = colCount;
+        this.#busy = 0;
+        this.#descPainter = dp;
         this.x = x;
         this.y = y;
-        this.scroll = 0;
-        this.r = 0;
-        this.c = 0;
-        this.busy = 0;
-        this.descPainter = dp;
+        this.scroll = this.r = this.c = 0;
         this.active = true;
     }
 
-    checkInput(GE){
-        if(this.busy > 0) this.busy--;
+    selectedIndex(){
+        return this.#select.index;
+    }
+
+    canMove(n){
+        return ((this.scroll + this.r) * this.#colCount + n >= this.#itemCount);
+    }
+
+    move(k, n){
+        if(k == 0 &amp;&amp; this.#select.index &lt; n) return;
+        if(k == 1 &amp;&amp; this.canMove(n)) return;
+        for( ; n > 0; n--) this.#select.move(k, this.#itemCount);
+        this.#updateState();
+    }
+
+    #updateState(){
+        this.#itemCount = this.#owner.cardCount();
+        this.#select.resize(this.#itemCount);
+        const quo = Math.floor(this.#select.index / this.#colCount);
+        while(quo &lt; this.scroll + this.r){
+            if(this.r > 0) this.r--;
+            else this.scroll--;
+        }
+        while(quo > this.scroll + this.r){
+            if(this.r &lt; this.#rowCount - 1) this.r++;
+            else this.scroll++;
+        }
+        this.c = this.#select.index % this.#colCount;
+    }
+
+    #checkInput(GE){
+        if(this.#busy > 0) this.#busy--;
         const codes1 = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "KeyA", "KeyS"];
         const codes2 = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
-        return GE.input.checkInput(codes1, codes2, this.busy);
+        return GE.input.checkInput(codes1, codes2, this.#busy);
     }
 
-    selectedIndex(){
-        return (this.r + this.scroll) * this.colCount + this.c;
-    }
-
-    inLastRow(){
-        return (this.r + this.scroll + 1) * this.colCount >= this.owner.cardCount();
-    }
-
-    recalculatePosition(){
-        while(this.selectedIndex() >= this.owner.cardCount()){
-            if(this.c > 0) this.c--;
-            else if(this.r > 0){
-                this.r--;
-                this.c = this.colCount - 1;
-            }
-            else{
-                this.scroll--;
-                this.c = this.colCount - 1;
-            }
+    execute(GE){
+        const k = this.#checkInput(GE)[1];
+        if(k >= 0) this.#busy = 10;
+        if(k == 0 || k == 1){
+            this.move(k, this.#colCount);
         }
+        if(k == 2 || k == 3){
+            this.move(k - 2, 1);
+        }
+        if(k == 4){
+            this.#owner.action();
+            this.#updateState();
+        }
+        if(k == 5){
+            this.#owner.cancel();
+        }
+        return false;
     }
 
     draw(GE, ctx){
@@ -331,55 +373,12 @@ let CardCapture2D = class{
             ctx.strokeRect(x, y, Card.width + 20, Card.height + 20);
             ctx.fillStyle = "white";
 
-            if(this.descPainter){
-                const card = this.owner.watch(this.selectedIndex());
-                this.descPainter.paint(ctx, card);
+            if(this.#descPainter){
+                const card = this.#owner.watch(this.selectedIndex());
+                this.#descPainter.paint(ctx, card);
             }
             ctx.restore();
         }
-    }
-
-    execute(GE){
-        const k = this.checkInput(GE)[1];
-        if(k == 0){
-            if(this.r > 0) this.r--;
-            else if(this.scroll > 0) this.scroll--;
-            this.busy = 10;
-        }
-        if(k == 1){
-            if(this.inLastRow()) return false;
-            if(this.r &lt; this.rowCount - 1) this.r++;
-            else this.scroll++;
-            this.recalculatePosition();
-            this.busy = 10;
-        }
-        if(k ==  2){
-            if(this.selectedIndex() == 0) return false;
-            if(this.c > 0) this.c--;
-            else{
-                this.c = this.colCount - 1;
-                if(this.r > 0) this.r--;
-                else this.scroll--;
-            }
-            this.busy = 10;
-        }
-        if(k == 3){
-            if(this.selectedIndex() == this.owner.cardCount() - 1) return false;
-            if(this.c &lt; this.colCount - 1) this.c++;
-            else{
-                this.c = 0;
-                if(this.r &lt; this.rowCount - 1) this.r++;
-                else this.scroll++;
-            }
-            this.busy = 10;
-        }
-        if(k == 4){
-            this.owner.action();
-        }
-        if(k == 5){
-            this.owner.cancel();
-        }
-        return false;
     }
 }
 
@@ -439,9 +438,6 @@ let CardPanel2D = class{
         this.owner.cardPicked(this, card);
         if(this.deckSet.size() == 0){
             this.cancel();
-        }
-        else{
-            this.capture.recalculatePosition();
         }
     }
 
@@ -560,7 +556,7 @@ const displayObject = {
 
 /**
  * BaseMenuのサブメニューを実装するクラス.
- * 具体的には "カードを増やす" と "カードを減らす" からなるメニューを表示し,
+ * 指定されたメニューを縦に並べて表示し,
  * ユーザーの入力に応じてデッキ編集作業を実行する.
  * @class
  * @prop {string[]} menu

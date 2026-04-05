@@ -190,6 +190,16 @@ stdtask.Select = class{
     }
 
     /**
+     * 項目数を変更する. これによりthis.indexの値が範囲外になる場合,
+     * this.indexを max(n-1, 0) に変更する.
+     * @param {number} n - 新しい項目数
+     */
+    resize(n){
+      this.#itemCount = n;
+      if(this.index >= n) this.index = Math.max(n-1, 0);
+    }
+
+    /**
      * 1フレーム分のタスク処理を実行する.
      * 具体的には, キー入力に応じてthis.indexを増減させたり
      * this.action/this.cancel を実行したりする.
@@ -374,7 +384,6 @@ stdtask.Scroll = class{
      * this.scroll と this.offset の値を初期化する.
      *
      * 具体的には次のように決める.
-     *
      * 1. indexの値がviewCount未満なら, scroll = 0, offset = index でよい.
      * 2. そうでないとき, 先に offset = viewCount - 1 を決定してしまい,
      *
@@ -389,6 +398,23 @@ stdtask.Scroll = class{
         else{
             this.offset = this.#viewCount - 1;
         }
+    }
+
+    /**
+     * 項目数を変更する. これによりindexの値が範囲外になる場合,
+     * indexを max(n-1, 0) に変更し, それに合うように this.scroll, this.offset を調整する.
+     * @param {number} n - 新しい項目数
+     */
+    resize(n){
+      this.#contents.resize(n);
+      const d = this.scroll + this.offset - this.#contents.index;
+      if(d > 0){
+        if(d &lt;= this.offset) this.offset -= d;
+        else{
+          this.offset = 0;
+          this.scroll = this.#contents.index;
+        }
+      }
     }
 
     // contents.indexの値の変化量から自身の次の状態を決める.
