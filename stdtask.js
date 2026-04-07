@@ -40,7 +40,7 @@ var stdtask = stdtask || {};
  *         this.useCoroutine(this.chart);
  *     }
  *
- *     *chart(GE, opt){
+ *     *chart(opt){
  *         // execute()を1回呼び出すごとにループが1周ずつ進む
  *         for(let i = 0; i < 10; i++){
  *             my_periodic_task(i);
@@ -66,14 +66,14 @@ var stdtask = stdtask || {};
  *
  *     execute(GE){
  *         if(GE.input.isJustPressed("Enter")){
- *             this.useCoroutine(this.chart);
+ *             this.useCoroutine(this.chart, { GE: GE });
  *         }
  *     }
  *
- *     *chart(GE, opt){
+ *     *chart(opt){
  *         // execute()を1回呼び出すごとにループが1周ずつ進む
  *         for(let i = 0; i < 10; i++){
- *             my_periodic_task(i);
+ *             my_periodic_task(opt.GE, i);
  *             yield true;
  *         }
  *
