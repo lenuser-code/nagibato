@@ -8,6 +8,8 @@
 /**
  * 頻繁に必要になり, かつGUIに直接依存しないタスクをまとめたnamespace.
  * 以下の要素が外部に公開される.
+ * - stdtask.Coroutine
+ * - stdtask.wait
  * - stdtask.Select
  * - stdtask.CyclicSelect
  * - stdtask.Scroll
