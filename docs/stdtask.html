@@ -206,7 +206,7 @@
         
         <span class="code-name">
             
-                wait<span class="signature">(frames)</span><span class="type-signature"></span>
+                wait<span class="signature">(frames, value<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -215,8 +215,8 @@
     
     
     <div class="description">
-        <p>指定されたフレーム数だけyield trueを繰り返すジェネレータを生成する.
-framesが0以下の場合は何もしない.</p>
+        <p>指定されたフレーム数だけ yield true または yield false を繰り返す
+ジェネレータを生成する. framesが0以下の場合は何もしない.</p>
     </div>
     
 
@@ -241,7 +241,11 @@ framesが0以下の場合は何もしない.</p>
             <th>Type</th>
 
             
+            <th>Attributes</th>
+            
 
+            
+            <th>Default</th>
             
 
             <th class="last">Description</th>
@@ -267,10 +271,63 @@ framesが0以下の場合は何もしない.</p>
   </td>
 
   
+      <td class="attributes">
+      
 
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
   
 
   <td class="description last"><p>待機するフレーム数</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>value</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          true
+      
+      </td>
+  
+
+  <td class="description last"><p>ジェネレータが返す値</p></td>
 </tr>
 
 
@@ -318,7 +375,7 @@ framesが0以下の場合は何もしない.</p>
         <p class="tag-source">
             <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line91">line 91</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line124">line 124</a>
             </span>
         </p>
     

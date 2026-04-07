@@ -32,12 +32,42 @@ var stdtask = stdtask || {};
  * 順番に実行するタスクを作る場合は次のようなコードになる.
  *
  * ```
- * // 使用例
+ * // 使用例1
  * class MyTask extends stdtask.Coroutine{
  *     constructor(){
  *         super();
  *         this.active = true;
  *         this.useCoroutine(this.chart);
+ *     }
+ *
+ *     *chart(GE, opt){
+ *         // execute()を1回呼び出すごとにループが1周ずつ進む
+ *         for(let i = 0; i < 10; i++){
+ *             my_periodic_task(i);
+ *             yield true;
+ *         }
+ *
+ *         this.active = false;  // 最後にタスクリストから除外してもらう
+ *     }
+ * }
+ * ```
+ *
+ * また, 自分でオーバーライドしたexecute()の中から必要に応じて
+ * useCoroutine()を呼び出すこともできる. この場合, ジェネレータが完了した後は
+ * 元のexecute()の内容に戻る.
+ *
+ * ```
+ * // 使用例2
+ * class MyTask extends stdtask.Coroutine{
+ *     constructor(){
+ *         super();
+ *         this.active = true;
+ *     }
+ *
+ *     execute(GE){
+ *         if(GE.input.isJustPressed("Enter")){
+ *             this.useCoroutine(this.chart);
+ *         }
  *     }
  *
  *     *chart(GE, opt){
@@ -59,6 +89,7 @@ stdtask.Coroutine = class{
      * 指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの
      * 更新処理をこのジェネレータに委任する.
      * 具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.
+     * ジェネレータの返り値がthis.executeの返り値として使われる.
      * ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.
      * @param {GeneratorFunction} gen - 処理を委任するジェネレータ関数
      * @param {Object.<*,*>} [opt={}] - ジェネレータ関数の初期化時に渡すオプション
@@ -69,6 +100,7 @@ stdtask.Coroutine = class{
         this.execute = (GE) => {
             const result = iter.next();
             if(result.done) this.execute = backup;
+            return result.value;
         };
     }
 
@@ -84,12 +116,13 @@ stdtask.Coroutine = class{
 }
 
 /**
- * 指定されたフレーム数だけyield trueを繰り返すジェネレータを生成する.
- * framesが0以下の場合は何もしない.
+ * 指定されたフレーム数だけ yield true または yield false を繰り返す
+ * ジェネレータを生成する. framesが0以下の場合は何もしない.
  * @param {number} frames - 待機するフレーム数
+ * @param {boolean} [value=true] - ジェネレータが返す値
  */
-stdtask.wait = function*(frames){
-    while(frames-- > 0) yield true;
+stdtask.wait = function*(frames, value = true){
+    while(frames-- > 0) yield value;
 }
 
 

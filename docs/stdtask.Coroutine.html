@@ -94,12 +94,39 @@
 このオブジェクトの更新処理を委任することができる.</p>
 <p>たとえば, ある決まった処理を1フレームに1回ずつ, 番号を増やしながら
 順番に実行するタスクを作る場合は次のようなコードになる.</p>
-<pre class="prettyprint source"><code>// 使用例
+<pre class="prettyprint source"><code>// 使用例1
 class MyTask extends stdtask.Coroutine{
     constructor(){
         super();
         this.active = true;
         this.useCoroutine(this.chart);
+    }
+
+    *chart(GE, opt){
+        // execute()を1回呼び出すごとにループが1周ずつ進む
+        for(let i = 0; i &lt; 10; i++){
+            my_periodic_task(i);
+            yield true;
+        }
+
+        this.active = false;  // 最後にタスクリストから除外してもらう
+    }
+}
+</code></pre>
+<p>また, 自分でオーバーライドしたexecute()の中から必要に応じて
+useCoroutine()を呼び出すこともできる. この場合, ジェネレータが完了した後は
+元のexecute()の内容に戻る.</p>
+<pre class="prettyprint source"><code>// 使用例2
+class MyTask extends stdtask.Coroutine{
+    constructor(){
+        super();
+        this.active = true;
+    }
+
+    execute(GE){
+        if(GE.input.isJustPressed(&quot;Enter&quot;)){
+            this.useCoroutine(this.chart);
+        }
     }
 
     *chart(GE, opt){
@@ -192,7 +219,7 @@ class MyTask extends stdtask.Coroutine{
         <p class="tag-source">
             <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line57">line 57</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line87">line 87</a>
             </span>
         </p>
     
@@ -366,7 +393,7 @@ class MyTask extends stdtask.Coroutine{
         <p class="tag-source">
             <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line81">line 81</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line113">line 113</a>
             </span>
         </p>
     
@@ -440,6 +467,7 @@ class MyTask extends stdtask.Coroutine{
         <p>指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの
 更新処理をこのジェネレータに委任する.
 具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.
+ジェネレータの返り値がthis.executeの返り値として使われる.
 ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.</p>
     </div>
     
@@ -599,7 +627,7 @@ class MyTask extends stdtask.Coroutine{
         <p class="tag-source">
             <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line66">line 66</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line97">line 97</a>
             </span>
         </p>
     
