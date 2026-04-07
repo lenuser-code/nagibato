@@ -18,6 +18,81 @@
 var stdtask = stdtask || {};
 (function(stdtask){
 
+// #1. コルーチン
+
+/**
+ * execute()を普通に実装する代わりにジェネレータを利用できるオブジェクト.
+ * コンストラクタの中などでuseCoroutine()メソッドを呼び出すと,
+ * 指定されたジェネレータ関数によって作られるジェネレータに
+ * このオブジェクトの更新処理を委任することができる.
+ *
+ * たとえば, ある決まった処理を1フレームに1回ずつ, 番号を増やしながら
+ * 順番に実行するタスクを作る場合は次のようなコードになる.
+ *
+ * ```
+ * // 使用例
+ * class MyTask extends stdtask.Coroutine{
+ *     constructor(){
+ *         super();
+ *         this.active = true;
+ *         this.useCoroutine(this.chart);
+ *     }
+ *
+ *     *chart(GE, opt){
+ *         // execute()を1回呼び出すごとにループが1周ずつ進む
+ *         for(let i = 0; i < 10; i++){
+ *             my_periodic_task(i);
+ *             yield true;
+ *         }
+ *
+ *         this.active = false;  // 最後にタスクリストから除外してもらう
+ *     }
+ * }
+ * ```
+ *
+ * @class
+ */
+stdtask.Coroutine = class{
+    /**
+     * 指定されたジェネレータ関数を使ってジェネレータを作り, このオブジェクトの
+     * 更新処理をこのジェネレータに委任する.
+     * 具体的には, このジェネレータを実行するだけの関数をthis.executeに代入する.
+     * ジェネレータが完了したときは, このメソッドを実行する直前のexecuteの値に戻す.
+     * @param {GeneratorFunction} gen - 処理を委任するジェネレータ関数
+     * @param {Object.<*,*>} [opt={}] - ジェネレータ関数の初期化時に渡すオプション
+     */
+    useCoroutine(gen, opt = {}){
+        const iter = gen.call(this, opt);
+        const backup = this.execute;
+        this.execute = (GE) => {
+            const result = iter.next();
+            if(result.done) this.execute = backup;
+        };
+    }
+
+    /**
+     * useCoroutine()を実行する前, および指定したジェネレータが完了した後に
+     * 使われるダミーのexecute()メソッド. 何もせずにtrueを返す.
+     * @param {stdgam.GameEngine} GE - タスク処理に用いるGameEngine
+     * @returns {boolean} 常にtrueを返す
+     */
+    execute(GE){
+        return true;
+    }
+}
+
+/**
+ * 指定されたフレーム数だけyield trueを繰り返すジェネレータを生成する.
+ * framesが0以下の場合は何もしない.
+ * @param {number} frames - 待機するフレーム数
+ */
+stdtask.wait = function*(frames){
+    while(frames-- > 0) yield true;
+}
+
+
+// #2. コンポーネント
+
 /**
  * indexプロパティを持ち, キー入力に応じて
  * - indexの増減
