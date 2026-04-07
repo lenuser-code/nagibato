@@ -1105,7 +1105,7 @@ onLoad(GE, args){
 },
 
 *chart(GE, opt){
-    yield* this.SD.wait(10);
+    yield* stdtask.wait(10);
     yield* this.firstDeal(GE, this);
     while(this.turn <= 4 && this.player.HP() > 0){
         // アップキープの処理
@@ -1161,7 +1161,7 @@ onLoad(GE, args){
     this.add(T.finite(
         T.text(`Turn ${this.turn}`, {x: 500, y: 180, ...this.textOpt.turn}),
         90));
-    yield* this.SD.wait(90);
+    yield* stdtask.wait(90);
 },
 
 *QBChanceProcess(GE, self){
@@ -1174,7 +1174,7 @@ onLoad(GE, args){
         [this.player, "addMP", this.player.percentMP(5), "powerup"],
         [this.enemy, "addHP", -this.player.percentMP(10), "hit0"]
     ];
-    yield* this.SD.wait(20);
+    yield* stdtask.wait(20);
     const op = effects[Math.floor(Math.random() * effects.length)];
     op[0][op[1]](op[2]);
     GE.se.play(op[3]);
@@ -1192,10 +1192,10 @@ onLoad(GE, args){
 
     if(yesno.result){
         const mainSkill =  this.player.shiftMainSkill();
-        yield* this.SD.wait(20);
+        yield* stdtask.wait(20);
         GE.se.play("skill");
         this.add( createSkillDialog(mainSkill) );
-        yield* this.SD.wait(130);
+        yield* stdtask.wait(130);
         yield* this.SD.deal(GE, mainSkill);
     }
 },
@@ -1219,19 +1219,19 @@ onLoad(GE, args){
         if(card){
             GE.se.play("heal");
             this.poolManager.extraScan(card);
-            yield* this.SD.wait(60);
+            yield* stdtask.wait(60);
         }
     }
 },
 
 *phase2(GE, self){
-    yield* this.SD.wait(10);
+    yield* stdtask.wait(10);
 
     if(this.player.stun() > 0){
         this.add(new QBTalk("行動を封じられて動けない！", 100));
         const [x, y] = this.position.rel(-110, 60);
         this.add(T.finite(T.text("STUN!", {x: x, y: y, font: "32px Sans-Serif"}), 120));
-        yield* this.SD.wait(120);
+        yield* stdtask.wait(120);
         return;
     }
 
@@ -1269,7 +1269,7 @@ phase2_body(GE, i){
 
 *waitWhileBusy(GE, self){
     while(this.handManager.busy) yield true;
-    yield* this.SD.wait(60);
+    yield* stdtask.wait(60);
 },
 
 *attackPhase(GE, self){
@@ -1289,21 +1289,21 @@ phase2_body(GE, i){
     dialog.active = false;
     stop.active = false;
     yield* this.attackPhase_choice(GE, n);
-    yield* this.SD.wait(60);
+    yield* stdtask.wait(60);
 
     const damage = this.poolManager.consumeMP(this.	player.MP());
     GE.se.play("hit0");  // 試しにSEを入れてみる
     this.enemy.addHP(-damage);
     this.shakeEnemy();  // shake_test
-    yield* this.SD.wait(110);
+    yield* stdtask.wait(110);
 },
 *attackPhase_choice(GE, n){
     if(n == 1){
-        yield* this.SD.wait(30);
+        yield* stdtask.wait(30);
         this.poolManager.halveMP();
         GE.se.play("powerup");
         this.player.resetSG();
-        yield* this.SD.wait(60);
+        yield* stdtask.wait(60);
     }
     if(n == 2){
         yield* this.poolManager.invokeSkills(GE);
@@ -1315,14 +1315,14 @@ phase2_body(GE, i){
         GE.se.play("shield");
         this.add(new QBTalk("スキルのおかげで敵の攻撃を防げたみたいだ。", 100));
         this.player.addShield(-1);
-        yield* this.SD.wait(50);
+        yield* stdtask.wait(50);
     }
     else{
         GE.se.play("hit1");  // 試しにSEを入れてみる
         this.shakePlayer();  // shaker_test
         this.player.addHP(-this.enemy.MP());
     }
-    yield* this.SD.wait(90);
+    yield* stdtask.wait(90);
 },
 
 *ending(GE, self){
@@ -1338,7 +1338,7 @@ phase2_body(GE, i){
     this.addTask(T.pause(20), true);
     this.poolManager.showOnlyCards = true;
 
-    yield* this.SD.wait(20);
+    yield* stdtask.wait(20);
     let blinky = T.text("Press any button", {x: 500, y: 580, textAlign: "center", ...this.textOpt.score});
     blinky = T.scheduler(T.fader(blinky, 0));
     blinky.loop(40, (GE, obj) => {
@@ -1348,7 +1348,7 @@ phase2_body(GE, i){
     this.addSprite(blinky);
     this.addTask(blinky, true);
 
-    yield* this.SD.wait(40);
+    yield* stdtask.wait(40);
     while(true){
         const i = this.checkInput(GE);
         if(i >= 0) GE.changeScene("intermediate");
