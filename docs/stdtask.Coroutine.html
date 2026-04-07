@@ -102,7 +102,7 @@ class MyTask extends stdtask.Coroutine{
         this.useCoroutine(this.chart);
     }
 
-    *chart(GE, opt){
+    *chart(opt){
         // execute()を1回呼び出すごとにループが1周ずつ進む
         for(let i = 0; i &lt; 10; i++){
             my_periodic_task(i);
@@ -125,14 +125,14 @@ class MyTask extends stdtask.Coroutine{
 
     execute(GE){
         if(GE.input.isJustPressed(&quot;Enter&quot;)){
-            this.useCoroutine(this.chart);
+            this.useCoroutine(this.chart, { GE: GE });
         }
     }
 
-    *chart(GE, opt){
+    *chart(opt){
         // execute()を1回呼び出すごとにループが1周ずつ進む
         for(let i = 0; i &lt; 10; i++){
-            my_periodic_task(i);
+            my_periodic_task(opt.GE, i);
             yield true;
         }
 
