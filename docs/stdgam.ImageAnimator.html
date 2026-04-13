@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> stdtask</title>
+  <title> ImageAnimator</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,8 +73,8 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Namespace</p>
-                    <h1>stdtask</h1>
+                    <p>Class</p>
+                    <h1>ImageAnimator</h1>
                 </header>
                 
 
@@ -85,7 +85,17 @@
 
 <header>
     
-        <h2>stdtask</h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>ImageAnimator<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>ImageCutterを使って簡易的なコマ送りアニメを生成するためのクラス.
+具体的には,</p>
+<ol>
+<li>最初にregisteメソッドによりImageCutterと「アニメーション定義リスト」の組を登録する.</li>
+<li>次に, generateメソッドで「コマ送り描画オブジェクト」を生成する.</li>
+<li>こうして生成したコマ送り描画オブジェクトのpaintメソッドで各コマを描画する.</li>
+</ol>
+<p>という手順によりコマ送りアニメを描画する.</p></div>
         
     
 </header>
@@ -94,19 +104,44 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>頻繁に必要になり, かつGUIに直接依存しないタスクをまとめたnamespace.
-以下の要素が外部に公開される.</p>
-<ul>
-<li>stdtask.Coroutine</li>
-<li>stdtask.wait</li>
-<li>stdtask.Select</li>
-<li>stdtask.CyclicSelect</li>
-<li>stdtask.Scroll</li>
-<li>stdtask.Meter</li>
-</ul></div>
-        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
 
+
+    
+    <h4 class="name" id="ImageAnimator">
+        <a class="href-link" href="#ImageAnimator">#</a>
         
+        <span class="code-name">
+            
+                new ImageAnimator<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>空のインスタンスを生成する.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 <dl class="details">
@@ -142,15 +177,38 @@
 
     
         <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
+            <a href="stdgam.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line20">line 20</a>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line617">line 617</a>
             </span>
         </p>
     
 </dl>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
         
     
     </div>
@@ -159,25 +217,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="stdtask.Coroutine.html">Coroutine</a></dt>
-            <dd></dd>
-        
-            <dt><a href="stdtask.CyclicSelect.html">CyclicSelect</a></dt>
-            <dd></dd>
-        
-            <dt><a href="stdtask.Meter.html">Meter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="stdtask.Scroll.html">Scroll</a></dt>
-            <dd></dd>
-        
-            <dt><a href="stdtask.Select.html">Select</a></dt>
-            <dd></dd>
-        </dl>
     
 
     
@@ -197,16 +236,12 @@
 
 
     
-    <h4 class="name" id=".wait">
-        <a class="href-link" href="#.wait">#</a>
-        
-            
-                <span class='tag'>static</span>
-            
+    <h4 class="name" id="generate">
+        <a class="href-link" href="#generate">#</a>
         
         <span class="code-name">
             
-                wait<span class="signature">(frames, value<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+                generate<span class="signature">(name, repeat<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -215,8 +250,19 @@
     
     
     <div class="description">
-        <p>指定されたフレーム数だけ yield true または yield false を繰り返す
-ジェネレータを生成する. framesが0以下の場合は何もしない.</p>
+        <p>指定された名前で登録されている情報を元にして「コマ送り描画オブジェクト」を生成する.
+このオブジェクトは次のメソッドを持つ.</p>
+<ul>
+<li>paint(ctx, x, y) - 指定された位置に現在のコマを描画し, 内部状態を更新する</li>
+<li>finished() - 描画するコマが残っていないときtrue, そうでないときfalse</li>
+</ul>
+<p>paintメソッドを呼び出されるたびに内部状態が更新され,
+自動的にコマ送りが進行する. すべてのコマを描画し終えたときの挙動は
+repeatによって変わる.</p>
+<ul>
+<li>repeatがtrueならば, 最初のコマに戻る</li>
+<li>repeatがfalseならば, これ以上何も描画しない</li>
+</ul>
     </div>
     
 
@@ -258,13 +304,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>frames</code></td>
+      <td class="name"><code>name</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">number</code>
+<code class="param-type">string</code>
 
 
   
@@ -286,7 +332,7 @@
       </td>
   
 
-  <td class="description last"><p>待機するフレーム数</p></td>
+  <td class="description last"><p>使用するアニメーションの登録名</p></td>
 </tr>
 
 
@@ -295,7 +341,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>value</code></td>
+      <td class="name"><code>repeat</code></td>
   
 
   <td class="type">
@@ -322,12 +368,12 @@
   
       <td class="default">
       
-          true
+          false
       
       </td>
   
 
-  <td class="description last"><p>ジェネレータが返す値</p></td>
+  <td class="description last"><p>リピートするか</p></td>
 </tr>
 
 
@@ -373,9 +419,9 @@
 
     
         <p class="tag-source">
-            <a href="stdtask.js.html" class="button">View Source</a>
+            <a href="stdgam.js.html" class="button">View Source</a>
             <span>
-                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line124">line 124</a>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line689">line 689</a>
             </span>
         </p>
     
@@ -395,6 +441,272 @@
 
 
 
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたコマ送り描画オブジェクト</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Object</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="register">
+        <a class="href-link" href="#register">#</a>
+        
+        <span class="code-name">
+            
+                register<span class="signature">(name, IC, dfn)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>ImageCutterオブジェクトと「アニメーション定義リスト」の組を
+指定された名前で登録する. ここで, アニメーション定義リストは,</p>
+<p>[a, b, frames, offX, offY]</p>
+<p>という形のリストをアニメーションのコマの数だけ並べた
+2重配列である (offX, offYは省略可).</p>
+<p>各成分は次の意味を持つ.</p>
+<ul>
+<li>(a,b) : ImageCutter内のどのブロックを描画するか指定する</li>
+<li>frames : そのコマを表示するフレーム数</li>
+<li>offX : 横方向に表示位置をどれだけずらすか (省略時は0)</li>
+<li>offY : 縦方向に表示位置をどれだけずらすか (省略時は0)</li>
+</ul>
+<p>たとえば, 各コマの画像を横一列に並べて連結したものを
+ImageCutterにより分割して使う場合, 次のようなコードになる.</p>
+<pre class="prettyprint source"><code>const IC = new stdgam.ImageCutter(連結した画像, 1コマの横幅, 1コマの縦幅);
+const IA = new stdgam.ImageAnimator();
+IA.register(&quot;animation_01&quot;, [
+    [0, 0, 表示フレーム数],
+    [1, 0, 表示フレーム数],
+    [2, 0, 表示フレーム数], ...
+]);
+</code></pre>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>name</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>このアニメーションに付ける登録名</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>IC</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.ImageCutter.html">stdgam.ImageCutter</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>画像を保持するImageCutter</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>dfn</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Array.&lt;number>></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>アニメーション定義リスト</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line661">line 661</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Throws:</label></div>
+        <div class="column is-10">
+            
+                    
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>アニメーション定義リストの中に長さが2以下のリストが含まれていたり,
+長さが3以上でも a &lt; 0 ||  b &lt; 0 || frames &lt;= 0 であるリストが含まれているとき</p></div>
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+<code class="param-type">Error</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
