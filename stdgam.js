@@ -19,6 +19,7 @@
  * - stdgam.Scene
  * - stdgam.CachePool
  * - stdgam.ImagePool
+ * - stdgam.ImageAnimator
  * - stdgam.SoundPool
  * - stdgam.SEPool
  * - stdgam.Templates
@@ -601,6 +602,117 @@ stdgam.ImageCutter = class {
             this.#img, sx, sy, this.#w, this.#h,
             x, y, this.#w, this.#h
         );
+    }
+}
+
+/**
+ * ImageCutterを使って簡易的なコマ送りアニメを生成するためのクラス.
+ * 具体的には,
+ * 1. 最初にregisteメソッドによりImageCutterと「アニメーション定義リスト」の組を登録する.
+ * 2. 次に, generateメソッドで「コマ送り描画オブジェクト」を生成する.
+ * 3. こうして生成したコマ送り描画オブジェクトのpaintメソッドで各コマを描画する.
+ *
+ * という手順によりコマ送りアニメを描画する.
+ */
+stdgam.ImageAnimator = class{
+    #pool;
+
+    /**
+     * 空のインスタンスを生成する.
+     */
+    constructor(){
+        this.#pool = {};
+    }
+
+    /**
+     * ImageCutterオブジェクトと「アニメーション定義リスト」の組を
+     * 指定された名前で登録する. ここで, アニメーション定義リストは,
+     *
+     * [a, b, frames, offX, offY]
+     *
+     * という形のリストをアニメーションのコマの数だけ並べた
+     * 2重配列である (offX, offYは省略可).
+     *
+     * 各成分は次の意味を持つ.
+     * - (a,b) : ImageCutter内のどのブロックを描画するか指定する
+     * - frames : そのコマを表示するフレーム数
+     * - offX : 横方向に表示位置をどれだけずらすか (省略時は0)
+     * - offY : 縦方向に表示位置をどれだけずらすか (省略時は0)
+     *
+     * たとえば, 各コマの画像を横一列に並べて連結したものを
+     * ImageCutterにより分割して使う場合, 次のようなコードになる.
+     *
+     * ```
+     * const IC = new stdgam.ImageCutter(連結した画像, 1コマの横幅, 1コマの縦幅);
+     * const IA = new stdgam.ImageAnimator();
+     * IA.register("animation_01", [
+     *     [0, 0, 表示フレーム数],
+     *     [1, 0, 表示フレーム数],
+     *     [2, 0, 表示フレーム数], ...
+     * ]);
+     * ```
+     *
+     * @param {string} name - このアニメーションに付ける登録名
+     * @param {stdgam.ImageCutter} IC - 画像を保持するImageCutter
+     * @param {Array<number[]>} dfn - アニメーション定義リスト
+     * @throws {Error} アニメーション定義リストの中に長さが2以下のリストが含まれていたり,
+     * 長さが3以上でも a < 0 ||  b < 0 || frames <= 0 であるリストが含まれているとき
+     */
+    register(name, IC, dfn){
+        for(const arr of dfn){
+            if(arr.length < 3 || !(arr[0] >= 0) || !(arr[1] >= 0)){
+                throw new Error("ImageAnimator: リストの書式が正しくありません");
+            }
+            if(!(arr[2] > 0)){
+                throw new Error("ImageAnimator: 各コマの表示フレーム数は1以上でなれけばいけません");
+            }
+        }
+        this.#pool[name] = { IC: IC, dfn: dfn };
+    }
+
+    /**
+     * 指定された名前で登録されている情報を元にして「コマ送り描画オブジェクト」を生成する.
+     * このオブジェクトは次のメソッドを持つ.
+     * - paint(ctx, x, y) - 指定された位置に現在のコマを描画し, 内部状態を更新する
+     * - finished() - 描画するコマが残っていないときtrue, そうでないときfalse
+     *
+     * paintメソッドを呼び出されるたびに内部状態が更新され,
+     * 自動的にコマ送りが進行する. すべてのコマを描画し終えたときの挙動は
+     * repeatによって変わる.
+     * - repeatがtrueならば, 最初のコマに戻る
+     * - repeatがfalseならば, これ以上何も描画しない
+     *
+     * @param {string} name - 使用するアニメーションの登録名
+     * @param {boolean} [repeat=false] - リピートするか
+     * @returns {Object} 生成されたコマ送り描画オブジェクト
+     */
+    generate(name, repeat=false){
+        const entry = this.#pool[name];
+        if(!entry || entry.dfn.length == 0) return null;
+
+        let i = 0;
+        let [a, b, frames, offX, offY] = entry.dfn[i];
+        offX = offX || 0;
+        offY = offY || 0;
+
+        return {
+            finished(){
+                return (i >= entry.dfn.length);
+            },
+            paint(ctx, x, y){
+                if(i >= entry.dfn.length) return;
+                entry.IC.paint(ctx, x + offX, y + offY, a, b);
+                if(--frames <= 0){
+                    if(++i >= entry.dfn.length){
+                        if(repeat) i = 0;
+                        else return;
+                    }
+                    [a, b, frames, offX, offY] = entry.dfn[i];
+                    offX = offX || 0;
+                    offY = offY || 0;
+                }
+            }
+        };
     }
 }
 
