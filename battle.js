@@ -22,64 +22,71 @@ var battle = battle || {};
  * 各種機能を具体的に実装する. 言い換えれば, スキル効果の実装作業において
  * mainSceneの中身を知らないと書けない処理がここに集められている.
  * @class
+ * @prop {number} appliedCB - crisisBoostの適用状況を記録するために使う
  */
 let SkillDealer = class extends SkillDealerBase{
+    #owner;
+
+    /**
+     * ownerを使用してSkillDealerBaseの機能を実装するインスタンスを生成する.
+     * @param {Scene} owner - mainSceneへの参照
+     */
     constructor(owner){
         super();
-        this.owner = owner;
+        this.#owner = owner;
     }
 
     // サブクラスが実装する処理 (基本情報)
 
     enemyHP(){
-        return this.owner.enemy.HP();
+        return this.#owner.enemy.HP();
     }
 
     // サブクラスが実装する処理 (攻撃時に実行)
 
     *addHP(percent){
-        const v = this.owner.player.percentHP(percent);
+        const v = this.#owner.player.percentHP(percent);
         GE.se.play("powerup");
-        this.owner.player.addHP(v);
+        this.#owner.player.addHP(v);
         yield* this.wait(60);
         yield* this.playerChanged();
     }
 
     *addMP(percent){
-        const v = this.owner.player.percentMP(percent);
+        const v = this.#owner.player.percentMP(percent);
         GE.se.play("chargeUp");
-        this.owner.player.addMP(v);
+        this.#owner.player.addMP(v);
         yield* this.wait(60);
     }
 
     *addSG(percent){
         GE.se.play("powerup");
-        this.owner.player.addSG(percent);
+        this.#owner.player.addSG(percent);
         yield* this.wait(60);
     }
 
     *addHPSG(percent){
-        const v = this.owner.player.percentHP(percent);
+        const v = this.#owner.player.percentHP(percent);
         GE.se.play("powerup");
-        this.owner.player.addHP(v);
-        this.owner.player.addSG(percent);
+        this.#owner.player.addHP(v);
+        this.#owner.player.addSG(percent);
         yield* this.wait(60);
         yield* this.playerChanged();
     }
 
     *addShield(n){
-        this.owner.player.addShield(n);
+        this.#owner.player.addShield(n);
     }
 
     *chargeUp(percent){
-        this.owner.poolManager.chargeUp(percent);
+        this.#owner.poolManager.chargeUp(percent);
         GE.se.play("chargeUp");
         yield* this.wait(60);
     }
 
     *reduceEnemyMP(percent){
-        const v = this.owner.enemy.percentMP(percent);
-        this.owner.enemy.addMP(-v);
+        const v = this.#owner.enemy.percentMP(percent);
+        this.#owner.enemy.addMP(-v);
         yield* this.wait(60);
     }
 
@@ -87,83 +94,83 @@ let SkillDealer = class extends SkillDealerBase{
         let f = false;
         if(mark < PrimitiveSuits.length){
             MPBoostBySuit.primitive[mark] += percent;
-            if(this.owner.player.mark() == mark){
-                const v = this.owner.player.percentMP(percent);
-                this.owner.player.addMP(v);
+            if(this.#owner.player.mark() == mark){
+                const v = this.#owner.player.percentMP(percent);
+                this.#owner.player.addMP(v);
                 f = true;
             }
         }
         else{
             MPBoostBySuit.prismatic += percent;
-            if(this.owner.player.isPrismatic()){
-                const v = this.owner.player.percentMP(percent);
-                this.owner.player.addMP(v);
+            if(this.#owner.player.isPrismatic()){
+                const v = this.#owner.player.percentMP(percent);
+                this.#owner.player.addMP(v);
                 f = true;
             }
         }
 
-        const changed = this.owner.poolManager.recalculate();
+        const changed = this.#owner.poolManager.recalculate();
         if(f || changed) GE.se.play("chargeUp");
         yield* this.wait(60);
     }
 
     *damage(percent){
-        const v = this.owner.player.percentMP(percent);
+        const v = this.#owner.player.percentMP(percent);
         GE.se.play("hit0");  // 試しにSEを入れてみる
-        this.owner.enemy.addHP(-v);
-        this.owner.shakeEnemy();  // shake_test
+        this.#owner.enemy.addHP(-v);
+        this.#owner.shakeEnemy();  // shake_test
         yield* this.wait(60);
     }
 
     *extendTime(n){
-        this.owner.maxTimeCount += n;
+        this.#owner.maxTimeCount += n;
     }
 
     *timeWarp(){
-        this.owner.player.addHP(this.owner.player.percentHP(100));
-        this.owner.player.addSG(100);
-        this.owner.turn = 1;
+        this.#owner.player.addHP(this.#owner.player.percentHP(100));
+        this.#owner.player.addSG(100);
+        this.#owner.turn = 1;
         yield* this.wait(60);
-        this.owner.add(T.finite(
-            T.text(`Turn ${this.owner.turn}`, {x: 500, y: 180, ...this.owner.textOpt.turn}),
+        this.#owner.add(T.finite(
+            T.text(`Turn ${this.#owner.turn}`, {x: 500, y: 180, ...this.#owner.textOpt.turn}),
             90));
         yield* this.wait(90);
     }
 
     // 本当に1ターン目に戻す場合
     *realTimeWarp(){
-        this.owner.backupArgs.playerData.main = null;
-        this.owner.init();  // !?
-        this.owner.GE.changeScene("main", this.owner.backupArgs);  // !?
+        this.#owner.backupArgs.playerData.main = null;
+        this.#owner.init();  // !?
+        this.#owner.GE.changeScene("main", this.#owner.backupArgs);  // !?
     }
 
     // サブクラスが実装する処理 (ターン開始時に実行)
 
     *heal(percent){
-        this.owner.add(new QBTalk("体力が回復するよ。", 60));
-        const v = this.owner.player.percentHP(percent);
+        this.#owner.add(new QBTalk("体力が回復するよ。", 60));
+        const v = this.#owner.player.percentHP(percent);
         GE.se.play("powerup");
-        this.owner.player.addHP(v);
+        this.#owner.player.addHP(v);
         yield* this.wait(120);
         yield* this.playerChanged();
     }
 
     *SGHeal(percent){
-        this.owner.add(new QBTalk("ソウルジェムが浄化されるよ。", 60));
+        this.#owner.add(new QBTalk("ソウルジェムが浄化されるよ。", 60));
         GE.se.play("powerup");
-        this.owner.player.addSG(percent);
+        this.#owner.player.addSG(percent);
         yield* this.wait(120);
     }
 
     // サブクラスが実装する処理 (HPの変化に伴い呼び出される)
 
     *crisisBoostTask(percent){
-        if(this.owner.player.HP() <= 0) return; // 既に敗北しているときは省略
-        const f = (this.owner.player.retentionRateHP() <= 0.5);
+        if(this.#owner.player.HP() <= 0) return; // 既に敗北しているときは省略
+        const f = (this.#owner.player.retentionRateHP() <= 0.5);
         if(this.appliedCB == percent){
             if(percent > 0 && !f){
                 // 適用中かつ条件から外れた
-                this.owner.player.addMP(-this.owner.player.percentMP(percent));
+                this.#owner.player.addMP(-this.#owner.player.percentMP(percent));
                 this.appliedCB = 0;
                 if(percent > 0) yield* this.wait(60);
             }
@@ -172,14 +179,14 @@ let SkillDealer = class extends SkillDealerBase{
             if(f){
                 //条件を満たしているが適用量がpercentでない
                 const a = percent - this.appliedCB;
-                this.owner.player.addMP(this.owner.player.percentMP(a));
+                this.#owner.player.addMP(this.#owner.player.percentMP(a));
                 this.appliedCB = percent;
                 if(a > 0) GE.se.play("chargeUp"); 
                 if(a != 0) yield* this.wait(90);
             }
             else if(!f && this.appliedCB > 0){
                 //条件を満たしていない
-                this.owner.player.addMP(-this.owner.player.percentMP(this.appliedCB));
+                this.#owner.player.addMP(-this.#owner.player.percentMP(this.appliedCB));
                 yield* this.wait(60);
                 this.appliedCB = 0;
             }
@@ -195,31 +202,37 @@ let SkillDealer = class extends SkillDealerBase{
  * @class
  */
 let EnemyActionDealer = class extends EnemyActionDealerBase{
+    #owner;
+
+    /**
+     * ownerを使用してEnemyActionDealerBaseの機能を実装するインスタンスを生成する.
+     * @param {Scene} owner - mainSceneへの参照
+     */
     constructor(owner){
         super();
-        this.owner = owner;
+        this.#owner = owner;
     }
 
     // サブクラスが実装する処理 (基本情報)
 
     turnCount(){
-        return this.owner.turn;
+        return this.#owner.turn;
     }
 
     playerHP(){
-        return this.owner.player.HP();
+        return this.#owner.player.HP();
     }
 
     // サブクラスが実装する処理 (*upkeep内で実行)
 
     *poison(percent){
-        this.owner.add(new QBTalk("敵スキルの効果でダメージを受けるよ。", 60));
-        const v = this.owner.player.percentHP(percent);
+        this.#owner.add(new QBTalk("敵スキルの効果でダメージを受けるよ。", 60));
+        const v = this.#owner.player.percentHP(percent);
         GE.se.play("hit1");  // 試しにSEを入れてみる
-        this.owner.shakePlayer();  // shaker_test
-        this.owner.player.addHP(-v);
+        this.#owner.shakePlayer();  // shaker_test
+        this.#owner.player.addHP(-v);
         yield* this.wait(120);
-        yield* this.owner.SD.playerChanged();
+        yield* this.#owner.SD.playerChanged();
     }
 
     // サブクラスが実装する処理 (*specialAction内で実行)
@@ -227,20 +240,20 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
     *common(action){
         yield* this.wait(20);
         GE.se.play("enemyAction");
-        this.owner.add( createSkillDialog(action) );
+        this.#owner.add( createSkillDialog(action) );
         yield* this.wait(130);
     }
 
     *antiskill(callback){
-        const id = this.owner.player.id();
-        if(this.owner.player.mainSkillCount() > 0 && this.owner.enemy.antiskillContains(id)){
+        const id = this.#owner.player.id();
+        if(this.#owner.player.mainSkillCount() > 0 && this.#owner.enemy.antiskillContains(id)){
             const yesno = new QBYesNo("アンチスキルを使うかい？\nA → YES    S → No", 20);
-            this.owner.addSprite(yesno);
-            this.owner.addTask(yesno, true);
+            this.#owner.addSprite(yesno);
+            this.#owner.addTask(yesno, true);
             while(yesno.active) yield true;
             if(yesno.result){
-                this.owner.add(new QBTalk("敵スキルを打ち消したよ。", 60));
-                this.owner.player.shiftMainSkill();
+                this.#owner.add(new QBTalk("敵スキルを打ち消したよ。", 60));
+                this.#owner.player.shiftMainSkill();
                 yield* this.wait(100);
                 callback();
             }
@@ -248,16 +261,16 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
     }
 
     *stun(n){
-        this.owner.player.addStun(n);
+        this.#owner.player.addStun(n);
     }
 
     *damage(percent){
-        const v = this.owner.enemy.percentMP(percent);
+        const v = this.#owner.enemy.percentMP(percent);
         GE.se.play("hit1");  // 試しにSEを入れてみる
-        this.owner.shakePlayer();  // shaker_test
-        this.owner.player.addHP(-v);
+        this.#owner.shakePlayer();  // shaker_test
+        this.#owner.player.addHP(-v);
         yield* this.wait(60);
-        yield* this.owner.SD.playerChanged();
+        yield* this.#owner.SD.playerChanged();
     }
 
     *nightmare(str, mark, percent){
@@ -270,9 +283,9 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
                 }
             }
         }
-        if(this.owner.player.mark() != mark){
-            const v = this.owner.player.percentMP(percent);
-            this.owner.player.addMP(-v);
+        if(this.#owner.player.mark() != mark){
+            const v = this.#owner.player.percentMP(percent);
+            this.#owner.player.addMP(-v);
         }
 
         // 複合属性に対して
@@ -280,17 +293,17 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
         if(MPBoostBySuit.prismatic < 0){
             MPBoostBySuit.prismatic = 0;
         }
-        if(this.owner.player.isPrismatic()){
-            const v = this.owner.player.percentMP(percent);
-            this.owner.player.addMP(-v);
+        if(this.#owner.player.isPrismatic()){
+            const v = this.#owner.player.percentMP(percent);
+            this.#owner.player.addMP(-v);
         }
         yield* this.wait(60);
     }
 
     *transform(enemyName){
         const data = EnemyData[enemyName];
-        this.owner.backupArgs.enemyData = data; // 敵設定を上書き
-        this.owner.enemy.init(data, this.owner.player.suitString());
+        this.#owner.backupArgs.enemyData = data; // 敵設定を上書き
+        this.#owner.enemy.init(data, this.#owner.player.suitString());
         this.init(data.actions);
         yield* this.wait(60);
     }
@@ -307,19 +320,29 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
  */
 
 /**
+ * @typedef {Task} createPhysicalButton_obj
+ * @prop {function(stdgam.GameEngine, CanvasRenderingContext2D): void} draw - 1フレーム分の描画処理を行う
+ * @prop {function(stdgam.GameEngine): void} execute - 1フレーム分のタスク処理を行う
+ * @prop {number} x - 配置する位置のx座標
+ * @prop {number} y - 配置する位置のy座標
+ * @prop {boolean} isPressed - このボタンが押されている状態かどうか
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
+ */
+
+/**
  * 筐体のボタンを表現するコンポーネントを生成する.
  * @param {number} x - 配置する位置のx座標
  * @param {number} y - 配置する位置のy座標
  * @param {string} key - どのキー入力に反応するか指定する
  * @param {string} label - ボタンに書かれる文字
- * @return {Sprite} 生成されたコンポーネント
+ * @return {createPhysicalButton_obj} 生成されたコンポーネント
  */
 let createPhysicalButton = function(x, y, key, label) {
     return {
-        x: x, y: y, key: key, label: label, isPressed: false, active: true,
+        x: x, y: y, isPressed: false, active: true,
         draw(GE, ctx) {
             ctx.save();
-            // 押されている間はボタンを少し下げて暗くする演出
+            // 押されている間はボタンを少し下げて暗くする
             const offsetY = this.isPressed ? 5 : 0;
             ctx.translate(this.x, this.y + offsetY);
 
@@ -337,13 +360,12 @@ let createPhysicalButton = function(x, y, key, label) {
             ctx.font = "bold 20px Sans-Serif";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.fillText(this.label, 0, 2);
+            ctx.fillText(label, 0, 2);
             ctx.restore();
         },
-
         execute(GE){
             const fn = this.isPressed ? "isDown" : "isJustPressed";
-            this.isPressed = !this.locked && GE.input[fn](this.key); // キーが押されているか判定
+            this.isPressed = !this.locked && GE.input[fn](key);
             return true;
         }
     };
