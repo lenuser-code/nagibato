@@ -93,6 +93,7 @@ class EnemyActionDealerBase{
 /**
  * 敵の特殊攻撃を生成する関数をまとめたもの.
  * @type {Object.<string, function>}
+ * @namespace
  */
 const EnemyAction = {
     /**
