@@ -27,25 +27,49 @@
  * - *transform(enemyName)
  *
  * @class
+ * @prop {number} poisonRate - 毎ターン開始時にプレイヤーへ与えるダメージ量を「敵MPに対するパーセント表示」で表した値
  */
 class EnemyActionDealerBase{
+    /**
+     * 何も設定されていない状態のインスタンスを作成する.
+     */
     constructor(){
         this.actionList = [];
         this.poisonRate = 0;
     }
 
+    /**
+     * 指定された行動リストをこのオブジェクトにセットする.
+     * ここで, actionListは「nターン目に実行する敵スキルをactionList[n-1]に格納したもの」である.
+     * もしactionList[n-1]がnullの場合, nターン目には何も行わない (nullの代わりに他の偽判定の値をセットしてもよい).
+     * @param {Array<EnemyAction_skill>} actionList - 設定する行動リスト
+     */
     init(actionList){
         this.actionList = actionList;
     }
 
+    /**
+     * 指定されたフレーム数だけyield trueを繰り返すジェネレータを生成する.
+     * framesが0以下の場合は何もしない.
+     * @param {number} frames - 待機するフレーム数
+     */
     *wait(frames){
         while(frames-- > 0) yield true;
     }
 
+    /**
+     * 敵側アップキープの処理を実行するジェネレータを生成する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     */
     *upkeep(GE){
         if(this.poisonRate > 0) yield* this.poison(this.poisonRate);
     }
 
+    /**
+     * 現在のターン数に応じて敵の特殊行動を実行するジェネレータを生成する.
+     * 行動の内容はinitメソッドで設定された行動リストによって決定する.
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     */
     *specialAction(GE){
         const action = this.actionList[ this.turnCount()-1 ];
         if(action){
@@ -59,10 +83,25 @@ class EnemyActionDealerBase{
 }
 
 /**
+ * @typedef {Object} EnemyAction_skill
+ * @prop {string} caption - スキル名
+ * @prop {string} desc - 効果の説明
+ * @prop {GeneratorFunction} effect - 引数として受け取ったEnemyActionDealerBaseを使ってスキルの効果を実装する
+ */
+
+
+/**
  * 敵の特殊攻撃を生成する関数をまとめたもの.
  * @type {Object.<string, function>}
  */
 const EnemyAction = {
+    /**
+     * プレイヤーを指定されたターン数の間行動不能にするスキル.
+     * @param {number} n - 行動不能になるターン数
+     * @param {string} [cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {EnemyAction_skill} 生成されたスキル
+     */
     stun: function(n, cap = null, desc = null){
         return {
             caption: cap ||"相手を束縛",
@@ -74,6 +113,13 @@ const EnemyAction = {
         };
     },
 
+    /**
+     * プレイヤーにダメージを与えるスキル.
+     * @param {number} percent - ダメージ量が敵MPの何％か指定する
+     * @param {string} [cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {EnemyAction_skill} 生成されたスキル
+     */
     attack: function(percent, cap = null, desc = null){
         return {
             caption: cap || "強力な一撃",
@@ -84,6 +130,14 @@ const EnemyAction = {
         };
     },
 
+    /**
+     * プレイヤーに複数回ダメージを与えるスキル.
+     * @param {number[]} option - 「1回のダメージ量が敵MPの何％か指定する値」と
+     * 「攻撃回数」をこの順番に並べた配列
+     * @param {string} [cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {EnemyAction_skill} 生成されたスキル
+     */
     multiAttack: function(option, cap = null, desc = null){
         const [percent, n] = option;
         return {
@@ -99,6 +153,9 @@ const EnemyAction = {
         };
     },
 
+    /**
+     * (編集中)
+     */
     nightmare: function(option, cap = null, desc = null){
         const [str, mark, percent] = option;
         return {
@@ -110,6 +167,13 @@ const EnemyAction = {
         };
     },
 
+    /**
+     * 各ターンのアップキープ時にプレイヤーへダメージを与えるスキル.
+     * @param {number} percent - ダメージ量が敵MPの何％か指定する
+     * @param {string} [cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
+     */
     poison: function(percent, cap = null, desc = null){
         return {
             caption: cap || "呪い効果",
@@ -120,6 +184,9 @@ const EnemyAction = {
         };
     },
 
+    /**
+     * (編集中)
+     */
     transform: function(enemyName, cap = null, desc = null){
         return {
             caption: cap || "変身",
