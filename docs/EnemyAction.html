@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> CardSet</title>
+  <title> EnemyAction</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,8 +73,8 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>CardSet</h1>
+                    <p>Namespace</p>
+                    <h1>EnemyAction</h1>
                 </header>
                 
 
@@ -85,13 +85,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>CardSet<span class="signature">(cards)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description"><p>重複を持たず, Card.compareでソートされたカードの集合を表す.
-Deckクラスが「実際にゲーム中に使用する山札」を表すのに対し,
-このクラスは「デッキに採用するカードのカタログ」として扱われる.
-たとえば, Deckクラスには「シャッフルする」という概念が存在するが,
-CardSetは常にCard.compareの順序でソートされている.</p></div>
+        <h2>EnemyAction</h2>
         
     
 </header>
@@ -100,96 +94,10 @@ CardSetは常にCard.compareの順序でソートされている.</p></div>
     <div class="container-overview">
     
         
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="CardSet">
-        <a class="href-link" href="#CardSet">#</a>
-        
-        <span class="code-name">
-            
-                new CardSet<span class="signature">(cards)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>cardsと同じ要素を持つインスタンスを生成する.
-shallow copyをとるので, このインスタンスを変更してもcardsには影響しない.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
+            <div class="description"><p>敵の特殊攻撃を生成する関数をまとめたもの.</p></div>
         
 
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>cards</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Array.&lt;<a href="global.html#Cardlike">Cardlike</a>></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>使用するカードを並べた配列</p></td>
-</tr>
-
-
         
-        </tbody>
-    </table>
-</div>
-
-
-
 
 
 <dl class="details">
@@ -225,38 +133,15 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
 
     
         <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
+            <a href="enemy.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1313">line 1313</a>
+                <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line98">line 98</a>
             </span>
         </p>
     
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
         
     
     </div>
@@ -284,12 +169,16 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
 
 
     
-    <h4 class="name" id="cards">
-        <a class="href-link" href="#cards">#</a>
+    <h4 class="name" id=".attack">
+        <a class="href-link" href="#.attack">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
         
         <span class="code-name">
             
-                cards<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;<a href="global.html#Cardlike">Cardlike</a>>}</span>
+                attack<span class="signature">(percent, cap<span class="signature-attributes">opt</span>, desc<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#EnemyAction_skill">EnemyAction_skill</a>}</span>
             
         </span>
     </h4>
@@ -298,129 +187,7 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
     
     
     <div class="description">
-        <p>このCardSetに含まれるカードを並べた配列を新しく生成する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1344">line 1344</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>生成された配列</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">Array.&lt;<a href="global.html#Cardlike">Cardlike</a>></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="includes">
-        <a class="href-link" href="#includes">#</a>
-        
-        <span class="code-name">
-            
-                includes<span class="signature">(card)</span><span class="type-signature"> &rarr; {boolean}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>cardがこのCardSetに含まれているか判定する.</p>
+        <p>プレイヤーにダメージを与えるスキル.</p>
     </div>
     
 
@@ -445,7 +212,11 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
             <th>Type</th>
 
             
+            <th>Attributes</th>
+            
 
+            
+            <th>Default</th>
             
 
             <th class="last">Description</th>
@@ -458,525 +229,204 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>card</code></td>
+      <td class="name"><code>percent</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type"><a href="global.html#Cardlike">Cardlike</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>調べるカード</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1353">line 1353</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>含まれているときtrue, そうでないときfalse</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">boolean</code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="init">
-        <a class="href-link" href="#init">#</a>
-        
-        <span class="code-name">
-            
-                init<span class="signature">(cards)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>cardsと同じ要素を持つように初期化する.
-shallow copyをとるので, このインスタンスを変更してもcardsには影響しない.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>cards</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Array.&lt;<a href="global.html#Cardlike">Cardlike</a>></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>使用するカードを並べた配列</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1330">line 1330</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="push">
-        <a class="href-link" href="#push">#</a>
-        
-        <span class="code-name">
-            
-                push<span class="signature">(card)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>cardをこのCardSetに追加する. もし既にCardSetの中に存在する場合は何もしない.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>card</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#Cardlike">Cardlike</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>追加するカード</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1371">line 1371</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="size">
-        <a class="href-link" href="#size">#</a>
-        
-        <span class="code-name">
-            
-                size<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1336">line 1336</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>含まれているカードの枚数</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
 <code class="param-type">number</code>
 
 
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>ダメージ量が敵MPの何％か指定する</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>cap</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          null
+      
+      </td>
+  
+
+  <td class="description last"><p>スキル名. nullのときはデフォルトの名前が使われる</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>desc</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          null
+      
+      </td>
+  
+
+  <td class="description last"><p>効果の説明文. nullのときはデフォルトの説明が使われる</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="enemy.js.html" class="button">View Source</a>
+            <span>
+                <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line124">line 124</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたスキル</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#EnemyAction_skill">EnemyAction_skill</a></code>
+
+
     </div>
     
 </div>
@@ -994,12 +444,16 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
 
 
     
-    <h4 class="name" id="slice">
-        <a class="href-link" href="#slice">#</a>
+    <h4 class="name" id=".multiAttack">
+        <a class="href-link" href="#.multiAttack">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
         
         <span class="code-name">
             
-                slice<span class="signature">(n)</span><span class="type-signature"> &rarr; {<a href="global.html#Cardlike">Cardlike</a>}</span>
+                multiAttack<span class="signature">(option, cap<span class="signature-attributes">opt</span>, desc<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#EnemyAction_skill">EnemyAction_skill</a>}</span>
             
         </span>
     </h4>
@@ -1008,8 +462,7 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
     
     
     <div class="description">
-        <p>前からn番目の要素をこのCardSetから削除し, そのカードを返す
-(nは0から数え始める). もし該当するカードが無ければCard.NullCardを返す.</p>
+        <p>プレイヤーに複数回ダメージを与えるスキル.</p>
     </div>
     
 
@@ -1034,7 +487,663 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
             <th>Type</th>
 
             
+            <th>Attributes</th>
+            
 
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>option</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;number></code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>「1回のダメージ量が敵MPの何％か指定する値」と
+「攻撃回数」をこの順番に並べた配列</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>cap</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          null
+      
+      </td>
+  
+
+  <td class="description last"><p>スキル名. nullのときはデフォルトの名前が使われる</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>desc</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          null
+      
+      </td>
+  
+
+  <td class="description last"><p>効果の説明文. nullのときはデフォルトの説明が使われる</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="enemy.js.html" class="button">View Source</a>
+            <span>
+                <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line142">line 142</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたスキル</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#EnemyAction_skill">EnemyAction_skill</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".nightmare">
+        <a class="href-link" href="#.nightmare">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                nightmare<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>(編集中)</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="enemy.js.html" class="button">View Source</a>
+            <span>
+                <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line160">line 160</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".poison">
+        <a class="href-link" href="#.poison">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                poison<span class="signature">(percent, cap<span class="signature-attributes">opt</span>, desc<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#PlayerSkill_skill">PlayerSkill_skill</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>各ターンのアップキープ時にプレイヤーへダメージを与えるスキル.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+            <th>Attributes</th>
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>percent</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>ダメージ量が敵MPの何％か指定する</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>cap</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          null
+      
+      </td>
+  
+
+  <td class="description last"><p>スキル名. nullのときはデフォルトの名前が使われる</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>desc</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          null
+      
+      </td>
+  
+
+  <td class="description last"><p>効果の説明文. nullのときはデフォルトの説明が使われる</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="enemy.js.html" class="button">View Source</a>
+            <span>
+                <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line178">line 178</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたスキル</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#PlayerSkill_skill">PlayerSkill_skill</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".stun">
+        <a class="href-link" href="#.stun">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                stun<span class="signature">(n, cap<span class="signature-attributes">opt</span>, desc<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="global.html#EnemyAction_skill">EnemyAction_skill</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>プレイヤーを指定されたターン数の間行動不能にするスキル.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+            <th>Attributes</th>
+            
+
+            
+            <th>Default</th>
             
 
             <th class="last">Description</th>
@@ -1060,10 +1169,104 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
   </td>
 
   
+      <td class="attributes">
+      
 
+      
+
+      
+      </td>
   
 
-  <td class="description last"><p>抜き出すカードのインデックス</p></td>
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>行動不能になるターン数</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>cap</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          null
+      
+      </td>
+  
+
+  <td class="description last"><p>スキル名. nullのときはデフォルトの名前が使われる</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>desc</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          null
+      
+      </td>
+  
+
+  <td class="description last"><p>効果の説明文. nullのときはデフォルトの説明が使われる</p></td>
 </tr>
 
 
@@ -1109,9 +1312,9 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
 
     
         <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
+            <a href="enemy.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1382">line 1382</a>
+                <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line106">line 106</a>
             </span>
         </p>
     
@@ -1142,13 +1345,13 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>抜き出されたカード. 該当するカードが無ければCard.NullCard</p></div>
+    <div class='param-desc column is-7'><p>生成されたスキル</p></div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type"><a href="global.html#Cardlike">Cardlike</a></code>
+<code class="param-type"><a href="global.html#EnemyAction_skill">EnemyAction_skill</a></code>
 
 
     </div>
@@ -1168,12 +1371,16 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
 
 
     
-    <h4 class="name" id="watch">
-        <a class="href-link" href="#watch">#</a>
+    <h4 class="name" id=".transform">
+        <a class="href-link" href="#.transform">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
         
         <span class="code-name">
             
-                watch<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#Cardlike">Cardlike</a>}</span>
+                transform<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -1182,8 +1389,7 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
     
     
     <div class="description">
-        <p>前からn番目のカードを返す (nは0から数え始める).
-もし該当するカードが無ければCard.NullCardを返す.</p>
+        <p>(編集中)</p>
     </div>
     
 
@@ -1232,9 +1438,9 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
 
     
         <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
+            <a href="enemy.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1362">line 1362</a>
+                <a href="enemy.js.html">enemy.js</a>, <a href="enemy.js.html#line191">line 191</a>
             </span>
         </p>
     
@@ -1256,31 +1462,6 @@ shallow copyをとるので, このインスタンスを変更してもcardsに�
 
 
 
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>n番目のカード. 該当するカードが無ければCard.NullCard</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="global.html#Cardlike">Cardlike</a></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
 
 
 
