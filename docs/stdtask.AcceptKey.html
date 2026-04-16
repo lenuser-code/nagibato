@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Deck</title>
+  <title> AcceptKey</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>Deck</h1>
+                    <h1>AcceptKey</h1>
                 </header>
                 
 
@@ -85,10 +85,14 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Deck<span class="signature">(cards)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="stdtask.html">stdtask</a>.</span>AcceptKey<span class="signature">(codes, modal<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>バトルで使うデッキを実装するクラス.
-シャッフルしてカードを並び替えたり, 先頭から1枚ずつカードを引いたりできる.</p></div>
+            <div class="class-description"><p>指定されたキーコードのリストに含まれるキーのうちどれか1つが押されるまで待機し,
+かつ, このとき何番目のキーが押されたかresult要素に格納するオブジェクトを作る.
+主にモーダルダイアログを作ってユーザーのキー入力を受け付けるときに使う.</p>
+<p>このクラス自体は描画処理を何も行わない. 必要な場合はサブクラスでdrawメソッドを
+実装することにより, スプライトとして登録できるようにすること.</p></div>
         
     
 </header>
@@ -107,12 +111,12 @@
 
 
     
-    <h4 class="name" id="Deck">
-        <a class="href-link" href="#Deck">#</a>
+    <h4 class="name" id="AcceptKey">
+        <a class="href-link" href="#AcceptKey">#</a>
         
         <span class="code-name">
             
-                new Deck<span class="signature">(cards)</span><span class="type-signature"></span>
+                new AcceptKey<span class="signature">(codes, modal<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -121,9 +125,7 @@
     
     
     <div class="description">
-        <p>cardsに格納されているカード達をそのままの並び順で使って
-インスタンスを生成する. shallow copyをとるので, このインスタンスを
-変更してもcardsには影響しない.</p>
+        <p>codesを受け付け対象とするインスタンスを生成する.</p>
     </div>
     
 
@@ -148,7 +150,11 @@
             <th>Type</th>
 
             
+            <th>Attributes</th>
+            
 
+            
+            <th>Default</th>
             
 
             <th class="last">Description</th>
@@ -161,23 +167,76 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>cards</code></td>
+      <td class="name"><code>codes</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">Array.&lt;<a href="global.html#Cardlike">Cardlike</a>></code>
+<code class="param-type">Array.&lt;string></code>
 
 
   
   </td>
 
   
+      <td class="attributes">
+      
 
+      
+
+      
+      </td>
   
 
-  <td class="description last"><p>使用するカードを並べた配列</p></td>
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>入力として受け付けるキーコードのリスト</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>modal</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          true
+      
+      </td>
+  
+
+  <td class="description last"><p>自分より後ろのタスク処理をブロックするか</p></td>
 </tr>
 
 
@@ -187,6 +246,81 @@
 </div>
 
 
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>result</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>指定されたリストのうち何番目のキーが押されたか (0から数え始める). 押されていないときはnull</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>active</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>(stdgam.Sceneの意味で) このオブジェクトが有効か</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -223,9 +357,9 @@
 
     
         <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
+            <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1394">line 1394</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line596">line 596</a>
             </span>
         </p>
     
@@ -282,12 +416,16 @@
 
 
     
-    <h4 class="name" id="cards">
-        <a class="href-link" href="#cards">#</a>
+    <h4 class="name" id="addAndWait">
+        <a class="href-link" href="#addAndWait">#</a>
+        
+            
+                <span class='tag'>generator</span>
+            
         
         <span class="code-name">
             
-                cards<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;<a href="global.html#Cardlike">Cardlike</a>>}</span>
+                addAndWait<span class="signature">(scene)</span><span class="type-signature"> &rarr; {number}</span>
             
         </span>
     </h4>
@@ -296,371 +434,20 @@
     
     
     <div class="description">
-        <p>このデッキに含まれるカードを並べた配列を新しく生成する.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1420">line 1420</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>生成された配列</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">Array.&lt;<a href="global.html#Cardlike">Cardlike</a>></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="clone">
-        <a class="href-link" href="#clone">#</a>
-        
-        <span class="code-name">
-            
-                clone<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Deck.html">Deck</a>}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>このデッキを複製して新しいインスタンスを生成する.
-片方を変更しても, もう片方に影響しない.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1412">line 1412</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>複製して作られたオブジェクト</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="Deck.html">Deck</a></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="isEmpty">
-        <a class="href-link" href="#isEmpty">#</a>
-        
-        <span class="code-name">
-            
-                isEmpty<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1430">line 1430</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>このデッキが空ならtrue, そうでなければfalse</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">boolean</code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="remove">
-        <a class="href-link" href="#remove">#</a>
-        
-        <span class="code-name">
-            
-                remove<span class="signature">(card)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>このデッキから指定されたカードを取り除く.
-もし複数の箇所に含まれるなら, それらをすべて削除する.</p>
+        <p>このオブジェクトをsceneに登録したあと, 生成時に指定されたキーの中のどれかが
+入力されるまで待ち続けるジェネレータを生成する.
+より正確には, 次の処理を行う.</p>
+<ol>
+<li>scene.addSprite(this);</li>
+<li>scene.addTask(this, true);</li>
+<li>while(this.active) yield true;</li>
+</ol>
+<p>ジェネレータが完了したときの返り値はthis.resultである. したがって,
+実行後にいちいちresult要素をチェックするのが面倒な場合は</p>
+<pre class="prettyprint source"><code>const n = yield* acceptKey.addAndWait(scene);
+</code></pre>
+<p>のようにyield*の返り値をそのまま利用してしまえばよい (acceptKeyは
+このクラス or そのサブクラスのインスタンスとする).</p>
     </div>
     
 
@@ -698,13 +485,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>card</code></td>
+      <td class="name"><code>scene</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type"><a href="global.html#Cardlike">Cardlike</a></code>
+<code class="param-type"><a href="stdgam.Scene.html">stdgam.Scene</a></code>
 
 
   
@@ -714,7 +501,7 @@
 
   
 
-  <td class="description last"><p>削除するカード</p></td>
+  <td class="description last"><p>このオブジェクトを登録するSceneオブジェクト</p></td>
 </tr>
 
 
@@ -760,111 +547,14 @@
 
     
         <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
+            <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1453">line 1453</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line663">line 663</a>
             </span>
         </p>
     
 </dl>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="shift">
-        <a class="href-link" href="#shift">#</a>
-        
-        <span class="code-name">
-            
-                shift<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#Cardlike">Cardlike</a>}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>このデッキの一番最初のカードを削除して, そのカードを返す.
-もし該当するカードが無ければ, Card.NullCardを返す</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1439">line 1439</a>
-            </span>
-        </p>
-    
-</dl>
 
 
 
@@ -884,229 +574,14 @@
 
 
     <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-2"><label>Yields:</label></div>
         <div class="column is-10">
             
                     
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>取り除かれたカード. 該当するカードが無ければCard.NullCard</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="global.html#Cardlike">Cardlike</a></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="shuffle">
-        <a class="href-link" href="#shuffle">#</a>
-        
-        <span class="code-name">
-            
-                shuffle<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>このデッキの中身をシャッフルする.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1472">line 1472</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="size">
-        <a class="href-link" href="#size">#</a>
-        
-        <span class="code-name">
-            
-                size<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
-            <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1425">line 1425</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>含まれているカードの枚数</p></div>
+    <div class='param-desc column is-7'>押されたキーのキーコードリストにおけるインデックス</div>
     
     
     <div class='column is-5 has-text-left'>
@@ -1125,19 +600,18 @@
 
 
 
-
 </div>
             
                 <div class="member">
 
 
     
-    <h4 class="name" id="watch">
-        <a class="href-link" href="#watch">#</a>
+    <h4 class="name" id="execute">
+        <a class="href-link" href="#execute">#</a>
         
         <span class="code-name">
             
-                watch<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#Cardlike">Cardlike</a>}</span>
+                execute<span class="signature">(GE)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -1146,8 +620,12 @@
     
     
     <div class="description">
-        <p>前からn番目のカードを返す (nは0から数え始める).
-もし該当するカードが無ければ, Card.NullCardを返す</p>
+        <p>1フレーム分のタスク処理を実行する.
+具体的には, 指定されたキーコードの各要素に対してキーが押されたか確認して,
+該当するものがあればそのインデックスをthis.resultに格納する
+(このとき同時にthis.activeがfalseになる).</p>
+<p>【注意】複数のキーが同時に押された場合, キーコードリストにおけるインデックスが
+一番小さいものだけ記録される.</p>
     </div>
     
 
@@ -1158,6 +636,57 @@
 
 
 
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>GE</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="stdgam.GameEngine.html">stdgam.GameEngine</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>タスク処理に用いるGameEngine</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1196,9 +725,9 @@
 
     
         <p class="tag-source">
-            <a href="card.js.html" class="button">View Source</a>
+            <a href="stdtask.js.html" class="button">View Source</a>
             <span>
-                <a href="card.js.html">card.js</a>, <a href="card.js.html#line1462">line 1462</a>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line623">line 623</a>
             </span>
         </p>
     
@@ -1229,16 +758,175 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>n番目のカード. 該当するカードが無ければCard.NullCard</p></div>
+    <div class='param-desc column is-7'><p>モーダルなタスクとして生成されたときはfalse, そうでなければtrue</p></div>
     
     
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="global.html#Cardlike">Cardlike</a></code>
+</div>
 
-
+                
+        </div>
     </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="is">
+        <a class="href-link" href="#is">#</a>
+        
+        <span class="code-name">
+            
+                is<span class="signature">(code)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>入力されたキーをキーコードにより照合する. すなわち, キーコードがcodeであるキーが
+押されることによって入力待ちが完了した場合はtrueを, そうでないときfalseを返す.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>code</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>照合したいキーのキーコード</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdtask.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdtask.js.html">stdtask.js</a>, <a href="stdtask.js.html#line639">line 639</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>押されたキーのキーコードがcodeと一致するときtrue, 一致しないときや
+まだどのキーも押されていないときfalse</p></div>
+    
     
 </div>
 

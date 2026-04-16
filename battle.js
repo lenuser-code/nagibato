@@ -22,18 +22,21 @@ var battle = battle || {};
  * 各種機能を具体的に実装する. 言い換えれば, スキル効果の実装作業において
  * mainSceneの中身を知らないと書けない処理がここに集められている.
  * @class
- * @prop {number} appliedCB - crisisBoostの適用状況を記録するために使う
+ * @extends SkillDealerBase
  */
 let SkillDealer = class extends SkillDealerBase{
     #owner;
+    #se;
 
     /**
      * ownerを使用してSkillDealerBaseの機能を実装するインスタンスを生成する.
-     * @param {Scene} owner - mainSceneへの参照
+     * @param {stdgam.Scene} owner - mainSceneへの参照
+     * @param {stdgam.SEPool} se - SEの再生に使うSEPool
      */
-    constructor(owner){
+    constructor(owner, se){
         super();
         this.#owner = owner;
+        this.#se = se;
     }
 
     // サブクラスが実装する処理 (基本情報)
@@ -46,7 +49,7 @@ let SkillDealer = class extends SkillDealerBase{
 
     *addHP(percent){
         const v = this.#owner.player.percentHP(percent);
-        GE.se.play("powerup");
+        this.#se.play("powerup");
         this.#owner.player.addHP(v);
         yield* this.wait(60);
         yield* this.playerChanged();
@@ -54,20 +57,20 @@ let SkillDealer = class extends SkillDealerBase{
 
     *addMP(percent){
         const v = this.#owner.player.percentMP(percent);
-        GE.se.play("chargeUp");
+        this.#se.play("chargeUp");
         this.#owner.player.addMP(v);
         yield* this.wait(60);
     }
 
     *addSG(percent){
-        GE.se.play("powerup");
+        this.#se.play("powerup");
         this.#owner.player.addSG(percent);
         yield* this.wait(60);
     }
 
     *addHPSG(percent){
         const v = this.#owner.player.percentHP(percent);
-        GE.se.play("powerup");
+        this.#se.play("powerup");
         this.#owner.player.addHP(v);
         this.#owner.player.addSG(percent);
         yield* this.wait(60);
@@ -80,7 +83,7 @@ let SkillDealer = class extends SkillDealerBase{
 
     *chargeUp(percent){
         this.#owner.poolManager.chargeUp(percent);
-        GE.se.play("chargeUp");
+        this.#se.play("chargeUp");
         yield* this.wait(60);
     }
 
@@ -110,13 +113,13 @@ let SkillDealer = class extends SkillDealerBase{
         }
 
         const changed = this.#owner.poolManager.recalculate();
-        if(f || changed) GE.se.play("chargeUp");
+        if(f || changed) this.#se.play("chargeUp");
         yield* this.wait(60);
     }
 
     *damage(percent){
         const v = this.#owner.player.percentMP(percent);
-        GE.se.play("hit0");  // 試しにSEを入れてみる
+        this.#se.play("hit0");  // 試しにSEを入れてみる
         this.#owner.enemy.addHP(-v);
         this.#owner.shakeEnemy();  // shake_test
         yield* this.wait(60);
@@ -149,7 +152,7 @@ let SkillDealer = class extends SkillDealerBase{
     *heal(percent){
         this.#owner.add(new QBTalk("体力が回復するよ。", 60));
         const v = this.#owner.player.percentHP(percent);
-        GE.se.play("powerup");
+        this.#se.play("powerup");
         this.#owner.player.addHP(v);
         yield* this.wait(120);
         yield* this.playerChanged();
@@ -157,7 +160,7 @@ let SkillDealer = class extends SkillDealerBase{
 
     *SGHeal(percent){
         this.#owner.add(new QBTalk("ソウルジェムが浄化されるよ。", 60));
-        GE.se.play("powerup");
+        this.#se.play("powerup");
         this.#owner.player.addSG(percent);
         yield* this.wait(120);
     }
@@ -181,7 +184,7 @@ let SkillDealer = class extends SkillDealerBase{
                 const a = percent - this.appliedCB;
                 this.#owner.player.addMP(this.#owner.player.percentMP(a));
                 this.appliedCB = percent;
-                if(a > 0) GE.se.play("chargeUp"); 
+                if(a > 0) this.#se.play("chargeUp"); 
                 if(a != 0) yield* this.wait(90);
             }
             else if(!f && this.appliedCB > 0){
@@ -200,17 +203,21 @@ let SkillDealer = class extends SkillDealerBase{
  * 具体的に実装する. 言い換えれば, 敵の特殊行動の実装作業において
  * mainSceneの中身を知らないと書けない処理がここに集められている.
  * @class
+ * @extends EnemyActionDealerBase
  */
 let EnemyActionDealer = class extends EnemyActionDealerBase{
     #owner;
+    #se;
 
     /**
      * ownerを使用してEnemyActionDealerBaseの機能を実装するインスタンスを生成する.
      * @param {Scene} owner - mainSceneへの参照
+     * @param {stdgam.SEPool} se - SEの再生に使うSEPool
      */
-    constructor(owner){
+    constructor(owner, se){
         super();
         this.#owner = owner;
+        this.#se = se;
     }
 
     // サブクラスが実装する処理 (基本情報)
@@ -228,7 +235,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
     *poison(percent){
         this.#owner.add(new QBTalk("敵スキルの効果でダメージを受けるよ。", 60));
         const v = this.#owner.player.percentHP(percent);
-        GE.se.play("hit1");  // 試しにSEを入れてみる
+        this.#se.play("hit1");  // 試しにSEを入れてみる
         this.#owner.shakePlayer();  // shaker_test
         this.#owner.player.addHP(-v);
         yield* this.wait(120);
@@ -239,7 +246,7 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 
     *common(action){
         yield* this.wait(20);
-        GE.se.play("enemyAction");
+        this.#se.play("enemyAction");
         this.#owner.add( createSkillDialog(action) );
         yield* this.wait(130);
     }
@@ -266,8 +273,8 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
 
     *damage(percent){
         const v = this.#owner.enemy.percentMP(percent);
-        GE.se.play("hit1");  // 試しにSEを入れてみる
-        this.#owner.shakePlayer();  // shaker_test
+        this.#se.play("hit1");
+        this.#owner.shakePlayer();
         this.#owner.player.addHP(-v);
         yield* this.wait(60);
         yield* this.#owner.SD.playerChanged();
@@ -478,22 +485,20 @@ let createTimeCount = function(maxTimeCount, x, y){
 /**
  * プレイヤーの行動選択時に表示するダイアログを生成する.
  * 入力受付はmainSceneで行う.
- * @returns {Sprite} 生成されたコンポーネント
+ * @returns {stdtask.Ask} 生成されたコンポーネント
  */
 let createAttackDialog = function(){
     const img = GE.caches.get("DIALOG");
-    const obj = {
-        active: true,
-        draw(GE, ctx){
-            ctx.save();
-            ctx.drawImage(img, 0, 0);
-            ctx.fillStyle = "white";
-            ctx.font = "bold 50px Serif";
-            ctx.fillText("A：アタック", 120, 250);
-            ctx.fillText("S：ＳＧ回復", 120, 340);
-            ctx.fillText("D：スキル", 120, 430);
-            ctx.restore();
-        }
+    const obj = new stdtask.AcceptKey(["KeyA", "KeyS", "KeyD"]);
+    obj.draw = function(GE, ctx){
+        ctx.save();
+        ctx.drawImage(img, 0, 0);
+        ctx.fillStyle = "white";
+        ctx.font = "bold 50px Serif";
+        ctx.fillText("A：アタック", 120, 250);
+        ctx.fillText("S：ＳＧ回復", 120, 340);
+        ctx.fillText("D：スキル", 120, 430);
+        ctx.restore();
     };
     return obj;
 }
@@ -1057,10 +1062,11 @@ judgement(){
 
 /**
  * このシーンの構成要素を初期化する.
+ * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
  * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
  * @memberof battle.mainScene
  */
-initComponents(args){
+initComponents(GE, args){
     this.position.init();
     this.sideboard = args.sideboard;
     
@@ -1071,8 +1077,8 @@ initComponents(args){
     this.QBChance = (args.QBChance ? 1 : 0);
     this.maxTimeCount = 5;
 
-    this.SD = new SkillDealer(this);
-    this.EAD = new EnemyActionDealer(this);
+    this.SD = new SkillDealer(this, GE.se);
+    this.EAD = new EnemyActionDealer(this, GE.se);
 
     this.player = new Player(args.playerData);
     this.enemy = new Enemy(args.enemyData || EnemyData["キュゥべえ"], args.playerData.suit_string);
@@ -1108,7 +1114,7 @@ onLoad(GE, args){
     this.add(T.image(GE.caches.get("CARDMAT"), {x: 0, y: 0}));
 
     this.backupOptions(args);
-    this.initComponents(args);
+    this.initComponents(GE, args);
 
     const btnLabels = ["A", "S", "D"];
     const btnKeys = ["KeyA", "KeyS", "KeyD"];
@@ -1300,16 +1306,9 @@ phase2_body(GE, i){
         return;
     }
 
-    let n;
     const dialog = createAttackDialog();
-    const stop = T.pause(-1);
-    this.addTask(stop, true);
-    this.add(dialog);
-    while((n = this.checkInput(GE)) < 0){
-        yield true;
-    }
-    dialog.active = false;
-    stop.active = false;
+    const n = yield* dialog.addAndWait(this);
+
     yield* this.attackPhase_choice(GE, n);
     yield* stdtask.wait(60);
 
@@ -1354,7 +1353,7 @@ phase2_body(GE, i){
     obj.fadeTo(1, 1);
 
     this.addSprite(obj);
-    this.addTask(T.pause(-1), true );
+    this.addTask(T.pause(-1), true);
     this.addTask(T.call((GE) => { GE.se.play("battleFinished"); } ), true );
     this.addTask(obj, true);
     this.addTask(T.pause(20), true);

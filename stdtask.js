@@ -582,4 +582,90 @@ stdtask.Meter = class{
     }
 }
 
+/**
+ * 指定されたキーコードのリストに含まれるキーのうちどれか1つが押されるまで待機し,
+ * かつ, このとき何番目のキーが押されたかresult要素に格納するオブジェクトを作る.
+ * 主にモーダルダイアログを作ってユーザーのキー入力を受け付けるときに使う.
+ *
+ * このクラス自体は描画処理を何も行わない. 必要な場合はサブクラスでdrawメソッドを
+ * 実装することにより, スプライトとして登録できるようにすること.
+ * @class
+ * @prop {number} result - 指定されたリストのうち何番目のキーが押されたか (0から数え始める). 押されていないときはnull
+ * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
+ */
+stdtask.AcceptKey = class{
+    #codes;
+    #modal;
+
+    /**
+     * codesを受け付け対象とするインスタンスを生成する.
+     * @param {string[]} codes - 入力として受け付けるキーコードのリスト
+     * @param {boolean} [modal=true] - 自分より後ろのタスク処理をブロックするか
+     */
+    constructor(codes, modal=true){
+        this.#codes = codes;
+        this.#modal = modal;
+        this.result = null;
+        this.active = true;
+    }
+
+    /**
+     * 1フレーム分のタスク処理を実行する.
+     * 具体的には, 指定されたキーコードの各要素に対してキーが押されたか確認して,
+     * 該当するものがあればそのインデックスをthis.resultに格納する
+     * (このとき同時にthis.activeがfalseになる).
+     *
+     * 【注意】複数のキーが同時に押された場合, キーコードリストにおけるインデックスが
+     * 一番小さいものだけ記録される.
+     * @param {stdgam.GameEngine} GE - タスク処理に用いるGameEngine
+     * @returns モーダルなタスクとして生成されたときはfalse, そうでなければtrue
+     */
+    execute(GE){
+        const k = this.#codes.findIndex((e) => GE.input.isJustPressed(e));
+        if(k >= 0){
+            this.result = k;
+            this.active = false;
+        }
+        return !this.#modal;
+    }
+
+    /**
+     * 入力されたキーをキーコードにより照合する. すなわち, キーコードがcodeであるキーが
+     * 押されることによって入力待ちが完了した場合はtrueを, そうでないときfalseを返す.
+     * @param {string} code - 照合したいキーのキーコード
+     * @returns 押されたキーのキーコードがcodeと一致するときtrue, 一致しないときや
+     * まだどのキーも押されていないときfalse
+     */
+    is(code){
+        return (this.result !== null) && (this.#codes[this.result] === code);
+    }
+
+    /**
+     * このオブジェクトをsceneに登録したあと, 生成時に指定されたキーの中のどれかが
+     * 入力されるまで待ち続けるジェネレータを生成する.
+     * より正確には, 次の処理を行う.
+     * 1. scene.addSprite(this);
+     * 2. scene.addTask(this, true);
+     * 3. while(this.active) yield true;
+     *
+     * ジェネレータが完了したときの返り値はthis.resultである. したがって,
+     * 実行後にいちいちresult要素をチェックするのが面倒な場合は
+     *
+     * ```
+     * const n = yield* acceptKey.addAndWait(scene);
+     * ```
+     *
+     * のようにyield*の返り値をそのまま利用してしまえばよい (acceptKeyは
+     * このクラス or そのサブクラスのインスタンスとする).
+     * @param {stdgam.Scene} scene - このオブジェクトを登録するSceneオブジェクト
+     * @yields {number} 押されたキーのキーコードリストにおけるインデックス
+     */
+    *addAndWait(scene){
+        scene.addSprite(this);
+        scene.addTask(this, true);
+        while(this.active) yield true;
+        return this.result;
+    }
+}
+
 })(stdtask);
