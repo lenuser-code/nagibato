@@ -1119,7 +1119,6 @@ onLoad(GE, args){
     const btnLabels = ["A", "S", "D"];
     const btnKeys = ["KeyA", "KeyS", "KeyD"];
     for (let i = 0; i < 3; i++) {
-        // 手札のカードの中心（Card.width/2）に合わせる
         const [bx, by] = this.position.button(i);
         this.add(createPhysicalButton(bx, by, btnKeys[i], btnLabels[i]));
     }
@@ -1132,6 +1131,11 @@ onLoad(GE, args){
     this.useCoroutine(GE, this.chart);
 },
 
+/**
+ * このオブジェクトのタスク処理を担当するジェネレータを生成する.
+ * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+ * @param {Object.<*,*>} [opt={}] - 初期化時に渡されるオプションリスト
+ */
 *chart(GE, opt){
     yield* stdtask.wait(10);
     yield* this.firstDeal(GE, this);

@@ -89,7 +89,6 @@ class EnemyActionDealerBase{
  * @prop {GeneratorFunction} effect - 引数として受け取ったEnemyActionDealerBaseを使ってスキルの効果を実装する
  */
 
-
 /**
  * 敵の特殊攻撃を生成する関数をまとめたもの.
  * @type {Object.<string, function>}
@@ -155,7 +154,12 @@ const EnemyAction = {
     },
 
     /**
-     * (編集中)
+     * 指定された属性以外のカードのMPを低下させるスキル.
+     * @param {Array<string|number>} option - 「効果対象を説明する文字列,
+     * 対象の属性のインデックス, 効果量をパーセントで表した値」をこの順番に並べた配列
+     * @param {string} [cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {EnemyAction_skill} 生成されたスキル
      */
     nightmare: function(option, cap = null, desc = null){
         const [str, mark, percent] = option;
@@ -186,7 +190,12 @@ const EnemyAction = {
     },
 
     /**
-     * (編集中)
+     * EnemyDataから指定された名前の敵データを探し, このバトルの敵の設定を
+     * 探してきたデータで上書きするスキル. このとき, 敵のHP・MPもリセットされる.
+     * @param {string} enemyName - 新しい敵の名前 (EnemyDataへの登録名)
+     * @param {string} [cap=null] - スキル名. nullのときはデフォルトの名前が使われる
+     * @param {string} [desc=null] - 効果の説明文. nullのときはデフォルトの説明が使われる
+     * @returns {PlayerSkill_skill} 生成されたスキル
      */
     transform: function(enemyName, cap = null, desc = null){
         return {
