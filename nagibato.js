@@ -592,19 +592,19 @@ onLoad(GE, args){
 
 /**
  * ロード画面.
- * 画像のロードを完了してからじゃないとゲームを開始できないので,
+ * 画像などのロードを完了してからでないとゲームを開始できないので,
  * ここでロード待ちをする. もし将来タイトル画面で音声を使いたい場合は,
  * キー入力待ちも一緒に済ませてしまうとよい.
  * @namespace
- * @prop message
- * @prop flag
+ * @prop {Sprite} message - 起動時のメッセージを表示するために使うスプライト
+ * @prop {boolena} flag - ロード待ちが完了しているならtrue, そうでないときfalse
  */
 const bootstrap = new Scene({
     /**
      * シーンがロードされた時に実行される初期化処理.
      * @param {stdgam.GameEngine} GE - このシーンをロードしたGameEngine
      * @param {Object.<string, *>} args - このシーンに渡されたオプションリスト
-     * @memberof intermediateScene
+     * @memberof bootstrap
      */
     onLoad(GE, args){
         this.add(T.image(GE.caches.get("BACKGROUND"), {x: 0, y: 0}));
@@ -617,6 +617,7 @@ const bootstrap = new Scene({
     /**
      * 1フレーム分のタスク処理を実行する.
      * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     * @memberof bootstrap
      */
     execute(GE){
         if(this.flag && !this.message.active){
