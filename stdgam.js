@@ -23,6 +23,8 @@
  * - stdgam.SoundPool
  * - stdgam.SEPool
  * - stdgam.Templates
+ * - stdgam.ColorWrapper
+ * - stdgam.colorOf
  *
  * @namespace
  */
@@ -1394,6 +1396,96 @@ stdgam.Templates = {
         });
         return obj;
     }
+}
+
+
+// #5. グラフィック描画のサポートを行うクラス・関数
+
+/**
+ * 色指定文字列をラップして明度操作（lighter）などのメソッドを提供するクラス.
+ * 実際は単に渡された文字列をラップするのではなく, カラーネームや相対カラー構文を
+ * 渡された場合に, ブラウザのCSS解析機能を用いて評価済みの絶対値（#RRGGBB 等）へと
+ * 変換して保持する. この機能により, 相対指定が何重にも入れ子になることを防止できる.
+ *
+ * また, このクラスはtoStringメソッドを実装しており, CanvasRenderingContext2Dの
+ * fillStyle等に代入するときは自動的に文字列へ変換される.
+ *
+ * ```
+ * // 例
+ * const c1 = new stdgam.ColorWrapper("orange").lighter(10);
+ * ctx.fillStyle = c1;  // 自動的に文字列へ変換される
+ *
+ * // stdgam.colorOfを使う場合
+ * const c2 = stdgam.colorOf("blue").lighter(-20);
+ * ctx.fillStyle = c2;
+ * ```
+ *
+ * @class
+ * @prop {string} s - ラップされている色指定文字列. ただし, コンストラクタに渡された文字列を
+ * そのまま保持するのではなく, ColorWrapper.resolveにより変換した後の文字列を保持する.
+ */
+stdgam.ColorWrapper = class{
+    /**
+     * ブラウザのCSS解析機能を利用するためだけに用意したキャンバスコンテキスト.
+     * @type {CanvasRenderingContext2D}
+     */
+    static #resolverCtx = document.createElement('canvas').getContext('2d');
+
+    /**
+     * ブラウザのCSS解析機能を利用して評価済みの色指定文字列を取得する.
+     * @param {string} colorStr - CSSの色指定文字列
+     * @returns {string} 評価結果
+     */
+    static resolve(colorStr){
+        this.#resolverCtx.fillStyle = colorStr;
+        return this.#resolverCtx.fillStyle;
+    }
+
+    /**
+     * 指定された色指定文字列を元にインスタンスを生成する.
+     * @param {string} colorStr - CSSの色指定文字列
+     */
+    constructor(colorStr){
+        this.s = stdgam.ColorWrapper.resolve(colorStr);
+    }
+
+    /**
+     * @returns 文字列へ変換した結果
+     */
+    toString(){
+        return this.s;
+    }
+
+    /**
+     * HSLの相対カラー指定を利用して新しいインスタンスを生成する.
+     * より正確には, `hsl(from ${this} ${modStr})` の実行結果を引数として
+     * 新しいインスタンスを生成する.
+     * @param {string} modStr - HSLの相対カラー指定で変換指示に用いる文字列
+     * @returns {stdgam.ColorWrapper} 生成されたインスタンス
+     */
+    mod(modStr){
+        return new stdgam.ColorWrapper(`hsl(from ${this} ${modStr})`);
+    }
+
+    /**
+     * HSLを利用してこのオブジェクトが保持する色の明度を増減させた色を作り,
+     * これを保持する新しいインスタンスを返す.
+     * @param {number} dh - 明度に加算する値 (負の数でもよい)
+     * @returns {stdgam.ColorWrapper} 生成されたインスタンス
+     */
+    lighter(dh){
+        return new stdgam.ColorWrapper(`hsl(from ${this} h s calc(l + ${dh}))`);
+    }
+}
+
+/**
+ * ColorWrapperオブジェクトを生成するためのショートカット.
+ * new stdgam.ColorWrapper(colorStr)と等価である.
+ * @param {string} colorStr - CSSの色指定文字列
+ * @returns {stdgam.ColorWrapper} 生成されたインスタンス
+ */
+stdgam.colorOf = function(colorStr){
+    return new stdgam.ColorWrapper(colorStr);
 }
 
 })(stdgam);
