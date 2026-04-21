@@ -15,7 +15,7 @@
  * - ImageCutter: {Class} 画像を分割して扱うためのクラス
  * - Templates: {Object.<string, function>} 定番のオブジェクトを作るためのテンプレート群
  */
-const { GameEngine, Scene, ImageCutter, Templates } = stdgam;
+const { GameEngine, Scene, ImageCutter, Templates, colorOf, LightGradation } = stdgam;
 
 /**
  * このプログラムで使うGameEngineオブジェクト.
@@ -53,10 +53,13 @@ GE.se.register("shield", [5,0,571,.09,.09,.3,0,4,0,0,0,0,.06,0,0,.1,0,.7,.25,.36
 
 GE.caches.createCache("BACKGROUND", 1000, 700, (ctx) => {
     ctx.save();
-    const grad = ctx.createLinearGradient(0, 0, 0, 1000);
-    grad.addColorStop(0, "#002753"); 
-    grad.addColorStop(1, "#001839"); // 下端（影）
-    ctx.fillStyle = grad;
+    //昔のコード
+    //const grad = ctx.createLinearGradient(0, 0, 0, 1000);
+    //grad.addColorStop(0, "#002753"); 
+    //grad.addColorStop(1, "#001839");
+    //ctx.fillStyle = grad;
+    const LG = new LightGradation("NtoS", [0, 0], [0.75, -2], [1, -5]);
+    ctx.fillStyle = LG.make(ctx, "#002753", 1000, 700);
     ctx.fillRect(0, 0, 1000, 700);
     ctx.restore();
 });

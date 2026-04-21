@@ -14,7 +14,7 @@
 //--- 最初にnamespace stdgamを定義する
 
 /**
- * ゲームエンジンの実装を行うnamespace. 以下の要素が外部に公開される.
+ * ゲームエンジンの実装を行うnamespace. 以下のクラスが外部に公開される.
  * - stdgam.GameEngine
  * - stdgam.Scene
  * - stdgam.CachePool
@@ -22,8 +22,11 @@
  * - stdgam.ImageAnimator
  * - stdgam.SoundPool
  * - stdgam.SEPool
- * - stdgam.Templates
  * - stdgam.ColorWrapper
+ * - stdgam.LightGradation
+ *
+ * これに加えて, 以下の定数が外部に公開される.
+ * - stdgam.Templates
  * - stdgam.colorOf
  *
  * @namespace
@@ -1464,7 +1467,7 @@ stdgam.ColorWrapper = class{
      * @returns {stdgam.ColorWrapper} 生成されたインスタンス
      */
     mod(modStr){
-        return new stdgam.ColorWrapper(`hsl(from ${this} ${modStr})`);
+        return new stdgam.ColorWrapper(`hsl(from ${this.s} ${modStr})`);
     }
 
     /**
@@ -1474,7 +1477,7 @@ stdgam.ColorWrapper = class{
      * @returns {stdgam.ColorWrapper} 生成されたインスタンス
      */
     lighter(dh){
-        return new stdgam.ColorWrapper(`hsl(from ${this} h s calc(l + ${dh}))`);
+        return new stdgam.ColorWrapper(`hsl(from ${this.s} h s calc(l + ${dh}))`);
     }
 }
 
@@ -1486,6 +1489,109 @@ stdgam.ColorWrapper = class{
  */
 stdgam.colorOf = function(colorStr){
     return new stdgam.ColorWrapper(colorStr);
+}
+
+/**
+ * ベースカラーに対する明度の相対変化によってグラデーションを生成するためのクラス.
+ * インスタンス生成の段階では
+ * - グラデーションの方向
+ * - 色経由点 (ストップ) の位置
+ * - 色経由点における明度の変化量 (HSLのL値に対する加算)
+ * だけを指定しておき, ベースカラーやサイズの情報はmakeメソッドを呼び出すときに指定する.
+ *
+ * ```
+ * // 開始地点では明度+20%, 終了地点では明度-20%であるようなグラデーションを作る
+ * const LG = new stdgam.LightGradation("NtoS", [0, 20], [1, -20]);
+ *
+ * // コンテキストやベースカラー, サイズはmakeメソッドの引数として与える
+ * const g = LG.make(ctx, "yellow", 640, 480);
+ * ctx.fillStyle = g;
+ * ```
+ *
+ * デザインが同じでベースカラーだけが違うグラデーションを作ったり, サイズの異なる領域に
+ * 同じデザインのグラデーションを施す場合, 最初に1つのLightGradationオブジェクトを用意して
+ * おいて, makeメソッドの引数だけ変更すれば目的を達成できる.
+ * @class
+ * @prop {Array<number[]>} stops - 色経由点の位置とその点における明度差分の組を並べた配列
+ */
+stdgam.LightGradation = class{
+    #pos;
+
+    /**
+     * 垂直方向（上から下へ）のグラデーションを指定するための文字列
+     * @type {string}
+     */
+    static NtoS = "NtoS";
+
+    /**
+     * 斜め方向（左上から右下へ）のグラデーションを指定するための文字列
+     * @type {string}
+     */
+    static NWtoSE = "NWtoSE";
+
+    /**
+     * 斜め方向（右上から左下へ）のグラデーションを指定するための文字列
+     * @type {string}
+     */
+    static NEtoSW = "NEtoSW";
+
+    /**
+     * 水平方向（左から右へ）のグラデーションを指定するための文字列
+     * @type {string}
+     */
+    static EtoW = "EtoW";
+
+    /**
+     * 各種のグラデーションにおける始点と終点の位置をまとめたオブジェクト.
+     * ただし, 座標の値そのものを記述するではなく, 左上を (0,0), 右下を (1,1) とする
+     * 「正規化された座標系」での位置を記述する.
+     * @type {Object.<string,Object>}
+     */
+    static positionInfo = Object.freeze({
+        NtoS: { sx: 0, sy: 0, tx: 0, ty: 1 },
+        NWtoSE: { sx: 0, sy: 0, tx: 1, ty: 1 },
+        NEtoSW: { sx: 1, sy: 0, tx: 0, ty: 1 },
+        WtoE: { sx: 0, sy: 0, tx: 1, ty: 0 }
+    });
+
+    /**
+     * 「グラデーションの方向」と「色経由点」を指定してインスタンスを生成する.
+     * 第2引数以降には [色経由点の位置, 明度の変化量] の形のリストを任意の個数
+     * 与えることができる.
+     *
+     * ```
+     * // 最初と最後が明るくて, 真ん中が暗いグラデーションの場合
+     * const LG = new stdgam.LightGradation("NWtoSE", [0, 25], [0.5, -25], [1, 25]);
+     * ```
+     *
+     * @param {string} type - グラデーションの方向を表す文字列
+     * @param {...number[]} stops - 色経由点の位置とその点における明度差分の組 (可変引数)
+     */
+    constructor(type, ...stops){
+        this.#pos = stdgam.LightGradation.positionInfo[type];
+        this.stops = stops;
+    }
+
+    /**
+     * 指定された領域サイズとベースカラーを元に, CanvasGradientオブジェクトを生成する.
+     * @param {CanvasRenderingContext2D} ctx - グラデーションの生成に用いるコンテキスト
+     * @param {string} color - ベースカラー
+     * @param {number} w - グラデーションを適用する描画領域の横幅
+     * @param {number} h - グラデーションを適用する描画領域の縦幅
+     * @param {number} [offX=0] - 描画領域の左上端のx座標 (省略時は0)
+     * @param {number} [offY=0] - 描画領域の左上端のy座標 (省略時は0)
+     * @returns {CanvasGradient} 生成されたグラデーションオブジェクト
+     */
+    make(ctx, color, w, h, offX=0, offY=0){
+        const g = ctx.createLinearGradient(
+            this.#pos.sx * w + offX, this.#pos.sy * h + offY,
+            this.#pos.tx * w + offX, this.#pos.ty * h + offY
+        );
+        for(const e of this.stops){
+            g.addColorStop(e[0], stdgam.colorOf(color).lighter(e[1]));
+        }
+        return g;
+    }
 }
 
 })(stdgam);
