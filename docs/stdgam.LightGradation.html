@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> ImageCutter</title>
+  <title> LightGradation</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>ImageCutter</h1>
+                    <h1>LightGradation</h1>
                 </header>
                 
 
@@ -86,11 +86,26 @@
 <header>
     
         <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>ImageCutter<span class="signature">(img, width, height)</span><span class="type-signature"></span></h2>
+            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>LightGradation<span class="signature">(type, &hellip;stops)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>イメージを指定された幅・高さに基づいて分割するクラス.
-より正確に言うと, 実際に分割した画像を生成するのではなく,
-単に「設定に基づいて元画像の適切な一部分を描画する」機能を持つだけである.</p></div>
+            <div class="class-description"><p>ベースカラーに対する明度の相対変化によってグラデーションを生成するためのクラス.
+インスタンス生成の段階では</p>
+<ul>
+<li>グラデーションの方向</li>
+<li>色経由点 (ストップ) の位置</li>
+<li>色経由点における明度の変化量 (HSLのL値に対する加算)
+だけを指定しておき, ベースカラーやサイズの情報はmakeメソッドを呼び出すときに指定する.</li>
+</ul>
+<pre class="prettyprint source"><code>// 開始地点では明度+20%, 終了地点では明度-20%であるようなグラデーションを作る
+const LG = new stdgam.LightGradation(&quot;NtoS&quot;, [0, 20], [1, -20]);
+
+// コンテキストやベースカラー, サイズはmakeメソッドの引数として与える
+const g = LG.make(ctx, &quot;yellow&quot;, 640, 480);
+ctx.fillStyle = g;
+</code></pre>
+<p>デザインが同じでベースカラーだけが違うグラデーションを作ったり, サイズの異なる領域に
+同じデザインのグラデーションを施す場合, 最初に1つのLightGradationオブジェクトを用意して
+おいて, makeメソッドの引数だけ変更すれば目的を達成できる.</p></div>
         
     
 </header>
@@ -109,12 +124,12 @@
 
 
     
-    <h4 class="name" id="ImageCutter">
-        <a class="href-link" href="#ImageCutter">#</a>
+    <h4 class="name" id="LightGradation">
+        <a class="href-link" href="#LightGradation">#</a>
         
         <span class="code-name">
             
-                new ImageCutter<span class="signature">(img, width, height)</span><span class="type-signature"></span>
+                new LightGradation<span class="signature">(type, &hellip;stops)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -123,7 +138,12 @@
     
     
     <div class="description">
-        <p>指定された画像を横width, 縦heightのブロックに等分割して扱う.</p>
+        <p>「グラデーションの方向」と「色経由点」を指定してインスタンスを生成する.
+第2引数以降には [色経由点の位置, 明度の変化量] の形のリストを任意の個数
+与えることができる.</p>
+<pre class="prettyprint source"><code>// 最初と最後が明るくて, 真ん中が暗いグラデーションの場合
+const LG = new stdgam.LightGradation(&quot;NWtoSE&quot;, [0, 25], [0.5, -25], [1, 25]);
+</code></pre>
     </div>
     
 
@@ -148,6 +168,8 @@
             <th>Type</th>
 
             
+            <th>Attributes</th>
+            
 
             
 
@@ -161,23 +183,31 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>img</code></td>
+      <td class="name"><code>type</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">HTMLImageElement</code>
+<code class="param-type">string</code>
 
 
   
   </td>
 
   
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
 
   
 
-  <td class="description last"><p>分割対象となる画像</p></td>
+  <td class="description last"><p>グラデーションの方向を表す文字列</p></td>
 </tr>
 
 
@@ -186,48 +216,33 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>width</code></td>
+      <td class="name"><code>stops</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">number</code>
+<code class="param-type">Array.&lt;number></code>
 
 
   
   </td>
 
   
-
-  
-
-  <td class="description last"><p>ブロック1個分の幅</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>height</code></td>
-  
-
-  <td class="type">
-  
+      <td class="attributes">
       
-<code class="param-type">number</code>
 
+      
+
+      
+          &lt;repeatable><br>
+      
+      </td>
+  
 
   
-  </td>
 
-  
-
-  
-
-  <td class="description last"><p>ブロック1個分の高さ</p></td>
+  <td class="description last"><p>色経由点の位置とその点における明度差分の組 (可変引数)</p></td>
 </tr>
 
 
@@ -237,6 +252,58 @@
 </div>
 
 
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>stops</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Array.&lt;Array.&lt;number>></code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>色経由点の位置とその点における明度差分の組を並べた配列</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -275,7 +342,7 @@
         <p class="tag-source">
             <a href="stdgam.js.html" class="button">View Source</a>
             <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line577">line 577</a>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1517">line 1517</a>
             </span>
         </p>
     
@@ -322,6 +389,400 @@
     
 
     
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">string</code>
+
+
+    </span>
+
+<h4 class="name" id="EtoW">
+    <a class="href-link" href="#EtoW">#</a>
+    
+    <span class="code-name">
+        EtoW
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>水平方向（左から右へ）のグラデーションを指定するための文字列</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1542">line 1542</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">string</code>
+
+
+    </span>
+
+<h4 class="name" id="NEtoSW">
+    <a class="href-link" href="#NEtoSW">#</a>
+    
+    <span class="code-name">
+        NEtoSW
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>斜め方向（右上から左下へ）のグラデーションを指定するための文字列</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1536">line 1536</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">string</code>
+
+
+    </span>
+
+<h4 class="name" id="NWtoSE">
+    <a class="href-link" href="#NWtoSE">#</a>
+    
+    <span class="code-name">
+        NWtoSE
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>斜め方向（左上から右下へ）のグラデーションを指定するための文字列</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1530">line 1530</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">string</code>
+
+
+    </span>
+
+<h4 class="name" id="NtoS">
+    <a class="href-link" href="#NtoS">#</a>
+    
+    <span class="code-name">
+        NtoS
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>垂直方向（上から下へ）のグラデーションを指定するための文字列</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1524">line 1524</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object.&lt;string, Object></code>
+
+
+    </span>
+
+<h4 class="name" id="positionInfo">
+    <a class="href-link" href="#positionInfo">#</a>
+    
+    <span class="code-name">
+        positionInfo
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>各種のグラデーションにおける始点と終点の位置をまとめたオブジェクト.
+ただし, 座標の値そのものを記述するではなく, 左上を (0,0), 右下を (1,1) とする
+「正規化された座標系」での位置を記述する.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="stdgam.js.html" class="button">View Source</a>
+            <span>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1550">line 1550</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
 
     
         <div class='vertical-section'>
@@ -332,12 +793,12 @@
 
 
     
-    <h4 class="name" id="paint">
-        <a class="href-link" href="#paint">#</a>
+    <h4 class="name" id="make">
+        <a class="href-link" href="#make">#</a>
         
         <span class="code-name">
             
-                paint<span class="signature">(ctx, x, y, a, b)</span><span class="type-signature"></span>
+                make<span class="signature">(ctx, color, w, h, offX<span class="signature-attributes">opt</span>, offY<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {CanvasGradient}</span>
             
         </span>
     </h4>
@@ -346,8 +807,7 @@
     
     
     <div class="description">
-        <p>分割した画像のうち上からa番目, 左からb番目の部分を描画する.
-ただし, a, bは0から数え始めるものとする.</p>
+        <p>指定された領域サイズとベースカラーを元に, CanvasGradientオブジェクトを生成する.</p>
     </div>
     
 
@@ -372,7 +832,11 @@
             <th>Type</th>
 
             
+            <th>Attributes</th>
+            
 
+            
+            <th>Default</th>
             
 
             <th class="last">Description</th>
@@ -398,10 +862,22 @@
   </td>
 
   
+      <td class="attributes">
+      
 
+      
+
+      
+      </td>
   
 
-  <td class="description last"><p>描画に使うコンテクスト</p></td>
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>グラデーションの生成に用いるコンテキスト</p></td>
 </tr>
 
 
@@ -410,7 +886,44 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>x</code></td>
+      <td class="name"><code>color</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>ベースカラー</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>w</code></td>
   
 
   <td class="type">
@@ -423,10 +936,22 @@
   </td>
 
   
+      <td class="attributes">
+      
 
+      
+
+      
+      </td>
   
 
-  <td class="description last"><p>描画位置のx座標</p></td>
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>グラデーションを適用する描画領域の横幅</p></td>
 </tr>
 
 
@@ -435,7 +960,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>y</code></td>
+      <td class="name"><code>h</code></td>
   
 
   <td class="type">
@@ -448,10 +973,22 @@
   </td>
 
   
+      <td class="attributes">
+      
 
+      
+
+      
+      </td>
   
 
-  <td class="description last"><p>描画位置のy座標</p></td>
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>グラデーションを適用する描画領域の縦幅</p></td>
 </tr>
 
 
@@ -460,7 +997,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>a</code></td>
+      <td class="name"><code>offX</code></td>
   
 
   <td class="type">
@@ -473,10 +1010,26 @@
   </td>
 
   
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
 
+      
+
+      
+      </td>
   
 
-  <td class="description last"><p>分割のうち, 上から何番目を使うか (0から数え始める)</p></td>
+  
+      <td class="default">
+      
+          0
+      
+      </td>
+  
+
+  <td class="description last"><p>描画領域の左上端のx座標 (省略時は0)</p></td>
 </tr>
 
 
@@ -485,7 +1038,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>b</code></td>
+      <td class="name"><code>offY</code></td>
   
 
   <td class="type">
@@ -498,10 +1051,26 @@
   </td>
 
   
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
 
+      
+
+      
+      </td>
   
 
-  <td class="description last"><p>分割のうち, 左から何番目を使うか (0から数え始める)</p></td>
+  
+      <td class="default">
+      
+          0
+      
+      </td>
+  
+
+  <td class="description last"><p>描画領域の左上端のy座標 (省略時は0)</p></td>
 </tr>
 
 
@@ -549,7 +1118,7 @@
         <p class="tag-source">
             <a href="stdgam.js.html" class="button">View Source</a>
             <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line603">line 603</a>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1585">line 1585</a>
             </span>
         </p>
     
@@ -571,6 +1140,31 @@
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>生成されたグラデーションオブジェクト</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">CanvasGradient</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
