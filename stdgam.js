@@ -1661,6 +1661,170 @@ stdgam.LightGradation = class{
     }
 }
 
+/**
+ * パス (図形の形状) を指定し, 背景の塗りつぶしやボーダー, グラデーションなどの装飾を
+ * 組み合わせて図形を作成するためのクラス.
+ * LightGradationクラスと同様, インスタンス生成後にmakeメソッドを呼び出すことで
+ * 実際に図形が作られる.
+ *
+ * 指定できるパラメータは大きく4つに分かれる.
+ * 1. 基本情報 (作成するキャンバスの幅, ボーダーの基準幅)
+ * 2. パスの形状
+ * 3. 背景に関する設定 (配色とグラデーション)
+ * 4. ボーダーに関する設定 (ボーダーの種類と配色, グラデーション)
+ *
+ * 1.はコンストラクタの引数width, height, lineWidthで指定する.
+ * また, 2.はパスを作成するコールバック関数pathFnによりユーザーが自分で設定する.
+ *
+ * これに対し, 3.と4.のパラメータは配色リストcolorsに必要な値をセットして
+ * コンストラクタに渡す.
+ *
+ * ```
+ * // 例
+ * const pool = new stdgam.CachePool();
+ * const colors = {
+ *     bg: "orange", bgBlend: "red",
+ *     border: "red", borderInner: "white", borderBlend: "yellow"
+ * }
+ * const pathFn = (ctx, w, h, lineWidth) => {
+ *     ctx.beginPath();
+ *     ctx.roundRect(lineWidth/2, lineWidth/2, w-lineWidth, h-lineWidth, 0);
+ * }
+ *
+ * const CB = new stdgam.ColorBox(640, 480, 8, colors, pathFn);
+ * CB.make(pool, "OrangeRectangle");
+ * ```
+ *
+ * 配色リストにセットできるパラメータは下記の通り.
+ * * bg - 背景の色
+ * * bgBlend - 背景に重ねるグラデーションの色
+ * * bgOp - 背景のグラデーションの合成モード (省略時は "soft-light")
+ * * border - ボーダーの色. もしborderInnerが指定されている場合はボーダーの外側の色として使う
+ * * borderInner - ボーダーを2色で描画するとき指定する. この値をボーダーの内側の色として使う
+ * * borderBlend - ボーダーに施すグラデーションの色
+ * * borderOp - ボーダーのグラデーションの合成モード (省略時は "soft-light")
+ * * clip - trueの場合, パスの内側に含まれる部分だけを描画する
+ * * lighting - 指定された色の光源に斜めから照らされるようなエフェクトを付与する
+ *
+ * もしcolors.bgが未設定なら, 背景の塗りつぶしを行わない.
+ * 同様に, colors.borderが未設定の場合はボーダーの描画を行わない.
+ *
+ * また, パスを設定する関数pathFnには, 既定の引数 (ctx, width, height, lineWidth) に加えて
+ * 追加の引数を渡すことができる.
+ *
+ * ```
+ * // pool, colorsは1つ目の例と同じとする
+ * const pathFn = (ctx, w, h, lineWidth, radius) => {
+       ctx.beginPath();
+ *     ctx.roundRect(lineWidth/2, lineWidth/2, w-lineWidth, h-lineWidth, radius);
+ * };
+ *
+ * const CB = new stdgam.ColorBox(640, 480, 8, colors, pathFn);
+ * CB.make(pool, "OrangeRectangle", 10);  // 引数radiusに10が代入される
+ * ```
+ *
+ * @prop {number} width
+ * @prop {number} height
+ * @prop {number} lineWidth
+ * @prop {Object.<string,*>} colors
+ * @prop {function(CanvasRenderingContext2D, number, number, number, ...*): void} pathFn
+ */
+stdgam.ColorBox = class{
+    static caches = new stdgam.CachePool();
+
+    constructor(width, height, lineWidth, colors, pathFn){
+        this.width = width;
+        this.height = height;
+        this.lineWidth = lineWidth;
+        this.pathFn = pathFn;
+        this.colors = colors;
+    }
+
+    #getOrCreate(pool, name, w, h, reset=false){
+        let c = pool.get(name);
+        if(c && reset) c.getContext("2d").clearRect(0, 0, c.width, c.height);
+        return c || pool.createCache(name, w, h);
+    }
+
+    #paintBody(canvas, ctx){
+        ctx.save();
+        ctx.fillStyle = this.colors.bg;
+        if(this.colors.clip) ctx.clip();
+        ctx.fill();
+        if(this.colors.bgBlend){
+            const blender = new stdgam.LightGradation("NtoS", [0, 70], [1, 0]);
+            blender.blend(canvas, this.colors.bgBlend, this.colors.bgOp || "soft-light", {alpha:0.5});
+        }
+        ctx.restore();
+    }
+
+    #doubleStroke(ctx, color, lw, shadowClipFlag, shadowAlpha){
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lw;
+        ctx.stroke();
+        if(shadowClipFlag) ctx.clip();
+        ctx.shadowColor = color;
+        ctx.shadowBlur = lw / 2;
+        ctx.globalAlpha = shadowAlpha;
+        ctx.stroke();
+        ctx.restore();
+    }
+
+    #paintBorder(canvas, ctx, opt){
+        const bufName = `${canvas.width}x${canvas.height}`;
+        const buf = this.#getOrCreate(stdgam.ColorBox.caches, bufName, canvas.width, canvas.height, true);
+        const ctxBuf = buf.getContext("2d");
+
+        this.pathFn(ctxBuf, this.width, this.height, this.lineWidth, ...opt);
+        this.#doubleStroke(
+            ctxBuf, this.colors.border,
+            this.lineWidth, true, 0.4
+        );
+
+        if(this.colors.borderInner){
+            this.#doubleStroke(ctxBuf, this.colors.borderInner, this.lineWidth / 2, false, 0.2);
+        }
+
+        if(this.colors.borderBlend){
+            const blender = new stdgam.LightGradation("NtoS", [0, 80], [1, 0]);
+            ctxBuf.save();
+            ctxBuf.clip();
+            blender.blend(buf, this.colors.borderBlend, this.colors.borderOp || "soft-light", {alpha: 0.8});
+            ctxBuf.restore();
+        }
+
+        ctx.save();
+        if(this.colors.clip){
+            const tmp = ctx.globalCompositeOperation;
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.lineWidth = Math.max(this.lineWidth / 3, 2);
+            ctx.stroke();
+            ctx.globalCompositeOperation = tmp;
+            ctx.clip();
+        }
+        ctx.drawImage(buf, 0, 0);
+        ctx.restore();
+    }
+
+    #paintLighting(canvas, ctx){
+        const blender = new stdgam.LightGradation("NWtoSE", [0, 50], [1, -50]);
+        blender.blend(canvas, this.colors.lighting, "screen", {alpha:0.4});
+        blender.blend(canvas, this.colors.lighting, "multiply", {alpha:0.4});
+    }
+
+    make(pool, name, ...opt){
+        const canvas = this.#getOrCreate(pool, name, this.width, this.height, true);
+        const ctx = canvas.getContext("2d");
+
+        this.pathFn(ctx, this.width, this.height, this.lineWidth, ...opt);
+        if(this.colors.bg) this.#paintBody(canvas, ctx);
+        if(this.colors.border) this.#paintBorder(canvas, ctx, opt);
+        if(this.colors.lighting) this.#paintLighting(canvas, ctx);
+        return canvas;
+    }
+}
+
 })(stdgam);
 
 
