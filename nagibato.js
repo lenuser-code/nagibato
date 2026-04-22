@@ -53,11 +53,6 @@ GE.se.register("shield", [5,0,571,.09,.09,.3,0,4,0,0,0,0,.06,0,0,.1,0,.7,.25,.36
 
 GE.caches.createCache("BACKGROUND", 1000, 700, (ctx) => {
     ctx.save();
-    //昔のコード
-    //const grad = ctx.createLinearGradient(0, 0, 0, 1000);
-    //grad.addColorStop(0, "#002753"); 
-    //grad.addColorStop(1, "#001839");
-    //ctx.fillStyle = grad;
     const LG = new LightGradation("NtoS", [0, 0], [0.75, -2], [1, -5]);
     ctx.fillStyle = LG.make(ctx, "#002753", 0, 0, 1000, 700);
     ctx.fillRect(0, 0, 1000, 700);
@@ -217,6 +212,21 @@ class SelectWindow extends stdtask.Scroll{
         this.#height = h;
     }
 
+    paintBackgroundImage(ctx){
+        if(!this.bgImage){
+            this.bgImage = document.createElement('canvas');
+            this.bgImage.width = this.#width;
+            this.bgImage.height = this.#height;
+
+            const ctxBG = this.bgImage.getContext("2d");
+            const LG = new LightGradation("NtoS", [0,0], [1,-30]);
+            ctxBG.fillStyle = "rgb(0,0,0,0.5)";
+            ctxBG.fillRect(0, 0, this.#width, this.#height);
+            LG.blend(this.bgImage, "#000044", "screen");
+        }
+        ctx.drawImage(this.bgImage, this.x, this.y);
+    }
+
     /**
      * 描画処理を行う.
      * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
@@ -224,8 +234,7 @@ class SelectWindow extends stdtask.Scroll{
      */
     draw(GE, ctx){
         ctx.save();
-        ctx.fillStyle = "rgb(0,0,0,0.5)";
-        ctx.fillRect(this.x, this.y, this.#width, this.#height);
+        this.paintBackgroundImage(ctx);
 
         ctx.font = "42px monospace";
         ctx.fillStyle = "white";
