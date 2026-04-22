@@ -1727,9 +1727,9 @@ stdgam.LightGradation = class{
         const h = canvas.height;
         const bufName = `${w}x${h}`;
 
-        let buf = CanvasBlender.caches.get(bufName);
+        let buf = stdgam.LightGradation.caches.get(bufName);
         if(buf) buf.getContext("2d").clearRect(0, 0, w, h);
-        else buf = CanvasBlender.caches.createCache(bufName, w, h);
+        else buf = stdgam.LightGradation.caches.createCache(bufName, w, h);
 
         const ctxBuf = buf.getContext("2d");
         ctxBuf.save();
