@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> ImagePool</title>
+  <title> ColorBox</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>ImagePool</h1>
+                    <h1>ColorBox</h1>
                 </header>
                 
 
@@ -86,9 +86,62 @@
 <header>
     
         <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>ImagePool<span class="signature">()</span><span class="type-signature"></span></h2>
+            <span class="ancestors"><a href="stdgam.html">stdgam</a>.</span>ColorBox<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>画像ファイルから読み込んだイメージを管理するクラス.</p></div>
+            <div class="class-description"><p>パス (図形の形状) を指定し, 背景の塗りつぶしやボーダー, グラデーションなどの装飾を
+組み合わせて図形を作成するためのクラス.
+LightGradationクラスと同様, インスタンス生成後にmakeメソッドを呼び出すことで
+実際に図形が作られる.</p>
+<p>指定できるパラメータは大きく4つに分かれる.</p>
+<ol>
+<li>基本情報 (作成するキャンバスの幅, ボーダーの基準幅)</li>
+<li>パスの形状</li>
+<li>背景に関する設定 (配色とグラデーション)</li>
+<li>ボーダーに関する設定 (ボーダーの種類と配色, グラデーション)</li>
+</ol>
+<p>1.はコンストラクタの引数width, height, lineWidthで指定する.
+また, 2.はパスを作成するコールバック関数pathFnによりユーザーが自分で設定する.</p>
+<p>これに対し, 3.と4.のパラメータは配色リストcolorsに必要な値をセットして
+コンストラクタに渡す.</p>
+<pre class="prettyprint source"><code>// 例
+const pool = new stdgam.CachePool();
+const colors = {
+    bg: &quot;orange&quot;, bgBlend: &quot;red&quot;,
+    border: &quot;red&quot;, borderInner: &quot;white&quot;, borderBlend: &quot;yellow&quot;
+}
+const pathFn = (ctx, w, h, lineWidth) => {
+    ctx.beginPath();
+    ctx.roundRect(lineWidth/2, lineWidth/2, w-lineWidth, h-lineWidth, 0);
+}
+
+const CB = new stdgam.ColorBox(640, 480, 8, colors, pathFn);
+CB.make(pool, &quot;OrangeRectangle&quot;);
+</code></pre>
+<p>配色リストにセットできるパラメータは下記の通り.</p>
+<ul>
+<li>bg - 背景の色</li>
+<li>bgBlend - 背景に重ねるグラデーションの色</li>
+<li>bgOp - 背景のグラデーションの合成モード (省略時は &quot;soft-light&quot;)</li>
+<li>border - ボーダーの色. もしborderInnerが指定されている場合はボーダーの外側の色として使う</li>
+<li>borderInner - ボーダーを2色で描画するとき指定する. この値をボーダーの内側の色として使う</li>
+<li>borderBlend - ボーダーに施すグラデーションの色</li>
+<li>borderOp - ボーダーのグラデーションの合成モード (省略時は &quot;soft-light&quot;)</li>
+<li>clip - trueの場合, パスの内側に含まれる部分だけを描画する</li>
+<li>lighting - 指定された色の光源に斜めから照らされるようなエフェクトを付与する</li>
+</ul>
+<p>もしcolors.bgが未設定なら, 背景の塗りつぶしを行わない.
+同様に, colors.borderが未設定の場合はボーダーの描画を行わない.</p>
+<p>また, パスを設定する関数pathFnには, 既定の引数 (ctx, width, height, lineWidth) に加えて
+追加の引数を渡すことができる.</p>
+<pre class="prettyprint source"><code>// pool, colorsは1つ目の例と同じとする
+const pathFn = (ctx, w, h, lineWidth, radius) => {
+       ctx.beginPath();
+    ctx.roundRect(lineWidth/2, lineWidth/2, w-lineWidth, h-lineWidth, radius);
+};
+
+const CB = new stdgam.ColorBox(640, 480, 8, colors, pathFn);
+CB.make(pool, &quot;OrangeRectangle&quot;, 10);  // 引数radiusに10が代入される
+</code></pre></div>
         
     
 </header>
@@ -107,12 +160,12 @@
 
 
     
-    <h4 class="name" id="ImagePool">
-        <a class="href-link" href="#ImagePool">#</a>
+    <h4 class="name" id="ColorBox">
+        <a class="href-link" href="#ColorBox">#</a>
         
         <span class="code-name">
             
-                new ImagePool<span class="signature">()</span><span class="type-signature"></span>
+                new ColorBox<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -120,20 +173,160 @@
 
     
     
-    <div class="description">
-        <p>空のインスタンスを作る.</p>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>width</code></td>
     
 
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
 
 
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>height</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
 
 
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>lineWidth</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
 
 
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>colors</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Object.&lt;string, *></code>
 
 
+    
+    </td>
 
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>pathFn</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">function</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -172,7 +365,7 @@
         <p class="tag-source">
             <a href="stdgam.js.html" class="button">View Source</a>
             <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line775">line 775</a>
+                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line1732">line 1732</a>
             </span>
         </p>
     
@@ -220,535 +413,6 @@
 
     
 
-    
-        <div class='vertical-section'>
-            <h1>Methods</h1>
-            <div class="members">
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="get">
-        <a class="href-link" href="#get">#</a>
-        
-        <span class="code-name">
-            
-                get<span class="signature">(name)</span><span class="type-signature"> &rarr; {HTMLImageElement}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>指定した名前で登録されている画像を返す.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>name</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>画像の登録名</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line852">line 852</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><ul>
-<li>指定された登録名の画像. 存在しなければundefined</li>
-</ul></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">HTMLImageElement</code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="load">
-        <a class="href-link" href="#load">#</a>
-        
-        <span class="code-name">
-            
-                load<span class="signature">(name, url)</span><span class="type-signature"> &rarr; {Promise.&lt;HTMLImageElement>}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>画像を読み込み, それを指定した名前で登録する.
-ただし, JavaScriptでは画像オブジェクトを作っても即座にロードが
-完了するのではなく, バックグラウンドで読み込み処理を行う.
-そのため, 返却値は画像のロード待ちを行なっているPromiseオブジェクトである.</p>
-<p>例)</p>
-<pre class="prettyprint source"><code>const pool = new stdgam.ImagePool();
-const promise = pool.load(&quot;IMAGE_01&quot;, &quot;./my_image1.png&quot;);
-promise.then((v) => {
-    my_paint_operation( pool.get(&quot;IMAGE_01&quot;) );
-});
-</code></pre>
-<p>普通はこのPromiseオブジェクトを直接使うのではなく, readyメソッドを利用する
-(readyメソッドの例を参照のこと).</p>
-<p>また, GameEngineオブジェクトがデフォルトで所持するImagePoolに関しては,
-GameEngineのreadyメソッドによりロード待ちを行うほうが好ましい.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>name</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>ロードした画像に付ける登録名</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>url</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>読み込む画像のURL</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line811">line 811</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>画像のロード待ちを行うPromiseオブジェクト</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">Promise.&lt;HTMLImageElement></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="ready">
-        <a class="href-link" href="#ready">#</a>
-        
-        <span class="code-name">
-            
-                ready<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;HTMLImageElement>>}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>全ての画像のロードが完了するまで待機するためのPromiseを返す.
-通常は次のようなコードを書く.</p>
-<p>例)</p>
-<pre class="prettyprint source"><code>const pool = new stdgam.ImagePool();
-pool.load(&quot;IMAGE_01&quot;, &quot;./my_image1.png&quot;);
-pool.load(&quot;IMAGE_02&quot;, &quot;./my_image2.png&quot;);
-
-pool.ready().then((v) => {
-   my_paint_operation( pool.get(&quot;IMAGE_01&quot;) );
-   my_paint_operation( pool.get(&quot;IMAGE_02&quot;) );
-});
-</code></pre>
-<p>ただし, GameEngineオブジェクトがデフォルトで所持するImagePoolに関しては,
-GameEngineのreadyメソッドによりロード待ちを行うほうが好ましい.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="stdgam.js.html" class="button">View Source</a>
-            <span>
-                <a href="stdgam.js.html">stdgam.js</a>, <a href="stdgam.js.html#line843">line 843</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>全部の画像のロード待ちを行うPromiseオブジェクト</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">Promise.&lt;Array.&lt;HTMLImageElement>></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-            </div>
-        </div>
     
 
     

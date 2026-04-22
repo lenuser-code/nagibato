@@ -78,32 +78,25 @@ GE.caches.createCache("DIALOG", 1000, 700, (ctx) => {
     ctx.fillRect(25, 25, 950, 650);
     ctx.restore();
 });
-GE.caches.createCache("BOOKLIKE_0", 360, 60, (ctx) => {
-    const w = 360, h = 60, r = 5;
-    ctx.save();
-    ctx.fillStyle = "rgb(239,228,176)";
-    ctx.fillRect(0, 0, 360, 60);
 
-    ctx.shadowColor = "rgb(255,255,76)";
-    ctx.shadowBlur = 10;
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 5;
-    ctx.strokeRect(-2, -2, w + 4, h + 4); // 少し外側を叩く
-    ctx.restore();
-});
-GE.caches.createCache("BOOKLIKE_1", 360, 60, (ctx) => {
-    const w = 360, h = 60, r = 5;
-    ctx.save();
-    ctx.fillStyle = "rgb(195,195,195)";
-    ctx.fillRect(0, 0, 360, 60);
+// ColorBoxの実験
+(new stdgam.ColorBox(360, 60, 8,
+    { bg: "rgb(239,228,176)", bgBlend: "orange", clip: true,
+      border: "rgb(210,210,76)", borderBlend: "yellow" },
+    (ctx, w, h, lw, opt) => {
+        ctx.beginPath();
+        ctx.roundRect(0, 1, w, h-2, 0);
+    }
+)).make(GE.caches, "BOOKLIKE_0");
 
-    ctx.shadowColor = "rgb(125,125,125)";
-    ctx.shadowBlur = 10;
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 5;
-    ctx.strokeRect(-2, -2, w + 4, h + 4); // 少し外側を叩く
-    ctx.restore();
-});
+(new stdgam.ColorBox(360, 60, 6,
+    { bg: "rgb(195,195,195)", clip: true,
+      border: "rgb(165,165,165)", borderBlend: "gray", lighting: "rgb(120,120,120,0.2)" },
+    (ctx, w, h, lw, opt) => {
+        ctx.beginPath();
+        ctx.roundRect(2, 1, w-4, h-2, 0);
+    }
+)).make(GE.caches, "BOOKLIKE_1");
 
 
 // #3. タイトル画面の実装
