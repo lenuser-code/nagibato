@@ -59,7 +59,7 @@ GE.caches.createCache("BACKGROUND", 1000, 700, (ctx) => {
     //grad.addColorStop(1, "#001839");
     //ctx.fillStyle = grad;
     const LG = new LightGradation("NtoS", [0, 0], [0.75, -2], [1, -5]);
-    ctx.fillStyle = LG.make(ctx, "#002753", 1000, 700);
+    ctx.fillStyle = LG.make(ctx, "#002753", 0, 0, 1000, 700);
     ctx.fillRect(0, 0, 1000, 700);
     ctx.restore();
 });

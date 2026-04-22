@@ -1505,8 +1505,11 @@ stdgam.colorOf = function(colorStr){
  * const LG = new stdgam.LightGradation("NtoS", [0, 20], [1, -20]);
  *
  * // コンテキストやベースカラー, サイズはmakeメソッドの引数として与える
- * const g = LG.make(ctx, "yellow", 640, 480);
+ * const g = LG.make(ctx, "yellow", 0, 0, 640, 480);
  * ctx.fillStyle = g;
+ *
+ * // 既存のキャンバスにブレンド合成する場合のショートカット
+ * LG.blend(canvas, "yellow", "overlay", { alpha: 0.5 });
  * ```
  *
  * デザインが同じでベースカラーだけが違うグラデーションを作ったり, サイズの異なる領域に
@@ -1517,6 +1520,14 @@ stdgam.colorOf = function(colorStr){
  */
 stdgam.LightGradation = class{
     #pos;
+
+    /**
+     * blendメソッドの処理で使うオフスクリーンキャンバスを管理するオブジェクト.
+     * 呼び出しのたびにキャンバスを生成するのは無駄だから, 同じサイズのキャンバスが
+     * 残っている場合はそれを再利用する.
+     * @type {stdgam.CachePool}
+     */
+    static caches = new stdgam.CachePool();
 
     /**
      * 垂直方向（上から下へ）のグラデーションを指定するための文字列
@@ -1574,24 +1585,79 @@ stdgam.LightGradation = class{
     }
 
     /**
-     * 指定された領域サイズとベースカラーを元に, CanvasGradientオブジェクトを生成する.
+     * 指定された位置情報とベースカラーを元に, CanvasGradientオブジェクトを生成する.
+     *
+     * 【注意】グラデーションの始点・終点はCanvasGradientと同じ意味で用いている.
+     * グラデーションのクリッピングが行われるわけではないので注意.
      * @param {CanvasRenderingContext2D} ctx - グラデーションの生成に用いるコンテキスト
      * @param {string} color - ベースカラー
-     * @param {number} w - グラデーションを適用する描画領域の横幅
-     * @param {number} h - グラデーションを適用する描画領域の縦幅
-     * @param {number} [offX=0] - 描画領域の左上端のx座標 (省略時は0)
-     * @param {number} [offY=0] - 描画領域の左上端のy座標 (省略時は0)
+     * @param {number} x1 - グラデーションの始点のx座標
+     * @param {number} y1 - グラデーションの始点のy座標
+     * @param {number} x2 - グラデーションの終点のx座標
+     * @param {number} y2 - グラデーションの終点のy座標
      * @returns {CanvasGradient} 生成されたグラデーションオブジェクト
      */
-    make(ctx, color, w, h, offX=0, offY=0){
+    make(ctx, color, x1, y1, x2, y2){
+        const w = x2 - x1;
+        const h = y2 - y1;
         const g = ctx.createLinearGradient(
-            this.#pos.sx * w + offX, this.#pos.sy * h + offY,
-            this.#pos.tx * w + offX, this.#pos.ty * h + offY
+            this.#pos.sx * w + x1, this.#pos.sy * h + y1,
+            this.#pos.tx * w + x1, this.#pos.ty * h + y1
         );
         for(const e of this.stops){
             g.addColorStop(e[0], stdgam.colorOf(color).lighter(e[1]));
         }
         return g;
+    }
+
+    /**
+     * 指定されたキャンバスに対し, コンテキストのglobalCompositeOperationを用いて
+     * グラデーションをブレンド合成する. ただし, 何も描かれていないピクセルに対しては
+     * 変更を与えない (これにより, 余白に色が付いてしまうことを防止できる).
+     *
+     * 第4引数のoptを省略した場合, キャンバス全体と同じサイズのグラデーションを作成して
+     * これをキャンバスに対してブレンドする (この場合, アルファ値を変更しない).
+     *
+     * 一方, 第4引数にオプションリストoptを与えた場合, グラデーションの位置や
+     * アルファ値を変更できる. 設定できる値は次の通りである:
+     * * x1 - グラデーションの始点のx座標 (省略時は0)
+     * * y1 - グラデーションの始点のy座標 (省略時は0)
+     * * x2 - グラデーションの終点のx座標 (省略時はcanvas.width)
+     * * y2 - グラデーションの終点のy座標 (省略時はcanvas.height)
+     * * alpha - 合成するときの不透明度 (省略時はコンテキストのglobalAlphaをそのまま使う)
+     *
+     * @param {HTMLCanvasElement} canvas - 合成対象のキャンバス
+     * @param {string} color - ベースカラー
+     * @param {string} mode - 合成モードを指定する文字列 ("overlay", "screen" など)
+     * @param {Object.<string,*>} [opt={}] - オプションリスト
+     */
+    blend(canvas, color, mode, opt={}){
+        const x1 = opt.x1 || 0;
+        const y1 = opt.y1 || 0;
+        const x2 = opt.x2 || canvas.width;
+        const y2 = opt.y2 || canvas.height;
+        const w = canvas.width;
+        const h = canvas.height;
+        const bufName = `${w}x${h}`;
+
+        let buf = CanvasBlender.caches.get(bufName);
+        if(buf) buf.getContext("2d").clearRect(0, 0, w, h);
+        else buf = CanvasBlender.caches.createCache(bufName, w, h);
+
+        const ctxBuf = buf.getContext("2d");
+        ctxBuf.save();
+        ctxBuf.drawImage(canvas, 0, 0);
+        ctxBuf.globalCompositeOperation = "source-in";
+        ctxBuf.fillStyle = this.make(ctxBuf, color, x1, y1, x2, y2);
+        ctxBuf.fillRect(0, 0, w, h);
+        ctxBuf.restore();
+
+        const ctx = canvas.getContext("2d");
+        ctx.save();
+        ctx.globalCompositeOperation = mode;
+        if(opt.alpha) ctx.globalAlpha = opt.alpha;
+        ctx.drawImage(buf, 0, 0);
+        ctx.restore();
     }
 }
 
