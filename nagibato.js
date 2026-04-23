@@ -58,19 +58,6 @@ GE.caches.createCache("BACKGROUND", 1000, 700, (ctx) => {
     ctx.fillRect(0, 0, 1000, 700);
     ctx.restore();
 });
-GE.caches.createCache("CARDMAT", 1000, 700, (ctx) => {
-    ctx.save();
-    ctx.fillStyle = "#502020";
-    ctx.fillRect(200, 120, 400, 190);
-    ctx.fillStyle = "#604040";
-    ctx.fillRect(203, 123, 394, 184);
-
-    ctx.fillStyle = "#502020";
-    ctx.fillRect(230, 340, 340, 190);
-    ctx.fillStyle = "#604040";
-    ctx.fillRect(233, 343, 334, 184);
-    ctx.restore();
-});
 GE.caches.createCache("DIALOG", 1000, 700, (ctx) => {
     ctx.save();
     ctx.globalAlpha = 0.5;
@@ -79,7 +66,28 @@ GE.caches.createCache("DIALOG", 1000, 700, (ctx) => {
     ctx.restore();
 });
 
-// ColorBoxの実験
+GE.caches.createCache("CARDMAT", 1000, 700, (ctx) => {
+    const colors = {
+        bg: "rgb(41,42,60,0.8)", bgBlend: "rgb(0,0,32,0.2)", 
+        border: "rgb(0,8,100)", borderInner: "rgb(40,47,170)",
+        borderBlend: "rgb(0,0,20,0.2)"
+    };
+    const paintFn = (ctx, w, h, lw, opt) => {
+        ctx.beginPath();
+        ctx.roundRect(lw/2, lw/2, w-lw, h-lw, 0);
+    };
+
+    const pool = new stdgam.CachePool();
+    let CB = new stdgam.ColorBox(400, 190, 6, colors, paintFn);
+    CB.make(pool, "CARDMAT1");
+
+    CB = new stdgam.ColorBox(340, 190, 6, colors, paintFn);
+    CB.make(pool, "CARDMAT2");
+
+    ctx.drawImage(pool.get("CARDMAT1"), 200, 120);
+    ctx.drawImage(pool.get("CARDMAT2"), 230, 340);
+});
+
 (new stdgam.ColorBox(360, 60, 8,
     { bg: "rgb(239,228,176)", bgBlend: "orange", clip: true,
       border: "rgb(210,210,76)", borderBlend: "yellow" },
