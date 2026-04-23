@@ -1715,7 +1715,7 @@ stdgam.LightGradation = class{
  * ```
  * // pool, colorsは1つ目の例と同じとする
  * const pathFn = (ctx, w, h, lineWidth, radius) => {
-       ctx.beginPath();
+ *     ctx.beginPath();
  *     ctx.roundRect(lineWidth/2, lineWidth/2, w-lineWidth, h-lineWidth, radius);
  * };
  *
@@ -1732,6 +1732,43 @@ stdgam.LightGradation = class{
 stdgam.ColorBox = class{
     static caches = new stdgam.CachePool();
 
+    /**
+     * コールバック関数pathFnによってパスを作成し, colorsの設定に基づいて
+     * 図形の描画を実行するインスタンスを生成する.
+     *
+     * pathFnは以下の4つの引数
+     * * ctx - パスを設定するコンテキスト
+     * * width - キャンバスの横幅
+     * * height - キャンバスの縦幅
+     * * lineWidth - ボーダーの太さの基準値
+     *
+     * を受け取り, これらの情報に基づいてctxにパスを設定する関数である.
+     * 通常は, ボーダーの太さを考慮し, 線がキャンバスの外にはみ出してしまわないように
+     * 位置を調整してパスを作る必要がある.
+     *
+     * また, もし必要ならば, makeメソッドの第3引数以降を利用して追加の引数を
+     * pathFnへ渡すこともできる.
+     *
+     * ```
+     * const pool = new stdgam.CachePool();
+     * const colors = { ... 略 ... };
+     * const pathFn = (ctx, w, h, lineWidth, radius) => {
+     *     ctx.beginPath();
+     *     ctx.roundRect(lineWidth/2, lineWidth/2, w-lineWidth, h-lineWidth, radius);
+     * };
+     *
+     * const CB = new stdgam.ColorBox(640, 480, 8, colors, pathFn);
+     * CB.make(pool, "OrangeRectangle", 10);  // 引数radiusに10が代入される
+     * ```
+     *
+     * 「配色リスト」についてはColorBoxクラスのクラス説明を参照のこと.
+     * @param {number} width - 作成するキャンバスの横幅
+     * @param {number} height - 作成するキャンバスの縦幅
+     * @param {number} lineWidth - ボーダーの太さの基準値 (strokeを実行するときの太さ)
+     * @param {Object.<string,*>} colors - 配色リスト
+     * @param {function(CanvasRenderingContext2D, number, number, number, ...*): void} pathFn
+     * - パスを作成するコールバック関数
+     */
     constructor(width, height, lineWidth, colors, pathFn){
         this.width = width;
         this.height = height;
@@ -1813,6 +1850,11 @@ stdgam.ColorBox = class{
         blender.blend(canvas, this.colors.lighting, "multiply", {alpha:0.4});
     }
 
+    /**
+     * @param {stdgam.CachePool} pool
+     * @param {string} name
+     * @param {...*} opt
+     */
     make(pool, name, ...opt){
         const canvas = this.#getOrCreate(pool, name, this.width, this.height, true);
         const ctx = canvas.getContext("2d");
