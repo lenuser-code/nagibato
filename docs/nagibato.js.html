@@ -193,6 +193,15 @@ GE.caches.createCache("CARDMAT", 1000, 700, (ctx) => {
     }
 )).make(GE.caches, "BOOKLIKE_1");
 
+(new stdgam.ColorBox(370, 310, 5,
+    { bg: "rgb(20,20,20,0.8)", bgBlend: "rgb(45,0,0,0.2)", bgOP: "multiply",
+      border: "rgb(10,10,10)", borderInner: "rgb(30,0,0)", borderBlend: "rgb(50,0,0,0.2)" },
+    (ctx, w, h, lw, opt) => {
+        ctx.beginPath();
+        ctx.roundRect(lw/2, lw/2, w-lw, h-lw, 0);
+    }
+)).make(GE.caches, "SHELFLIKE");
+
 
 // #3. タイトル画面の実装
 
@@ -472,12 +481,13 @@ class Shelflike extends stdtask.CyclicSelect{
      * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
      */
     draw(GE, ctx){
-        ctx.save();
-        ctx.fillStyle = Shelflike.borderColor;
-        ctx.fillRect(this.x-5, this.y-5, this.#width+10, this.#height*this.books.length+10);
-        ctx.fillStyle = Shelflike.boxColor;
-        ctx.fillRect(this.x, this.y, this.#width, this.#height*this.books.length);
-        ctx.restore();
+        ctx.drawImage(GE.caches.get("SHELFLIKE"), 595, 255);
+//        ctx.save();
+//        ctx.fillStyle = Shelflike.borderColor;
+//        ctx.fillRect(this.x-5, this.y-5, this.#width+10, this.#height*this.books.length+10);
+//        ctx.fillStyle = Shelflike.boxColor;
+//        ctx.fillRect(this.x, this.y, this.#width, this.#height*this.books.length);
+//        ctx.restore();
     }
 
     /**
