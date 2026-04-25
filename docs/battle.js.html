@@ -414,14 +414,73 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
  */
 
 /**
- * @typedef {Task} createPhysicalButton_obj
- * @prop {function(stdgam.GameEngine, CanvasRenderingContext2D): void} draw - 1フレーム分の描画処理を行う
- * @prop {function(stdgam.GameEngine): void} execute - 1フレーム分のタスク処理を行う
+ * 筐体のボタンを表現するコンポーネント.
+ * @class
  * @prop {number} x - 配置する位置のx座標
  * @prop {number} y - 配置する位置のy座標
  * @prop {boolean} isPressed - このボタンが押されている状態かどうか
+ * @prop {boolean} isLocked - このボタンの操作が封じられているか
  * @prop {boolean} active - (stdgam.Sceneの意味で) このオブジェクトが有効か
  */
+let PhysicalButton = class{
+    static #images = new stdgam.CachePool();
+
+    static getImage(color){
+        const img = this.#images.get(color);
+        if(img) return img;
+        const CB = new stdgam.ColorBox(
+            { bg: color, bgBlend: "#444", lighting: "#888",
+              border: "gray", borderInner: "white", borderBlur: "rgb(200,200,200,0.2)" },
+            (ctx, w, h, lw, opt) => {
+                ctx.beginPath();
+                ctx.arc(23+lw/2, 22+lw/2, 22, 0, Math.PI * 2);
+            });
+        return CB.make(this.#images, color, 50, 50, 4);
+    }
+
+    constructor(x, y, label, key){
+        this.x = x;
+        this.y = y;
+        this.label = label;
+        this.key = key;
+        this.isPressed = false;
+        this.active = true;
+    }
+
+    /**
+     * 1フレーム分の描画処理を行う
+     * @param {stdgam.GameEngine} GE - この処理に用いるGameEngine
+     * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
+     */
+    draw(GE, ctx){
+        ctx.save();
+        // 押されている間はボタンを少し下げて暗くする
+        const offsetY = this.isPressed ? 5 : 0;
+        ctx.translate(this.x, this.y + offsetY);
+
+        // ボタン本体（円）
+        const img = PhysicalButton.getImage(this.isPressed ? "#aaa" : "#ff0");
+        ctx.drawImage(img, -25, -24);
+
+        // ラベル文字（A, S, D）
+        ctx.fillStyle = this.isPressed ? "white" : "#a84";
+        ctx.font = "bold 20px Sans-Serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(this.label, 0, 2);
+        ctx.restore();
+    }
+
+    /**
+     * 1フレーム分のタスク処理を実行する.
+     * @param {stdgam.GameEngine} GE - このタスク処理に用いるGameEngine
+     */
+    execute(GE){
+        const fn = this.isPressed ? "isDown" : "isJustPressed";
+        this.isPressed = !this.locked &amp;&amp; GE.input[fn](this.key);
+        return true;
+    }
+}
 
 /**
  * 筐体のボタンを表現するコンポーネントを生成する.
@@ -429,40 +488,10 @@ let EnemyActionDealer = class extends EnemyActionDealerBase{
  * @param {number} y - 配置する位置のy座標
  * @param {string} key - どのキー入力に反応するか指定する
  * @param {string} label - ボタンに書かれる文字
- * @return {createPhysicalButton_obj} 生成されたコンポーネント
+ * @return {PhysicalButton} 生成されたコンポーネント
  */
 let createPhysicalButton = function(x, y, key, label) {
-    return {
-        x: x, y: y, isPressed: false, active: true,
-        draw(GE, ctx) {
-            ctx.save();
-            // 押されている間はボタンを少し下げて暗くする
-            const offsetY = this.isPressed ? 5 : 0;
-            ctx.translate(this.x, this.y + offsetY);
-
-            // ボタン本体（円）
-            ctx.beginPath();
-            ctx.arc(0, 0, 22, 0, Math.PI * 2);
-            ctx.fillStyle = this.isPressed ? "#555" : "#aaa";
-            ctx.fill();
-            ctx.strokeStyle = "white";
-            ctx.lineWidth = 4;
-            ctx.stroke();
-
-            // ラベル文字（A, S, D）
-            ctx.fillStyle = this.isPressed ? "white" : "black";
-            ctx.font = "bold 20px Sans-Serif";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(label, 0, 2);
-            ctx.restore();
-        },
-        execute(GE){
-            const fn = this.isPressed ? "isDown" : "isJustPressed";
-            this.isPressed = !this.locked &amp;&amp; GE.input[fn](key);
-            return true;
-        }
-    };
+    return new PhysicalButton(x, y, label, key);
 }
 
 /**
