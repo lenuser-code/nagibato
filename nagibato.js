@@ -78,42 +78,41 @@ GE.caches.createCache("CARDMAT", 1000, 700, (ctx) => {
     };
 
     const pool = new stdgam.CachePool();
-    let CB = new stdgam.ColorBox(400, 190, 6, colors, paintFn);
-    CB.make(pool, "CARDMAT1");
-
-    CB = new stdgam.ColorBox(340, 190, 6, colors, paintFn);
-    CB.make(pool, "CARDMAT2");
+    const CB = new stdgam.ColorBox(colors, paintFn);
+    CB.make(pool, "CARDMAT1", 400, 190, 6);
+    CB.make(pool, "CARDMAT2", 340, 190, 6);
 
     ctx.drawImage(pool.get("CARDMAT1"), 200, 120);
     ctx.drawImage(pool.get("CARDMAT2"), 230, 340);
 });
 
-(new stdgam.ColorBox(360, 60, 8,
+(new stdgam.ColorBox(
     { bg: "rgb(239,228,176)", bgBlend: "orange", clip: true,
-      border: "rgb(210,210,76)", borderBlend: "yellow" },
+      border: "rgb(210,210,76)", borderBlend: "yellow", borderBlur: "#ffff22" },
     (ctx, w, h, lw, opt) => {
         ctx.beginPath();
         ctx.roundRect(0, 1, w, h-2, 0);
     }
-)).make(GE.caches, "BOOKLIKE_0");
+)).make(GE.caches, "BOOKLIKE_0", 360, 60, 6);
 
-(new stdgam.ColorBox(360, 60, 6,
+(new stdgam.ColorBox(
     { bg: "rgb(195,195,195)", clip: true,
-      border: "rgb(165,165,165)", borderBlend: "gray", lighting: "rgb(120,120,120,0.2)" },
+      border: "rgb(165,165,165)", borderBlend: "gray",
+      lighting: "rgb(120,120,120,0.2)" },
     (ctx, w, h, lw, opt) => {
         ctx.beginPath();
         ctx.roundRect(2, 1, w-4, h-2, 0);
     }
-)).make(GE.caches, "BOOKLIKE_1");
+)).make(GE.caches, "BOOKLIKE_1", 360, 60, 6);
 
-(new stdgam.ColorBox(370, 310, 5,
+(new stdgam.ColorBox(
     { bg: "rgb(20,20,20,0.8)", bgBlend: "rgb(45,0,0,0.2)", bgOP: "multiply",
       border: "rgb(10,10,10)", borderInner: "rgb(30,0,0)", borderBlend: "rgb(50,0,0,0.2)" },
     (ctx, w, h, lw, opt) => {
         ctx.beginPath();
         ctx.roundRect(lw/2, lw/2, w-lw, h-lw, 0);
     }
-)).make(GE.caches, "SHELFLIKE");
+)).make(GE.caches, "SHELFLIKE", 370, 310, 5);
 
 
 // #3. タイトル画面の実装
