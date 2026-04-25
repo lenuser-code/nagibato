@@ -1479,6 +1479,15 @@ stdgam.ColorWrapper = class{
     lighter(dh){
         return new stdgam.ColorWrapper(`hsl(from ${this.s} h s calc(l + ${dh}))`);
     }
+
+    /**
+     * 不透明度をaに変更した色を作り, これを保持する新しいインスタンスを返す.
+     * @param {number} a - 不透明度の値
+     * @returns {stdgam.ColorWrapper} 生成されたインスタンス
+     */
+    alpha(a){
+        return new stdgam.ColorWrapper(`hsl(from ${this.s} h s l / ${a}`);
+    }
 }
 
 /**
