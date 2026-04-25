@@ -1673,7 +1673,7 @@ stdgam.LightGradation = class{
  * 3. 背景に関する設定 (配色とグラデーション)
  * 4. ボーダーに関する設定 (ボーダーの種類と配色, グラデーション)
  *
- * 1.はコンストラクタの引数width, height, lineWidthで指定する.
+ * 1.はmakeメソッドの引数width, height, lineWidthで指定する.
  * また, 2.はパスを作成するコールバック関数pathFnによりユーザーが自分で設定する.
  *
  * これに対し, 3.と4.のパラメータは配色リストcolorsに必要な値をセットして
@@ -1691,8 +1691,8 @@ stdgam.LightGradation = class{
  *     ctx.roundRect(lineWidth/2, lineWidth/2, w-lineWidth, h-lineWidth, 0);
  * }
  *
- * const CB = new stdgam.ColorBox(640, 480, 8, colors, pathFn);
- * CB.make(pool, "OrangeRectangle");
+ * const CB = new stdgam.ColorBox(colors, pathFn);
+ * CB.make(pool, "OrangeRectangle", 640, 480, 8);
  * ```
  *
  * 配色リストにセットできるパラメータは下記の通り.
@@ -1702,6 +1702,7 @@ stdgam.LightGradation = class{
  * * border - ボーダーの色. もしborderInnerが指定されている場合はボーダーの外側の色として使う
  * * borderInner - ボーダーを2色で描画するとき指定する. この値をボーダーの内側の色として使う
  * * borderBlend - ボーダーに施すグラデーションの色
+ * * borderBlur - ボーダーをぼかすために重ねるシャドーの色
  * * borderOp - ボーダーのグラデーションの合成モード (省略時は "soft-light")
  * * clip - trueの場合, パスの内側に含まれる部分だけを描画する
  * * lighting - 指定された色の光源に斜めから照らされるようなエフェクトを付与する
@@ -1719,15 +1720,13 @@ stdgam.LightGradation = class{
  *     ctx.roundRect(lineWidth/2, lineWidth/2, w-lineWidth, h-lineWidth, radius);
  * };
  *
- * const CB = new stdgam.ColorBox(640, 480, 8, colors, pathFn);
- * CB.make(pool, "OrangeRectangle", 10);  // 引数radiusに10が代入される
+ * const CB = new stdgam.ColorBox(colors, pathFn);
+ * CB.make(pool, "OrangeRectangle", 640, 480, 8, 10);  // 引数radiusに10が代入される
  * ```
  *
- * @prop {number} width
- * @prop {number} height
- * @prop {number} lineWidth
- * @prop {Object.<string,*>} colors
- * @prop {function(CanvasRenderingContext2D, number, number, number, ...*): void} pathFn
+ * @prop {Object.<string,*>} colors - 使用する配色リスト
+ * @prop {function(CanvasRenderingContext2D, number, number, number, ...*): void} pathFn - 
+ * パスの作成に用いる関数
  */
 stdgam.ColorBox = class{
     static caches = new stdgam.CachePool();
@@ -1746,7 +1745,7 @@ stdgam.ColorBox = class{
      * 通常は, ボーダーの太さを考慮し, 線がキャンバスの外にはみ出してしまわないように
      * 位置を調整してパスを作る必要がある.
      *
-     * また, もし必要ならば, makeメソッドの第3引数以降を利用して追加の引数を
+     * また, もし必要ならば, makeメソッドの第6引数以降を利用して追加の引数を
      * pathFnへ渡すこともできる.
      *
      * ```
@@ -1757,24 +1756,18 @@ stdgam.ColorBox = class{
      *     ctx.roundRect(lineWidth/2, lineWidth/2, w-lineWidth, h-lineWidth, radius);
      * };
      *
-     * const CB = new stdgam.ColorBox(640, 480, 8, colors, pathFn);
-     * CB.make(pool, "OrangeRectangle", 10);  // 引数radiusに10が代入される
+     * const CB = new stdgam.ColorBox(colors, pathFn);
+     * CB.make(pool, "OrangeRectangle", 640, 480, 8, 10);  // 引数radiusに10が代入される
      * ```
      *
      * 「配色リスト」についてはColorBoxクラスのクラス説明を参照のこと.
-     * @param {number} width - 作成するキャンバスの横幅
-     * @param {number} height - 作成するキャンバスの縦幅
-     * @param {number} lineWidth - ボーダーの太さの基準値 (strokeを実行するときの太さ)
      * @param {Object.<string,*>} colors - 配色リスト
-     * @param {function(CanvasRenderingContext2D, number, number, number, ...*): void} pathFn
-     * - パスを作成するコールバック関数
+     * @param {function(CanvasRenderingContext2D, number, number, number, ...*): void} pathFn - 
+     * パスを作成するコールバック関数
      */
-    constructor(width, height, lineWidth, colors, pathFn){
-        this.width = width;
-        this.height = height;
-        this.lineWidth = lineWidth;
-        this.pathFn = pathFn;
+    constructor(colors, pathFn){
         this.colors = colors;
+        this.pathFn = pathFn;
     }
 
     #getOrCreate(pool, name, w, h, reset=false){
@@ -1808,19 +1801,32 @@ stdgam.ColorBox = class{
         ctx.restore();
     }
 
-    #paintBorder(canvas, ctx, opt){
+    #paintBorder(canvas, ctx, lineWidth, opt){
         const bufName = `${canvas.width}x${canvas.height}`;
         const buf = this.#getOrCreate(stdgam.ColorBox.caches, bufName, canvas.width, canvas.height, true);
         const ctxBuf = buf.getContext("2d");
 
-        this.pathFn(ctxBuf, this.width, this.height, this.lineWidth, ...opt);
+        this.pathFn(ctxBuf, canvas.width, canvas.height, lineWidth, ...opt);
         this.#doubleStroke(
             ctxBuf, this.colors.border,
-            this.lineWidth, true, 0.4
+            lineWidth, true, 0.4
         );
 
+        if(this.colors.borderBlur){
+            ctxBuf.save();
+            ctxBuf.lineWidth = 1;
+            ctxBuf.strokeStyle = this.colors.border;
+            ctxBuf.shadowColor = this.colors.borderBlur;
+            ctxBuf.shadowBlur = lineWidth * 0.8;
+            ctxBuf.stroke();
+            ctxBuf.shadowBlur = lineWidth * 1;
+            ctxBuf.globalCompositeOperation = "soft-light";
+            ctxBuf.stroke();
+            ctxBuf.restore();
+        }
+
         if(this.colors.borderInner){
-            this.#doubleStroke(ctxBuf, this.colors.borderInner, this.lineWidth / 2, false, 0.2);
+            this.#doubleStroke(ctxBuf, this.colors.borderInner, lineWidth / 2, false, 0.2);
         }
 
         if(this.colors.borderBlend){
@@ -1835,7 +1841,7 @@ stdgam.ColorBox = class{
         if(this.colors.clip){
             const tmp = ctx.globalCompositeOperation;
             ctx.globalCompositeOperation = "destination-out";
-            ctx.lineWidth = Math.max(this.lineWidth / 3, 2);
+            ctx.lineWidth = Math.max(lineWidth / 3, 2);
             ctx.stroke();
             ctx.globalCompositeOperation = tmp;
             ctx.clip();
@@ -1851,17 +1857,21 @@ stdgam.ColorBox = class{
     }
 
     /**
-     * @param {stdgam.CachePool} pool
-     * @param {string} name
-     * @param {...*} opt
+     * 渡されたCachePoolを使ってキャンバスを作り, その中に図形を描画する.
+     * @param {stdgam.CachePool} pool - キャンバスの作成に使うCachePool
+     * @param {string} name - 作成するキャンバスの名前
+     * @param {number} width - 作成するキャンバスの横幅
+     * @param {number} height - 作成するキャンバスの縦幅
+     * @param {number} lineWidth - ボーダーの太さの基準値 (strokeを実行するときの太さ)
+     * @param {...*} opt - pathFnに渡す追加の引数 (可変引数)
      */
-    make(pool, name, ...opt){
-        const canvas = this.#getOrCreate(pool, name, this.width, this.height, true);
+    make(pool, name, width, height, lineWidth, ...opt){
+        const canvas = this.#getOrCreate(pool, name, width, height, true);
         const ctx = canvas.getContext("2d");
 
-        this.pathFn(ctx, this.width, this.height, this.lineWidth, ...opt);
+        this.pathFn(ctx, width, height, lineWidth, ...opt);
         if(this.colors.bg) this.#paintBody(canvas, ctx);
-        if(this.colors.border) this.#paintBorder(canvas, ctx, opt);
+        if(this.colors.border) this.#paintBorder(canvas, ctx, lineWidth, opt);
         if(this.colors.lighting) this.#paintLighting(canvas, ctx);
         return canvas;
     }
