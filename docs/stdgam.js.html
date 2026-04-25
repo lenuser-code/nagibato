@@ -679,13 +679,13 @@ stdgam.ImageCutter = class {
     }
 
     /**
-     * 分割した画像のうち上からa番目, 左からb番目の部分を描画する.
+     * 分割した画像のうち左からa番目, 上からb番目の部分を描画する.
      * ただし, a, bは0から数え始めるものとする.
      * @param {CanvasRenderingContext2D} ctx - 描画に使うコンテクスト
      * @param {number} x - 描画位置のx座標
      * @param {number} y - 描画位置のy座標
-     * @param {number} a - 分割のうち, 上から何番目を使うか (0から数え始める)
-     * @param {number} b - 分割のうち, 左から何番目を使うか (0から数え始める)
+     * @param {number} a - 分割のうち, 左から何番目を使うか (0から数え始める)
+     * @param {number} b - 分割のうち, 上から何番目を使うか (0から数え始める)
      */
     paint(ctx, x, y, a, b){
         const sx = this.#w * a;
