@@ -1486,7 +1486,7 @@ stdgam.ColorWrapper = class{
      * @returns {stdgam.ColorWrapper} 生成されたインスタンス
      */
     alpha(a){
-        return new stdgam.ColorWrapper(`hsl(from ${this.s} h s l / ${a}`);
+        return new stdgam.ColorWrapper(`hsl(from ${this.s} h s l / ${a})`);
     }
 }
 
